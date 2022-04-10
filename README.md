@@ -4,8 +4,8 @@
   <a href="https://github.com/axtonprice/quickblaze-encrypt/blob/main/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
-  <a href="https://twitter.com/axtonprice" target="_blank">
-    <img alt="Twitter: axtonprice" src="https://img.shields.io/twitter/follow/axtonprice.svg?style=social" />
+  <a href="https://axtonprice.com?discord" target="_blank">
+    <img alt="Discord: axtonprice" src="https://img.shields.io/discord/826239258590969897" />
   </a>
 </p>
 
