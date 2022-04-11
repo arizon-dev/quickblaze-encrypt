@@ -7,6 +7,12 @@ function processData($data)
     insertRecord($encryptedData, $encryptionKey); // Insert new database record
     return $encryptionKey;
 }
+function ifTextBoxDisabled()
+{
+    if ($_GET["submitted"]) {
+        echo "disabled";
+    }
+}
 function viewMessageContent()
 {
     if (getRecord("encrypted_contents", $_GET["key"]) == null) {
