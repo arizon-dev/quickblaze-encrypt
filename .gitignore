@@ -1,3 +1,6 @@
 # Composer
 /vendor/
+composer.json
+
+# Project based
 /Modules/Database.env
