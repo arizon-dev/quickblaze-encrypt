@@ -21,7 +21,7 @@
 - PHP [MBSTRING](http://php.net/manual/en/book.mbstring.php) module for full UTF-8 support.
 - PHP [JSON](http://php.net/manual/en/book.json.php) module for JSON manipulation
 
-<br><br>⚠️ ***Do not install QuickBlaze into a folder, it will cause issues! We recommend you install it to separate subdomain.***
+⚠️ ***Do not install QuickBlaze into a folder, it will cause issues! We recommend you install it to separate subdomain.***
 
 ## Installation
 
