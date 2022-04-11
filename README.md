@@ -21,7 +21,7 @@
 - PHP [MBSTRING](http://php.net/manual/en/book.mbstring.php) module for full UTF-8 support.
 - PHP [JSON](http://php.net/manual/en/book.json.php) module for JSON manipulation
 
-⚠️ ***Do not install QuickBlaze into a folder, it will cause issues! We recommend you install it to separate subdomain.***
+⚠️ ***Do not install QuickBlaze into a directory, it will cause issues! We recommend you install it to separate subdomain.***
 
 ## Installation
 
@@ -33,7 +33,7 @@
 
 ## How it Works
 
-The user enters the message they would like to encrypt. The system then securely encrypts the message, and generates an encryption key. *The key can be used to decrypt the encrypted message.* The system then creates a new record in the database, containing the encrypted data and the encryption key. Once the decryption function is executed, indicating the user has viewed the message, the database record is deleted along with the encryption data and key.
+The user enters the message they would like to encrypt. The system then securely encrypts the message, and generates an encryption key. *The key can be used to decrypt the encrypted message.* The system then creates a new record in the database, containing the encrypted data and the encryption key. Once the decryption function is executed (indicating the user has viewed the message) the database record is deleted along with the encryption data and key. This means the data is now permanently lost and cannot be viewed, accessed or recovered.
 
 ## Author
 
