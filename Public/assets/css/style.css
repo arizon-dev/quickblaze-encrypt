@@ -1,0 +1,37 @@
+html,
+body {
+	height: 100%;
+}
+
+body {
+	display: flex;
+	align-items: center;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	background-color: #f5f5f5;
+}
+
+textarea {
+	width: 300px;
+	height: 150px;
+}
+
+.submit-button {
+	width: 40%;
+	margin-top: 20px;
+}
+
+.form-submit {
+	width: 100%;
+	max-width: 600px;
+	padding: 15px;
+	margin: auto;
+}
+
+.form-submit .checkbox {
+	font-weight: 400;
+}
+
+.form-submit .form-floating:focus-within {
+	z-index: 2;
+}
