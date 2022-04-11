@@ -23,7 +23,7 @@
             <h5 class="text-muted">One time view encrypted message sharing system</h5>
             <br><br>
 
-            <textarea type="text" class="form-control" id="floatingInput" placeholder="Secret message" required name="data"><?= getSubmittedKey() ?></textarea>
+            <textarea type="text" class="form-control" id="floatingInput" name="data" placeholder="Secret message" <?= ifTextBoxDisabled(); ?> required><?= getSubmittedKey() ?></textarea>
 
             <?= determineSubmissionFooter() ?>
 
