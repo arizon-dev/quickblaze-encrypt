@@ -2,16 +2,16 @@
 /* Internal Script Functions */
 function processData($data)
 {
-    $encryptionKey = generateKey(); // Create new key
+    $encryptionKey = generateKey(64); // Create new key
     $encryptedData = encryptData($data, $encryptionKey); // Encrypt data
     insertRecord($encryptedData, $encryptionKey); // Insert new database record
     return $encryptionKey;
 }
 function viewMessageContent()
 {
-    if(getRecord("encrypted_contents", $_GET["key"]) == null) {
+    if (getRecord("encrypted_contents", $_GET["key"]) == null) {
         header("Location: 404");
-    } else{
+    } else {
         if (!isset($_GET["confirm"])) {
             echo '<h6>Decrypt & View Message?</h6>
         <a class="btn btn-primary submit-button" href="?confirm&key=' . $_GET["key"] . '">View Message</a>';
@@ -38,27 +38,25 @@ function determineSubmissionFooter()
 }
 
 /* Database Interaction Functions */
-function generateKey()
+function generateKey($length)
 {
-    $length = 50;
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $key = '';
-    for ($i = 0; $i < $length; $i++) {
-        $key .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $key;
+    $length = 16;
+    $bytes = openssl_random_pseudo_bytes($length);
+    $hex = bin2hex($bytes);
+    return $hex;
 }
 
 /* Data Conversion Functions */
-function encryptData($data)
+function encryptData($data, $encryption_key)
 {
-    return base64_encode($data);
+    $encryption_iv = hex2bin($encryption_key);
+    return openssl_encrypt($data, "AES-128-CTR", $encryption_key, 0, $encryption_iv);
 }
 
-function decryptData($dataKey)
+function decryptData($encryption_key) // getRecord("encrypted_contents", $dataKey)
 {
-    return base64_decode(getRecord("encrypted_contents", $dataKey));
+    $encryption_iv = hex2bin($encryption_key);
+    return openssl_decrypt(getRecord("encrypted_contents", $encryption_key), "AES-128-CTR", $encryption_key, 0, $encryption_iv);
 }
 
 /* Database Interaction Functions */
