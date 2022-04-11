@@ -35,7 +35,7 @@
 
 👤 **axtonprice**
 
-* Discord: https://axtonprice.com?discord
+* Discord: https://discord.gg/dP3MuBATGc
 * Twitter: [@axtonprice](https://twitter.com/axtonprice)
 * Github: [@axtonprice](https://github.com/axtonprice)
 
