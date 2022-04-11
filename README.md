@@ -35,6 +35,13 @@
 
 The user enters the message they would like to encrypt. The system then securely encrypts the message, and generates an encryption key. *The key can be used to decrypt the encrypted message.* The system then creates a new record in the database, containing the encrypted data and the encryption key. Once the decryption function is executed (indicating the user has viewed the message) the database record is deleted along with the encryption data and key. This means the data is now permanently lost and cannot be viewed, accessed or recovered. <br><br>Keep your URL safe, it contains the encryption key! Without it, the data cannot be decrypted!
 
+## Screenshots
+
+![image](https://user-images.githubusercontent.com/37771600/162692669-273df86d-2e53-49c9-bd08-637c90f155be.png)
+![image](https://user-images.githubusercontent.com/37771600/162692731-b3c6d03f-41a1-42f7-b4dc-8ed8661f121f.png)
+![image](https://user-images.githubusercontent.com/37771600/162692774-2116a65b-d9e0-4841-a58b-ff89c55d5f63.png)
+![image](https://user-images.githubusercontent.com/37771600/162692802-b3d91607-99e1-4b48-98a6-2fdf70dfe5de.png)
+
 ## Author
 
 👤 **axtonprice**
