@@ -26,10 +26,9 @@
 ## Installation
 
 1. Download the latest version from the <a href="https://github.com/axtonprice/quickblaze-encrypt/releases">releases page</a>. 
-2. Extract the zip file into a directory such as `quickblaze-encrypt`. 
-3. Upload the directory `quickblaze-encrypt` to your web server or hosting. 
-4. Visit your domain https://example.com/quickblaze-encrypt/
-5. Enjoy!
+2. Upload and extract the file to your web server or hosting subdomain. 
+3. Visit your domain https://quickblaze.example.com/
+4. Enjoy!
 
 ## Author
 
