@@ -15,7 +15,7 @@
     <link href="./Public/assets/css/style.css" rel="stylesheet">
 </head>
 
-<body class="text-center darkmode">
+<body class="text-center">
 
     <main class="form-submit">
         <form action="processForm" method="post">

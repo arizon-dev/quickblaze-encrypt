@@ -36,6 +36,6 @@ textarea {
 	z-index: 2;
 }
 
-.darkmode{
-	background-color: #f5f5f5;
+.darkmode--activated .btn-primary {
+	color: #074CC5;
 }
