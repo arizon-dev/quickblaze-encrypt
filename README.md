@@ -44,9 +44,9 @@ The user enters the message they would like to encrypt. The system then securely
   <img height="150" src="https://user-images.githubusercontent.com/37771600/162692802-b3d91607-99e1-4b48-98a6-2fdf70dfe5de.png">
 </p>
   
-## Author
+## Authors, Credits, and Contributors
 
-👤 **axtonprice**
+👤 **axtonprice** - Main Author
 
 * Discord: https://discord.gg/dP3MuBATGc
 * Twitter: [@axtonprice](https://twitter.com/axtonprice)
