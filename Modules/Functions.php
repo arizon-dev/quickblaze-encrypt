@@ -140,6 +140,7 @@ function destroyRecord($token)
     if ($mysqli->connect_errno) {
         return $mysqli->connect_errno;
     }
+    $token = filter_var($token, FILTER_SANITIZE_STRING);
     if ($mysqli->query("DELETE FROM `quickblaze_records` WHERE `encryption_token` = '$token';") === TRUE) {
         return true;
     } else {
