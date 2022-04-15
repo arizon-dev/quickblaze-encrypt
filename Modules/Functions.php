@@ -31,11 +31,9 @@ function viewMessageContent()
         header("Location: 404");
     } else {
         if (!isset($_GET["confirm"])) {
-            echo '<h6>Decrypt & View Message?</h6>
-            <a class="btn btn-primary submit-button" href="?confirm&key=' . $_GET["key"] . '">View Message</a>';
+            echo '<h6>Decrypt & View Message?</h6><a class="btn btn-primary submit-button" href="?confirm&key=' . $_GET["key"] . '">View Message</a>';
         } else {
             echo '<h6>This message has been destroyed!</h6><textarea disabled type="text" class="form-control" id="floatingInput" placeholder="Secret message" required name="data">' . decryptData($_GET["key"]) . '</textarea><br><a class="btn btn-primary submit-button" href="./">Return Home</a>';
-            destroyRecord($_GET["key"]);
         }
     }
 }
@@ -80,6 +78,7 @@ function decryptData($encryption_key) // getRecord("encrypted_contents", $dataKe
     sanitizeXSS(); // Sanitize Script
     $encryption_iv = hex2bin($encryption_key);
     return openssl_decrypt(getRecord("encrypted_contents", $encryption_key), "AES-128-CTR", $encryption_key, 0, $encryption_iv);
+    destroyRecord($encryption_key); // destroy record
 }
 
 /* Database Interaction Functions */
