@@ -126,8 +126,7 @@ function insertRecord($encrypted_contents, $encryption_token)
     $_SERVER['REMOTE_ADDR'] = htmlspecialchars($_SERVER['REMOTE_ADDR']);
     $source_ip = htmlspecialchars($_SERVER['HTTP_CF_CONNECTING_IP']) ?? htmlspecialchars($_SERVER['REMOTE_ADDR']);
     $record_date = date("Y-m-d H:i:s");
-    $insertRecordSQL = "INSERT INTO `quickblaze_records` (`encrypted_contents`, `encryption_token`, `source_ip`, `record_date`) VALUES ('$encrypted_contents', '$encryption_token', '$source_ip', '$record_date');";
-    if ($mysqli->query($insertRecordSQL) === TRUE) {
+    if ($mysqli->query("INSERT INTO `quickblaze_records` (`encrypted_contents`, `encryption_token`, `source_ip`, `record_date`) VALUES ('$encrypted_contents', '$encryption_token', '$source_ip', '$record_date');") === TRUE) {
         return true;
     } else {
         die($mysqli->error);
@@ -143,8 +142,7 @@ function destroyRecord($token)
     if ($mysqli->connect_errno) {
         return $mysqli->connect_errno;
     }
-    $deleteRecordSQL = "DELETE FROM `quickblaze_records` WHERE `encryption_token` = '$token';";
-    if ($mysqli->query($deleteRecordSQL) === TRUE) {
+    if ($mysqli->query("DELETE FROM `quickblaze_records` WHERE `encryption_token` = '$token';") === TRUE) {
         return true;
     } else {
         die($mysqli->error);
@@ -160,8 +158,7 @@ function getRecord($dataToFetch, $encryption_token)
     if ($mysqli->connect_errno) {
         return $mysqli->connect_errno;
     }
-    $getRecordSQL = "SELECT `$dataToFetch` FROM `quickblaze_records` WHERE `encryption_token` = '$encryption_token'";
-    $result = $mysqli->query($getRecordSQL);
+    $result = $mysqli->query("SELECT `$dataToFetch` FROM `quickblaze_records` WHERE `encryption_token` = '$encryption_token'");
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             return $row[$dataToFetch];
