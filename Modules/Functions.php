@@ -2,7 +2,6 @@
 /* Prevent XSS input */
 function sanitizeXSS()
 { 
-    sanitizeXSS(); // Sanitize Script
     $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
     $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
     $_SERVER  = filter_input_array(INPUT_SERVER, FILTER_SANITIZE_STRING);
