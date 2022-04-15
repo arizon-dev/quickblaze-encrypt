@@ -37,5 +37,5 @@ textarea {
 }
 
 .darkmode--activated .btn-primary {
-	color: #074CC5;
+	mix-blend-mode: difference;
 }
