@@ -1,7 +1,7 @@
 <?php
 /* Prevent XSS input */
 function sanitizeXSS()
-{ 
+{
     $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
     $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
     $_SERVER  = filter_input_array(INPUT_SERVER, FILTER_SANITIZE_STRING);
@@ -10,7 +10,7 @@ function sanitizeXSS()
 
 /* Internal Script Functions */
 function processData($data)
-{ 
+{
     sanitizeXSS(); // Sanitize Script
     $encryptionKey = generateKey(64); // Create new key
     $encryptedData = encryptData($data, $encryptionKey); // Encrypt data
@@ -18,14 +18,14 @@ function processData($data)
     return $encryptionKey;
 }
 function ifTextBoxDisabled()
-{ 
+{
     sanitizeXSS(); // Sanitize Script
     if ($_GET["submitted"]) {
         echo "disabled";
     }
 }
 function viewMessageContent()
-{ 
+{
     sanitizeXSS(); // Sanitize Script
     if (getRecord("encrypted_contents", $_GET["key"]) == null) {
         header("Location: 404");
@@ -34,11 +34,12 @@ function viewMessageContent()
             echo '<h6>Decrypt & View Message?</h6><a class="btn btn-primary submit-button" href="?confirm&key=' . $_GET["key"] . '">View Message</a>';
         } else {
             echo '<h6>This message has been destroyed!</h6><textarea disabled type="text" class="form-control" id="floatingInput" placeholder="Secret message" required name="data">' . decryptData($_GET["key"]) . '</textarea><br><a class="btn btn-primary submit-button" href="./">Return Home</a>';
+            destroyRecord($_GET["key"]); // destroy record
         }
     }
 }
 function getSubmittedKey()
-{ 
+{
     sanitizeXSS(); // Sanitize Script 
     if (isset($_GET['submitted'])) {
         $fullUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . str_replace("?submitted=", "view?key=", $_SERVER['REQUEST_URI']);
@@ -46,7 +47,7 @@ function getSubmittedKey()
     }
 }
 function determineSubmissionFooter()
-{ 
+{
     sanitizeXSS(); // Sanitize Script
     if (isset($_GET["submitted"])) {
         echo '<br><p class="text-muted">Share this link anywhere on the internet. The message will be automatically destroyed once viewed.</p><a class="btn btn-primary submit-button" href="./">Create New</a>';
@@ -57,7 +58,7 @@ function determineSubmissionFooter()
 
 /* Database Interaction Functions */
 function generateKey($length)
-{ 
+{
     sanitizeXSS(); // Sanitize Script
     $length = 16;
     $bytes = openssl_random_pseudo_bytes($length);
@@ -67,23 +68,22 @@ function generateKey($length)
 
 /* Data Conversion Functions */
 function encryptData($data, $encryption_key)
-{ 
+{
     sanitizeXSS(); // Sanitize Script
     $encryption_iv = hex2bin($encryption_key);
     return openssl_encrypt($data, "AES-128-CTR", $encryption_key, 0, $encryption_iv);
 }
 
 function decryptData($encryption_key) // getRecord("encrypted_contents", $dataKey)
-{ 
+{
     sanitizeXSS(); // Sanitize Script
     $encryption_iv = hex2bin($encryption_key);
     return openssl_decrypt(getRecord("encrypted_contents", $encryption_key), "AES-128-CTR", $encryption_key, 0, $encryption_iv);
-    destroyRecord($encryption_key); // destroy record
 }
 
 /* Database Interaction Functions */
 function setupDatabase()
-{ 
+{
     sanitizeXSS(); // Sanitize Script
     $json = json_decode(file_get_contents("./Modules/InstallationStatus.json", true), true);
     if ($json["INSTALLED"] == "false") {
@@ -115,7 +115,7 @@ function setupDatabase()
 }
 
 function insertRecord($encrypted_contents, $encryption_token)
-{ 
+{
     sanitizeXSS(); // Sanitize Script
     $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
     $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
@@ -134,7 +134,7 @@ function insertRecord($encrypted_contents, $encryption_token)
 }
 
 function destroyRecord($token)
-{ 
+{
     sanitizeXSS(); // Sanitize Script
     $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
     $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
@@ -151,7 +151,7 @@ function destroyRecord($token)
 }
 
 function getRecord($dataToFetch, $encryption_token)
-{ 
+{
     sanitizeXSS(); // Sanitize Script
     $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
     $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
