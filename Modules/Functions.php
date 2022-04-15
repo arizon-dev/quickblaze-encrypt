@@ -156,6 +156,7 @@ function getRecord($dataToFetch, $encryption_token)
     if ($mysqli->connect_errno) {
         return $mysqli->connect_errno;
     }
+    $encryption_token = filter_var($encryption_token, FILTER_SANITIZE_STRING);
     $result = $mysqli->query("SELECT `$dataToFetch` FROM `quickblaze_records` WHERE `encryption_token` = '$encryption_token'");
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
