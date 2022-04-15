@@ -21,7 +21,7 @@ function ifTextBoxDisabled()
 { 
     sanitizeXSS(); // Sanitize Script
     if ($_GET["submitted"]) {
-        echo htmlspecialchars("disabled", ENT_QUOTES, 'UTF-8');
+        echo "disabled";
     }
 }
 function viewMessageContent()
@@ -31,10 +31,10 @@ function viewMessageContent()
         header("Location: 404");
     } else {
         if (!isset($_GET["confirm"])) {
-            echo htmlspecialchars('<h6>Decrypt & View Message?</h6>
-            <a class="btn btn-primary submit-button" href="?confirm&key=' . $_GET["key"] . '">View Message</a>', ENT_QUOTES, 'UTF-8');
+            echo '<h6>Decrypt & View Message?</h6>
+            <a class="btn btn-primary submit-button" href="?confirm&key=' . $_GET["key"] . '">View Message</a>';
         } else {
-            echo htmlspecialchars('<h6>This message has been destroyed!</h6><textarea disabled type="text" class="form-control" id="floatingInput" placeholder="Secret message" required name="data">' . decryptData($_GET["key"]) . '</textarea><br><a class="btn btn-primary submit-button" href="./">Return Home</a>', ENT_QUOTES, 'UTF-8');
+            echo '<h6>This message has been destroyed!</h6><textarea disabled type="text" class="form-control" id="floatingInput" placeholder="Secret message" required name="data">' . decryptData($_GET["key"]) . '</textarea><br><a class="btn btn-primary submit-button" href="./">Return Home</a>';
             destroyRecord($_GET["key"]);
         }
     }
@@ -51,9 +51,9 @@ function determineSubmissionFooter()
 { 
     sanitizeXSS(); // Sanitize Script
     if (isset($_GET["submitted"])) {
-        echo htmlspecialchars('<br><p class="text-muted">Share this link anywhere on the internet. The message will be automatically destroyed once viewed.</p><a class="btn btn-primary submit-button" href="./">Create New</a>', ENT_QUOTES, 'UTF-8');
+        echo '<br><p class="text-muted">Share this link anywhere on the internet. The message will be automatically destroyed once viewed.</p><a class="btn btn-primary submit-button" href="./">Create New</a>';
     } else {
-        echo htmlspecialchars('<br><button class="btn btn-primary submit-button" type="submit">Create One-Time Link</button>', ENT_QUOTES, 'UTF-8');
+        echo '<br><button class="btn btn-primary submit-button" type="submit">Create One-Time Link</button>';
     }
 }
 
