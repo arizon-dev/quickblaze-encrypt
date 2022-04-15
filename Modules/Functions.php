@@ -31,9 +31,9 @@ function viewMessageContent()
         header("Location: 404");
     } else {
         if (!isset($_GET["confirm"])) {
-            echo '<h6>Decrypt & View Message?</h6><a class="btn btn-primary submit-button" href="?confirm&key=' . $_GET["key"] . '">View Message</a>';
+            echo '<h6>Decrypt & View Message?</h6><a class="btn btn-primary submit-button" href="?confirm&key=' . htmlspecialchars($_GET["key"]) . '">View Message</a>';
         } else {
-            echo '<h6>This message has been destroyed!</h6><textarea disabled type="text" class="form-control" id="floatingInput" placeholder="Secret message" required name="data">' . decryptData($_GET["key"]) . '</textarea><br><a class="btn btn-primary submit-button" href="./">Return Home</a>';
+            echo '<h6>This message has been destroyed!</h6><textarea disabled type="text" class="form-control" id="floatingInput" placeholder="Secret message" required name="data">' . decryptData(htmlspecialchars($_GET["key"])) . '</textarea><br><a class="btn btn-primary submit-button" href="./">Return Home</a>';
             destroyRecord($_GET["key"]); // destroy record
         }
     }
@@ -42,7 +42,7 @@ function getSubmittedKey()
 {
     sanitizeXSS(); // Sanitize Script 
     if (isset($_GET['submitted'])) {
-        $fullUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . str_replace("?submitted=", "view?key=", $_SERVER['REQUEST_URI']);
+        $fullUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . str_replace("?submitted=", "view?key=", htmlspecialchars($_SERVER['REQUEST_URI']));
         echo htmlspecialchars($fullUrl, ENT_QUOTES, 'UTF-8');
     }
 }
