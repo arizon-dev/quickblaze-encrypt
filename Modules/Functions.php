@@ -55,6 +55,10 @@ function determineSubmissionFooter()
         echo '<br><button class="btn btn-primary submit-button" type="submit">Create One-Time Link</button>';
     }
 }
+function determineSystemVersion(){
+    $json = json_decode(file_get_contents("./Modules/InstallationStatus.json", true), true);
+    return $json["VERSION"];
+}
 
 /* Database Interaction Functions */
 function generateKey($length)
@@ -85,6 +89,7 @@ function decryptData($encryption_key) // getRecord("encrypted_contents", $dataKe
 function setupDatabase()
 {
     sanitizeXSS(); // Sanitize Script
+    if(!file_exists("./Modules/InstallationStatus.json")) touch("./Modules/InstallationStatus.json");
     $json = json_decode(file_get_contents("./Modules/InstallationStatus.json", true), true);
     if ($json["INSTALLED"] == "false") {
         $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
@@ -98,7 +103,7 @@ function setupDatabase()
         if ($mysqli->query($tableCreateSQL) === TRUE) {
             if ($mysqli->query($addPrimaryKeySQL) === TRUE) {
                 if ($mysqli->query($autoIncrementSQL) === TRUE) {
-                    file_put_contents("./Modules/InstallationStatus.json", json_encode(array("INSTALLED" => "true")));
+                    file_put_contents("./Modules/InstallationStatus.json", json_encode(array("VERSION" => "1.0.4", "INSTALLED" => "true")));
                     return true;
                 } else {
                     die($mysqli->error);
