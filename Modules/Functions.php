@@ -57,8 +57,13 @@ function determineSubmissionFooter()
 }
 function determineSystemVersion()
 {
-    $json = json_decode(file_get_contents("./Modules/InstallationStatus.json", true), true);
-    return $json["VERSION"];
+    $thisVersion = json_decode(file_get_contents("./Modules/InstallationStatus.json", true), true);
+    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/main/Modules/InstallationStatus.json", true), true);
+    if($thisVersion["VERSION"] != $latestVersion["VERSION"]){
+        return '<x style="color:red">'.$thisVersion.' (Outdated!)</x>';
+    } else{
+        return $thisVersion;
+    }
 }
 
 /* Database Interaction Functions */
