@@ -57,7 +57,7 @@ function determineSubmissionFooter()
 }
 function determineSystemVersion()
 {
-    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/main/.version", true), true);
+    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/dev/.version", true), true);
     if (!file_exists("./.version")) {
         file_put_contents("./.version", json_encode(array("version" => $latestVersion["VERSION"])));
         touch("./.version");
