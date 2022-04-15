@@ -122,6 +122,8 @@ function insertRecord($encrypted_contents, $encryption_token)
     if ($mysqli->connect_errno) {
         return $mysqli->connect_errno;
     }
+    $_SERVER['HTTP_CF_CONNECTING_IP'] = htmlspecialchars($_SERVER['HTTP_CF_CONNECTING_IP']);
+    $_SERVER['REMOTE_ADDR'] = htmlspecialchars($_SERVER['REMOTE_ADDR']);
     $source_ip = htmlspecialchars($_SERVER['HTTP_CF_CONNECTING_IP']) ?? htmlspecialchars($_SERVER['REMOTE_ADDR']);
     $record_date = date("Y-m-d H:i:s");
     $insertRecordSQL = "INSERT INTO `quickblaze_records` (`encrypted_contents`, `encryption_token`, `source_ip`, `record_date`) VALUES ('$encrypted_contents', '$encryption_token', '$source_ip', '$record_date');";
