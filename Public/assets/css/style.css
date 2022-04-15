@@ -36,6 +36,6 @@ textarea {
 	z-index: 2;
 }
 
-.darkmode--activated button {
+.darkmode--activated button, .darkmode--activated textarea:outline {
 	mix-blend-mode: difference;
 }
