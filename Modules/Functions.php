@@ -64,7 +64,6 @@ function determineSystemVersion()
     }
     $thisVersion = json_decode(file_get_contents("./.version", true), true);
     $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/" . $thisVersion["BRANCH"] . "/.version", true), true);
-    
     if ($thisVersion["VERSION"] != $latestVersion["VERSION"]) {
         return '<x style="color:red">v' . $thisVersion["VERSION"] . ' (Outdated!)</x>';
     } else {
