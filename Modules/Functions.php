@@ -27,14 +27,14 @@ function ifTextBoxDisabled()
 function viewMessageContent()
 {
     sanitizeXSS(); // Sanitize Script
-    if (getRecord("encrypted_contents", $_GET["key"]) == null) {
+    if (getRecord("encrypted_contents", htmlspecialchars($_GET["key"])) == null) {
         header("Location: 404");
     } else {
         if (!isset($_GET["confirm"])) {
             echo '<h6>Decrypt & View Message?</h6><a class="btn btn-primary submit-button" href="?confirm&key=' . htmlspecialchars($_GET["key"]) . '">View Message</a>';
         } else {
             echo '<h6>This message has been destroyed!</h6><textarea disabled type="text" class="form-control" id="floatingInput" placeholder="Secret message" required name="data">' . htmlspecialchars(decryptData(htmlspecialchars($_GET["key"]))) . '</textarea><br><a class="btn btn-primary submit-button" href="./">Return Home</a>';
-            destroyRecord($_GET["key"]); // destroy record
+            destroyRecord(htmlspecialchars($_GET["key"])); // destroy record
         }
     }
 }
