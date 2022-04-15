@@ -66,7 +66,7 @@ function determineSystemVersion()
     if ($thisVersion["VERSION"] != $latestVersion["VERSION"]) {
         return '<x style="color:red">v' . $thisVersion["VERSION"] . ' (Outdated!)</x>';
     } else {
-        return 'v' . $thisVersion . '';
+        return 'v' . $thisVersion["VERSION"] . '';
     }
 }
 
