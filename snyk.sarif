@@ -1,0 +1,20 @@
+name: QuickBlaze-Encrypt
+on: push
+jobs:
+  snyk:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build an image
+      run: docker build . -t some-image       
+    - name: Run Snyk to check image for vulnerabilities
+      continue-on-error: true
+      uses: snyk/actions/docker@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        image: some-image
+        args: --file=Dockerfile
+    - uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: snyk.sarif
