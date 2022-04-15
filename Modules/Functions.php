@@ -33,7 +33,7 @@ function viewMessageContent()
         if (!isset($_GET["confirm"])) {
             echo '<h6>Decrypt & View Message?</h6><a class="btn btn-primary submit-button" href="?confirm&key=' . htmlspecialchars($_GET["key"]) . '">View Message</a>';
         } else {
-            echo '<h6>This message has been destroyed!</h6><textarea disabled type="text" class="form-control" id="floatingInput" placeholder="Secret message" required name="data">' . decryptData(htmlspecialchars($_GET["key"])) . '</textarea><br><a class="btn btn-primary submit-button" href="./">Return Home</a>';
+            echo '<h6>This message has been destroyed!</h6><textarea disabled type="text" class="form-control" id="floatingInput" placeholder="Secret message" required name="data">' . htmlspecialchars(decryptData(htmlspecialchars($_GET["key"]))) . '</textarea><br><a class="btn btn-primary submit-button" href="./">Return Home</a>';
             destroyRecord($_GET["key"]); // destroy record
         }
     }
@@ -168,6 +168,6 @@ function getRecord($dataToFetch, $encryption_token)
         }
     } else {
         return false;
-    }
+    }   
     $mysqli->close();
 }
