@@ -35,3 +35,7 @@ textarea {
 .form-submit .form-floating:focus-within {
 	z-index: 2;
 }
+
+.darkmode{
+	background-color: #f5f5f5;
+}
