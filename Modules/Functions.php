@@ -57,11 +57,15 @@ function determineSubmissionFooter()
 }
 function determineSystemVersion()
 {
-    $thisVersion = json_decode(file_get_contents("./Modules/InstallationStatus.json", true), true);
-    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/main/Modules/InstallationStatus.json", true), true);
-    if($thisVersion["VERSION"] != $latestVersion["VERSION"]){
-        return '<x style="color:red">v'.$thisVersion.' (Outdated!)</x>';
-    } else{
+    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/main/.version", true), true);
+    if(!file_exists("./.version")) {
+        file_put_contents("./.version", json_encode(array("version" => $latestVersion["VERSION"])));
+        touch("./.version");
+    }
+    $thisVersion = json_decode(file_get_contents("./.version", true), true);
+    if ($thisVersion["VERSION"] != $latestVersion["VERSION"]) {
+        return '<x style="color:red">v' . $thisVersion . ' (Outdated!)</x>';
+    } else {
         return "v$thisVersion";
     }
 }
@@ -97,7 +101,7 @@ function setupDatabase()
     sanitizeXSS(); // Sanitize Script
     if (!file_exists("./Modules/InstallationStatus.json")) {
         touch("./Modules/InstallationStatus.json");
-        file_put_contents("./Modules/InstallationStatus.json", json_encode(array("VERSION" => "1.0.4", "INSTALLED" => "true")));
+        file_put_contents("./Modules/InstallationStatus.json", json_encode(array("INSTALLED" => "true")));
     }
     $json = json_decode(file_get_contents("./Modules/InstallationStatus.json", true), true);
     if ($json["INSTALLED"] == "false") {
@@ -112,7 +116,7 @@ function setupDatabase()
         if ($mysqli->query($tableCreateSQL) === TRUE) {
             if ($mysqli->query($addPrimaryKeySQL) === TRUE) {
                 if ($mysqli->query($autoIncrementSQL) === TRUE) {
-                    file_put_contents("./Modules/InstallationStatus.json", json_encode(array("VERSION" => "1.0.4", "INSTALLED" => "true")));
+                    file_put_contents("./Modules/InstallationStatus.json", json_encode(array("INSTALLED" => "true")));
                     return true;
                 } else {
                     die($mysqli->error);
