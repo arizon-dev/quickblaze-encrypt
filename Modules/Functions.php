@@ -10,7 +10,7 @@ function processData($data)
 function ifTextBoxDisabled()
 {
     if ($_GET["submitted"]) {
-        echo "disabled";
+        echo htmlspecialchars("disabled",  ENT_QUOTES, 'UTF-8');
     }
 }
 function viewMessageContent()
@@ -19,10 +19,10 @@ function viewMessageContent()
         header("Location: 404");
     } else {
         if (!isset($_GET["confirm"])) {
-            echo '<h6>Decrypt & View Message?</h6>
-        <a class="btn btn-primary submit-button" href="?confirm&key=' . $_GET["key"] . '">View Message</a>';
+            echo htmlspecialchars('<h6>Decrypt & View Message?</h6>
+            <a class="btn btn-primary submit-button" href="?confirm&key=' . $_GET["key"] . '">View Message</a>',  ENT_QUOTES, 'UTF-8');
         } else {
-            echo '<h6>This message has been destroyed!</h6><textarea disabled type="text" class="form-control" id="floatingInput" placeholder="Secret message" required name="data">' . decryptData($_GET["key"]) . '</textarea><br><a class="btn btn-primary submit-button" href="./">Return Home</a>';
+            echo htmlspecialchars('<h6>This message has been destroyed!</h6><textarea disabled type="text" class="form-control" id="floatingInput" placeholder="Secret message" required name="data">' . decryptData($_GET["key"]) . '</textarea><br><a class="btn btn-primary submit-button" href="./">Return Home</a>',  ENT_QUOTES, 'UTF-8');
             destroyRecord($_GET["key"]);
         }
     }
@@ -31,15 +31,15 @@ function getSubmittedKey()
 {
     if (isset($_GET['submitted'])) {
         $fullUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . str_replace("?submitted=", "view?key=", $_SERVER['REQUEST_URI']);
-        echo $fullUrl;
+        echo htmlspecialchars($fullUrl,  ENT_QUOTES, 'UTF-8');
     }
 }
 function determineSubmissionFooter()
 {
     if (isset($_GET["submitted"])) {
-        echo '<br><p class="text-muted">Share this link anywhere on the internet. The message will be automatically destroyed once viewed.</p><a class="btn btn-primary submit-button" href="./">Create New</a>';
+        echo htmlspecialchars('<br><p class="text-muted">Share this link anywhere on the internet. The message will be automatically destroyed once viewed.</p><a class="btn btn-primary submit-button" href="./">Create New</a>',  ENT_QUOTES, 'UTF-8');
     } else {
-        echo '<br><button class="btn btn-primary submit-button" type="submit">Create One-Time Link</button>';
+        echo htmlspecialchars('<br><button class="btn btn-primary submit-button" type="submit">Create One-Time Link</button>',  ENT_QUOTES, 'UTF-8');
     }
 }
 
