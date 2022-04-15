@@ -122,9 +122,7 @@ function insertRecord($encrypted_contents, $encryption_token)
     if ($mysqli->connect_errno) {
         return $mysqli->connect_errno;
     }
-    $_SERVER['HTTP_CF_CONNECTING_IP'] = htmlspecialchars($_SERVER['HTTP_CF_CONNECTING_IP']);
-    $_SERVER['REMOTE_ADDR'] = htmlspecialchars($_SERVER['REMOTE_ADDR']);
-    $source_ip = htmlspecialchars($_SERVER['HTTP_CF_CONNECTING_IP']) ?? htmlspecialchars($_SERVER['REMOTE_ADDR']);
+    $source_ip = filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP) ?? filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
     $record_date = date("Y-m-d H:i:s");
     if ($mysqli->query("INSERT INTO `quickblaze_records` (`encrypted_contents`, `encryption_token`, `source_ip`, `record_date`) VALUES ('$encrypted_contents', '$encryption_token', '$source_ip', '$record_date');") === TRUE) {
         return true;
@@ -165,6 +163,6 @@ function getRecord($dataToFetch, $encryption_token)
         }
     } else {
         return false;
-    }   
+    }
     $mysqli->close();
 }
