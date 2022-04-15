@@ -54,11 +54,9 @@ The user enters the message they would like to encrypt. The system then securely
 
 ## Show your support
 
-Give a ⭐️ if you like this project!
+If you like this project, give a ⭐️ to support us!
 
 ## 📝 License
 
 Copyright © 2022 [axtonprice](https://github.com/axtonprice).<br />
 This project is [MIT](https://github.com/axtonprice/quickblaze-encrypt/blob/main/LICENSE) licensed.
-
-***
