@@ -20,7 +20,7 @@ function processData($data)
 function ifTextBoxDisabled()
 {
     sanitizeXSS(); // Sanitize Script
-    if ($_GET["submitted"]) {
+    if (isset($_GET["submitted"])) {
         echo "disabled";
     }
 }
