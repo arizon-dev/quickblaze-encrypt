@@ -1,0 +1,2 @@
+*.env linguist-language=ENV
+./* linguist-documentation # apply to all files and folders
