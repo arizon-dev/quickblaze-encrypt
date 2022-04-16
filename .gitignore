@@ -1,5 +1,5 @@
 # Project Files
-# .gitattributes
+.gitattributes
 snyk.sarif
 
 # QuickBlaze Security
