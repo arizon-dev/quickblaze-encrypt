@@ -6,6 +6,7 @@ RewriteRule ^.* index.php [L,QSA]
 
 # Error handling
 ErrorDocument 404 /404
+ErrorDocument 404 /403
 ErrorDocument 500 /500
 
 # File security
