@@ -102,6 +102,7 @@ function setupDatabase()
     sanitizeXSS(); // Sanitize Script
     if (!file_exists("./Modules/InstallationStatus.json")) {
         touch("./Modules/InstallationStatus.json");
+        file_put_contents("./Modules/InstallationStatus.json", json_encode(array("INSTALLED" => "false")));
     }
     $json = json_decode(file_get_contents("./Modules/InstallationStatus.json", true), true);
     if ($json["INSTALLED"] == "false" || $json["INSTALLED"] == "") {
