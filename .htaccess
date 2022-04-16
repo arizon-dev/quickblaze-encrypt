@@ -9,8 +9,7 @@ ErrorDocument 404 /404
 ErrorDocument 500 /500
 
 # File security
-<FilesMatch "\.(json|sarif|md|gitignore|version)$">
+<FilesMatch "\.(json|sarif|md|gitignore|version|LICENSE|htaccess|env)$">
 Order allow,deny
 Deny from all
-
 </FilesMatch>
