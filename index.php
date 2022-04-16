@@ -2,9 +2,9 @@
 /* Initialise the Application */
 $url = $_SERVER['REQUEST_URI'];
 $url = substr($url, strrpos($url, '/') + 1);
-$url = strstr($url, '?', true);
+if(strpos($url, '?') !== false) $url = substr($url, 0, strpos($url, "?"));
 
-/* Initialise Displays */
+// /* Initialise Displays */
 if ($url == "") {
     /* Primary Display Page */
     require("./Modules/Functions.php");
