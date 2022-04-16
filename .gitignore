@@ -1,6 +1,4 @@
 # Project Files
-/vendor/
-composer.json
 snyk.sarif
 
 # QuickBlaze Security
