@@ -2,8 +2,8 @@
 /* Initialise the Application */
 $url = $_SERVER['REQUEST_URI'];
 $url = substr($url, strrpos($url, '/') + 1);
-if(strpos($url, "?")) {
-    $url = substr($url, 0, strpos($url, '?'));
+if(strpos($url, "?") == true) {
+    $url = strstr($url, '?', true);
 }
 
 /* Initialise Scripts */
