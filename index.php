@@ -20,6 +20,7 @@ if ($url == "view") {
 if ($url == "") {
     /* Primary Display Page */
     require("./Modules/Functions.php");
+    checkDatabase(); // Check database
     setupDatabase(); // Initialise Database
     require("./Public/index.php");
 } elseif ($url == "404") {

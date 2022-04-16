@@ -132,6 +132,17 @@ function setupDatabase()
         $mysqli->close();
     }
 }
+function checkDatabase()
+{
+    if (!file_exists("./Modules/Database.env")) {
+        die(file_get_contents("./Public/Error/DatabaseConfig.html"));
+    } else {
+        $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
+        if ($json["DATABASE"] == "" || $json["HOSTNAME"] == "") {
+            die(file_get_contents("./Public/Error/DatabaseConfig.html"));
+        }
+    }
+}
 
 function insertRecord($encrypted_contents, $encryption_token)
 {
