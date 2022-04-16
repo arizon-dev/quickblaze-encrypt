@@ -1,10 +1,8 @@
-# Composer
+# Project Files
 /vendor/
 composer.json
+snyk.sarif
 
-# Project based
+# QuickBlaze Security
 /Modules/Database.env
 /Modules/InstallationStatus.json
-
-# Github
-snyk.sarif
