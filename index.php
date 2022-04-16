@@ -8,12 +8,14 @@ if (strpos($url, '?') !== false) $url = substr($url, 0, strpos($url, "?"));
 if ($url == "processForm") {
     /* Form Submission Handler */
     require("./Modules/Functions.php");
+    checkDatabase(); // Check database
     require("./Public/processForm.php");
     return;
 }
 if ($url == "view") {
     /* View Message Page */
     require("./Modules/Functions.php");
+    checkDatabase(); // Check database
     require("./Public/view.php");
     return;
 }
