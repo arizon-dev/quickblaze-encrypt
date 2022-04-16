@@ -2,9 +2,7 @@
 /* Initialise the Application */
 $url = $_SERVER['REQUEST_URI'];
 $url = substr($url, strrpos($url, '/') + 1);
-if(strpos($url, "?") == true) {
-    $url = strstr($url, '?', true);
-}
+$url = strstr($url, '?', true);
 
 /* Initialise Scripts */
 if ($url == "view") {
