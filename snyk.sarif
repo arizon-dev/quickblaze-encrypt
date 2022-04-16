@@ -6,12 +6,10 @@
 			"tool": {
 				"driver": {
 					"name": "Snyk Open Source",
-					"rules": [
-          ]
+					"rules": []
 				}
 			},
-			"results": [
-      ]
+			"results": []
 		}
 	]
 }
