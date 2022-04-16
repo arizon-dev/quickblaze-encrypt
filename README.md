@@ -29,7 +29,7 @@
 4. Visit your domain https://quickblaze.example.com/
 5. Enjoy!
 
-<p align="center">⚠️ <i>Don't delete the `.version` file! It contains necessary version data, and modifying it may cause issues!. </i><p>
+⚠️ *Don't delete the `.version` file! It contains necessary version data, and modifying it may cause issues!.*
 
 ## Configuration
 Example configuration layout of `Database.env`:
