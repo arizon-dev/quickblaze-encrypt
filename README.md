@@ -1,4 +1,4 @@
-<h1 align="center">QuickBlaze Encryption 👋</h1>
+<h1>QuickBlaze Encryption 👋</h1>
 
 <img height="400" src="https://user-images.githubusercontent.com/37771600/163716199-8fb7ceed-0d4b-493b-97dd-3365938c14d7.png" />
 
