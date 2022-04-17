@@ -63,7 +63,7 @@ function determineSystemVersion()
         file_put_contents("./.version", json_encode(array("BRANCH" => $latestVersion["BRANCH"], "VERSION" => $latestVersion["VERSION"])));
     }
     $thisVersion = json_decode(file_get_contents("./.version", true), true);
-    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/" . $thisVersion["BRANCH"] . "/.version", true), true);
+    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/" . filter_var(htmlspecialchars($thisVersion["BRANCH"]), FILTER_SANITIZE_STRING) . "/.version", true), true);
     if ($thisVersion["VERSION"] != $latestVersion["VERSION"]) {
         return '<x style="color:red">v' . $thisVersion["VERSION"] . ' (Outdated!)</x>';
     } else {
