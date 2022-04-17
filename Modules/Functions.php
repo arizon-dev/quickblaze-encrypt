@@ -45,7 +45,7 @@ function determineMessageContent()
                 ' . htmlspecialchars(decryptData(htmlspecialchars($_GET["key"]))) . '
             </textarea>
             <br>
-            <button class="btn btn-primary submit-button" onclick="copy()" nosubmit>
+            <button type="button" class="btn btn-primary submit-button" onclick="copy()" nosubmit>
                 Copy Message
             </button>
             <a class="btn btn-secondary submit-button" href="./">
@@ -72,7 +72,7 @@ function determineSubmissionFooter()
         <p class="text-muted">
             Share this link anywhere on the internet. The message will be automatically destroyed once viewed.
         </p>
-        <button class="btn btn-primary submit-button" onclick="copy()" nosubmit>
+        <button type="button" class="btn btn-primary submit-button" onclick="copy()" nosubmit>
             Copy Link
         </button>
         <a class="btn btn-secondary submit-button" href="./">
