@@ -3,7 +3,7 @@ name: "pre-release"
 on:
   push:
     branches:
-      - "master"
+      - "main"
 
 jobs:
   pre-release:
@@ -20,8 +20,8 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
-          prerelease: true
-          title: "Development Build"
+          prerelease: false
+          draft: false
+          #title: "Development Build"
           files: |
-            LICENSE.txt
-            *.jar
+             *
