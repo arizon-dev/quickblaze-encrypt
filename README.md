@@ -46,7 +46,7 @@ Example configuration layout of `Database.env`:
 
 The user enters the message they would like to encrypt. The system then securely encrypts the message, and generates an encryption key. *The key can be used to decrypt the encrypted message.* The system then creates a new record in the database, containing the encrypted data and the encryption key. Once the decryption function is executed (indicating the user has viewed the message) the database record is deleted along with the encryption data and key. This means the data is now permanently lost and cannot be viewed, accessed or recovered. <br><br>Keep your URL safe, it contains the encryption key! Exposing the URL means anybody will be able to view the encrypted message!
 
-## Screenshots
+## Screenshots *(Light/Dark Mode)*
 
 <p align="center">
   <img height="150" src="https://user-images.githubusercontent.com/37771600/163694900-13dbb832-05f2-4a55-856d-9d0d9e315621.png">
