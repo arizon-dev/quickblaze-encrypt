@@ -1,6 +1,6 @@
 # Project Files
 .gitattributes
-#snyk.sarif
+.dccache
 
 # QuickBlaze Security
 /Modules/Database.env
