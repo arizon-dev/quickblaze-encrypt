@@ -1,7 +1,5 @@
 <h1 align="center">QuickBlaze Encryption 👋</h1>
 
-![Discord Banner 3](https://discord.com/api/guilds/826239258590969897/widget.png?style=banner3)
-
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-v1.0.5_Dev-red.svg?cacheSeconds=2592000" />
   <a href="https://github.com/axtonprice/quickblaze-encrypt/blob/main/LICENSE" target="_blank">
@@ -60,7 +58,7 @@ The user enters the message they would like to encrypt. The system then securely
   <img height="150" src="https://user-images.githubusercontent.com/37771600/163694926-fd6ffa78-774c-456d-b942-8bea12f57662.png">
 </p>
   
-## Authors, Credits, and Contributors
+## Authors and Contributors
 
 👤 **axtonprice** - Main Author
 
@@ -76,3 +74,7 @@ If you like this project, give a ⭐️ to support us!
 
 Copyright © 2022 [axtonprice](https://github.com/axtonprice).<br />
 This project is [MIT](https://github.com/axtonprice/quickblaze-encrypt/blob/main/LICENSE) licensed.
+
+<hr>
+
+<a href="https://discord.gg/dP3MuBATGc"><img src="https://discord.com/api/guilds/826239258590969897/widget.png?style=banner3"/></a>
