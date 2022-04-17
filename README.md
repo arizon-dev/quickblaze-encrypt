@@ -1,7 +1,7 @@
 <h1 align="center">QuickBlaze Encryption 👋</h1>
 
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-v1.0.5_Dev-red.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-v1.0.6_Dev-red.svg?cacheSeconds=2592000" />
   <a href="https://github.com/axtonprice/quickblaze-encrypt/blob/main/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
