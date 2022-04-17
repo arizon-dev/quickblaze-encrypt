@@ -45,7 +45,7 @@ function determineMessageContent()
                 ' . htmlspecialchars(decryptData(htmlspecialchars($_GET["key"]))) . '
             </textarea>
             <br>
-            <button type="button" class="btn btn-primary submit-button" onclick="copy()" nosubmit>
+            <button type="button" class="btn btn-primary submit-button" onclick="copyText()" nosubmit>
                 Copy Message
             </button>
             <a class="btn btn-secondary submit-button" href="./">
@@ -58,10 +58,16 @@ function determineMessageContent()
 function getSubmittedKey()
 {
     sanitizeXSS(); // Sanitize Script 
-    if (isset($_GET['submitted'])) {
+    error_reporting(0); // disable error reporting
+    if (isset($_GET["submitted"]) && $_GET["submitted"] != "") {
         $fullUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . str_replace("?submitted=", "view?key=", htmlspecialchars($_SERVER['REQUEST_URI']));
         echo htmlspecialchars($fullUrl, ENT_QUOTES, 'UTF-8');
+    } else {
+        if (isset($_GET["submitted"])) {
+            header("Location: ./");
+        }
     }
+    error_reporting(E_ALL); // enable error reporting
 }
 function determineSubmissionFooter()
 {
@@ -72,7 +78,7 @@ function determineSubmissionFooter()
         <p class="text-muted">
             Share this link anywhere on the internet. The message will be automatically destroyed once viewed.
         </p>
-        <button type="button" class="btn btn-primary submit-button" onclick="copy()" nosubmit>
+        <button type="button" class="btn btn-primary submit-button" onclick="copyText()" nosubmit>
             Copy Link
         </button>
         <a class="btn btn-secondary submit-button" href="./">

@@ -50,13 +50,7 @@
         window.addEventListener('load', addDarkmodeWidget);
     </script>
     <!-- Copy Button -->
-    <script>
-        function copy() {
-            let textarea = document.getElementById("linkbox");
-            textarea.select();
-            document.execCommand("copy");
-        }
-    </script>
+    <script src="./Public/assets/js/buttonCopyURL.js"></script>
 
 </body>
 
