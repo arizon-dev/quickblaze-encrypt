@@ -13,7 +13,7 @@
 > An extremely simple, one-time view encryption system. Send links anywhere on the internet, and the encrypted message will automatically be destroyed after being viewed once!
 
 ### ✨ <a href="https://quickblaze.axtonprice.com" target="_blank">Click to view Demo</a>
-### 📚 <a href="/wiki">Click to view Wiki</a>
+### 📚 <a href="https://github.com/axtonprice-dev/quickblaze-encrypt/wiki">Click to view Wiki</a>
 
 ## Requirements
 
