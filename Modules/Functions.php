@@ -2,9 +2,9 @@
 /* Prevent XSS input */
 function sanitizeXSS()
 {
-    $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
-    $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-    $_SERVER  = filter_input_array(INPUT_SERVER, FILTER_SANITIZE_STRING);
+    $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $_SERVER  = filter_input_array(INPUT_SERVER, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $_REQUEST = (array)$_POST + (array)$_GET + (array)$_REQUEST;
 }
 
@@ -94,7 +94,7 @@ function determineSystemVersion()
         file_put_contents("./.version", json_encode(array("BRANCH" => $latestVersion["BRANCH"], "VERSION" => $latestVersion["VERSION"])));
     }
     $thisVersion = json_decode(file_get_contents("./.version", true), true);
-    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/" . filter_var(htmlspecialchars($thisVersion["BRANCH"]), FILTER_SANITIZE_STRING) . "/.version", true), true);
+    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/" . filter_var(htmlspecialchars($thisVersion["BRANCH"]), FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "/.version", true), true);
     if ($thisVersion["VERSION"] != $latestVersion["VERSION"]) {
         return '<x style="color:red">v' . $thisVersion["VERSION"] . ' (Outdated!)</x>';
     } else {
@@ -204,7 +204,7 @@ function destroyRecord($token)
     if ($mysqli->connect_errno) {
         return $mysqli->connect_errno;
     }
-    $token = filter_var($token, FILTER_SANITIZE_STRING);
+    $token = filter_var($token, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     if ($mysqli->query("DELETE FROM `quickblaze_records` WHERE `encryption_token` = '$token';") === TRUE) {
         return true;
     } else {
@@ -221,7 +221,7 @@ function getRecord($dataToFetch, $encryption_token)
     if ($mysqli->connect_errno) {
         return $mysqli->connect_errno;
     }
-    $encryption_token = filter_var($encryption_token, FILTER_SANITIZE_STRING);
+    $encryption_token = filter_var($encryption_token, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $result = $mysqli->query("SELECT `$dataToFetch` FROM `quickblaze_records` WHERE `encryption_token` = '$encryption_token'");
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
