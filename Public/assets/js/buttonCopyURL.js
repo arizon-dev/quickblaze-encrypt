@@ -1,6 +1,6 @@
 function copyText() {
     /* Get the text field */
-    var copyText = document.getElementById("myInput");
+    var copyText = document.getElementById("linkbox");
   
     /* Select the text field */
     copyText.select();
