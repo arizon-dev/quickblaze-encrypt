@@ -23,7 +23,7 @@
             <h5 class="text-muted">One time view encrypted message sharing system</h5>
             <br><br>
 
-            <?= viewMessageContent() ?>
+            <?= determineMessageContent() ?>
 
             <p class="mt-5 mb-3 text-muted">
                 <a href="https://github.com/axtonprice/quickblaze-encrypt" class="text-muted no-decoration">GitHub</a> •
@@ -48,6 +48,13 @@
             darkmode.showWidget();
         }
         window.addEventListener('load', addDarkmodeWidget);
+    </script>
+    <!-- Copy Button -->
+    <script>
+        document.querySelector("button").onclick = function() {
+            document.querySelector("textarea").select();
+            document.execCommand('copy');
+        }
     </script>
 
 </body>
