@@ -1,4 +1,7 @@
 <h1 align="center">QuickBlaze Encryption 👋</h1>
+
+![image](https://user-images.githubusercontent.com/37771600/163694976-30ca9c53-96e7-4824-aac9-c2d7014c7c7b.png)
+
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-v1.0.5_Dev-red.svg?cacheSeconds=2592000" />
   <a href="https://github.com/axtonprice/quickblaze-encrypt/blob/main/LICENSE" target="_blank">
