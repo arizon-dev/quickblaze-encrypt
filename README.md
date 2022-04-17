@@ -1,7 +1,5 @@
 <h1 align="center">QuickBlaze Encryption 👋</h1>
 
-![image](https://user-images.githubusercontent.com/37771600/163694995-15885d6f-51ee-457c-a65b-6d1642a460da.png)
-
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-v1.0.5_Dev-red.svg?cacheSeconds=2592000" />
   <a href="https://github.com/axtonprice/quickblaze-encrypt/blob/main/LICENSE" target="_blank">
@@ -76,3 +74,7 @@ If you like this project, give a ⭐️ to support us!
 
 Copyright © 2022 [axtonprice](https://github.com/axtonprice).<br />
 This project is [MIT](https://github.com/axtonprice/quickblaze-encrypt/blob/main/LICENSE) licensed.
+
+<hr>
+
+<iframe src="https://discord.com/widget?id=826239258590969897&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0""></iframe>
