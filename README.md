@@ -49,12 +49,12 @@ The user enters the message they would like to encrypt. The system then securely
 ## Screenshots
 
 <p align="center">
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/162692669-273df86d-2e53-49c9-bd08-637c90f155be.png">
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/162692731-b3c6d03f-41a1-42f7-b4dc-8ed8661f121f.png">
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/162692774-2116a65b-d9e0-4841-a58b-ff89c55d5f63.png">
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/162692802-b3d91607-99e1-4b48-98a6-2fdf70dfe5de.png">
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/163634259-b66127ef-0e7b-4e48-a1f7-113a51ea2d22.png">
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/163634350-13dd2d42-f4b2-4978-9afe-4974d89a459c.png">
+  <img height="150" src="https://user-images.githubusercontent.com/37771600/163694900-13dbb832-05f2-4a55-856d-9d0d9e315621.png">
+  <img height="150" src="https://user-images.githubusercontent.com/37771600/163694908-a332341b-6230-440c-a3e6-477c54193f71.png">
+  <img height="150" src="https://user-images.githubusercontent.com/37771600/163694918-84fe78cc-286b-4d8d-8eef-0a172b517c0e.png">
+  <img height="150" src="https://user-images.githubusercontent.com/37771600/163694933-4ea122b3-e2a4-4cee-82fd-065126bb3a3f.png">
+  <img height="150" src="https://user-images.githubusercontent.com/37771600/163694928-8b23235b-a671-43fb-af71-7526c4a71035.png">
+  <img height="150" src="https://user-images.githubusercontent.com/37771600/163694926-fd6ffa78-774c-456d-b942-8bea12f57662.png">
 </p>
   
 ## Authors, Credits, and Contributors
