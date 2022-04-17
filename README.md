@@ -6,7 +6,7 @@
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
   <a href="https://axtonprice.com?discord" target="_blank">
-    <img alt="Discord: axtonprice" src="https://img.shields.io/discord/826239258590969897" />
+    <img alt="Discord: axtonprice" src="https://discord.com/api/guilds/826239258590969897/widget.png?style=shield" />
   </a>
 </p>
 
