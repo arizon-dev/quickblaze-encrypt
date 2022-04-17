@@ -23,7 +23,7 @@
             <h5 class="text-muted">One time view encrypted message sharing system</h5>
             <br><br>
 
-            <textarea type="text" class="form-control" id="floatingInput" name="data" placeholder="Enter your secret message!" <?= ifTextBoxDisabled(); ?> required><?= getSubmittedKey() ?></textarea>
+            <textarea type="text" class="form-control" id="linkbox" name="data" placeholder="Enter your secret message!" <?= ifTextBoxDisabled(); ?> required><?= getSubmittedKey() ?></textarea>
 
             <?= determineSubmissionFooter() ?>
 
@@ -51,11 +51,12 @@
         }
         window.addEventListener('load', addDarkmodeWidget);
     </script>
-        <!-- Copy Button -->
-        <script>
-        document.querySelector("button").onclick = function() {
-            document.querySelector("textarea").select();
-            document.execCommand('copy');
+    <!-- Copy Button -->
+    <script>
+        function copy() {
+            let textarea = document.getElementById("linkbox");
+            textarea.select();
+            document.execCommand("copy");
         }
     </script>
 

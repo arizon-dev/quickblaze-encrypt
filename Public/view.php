@@ -51,9 +51,10 @@
     </script>
     <!-- Copy Button -->
     <script>
-        document.querySelector("button").onclick = function() {
-            document.querySelector("textarea").select();
-            document.execCommand('copy');
+        function copy() {
+            let textarea = document.getElementById("linkbox");
+            textarea.select();
+            document.execCommand("copy");
         }
     </script>
 

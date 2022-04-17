@@ -41,11 +41,11 @@ function determineMessageContent()
         } else {
             echo '
             <h6>This message has been destroyed!</h6>
-            <textarea disabled type="text" class="form-control" id="floatingInput" placeholder="Secret message" required name="data">
+            <textarea disabled type="text" class="form-control" id="linkbox" placeholder="Secret message" required name="data">
                 ' . htmlspecialchars(decryptData(htmlspecialchars($_GET["key"]))) . '
             </textarea>
             <br>
-            <button class="btn btn-primary submit-button">
+            <button class="btn btn-primary submit-button" onclick="copy()" nosubmit>
                 Copy Message
             </button>
             <a class="btn btn-secondary submit-button" href="./">
@@ -72,7 +72,7 @@ function determineSubmissionFooter()
         <p class="text-muted">
             Share this link anywhere on the internet. The message will be automatically destroyed once viewed.
         </p>
-        <button class="btn btn-primary submit-button">
+        <button class="btn btn-primary submit-button" onclick="copy()" nosubmit>
             Copy Link
         </button>
         <a class="btn btn-secondary submit-button" href="./">
@@ -82,7 +82,7 @@ function determineSubmissionFooter()
         echo '
         <br>
         <button class="btn btn-primary submit-button" type="submit">
-            Create One-Time Message
+            Generate Link
         </button>';
     }
 }
