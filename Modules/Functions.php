@@ -20,7 +20,7 @@ function processData($data)
 function ifTextBoxDisabled()
 {
     sanitizeXSS(); // Sanitize Script
-    if ($_GET["submitted"]) {
+    if (isset($_GET["submitted"])) {
         echo "disabled";
     }
 }
@@ -57,12 +57,13 @@ function determineSubmissionFooter()
 }
 function determineSystemVersion()
 {
-    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/main/.version", true), true);
     if (!file_exists("./.version")) {
-        file_put_contents("./.version", json_encode(array("version" => $latestVersion["VERSION"])));
         touch("./.version");
+        $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/main/.version", true), true);
+        file_put_contents("./.version", json_encode(array("BRANCH" => $latestVersion["BRANCH"], "VERSION" => $latestVersion["VERSION"])));
     }
     $thisVersion = json_decode(file_get_contents("./.version", true), true);
+    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/" . $thisVersion["BRANCH"] . "/.version", true), true);
     if ($thisVersion["VERSION"] != $latestVersion["VERSION"]) {
         return '<x style="color:red">v' . $thisVersion["VERSION"] . ' (Outdated!)</x>';
     } else {
@@ -99,16 +100,18 @@ function decryptData($encryption_key) // getRecord("encrypted_contents", $dataKe
 function setupDatabase()
 {
     sanitizeXSS(); // Sanitize Script
+    error_reporting(0); // disable error reporting
     if (!file_exists("./Modules/InstallationStatus.json")) {
         touch("./Modules/InstallationStatus.json");
-        file_put_contents("./Modules/InstallationStatus.json", json_encode(array("INSTALLED" => "true")));
+        file_put_contents("./Modules/InstallationStatus.json", json_encode(array("INSTALLED" => "false")));
     }
     $json = json_decode(file_get_contents("./Modules/InstallationStatus.json", true), true);
-    if ($json["INSTALLED"] == "false") {
+    if ($json["INSTALLED"] == "false" || $json["INSTALLED"] == "") {
         $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
-        $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
-        if ($mysqli->connect_errno) {
-            return $mysqli->connect_errno;
+        try { // attempt database connection
+            $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
+        } catch (mysqli_sql_exception $e) {
+            die(file_get_contents("./Public/Error/DatabaseCredentials.html")); // throw error page if invalid credentials
         }
         $tableCreateSQL = "CREATE TABLE IF NOT EXISTS `quickblaze_records` (`record_id` int(11) NOT NULL,`encrypted_contents` longtext NOT NULL,`encryption_token` varchar(128) NOT NULL,`source_ip` varchar(100) NOT NULL, `record_date` timestamp(5) NOT NULL DEFAULT current_timestamp(5)) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         $addPrimaryKeySQL = "ALTER TABLE `quickblaze_records` ADD PRIMARY KEY (`record_id`);";
@@ -129,6 +132,18 @@ function setupDatabase()
         }
 
         $mysqli->close();
+    }
+    error_reporting(E_ALL); // enable error reporting
+}
+function checkDatabase()
+{
+    if (!file_exists("./Modules/Database.env")) {
+        die(file_get_contents("./Public/Error/DatabaseConfig.html"));
+    } else {
+        $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
+        if ($json["DATABASE"] == "" || $json["HOSTNAME"] == "") {
+            die(file_get_contents("./Public/Error/DatabaseConfig.html"));
+        }
     }
 }
 

@@ -28,11 +28,27 @@
             <p class="mt-5 mb-3 text-muted">
                 <a href="https://github.com/axtonprice/quickblaze-encrypt" class="text-muted no-decoration">GitHub</a> •
                 <a href="https://discord.gg/dP3MuBATGc" class="text-muted no-decoration">Discord</a> •
-                <a href="https://github.com/axtonprice/quickblaze-encrypt/releases" class="text-muted no-decoration">v<?= determineSystemVersion(); ?></a>
+                <a href="https://github.com/axtonprice/quickblaze-encrypt/releases" class="text-muted no-decoration"><?= determineSystemVersion(); ?></a>
             </p>
 
         </form>
     </main>
+
+    <!-- Dark Mode Widget -->
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script>
+        function addDarkmodeWidget() {
+            const options = {
+                time: '0.3s', // default: '0.3s'
+                saveInCookies: true, // default: true,
+                label: '🌓', // default: ''
+            }
+
+            const darkmode = new Darkmode(options);
+            darkmode.showWidget();
+        }
+        window.addEventListener('load', addDarkmodeWidget);
+    </script>
 
 </body>
 

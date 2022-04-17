@@ -23,7 +23,7 @@
             <h5 class="text-muted">One time view encrypted message sharing system</h5>
             <br><br>
 
-            <textarea type="text" class="form-control" id="floatingInput" name="data" placeholder="Secret message" <?= ifTextBoxDisabled(); ?> required><?= getSubmittedKey() ?></textarea>
+            <textarea type="text" class="form-control" id="floatingInput" name="data" placeholder="Enter your secret message!" <?= ifTextBoxDisabled(); ?> required><?= getSubmittedKey() ?></textarea>
 
             <?= determineSubmissionFooter() ?>
 
@@ -35,6 +35,22 @@
 
         </form>
     </main>
+
+    <!-- Dark Mode Widget -->
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script>
+        function addDarkmodeWidget() {
+            const options = {
+                time: '0.3s', // default: '0.3s'
+                saveInCookies: true, // default: true,
+                label: '🌓', // default: ''
+            }
+
+            const darkmode = new Darkmode(options);
+            darkmode.showWidget();
+        }
+        window.addEventListener('load', addDarkmodeWidget);
+    </script>
 
 </body>
 
