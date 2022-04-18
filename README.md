@@ -1,8 +1,8 @@
 <h1 align="center">QuickBlaze Encryption 👋</h1>
 
-<p>
+<p align="center">
   <img alt="Version" src="https://img.shields.io/badge/version-v1.0.6_Dev-red.svg?cacheSeconds=2592000" />
-  <img alt="Views" src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Faxtonprice-dev%2Fquickblaze-encrypt%2F&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Project+Views&edge_flat=false)](https://hits.seeyoufarm.com" />
+  <img alt="Hits" src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Faxtonprice-dev%2Fquickblaze-encrypt%2F&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Project+Hits&edge_flat=false)](https://hits.seeyoufarm.com" />
   <a href="https://github.com/axtonprice/quickblaze-encrypt/blob/main/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
