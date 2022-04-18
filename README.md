@@ -51,9 +51,9 @@ The user enters the message they would like to encrypt. The system then securely
 
 <p align="center">
   <!-- Light Mode -->
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/163694900-13dbb832-05f2-4a55-856d-9d0d9e315621.png">
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/163694908-a332341b-6230-440c-a3e6-477c54193f71.png">
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/163694918-84fe78cc-286b-4d8d-8eef-0a172b517c0e.png">
+  <img height="150" src="https://user-images.githubusercontent.com/37771600/163854079-ae8ea359-fce3-4157-8cff-114da799ff89.png">
+  <img height="150" src="https://user-images.githubusercontent.com/37771600/163854117-bba6e982-0a1b-4a16-b785-78a093cdb09b.png">
+  <img height="150" src="https://user-images.githubusercontent.com/37771600/163854146-746635c3-fce3-4725-a733-bf7646f4618f.png">
   <!-- Dark Mode -->
   <img height="150" src="https://user-images.githubusercontent.com/37771600/163853630-c5fe544d-9976-499f-859c-05efdc990947.png">
   <img height="150" src="https://user-images.githubusercontent.com/37771600/163853684-3ff0c1b5-039d-465c-abfb-dfc9af00c338.png">
