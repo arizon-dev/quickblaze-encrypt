@@ -35,7 +35,7 @@ function determineMessageContent()
             <h6>
                 Decrypt & View Message?
             </h6>
-            <a class="btn btn-primary submit-button" href="?confirm&key=' . htmlspecialchars($_GET["key"]) . '">
+            <a class="btn btn-primary submit-button darkmode-ignore" href="?confirm&key=' . htmlspecialchars($_GET["key"]) . '">
                 View Message
             </a>';
         } else {
@@ -45,10 +45,10 @@ function determineMessageContent()
             </h6>
             <textarea disabled type="text" class="form-control" id="linkbox" name="data">' . htmlspecialchars(decryptData(htmlspecialchars($_GET["key"]))) . '</textarea>
             <br>
-            <button type="button" class="btn btn-primary submit-button" onclick="copyToClipboard(\'#linkbox\')">
+            <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard(\'#linkbox\')">
                 Copy Message
             </button>
-            <a class="btn btn-secondary submit-button" href="./">
+            <a class="btn btn-secondary submit-button darkmode-ignore" href="./">
                 Return Home
             </a>';
             destroyRecord(htmlspecialchars($_GET["key"], ENT_QUOTES, 'UTF-8')); // destroy record
@@ -79,11 +79,11 @@ function determineSubmissionFooter()
             Share this link anywhere on the internet. The message will be automatically destroyed once viewed.
         </p>
 
-        <button type="button" class="btn btn-primary submit-button" onclick="copyToClipboard(\'#linkbox\')">
+        <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard(\'#linkbox\')">
             Copy Link
         </button>
     
-        <a class="btn btn-secondary submit-button" href="./">
+        <a class="btn btn-secondary submit-button darkmode-ignore" href="./">
             Create New
         </a>';
     } else {
