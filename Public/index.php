@@ -36,6 +36,7 @@
         </form>
     </main>
 
+    
     <!-- Snackbar Notification -->
     <div id="snackbar">✅ URL has been copied to clipboard</div>
 
