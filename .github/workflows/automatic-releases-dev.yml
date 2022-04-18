@@ -23,6 +23,5 @@ jobs:
           prerelease: true
           draft: false
           files: |
-            LICENSE
-            README.md
-            *
+            ./LICENSE
+            ./README.md
