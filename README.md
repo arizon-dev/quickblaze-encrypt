@@ -50,12 +50,14 @@ The user enters the message they would like to encrypt. The system then securely
 ## Screenshots *(Light/Dark Mode)*
 
 <p align="center">
+  <!-- Light Mode -->
   <img height="150" src="https://user-images.githubusercontent.com/37771600/163694900-13dbb832-05f2-4a55-856d-9d0d9e315621.png">
   <img height="150" src="https://user-images.githubusercontent.com/37771600/163694908-a332341b-6230-440c-a3e6-477c54193f71.png">
   <img height="150" src="https://user-images.githubusercontent.com/37771600/163694918-84fe78cc-286b-4d8d-8eef-0a172b517c0e.png">
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/163694933-4ea122b3-e2a4-4cee-82fd-065126bb3a3f.png">
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/163694928-8b23235b-a671-43fb-af71-7526c4a71035.png">
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/163694926-fd6ffa78-774c-456d-b942-8bea12f57662.png">
+  <!-- Dark Mode -->
+  <img height="150" src="https://user-images.githubusercontent.com/37771600/163853630-c5fe544d-9976-499f-859c-05efdc990947.png">
+  <img height="150" src="https://user-images.githubusercontent.com/37771600/163853684-3ff0c1b5-039d-465c-abfb-dfc9af00c338.png">
+  <img height="150" src="https://user-images.githubusercontent.com/37771600/163853762-ee6d721b-a0bd-482c-9fb9-4020bcf7653c.png">
 </p>
   
 ## Authors and Contributors
