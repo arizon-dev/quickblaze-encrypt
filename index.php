@@ -32,7 +32,7 @@ if ($url == "") {
     return;
 } elseif ($url == "403") {
     /* Not Found Page */
-    require("./Modules/Functions.php");
+    require("./Modules/Functions.php"); 
     require("./Public/Error/403.html");
     return;
 } else {
