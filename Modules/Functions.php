@@ -89,7 +89,7 @@ function determineSubmissionFooter()
     } else {
         echo '
         <br>
-        <button class="btn btn-primary submit-button" type="submit">
+        <button class="btn btn-primary submit-button darkmode-ignore" type="submit">
             Generate Link
         </button>';
     }
