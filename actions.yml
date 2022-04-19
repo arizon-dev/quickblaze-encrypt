@@ -1,2 +1,4 @@
 - name: Automatic Releases
   uses: marvinpinto/action-automatic-releases@v1.2.1
+- name: Automatic Semver Release
+  uses: rui-costa/action-automatic-semver-releases@1.1.0

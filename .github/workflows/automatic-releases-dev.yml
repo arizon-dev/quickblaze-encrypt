@@ -1,28 +1,39 @@
-name: "tagged-release"
+name: 'Release'
 
 on:
-  push:
-    branches:
-      - "dev"
+  workflow_dispatch:
+    inputs:
+      semver:
+        description: 'Which version you want to increment? Use MAJOR, MINOR or PATCH'
+        required: true
+        default: 'PATCH'
+      label:
+        description: 'Add Labels. i.e final, alpha, rc'
+        required: false
+        default: ''
 
 jobs:
-  tagged-release:
-    name: "Tagged Release"
-    runs-on: "ubuntu-latest"
+  release:
+    name: 'Release'
+    runs-on: 'ubuntu-latest'
 
     steps:
+      # Checkout sources
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+
       # ...
-      - name: "Build & test"
+      - name: '👷‍♂️ Build'
         run: |
-          echo "done!"
-      - uses: "marvinpinto/action-automatic-releases@latest"
+          echo "BUILD COMPLETE 👍"
+
+      # ...
+      - name: '🧪 TEST'
+        run: |
+          echo "TESTS PASSED 🎉"
+
+      - uses: 'rui-costa/action-automatic-semver-releases@{latest}'
         with:
-          repo_token: "${{secrets.GITHUB_TOKEN}}"
-          automatic_release_tag: "latest-dev"
-          title: "Latest Dev Release"
-          prerelease: true
-          draft: false
-          upload_url: "https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/latest/LICENSE"
-          files: |
-            LICENSE
-            *.md
+          TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          SEMVER: '${{ github.event.inputs.semver }}'
+          LABEL: '${{ github.event.inputs.label }}'
