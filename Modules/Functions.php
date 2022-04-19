@@ -2,9 +2,9 @@
 /* Prevent XSS input */
 function sanitizeXSS()
 {
-    $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
-    $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-    $_SERVER  = filter_input_array(INPUT_SERVER, FILTER_SANITIZE_STRING);
+    $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $_SERVER  = filter_input_array(INPUT_SERVER, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $_REQUEST = (array)$_POST + (array)$_GET + (array)$_REQUEST;
 }
 
@@ -24,16 +24,33 @@ function ifTextBoxDisabled()
         echo "disabled";
     }
 }
-function viewMessageContent()
+function determineMessageContent()
 {
     sanitizeXSS(); // Sanitize Script
     if (getRecord("encrypted_contents", htmlspecialchars($_GET["key"]), ENT_QUOTES, 'UTF-8') == null) {
         header("Location: 404");
     } else {
         if (!isset($_GET["confirm"])) {
-            echo '<h6>Decrypt & View Message?</h6><a class="btn btn-primary submit-button" href="?confirm&key=' . htmlspecialchars($_GET["key"]) . '">View Message</a>';
+            echo '
+            <h6>
+                Decrypt & View Message?
+            </h6>
+            <a class="btn btn-primary submit-button darkmode-ignore" href="?confirm&key=' . htmlspecialchars($_GET["key"]) . '">
+                View Message
+            </a>';
         } else {
-            echo '<h6>This message has been destroyed!</h6><textarea disabled type="text" class="form-control" id="floatingInput" placeholder="Secret message" required name="data">' . htmlspecialchars(decryptData(htmlspecialchars($_GET["key"]))) . '</textarea><br><a class="btn btn-primary submit-button" href="./">Return Home</a>';
+            echo '
+            <h6>
+                This message has been destroyed!
+            </h6>
+            <textarea disabled type="text" class="form-control" id="linkbox" name="data">' . htmlspecialchars(decryptData(htmlspecialchars($_GET["key"]))) . '</textarea>
+            <br>
+            <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard(\'#linkbox\')">
+                Copy Message
+            </button>
+            <a class="btn btn-secondary submit-button darkmode-ignore" href="./">
+                Return Home
+            </a>';
             destroyRecord(htmlspecialchars($_GET["key"], ENT_QUOTES, 'UTF-8')); // destroy record
         }
     }
@@ -41,18 +58,40 @@ function viewMessageContent()
 function getSubmittedKey()
 {
     sanitizeXSS(); // Sanitize Script 
-    if (isset($_GET['submitted'])) {
+    error_reporting(0); // disable error reporting
+    if (isset($_GET["submitted"]) && $_GET["submitted"] != "") {
         $fullUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . str_replace("?submitted=", "view?key=", htmlspecialchars($_SERVER['REQUEST_URI']));
         echo htmlspecialchars($fullUrl, ENT_QUOTES, 'UTF-8');
+    } else {
+        if (isset($_GET["submitted"])) {
+            header("Location: ./");
+        }
     }
+    error_reporting(E_ALL); // enable error reporting
 }
 function determineSubmissionFooter()
 {
     sanitizeXSS(); // Sanitize Script
     if (isset($_GET["submitted"])) {
-        echo '<br><p class="text-muted">Share this link anywhere on the internet. The message will be automatically destroyed once viewed.</p><a class="btn btn-primary submit-button" href="./">Create New</a>';
+        echo '
+        <br>
+        <p class="text-muted">
+            Share this link anywhere on the internet. The message will be automatically destroyed once viewed.
+        </p>
+
+        <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard(\'#linkbox\')">
+            Copy Link
+        </button>
+    
+        <a class="btn btn-secondary submit-button darkmode-ignore" href="./">
+            Create New
+        </a>';
     } else {
-        echo '<br><button class="btn btn-primary submit-button" type="submit">Create One-Time Link</button>';
+        echo '
+        <br>
+        <button class="btn btn-primary submit-button darkmode-ignore" type="submit">
+            Generate Link
+        </button>';
     }
 }
 function determineSystemVersion()
@@ -63,7 +102,7 @@ function determineSystemVersion()
         file_put_contents("./.version", json_encode(array("BRANCH" => $latestVersion["BRANCH"], "VERSION" => $latestVersion["VERSION"])));
     }
     $thisVersion = json_decode(file_get_contents("./.version", true), true);
-    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/" . filter_var(htmlspecialchars($thisVersion["BRANCH"]), FILTER_SANITIZE_STRING) . "/.version", true), true);
+    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/" . filter_var(htmlspecialchars($thisVersion["BRANCH"]), FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "/.version", true), true);
     if ($thisVersion["VERSION"] != $latestVersion["VERSION"]) {
         return '<x style="color:red">v' . $thisVersion["VERSION"] . ' (Outdated!)</x>';
     } else {
@@ -173,7 +212,7 @@ function destroyRecord($token)
     if ($mysqli->connect_errno) {
         return $mysqli->connect_errno;
     }
-    $token = filter_var($token, FILTER_SANITIZE_STRING);
+    $token = filter_var($token, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     if ($mysqli->query("DELETE FROM `quickblaze_records` WHERE `encryption_token` = '$token';") === TRUE) {
         return true;
     } else {
@@ -190,7 +229,7 @@ function getRecord($dataToFetch, $encryption_token)
     if ($mysqli->connect_errno) {
         return $mysqli->connect_errno;
     }
-    $encryption_token = filter_var($encryption_token, FILTER_SANITIZE_STRING);
+    $encryption_token = filter_var($encryption_token, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $result = $mysqli->query("SELECT `$dataToFetch` FROM `quickblaze_records` WHERE `encryption_token` = '$encryption_token'");
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {

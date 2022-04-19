@@ -23,7 +23,7 @@
             <h5 class="text-muted">One time view encrypted message sharing system</h5>
             <br><br>
 
-            <textarea type="text" class="form-control" id="floatingInput" name="data" placeholder="Enter your secret message!" <?= ifTextBoxDisabled(); ?> required><?= getSubmittedKey() ?></textarea>
+            <textarea type="text" class="form-control" id="linkbox" name="data" placeholder="Enter your secret message!" <?= ifTextBoxDisabled(); ?> required value="<?= getSubmittedKey() ?>"><?= getSubmittedKey() ?></textarea>
 
             <?= determineSubmissionFooter() ?>
 
@@ -35,6 +35,10 @@
 
         </form>
     </main>
+
+
+    <!-- Snackbar Notification -->
+    <div id="snackbar">✅ URL has been copied to clipboard!</div>
 
     <!-- Dark Mode Widget -->
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
@@ -51,6 +55,9 @@
         }
         window.addEventListener('load', addDarkmodeWidget);
     </script>
+    <!-- Copy Button -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="./Public/assets/js/buttonCopyURL.js"></script>
 
 </body>
 
