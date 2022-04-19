@@ -6,36 +6,22 @@ on:
       - "dev"
 
 jobs:
-  gh_tagged_release:
+  tagged-release:
+    name: "Tagged Release"
     runs-on: "ubuntu-latest"
-    env:
-      JEST_VERBOSE: ${{ secrets.JEST_VERBOSE }}
 
     steps:
-      - name: "Checkout source code"
-        uses: "actions/checkout@v2.3.4"
-        with:
-          lfs: true
-          fetch-depth: 0
-
+      # ...
+      - name: "Build & test"
+        run: |
+          echo "done!"
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          repo_token: "${{secrets.GITHUB_TOKEN}}"
+          automatic_release_tag: "latest"
+          title: "Latest Dev Release"
           prerelease: false
+          draft: false
           files: |
+            LICENSE.txt
             README.md
-            LICENSE
-        id: "automatic_releases"
-
-      # marvinpinto/action-keybase-notifications
-      # marvinpinto/action-automatic-releases
-      - name: "Automatically mirror release artifacts"
-        env:
-          GITHUB_SUPER_TOKEN: ${{ secrets.GITHUB_SUPER_TOKEN }}
-        run: |
-          ./scripts/mirror-actions.sh "$AUTOMATIC_RELEASES_TAG"
-      - uses: "marvinpinto/action-keybase-notifications@latest"
-        if: always()
-        with:
-          job_status: ${{ job.status }}
-          opensentinel_token: ${{ secrets.OSL_TOKEN }}
