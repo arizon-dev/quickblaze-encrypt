@@ -20,7 +20,7 @@ jobs:
           repo_token: "${{secrets.GITHUB_TOKEN}}"
           automatic_release_tag: "latest"
           title: "Latest Dev Release"
-          prerelease: false
+          prerelease: true
           draft: false
           files: |
             LICENSE.txt
