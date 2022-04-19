@@ -26,9 +26,10 @@
 
 1. Download the latest version from the <a href="https://github.com/axtonprice/quickblaze-encrypt/releases">releases page</a>. 
 2. Upload and extract the file to your web server or hosting subdomain. 
-3. Update the database information in `/modules/Database_example.env`, then ensure you rename the file to `Database.env`. [(See below for layout format)](#configuration)
-4. Visit your domain https://quickblaze.example.com/
-5. Enjoy!
+3. Update the database information in `/modules/Database_example.env`
+4. Rename the configuration file to `Database.env` [(See below for example layout format)](#configuration).
+5. Visit your domain installation directory https://example.com/quickblaze-encrypt/
+6. Enjoy!
 
 ⚠️ *Don't delete the `.version` file! It contains necessary version data, and modifying it may cause issues!*
 
