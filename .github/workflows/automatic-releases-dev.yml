@@ -1,6 +1,9 @@
 name: 'Release'
 
 on:
+  push:
+    branches:
+      - "dev"
   workflow_dispatch:
     inputs:
       semver:
@@ -32,8 +35,14 @@ jobs:
         run: |
           echo "TESTS PASSED 🎉"
 
+      # This action may not exist, please check
+      - name: '⚙ GENERATE RELEASE NOTES'
+        id: 'gen-notes'
+        uses: 'rui-costa/action-auto-generate-release-notes@{latest}'
+
       - uses: 'rui-costa/action-automatic-semver-releases@{latest}'
         with:
           TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           SEMVER: '${{ github.event.inputs.semver }}'
           LABEL: '${{ github.event.inputs.label }}'
+          NOTES: '${{ steps.gen-notes.outputs.notes }}'
