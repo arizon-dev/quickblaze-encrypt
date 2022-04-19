@@ -22,7 +22,6 @@ jobs:
           title: "Latest Release"
           prerelease: false
           draft: false
-          upload_url: 
           files: |
             LICENSE.txt
             README.md
