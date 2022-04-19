@@ -18,10 +18,11 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{secrets.GITHUB_TOKEN}}"
-          automatic_release_tag: "latest"
-          title: "Latest Stable Release"
+          automatic_release_tag: "latest-stable"
+          title: "Latest Release"
           prerelease: false
           draft: false
+          upload_url: 
           files: |
-            ./LICENSE.txt
-            ./README.md
+            LICENSE.txt
+            README.md
