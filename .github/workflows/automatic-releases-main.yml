@@ -12,7 +12,7 @@ on:
         default: 'PATCH'
       label:
         description: 'Add Labels. i.e final, alpha, rc'
-        required: false
+        required: true
         default: ' Stable'
 
 jobs:
