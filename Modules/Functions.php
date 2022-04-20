@@ -11,7 +11,6 @@ function sanitizeXSS()
 /* Internal Script Functions */
 function processData($data)
 {
-    sanitizeXSS(); // Sanitize Script
     $encryptionKey = generateKey(64); // Create new key
     $encryptedData = encryptData($data, $encryptionKey); // Encrypt data
     insertRecord($encryptedData, $encryptionKey); // Insert new database record
@@ -19,14 +18,12 @@ function processData($data)
 }
 function ifTextBoxDisabled()
 {
-    sanitizeXSS(); // Sanitize Script
     if (isset($_GET["submitted"])) {
         echo "disabled";
     }
 }
 function determineMessageContent()
 {
-    sanitizeXSS(); // Sanitize Script
     if (getRecord("encrypted_contents", htmlspecialchars($_GET["key"]), ENT_QUOTES, 'UTF-8') == null) {
         header("Location: 404");
     } else {
@@ -57,7 +54,6 @@ function determineMessageContent()
 }
 function getSubmittedKey()
 {
-    sanitizeXSS(); // Sanitize Script 
     error_reporting(0); // disable error reporting
     if (isset($_GET["submitted"]) && $_GET["submitted"] != "") {
         $fullUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . str_replace("?submitted=", "view?key=", htmlspecialchars($_SERVER['REQUEST_URI']));
@@ -71,7 +67,6 @@ function getSubmittedKey()
 }
 function determineSubmissionFooter()
 {
-    sanitizeXSS(); // Sanitize Script
     if (isset($_GET["submitted"])) {
         echo '
         <br>
@@ -98,11 +93,11 @@ function determineSystemVersion()
 {
     if (!file_exists("./.version")) {
         touch("./.version");
-        $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/main/.version?cacheUpdate=".rand(0,100), true), true);
+        $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/main/.version?cacheUpdate=" . rand(0, 100), true), true);
         file_put_contents("./.version", json_encode(array("BRANCH" => $latestVersion["BRANCH"], "VERSION" => $latestVersion["VERSION"])));
     }
     $thisVersion = json_decode(file_get_contents("./.version", true), true);
-    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/" . filter_var(htmlspecialchars($thisVersion["BRANCH"]), FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "/.version?cacheUpdate=".rand(0,100), true), true);
+    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/" . filter_var(htmlspecialchars($thisVersion["BRANCH"]), FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "/.version?cacheUpdate=" . rand(0, 100), true), true);
     if ($thisVersion["VERSION"] != $latestVersion["VERSION"]) {
         return '<x style="color:red">v' . $thisVersion["VERSION"] . ' (Outdated!)</x>';
     } else {
@@ -113,7 +108,6 @@ function determineSystemVersion()
 /* Database Interaction Functions */
 function generateKey($length)
 {
-    sanitizeXSS(); // Sanitize Script
     $length = 16;
     $bytes = openssl_random_pseudo_bytes($length);
     $hex = bin2hex($bytes);
@@ -123,14 +117,12 @@ function generateKey($length)
 /* Data Conversion Functions */
 function encryptData($data, $encryption_key)
 {
-    sanitizeXSS(); // Sanitize Script
     $encryption_iv = hex2bin($encryption_key);
     return openssl_encrypt($data, "AES-128-CTR", $encryption_key, 0, $encryption_iv);
 }
 
 function decryptData($encryption_key) // getRecord("encrypted_contents", $dataKey)
 {
-    sanitizeXSS(); // Sanitize Script
     $encryption_iv = hex2bin($encryption_key);
     return openssl_decrypt(getRecord("encrypted_contents", $encryption_key), "AES-128-CTR", $encryption_key, 0, $encryption_iv);
 }
@@ -138,7 +130,6 @@ function decryptData($encryption_key) // getRecord("encrypted_contents", $dataKe
 /* Database Interaction Functions */
 function setupDatabase()
 {
-    sanitizeXSS(); // Sanitize Script
     error_reporting(0); // disable error reporting
     if (!file_exists("./Modules/InstallationStatus.json")) {
         touch("./Modules/InstallationStatus.json");
@@ -161,13 +152,13 @@ function setupDatabase()
                     file_put_contents("./Modules/InstallationStatus.json", json_encode(array("INSTALLED" => "true")));
                     return true;
                 } else {
-                    die($mysqli->error);
+                    die(file_get_contents("./Public/Error/DatabaseCredentials.html")); // throw error page if invalid credentials
                 }
             } else {
-                die($mysqli->error);
+                die(file_get_contents("./Public/Error/DatabaseCredentials.html")); // throw error page if invalid credentials
             }
         } else {
-            die($mysqli->error);
+            die(file_get_contents("./Public/Error/DatabaseCredentials.html")); // throw error page if invalid credentials
         }
 
         $mysqli->close();
@@ -176,7 +167,9 @@ function setupDatabase()
 }
 function checkDatabase()
 {
+    error_reporting(0); // disable error reporting
     if (!file_exists("./Modules/Database.env")) {
+        touch("./Modules/Database.env");
         die(file_get_contents("./Public/Error/DatabaseConfig.html"));
     } else {
         $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
@@ -184,15 +177,21 @@ function checkDatabase()
             die(file_get_contents("./Public/Error/DatabaseConfig.html"));
         }
     }
+    $status = json_decode(file_get_contents("./Modules/InstallationStatus.json", true), true);
+    if ($status["INSTALLED"] == "false") {
+        // file_put_contents("./Modules/InstallationStatus.json", json_encode(array("INSTALLED" => "true")));
+        // header("Location: ./");
+        setupDatabase();
+    }
+    error_reporting(E_ALL); // enable error reporting
 }
 
 function insertRecord($encrypted_contents, $encryption_token)
 {
-    sanitizeXSS(); // Sanitize Script
     $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
     $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
     if ($mysqli->connect_errno) {
-        return $mysqli->connect_errno;
+        die(file_get_contents("./Public/Error/DatabaseCredentials.html"));
     }
     $source_ip = filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP) ?? filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
     $record_date = date("Y-m-d H:i:s");
@@ -206,11 +205,10 @@ function insertRecord($encrypted_contents, $encryption_token)
 
 function destroyRecord($token)
 {
-    sanitizeXSS(); // Sanitize Script
     $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
     $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
     if ($mysqli->connect_errno) {
-        return $mysqli->connect_errno;
+        die(file_get_contents("./Public/Error/DatabaseCredentials.html"));
     }
     $token = filter_var($token, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     if ($mysqli->query("DELETE FROM `quickblaze_records` WHERE `encryption_token` = '$token';") === TRUE) {
@@ -223,11 +221,10 @@ function destroyRecord($token)
 
 function getRecord($dataToFetch, $encryption_token)
 {
-    sanitizeXSS(); // Sanitize Script
     $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
     $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
     if ($mysqli->connect_errno) {
-        return $mysqli->connect_errno;
+        die(file_get_contents("./Public/Error/DatabaseCredentials.html"));
     }
     $encryption_token = filter_var($encryption_token, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $result = $mysqli->query("SELECT `$dataToFetch` FROM `quickblaze_records` WHERE `encryption_token` = '$encryption_token'");
