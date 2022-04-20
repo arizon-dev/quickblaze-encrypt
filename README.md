@@ -18,18 +18,20 @@
 ## Requirements
 
 - Accessible webserver with PHP support.
-- PHP v7 or higher version.
+- PHP v7 or higher.
+- PHP composer v2.0.11 or later.
 - PHP [MBSTRING](http://php.net/manual/en/book.mbstring.php) module for full UTF-8 support.
 - PHP [JSON](http://php.net/manual/en/book.json.php) module for JSON manipulation
 
 ## Installation
 
 1. Download the latest version from the <a href="https://github.com/axtonprice/quickblaze-encrypt/releases">releases page</a>. 
-2. Upload and extract the file to your web server or hosting subdomain. 
-3. Update the database information in `/modules/Database_example.env`.
-4. Rename the configuration file to `Database.env` [(Example configuration)](#configuration).
-5. Visit your domain installation directory https://example.com/quickblaze-encrypt/
-6. Enjoy!
+2. Upload and extract the file to your web server. 
+3. Install composer requirements with ```composer install```.
+4. Update the database information in `/modules/Database_example.env`.
+5. Rename the configuration file to `Database.env` [(Example configuration)](#configuration).
+6. Visit your domain installation directory or subdomain https://example.com/quickblaze-encrypt/
+7. **Enjoy!**
 
 ⚠️ *Don't delete the `.version` file! It contains necessary version data, and modifying it may cause issues!*
 
