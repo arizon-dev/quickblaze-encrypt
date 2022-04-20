@@ -19,7 +19,7 @@
 
 - Accessible webserver with PHP support.
 - PHP v7 or higher.
-- PHP composer v2.0.11 or later.
+- PHP composer `v2.0.11` or later.
 - PHP [MBSTRING](http://php.net/manual/en/book.mbstring.php) module for full UTF-8 support.
 - PHP [JSON](http://php.net/manual/en/book.json.php) module for JSON manipulation
 
