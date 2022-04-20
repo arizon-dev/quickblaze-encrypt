@@ -15,7 +15,9 @@
 
 ## Reports & Submissions
 
-Please report all security vulnerabilities, bug reports, as well as suggestions to either the GitHub [issues page](https://github.com/axtonprice-dev/quickblaze-encrypt/issues), [discussion page](https://github.com/axtonprice-dev/quickblaze-encrypt/discussions), or the community Discord server.
-You can also directly contact the project lead developer via Discord, in order to submit reports or suggestions. (*Axton P.#1234*)(*[@axtonprice](https://github.com/axtonprice)*).
+Please report all security vulnerabilities, bug reports, as well as suggestions to either the GitHub [issues](https://github.com/axtonprice-dev/quickblaze-encrypt/issues) page, [discussion](https://github.com/axtonprice-dev/quickblaze-encrypt/discussions) page, or the community [Discord server](https://discord.gg/dP3MuBATGc).
+You can also directly contact the project lead developer via Discord, in order to submit reports or suggestions.
+
+*[@axtonprice](https://github.com/axtonprice): Axton P.#1234*
 
 Thank you.
