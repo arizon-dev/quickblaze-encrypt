@@ -2,7 +2,6 @@
 
 <p align="center">
   <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/axtonprice/quickblaze-encrypt?label=Version">
-  <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/axtonprice/quickblaze-encrypt/total">
   <a href="https://github.com/axtonprice/quickblaze-encrypt/blob/main/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
