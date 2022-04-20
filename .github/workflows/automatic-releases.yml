@@ -21,7 +21,6 @@ jobs:
     runs-on: 'ubuntu-latest'
 
     steps:
-      # Checkout sources
       - name: 'Checkout'
         uses: actions/checkout@v2
 
