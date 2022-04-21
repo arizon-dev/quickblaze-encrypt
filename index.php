@@ -19,13 +19,6 @@ if ($url == "view") {
     require("./Public/view.php");
     return;
 }
-if ($url == "translate") {
-    /* View Message Page */
-    require("./Modules/Functions.php");
-    checkDatabase(); // Check database
-    require("./Modules/TranslationCore.php");
-    return;
-}
 if ($url == "") {
     /* Primary Display Page */
     require("./Modules/Functions.php");
@@ -54,4 +47,13 @@ if ($url == "") {
         require("./Public/Error/404.html");
         return;
     }
+}
+
+// Testing
+if ($url == "translate") {
+    /* View Message Page */
+    require("./Modules/Functions.php");
+    checkDatabase(); // Check database
+    require("./Modules/TranslationCore.php");
+    return;
 }
