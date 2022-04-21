@@ -19,6 +19,13 @@ if ($url == "view") {
     require("./Public/view.php");
     return;
 }
+if ($url == "translate") {
+    /* View Message Page */
+    require("./Modules/Functions.php");
+    checkDatabase(); // Check database
+    require("./Modules/TranslationCore.php");
+    return;
+}
 if ($url == "") {
     /* Primary Display Page */
     require("./Modules/Functions.php");
@@ -32,7 +39,7 @@ if ($url == "") {
     return;
 } elseif ($url == "403") {
     /* Not Found Page */
-    require("./Modules/Functions.php"); 
+    require("./Modules/Functions.php");
     require("./Public/Error/403.html");
     return;
 } else {

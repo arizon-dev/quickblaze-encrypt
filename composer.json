@@ -5,6 +5,7 @@
     "license": "MIT",
     "minimum-stability": "stable",
     "require": {
-        "delfimov/translate": "^2.6"
+        "delfimov/translate": "^2.6",
+        "monolog/monolog": "^2.5"
     }
 }

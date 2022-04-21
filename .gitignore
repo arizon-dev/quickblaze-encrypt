@@ -3,8 +3,8 @@
 .dccache
 
 # QuickBlaze Security
-/Modules/Database.env
-/Modules/InstallationStatus.json
+Modules/Database.env
+Modules/InstallationStatus.json
 
 # QuickBlaze Composer
 /vendor/
