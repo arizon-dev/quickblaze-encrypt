@@ -11,6 +11,13 @@ if ($url == "") {
     checkDatabase(); // Check database
     setupDatabase(); // Initialise Database
     require("./Public/index.php");
+}
+if (isset($url)) {
+    /* View Requested Page */
+    require("./Modules/Functions.php");
+    checkDatabase(); // Check database
+    require("./Public/$url.php");
+    return;
 } elseif ($url == "404") {
     /* Not Found Page */
     require("./Modules/Functions.php");
@@ -21,23 +28,14 @@ if ($url == "") {
     require("./Modules/Functions.php");
     require("./Public/Error/403.html");
     return;
-} else {
-    if ($url == "500") {
-        /* Server Error Page */
-        require("./Modules/Functions.php");
-        require("./Public/Error/500.html");
-        return;
-    } else {
-        /* Not Found Page */
-        require("./Modules/Functions.php");
-        require("./Public/Error/404.html");
-        return;
-    }
-}
-if ($url) {
-    /* View Message Page */
+} elseif ($url == "500") {
+    /* Server Error Page */
     require("./Modules/Functions.php");
-    checkDatabase(); // Check database
-    require("./Public/$url.php");
+    require("./Public/Error/500.html");
+    return;
+} else {
+    /* Not Found Page */
+    require("./Modules/Functions.php");
+    require("./Public/Error/404.html");
     return;
 }
