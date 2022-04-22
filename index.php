@@ -5,20 +5,6 @@ $url = substr($url, strrpos($url, '/') + 1);
 if (strpos($url, '?') !== false) $url = substr($url, 0, strpos($url, "?"));
 
 // /* Initialise Displays */
-if ($url == "processForm") {
-    /* Form Submission Handler */
-    require("./Modules/Functions.php");
-    checkDatabase(); // Check database
-    require("./Public/processForm.php");
-    return;
-}
-if ($url == "view") {
-    /* View Message Page */
-    require("./Modules/Functions.php");
-    checkDatabase(); // Check database
-    require("./Public/view.php");
-    return;
-}
 if ($url == "") {
     /* Primary Display Page */
     require("./Modules/Functions.php");
@@ -48,12 +34,10 @@ if ($url == "") {
         return;
     }
 }
-
-// Testing
-if ($url == "translate") {
+if ($url) {
     /* View Message Page */
     require("./Modules/Functions.php");
     checkDatabase(); // Check database
-    require("./Modules/TranslationCore.php");
+    require("./Public/$url.php");
     return;
 }
