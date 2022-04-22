@@ -12,13 +12,7 @@ if ($url == "") {
     setupDatabase(); // Initialise Database
     require("./Public/index.php");
 }
-if (isset($url)) {
-    /* View Requested Page */
-    require("./Modules/Functions.php");
-    checkDatabase(); // Check database
-    require("./Public/$url.php");
-    return;
-} elseif ($url == "404") {
+if ($url == "404") {
     /* Not Found Page */
     require("./Modules/Functions.php");
     require("./Public/Error/404.html");
@@ -39,3 +33,9 @@ if (isset($url)) {
     require("./Public/Error/404.html");
     return;
 }
+
+/* View Requested Page */
+require("./Modules/Functions.php");
+checkDatabase(); // Check database
+require("./Public/$url.php");
+return;
