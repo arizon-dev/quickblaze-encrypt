@@ -5,8 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="./Public/assets/img/favicon.png">
-    <meta name="description"
-        content="An extremely simple, one-time view encryption message system. Send anybody passwords, or secret messages on a one-time view basis.">
+    <meta name="description" content="<?= translate("An extremely simple, one-time view encryption message system. Send anybody passwords, or secret messages on a one-time view basis.", "en") ?>">
     <title>QuickBlaze</title>
 
     <!-- Bootstrap core CSS -->
@@ -20,14 +19,15 @@
 
     <main class="form-submit">
         <h1>500</h1>
-        <h5 class="text-muted">An internal server error occurred. Please try again later!</h5>
+        <h5 class="text-muted"><?= translate("An internal server error occurred. Please try again later!", "en") ?></h5>
 
         <br>
-        <a class="btn btn-primary submit-button darkmode-ignore" href="./">Return Home</a>
+        <a class="btn btn-primary submit-button darkmode-ignore" href="./"><?= translate("Return Home", "en") ?></a>
 
         <p class="mt-5 mb-3 text-muted">
             <a href="https://github.com/axtonprice/quickblaze-encrypt" class="text-muted no-decoration">GitHub</a> •
-            <a href="https://discord.gg/dP3MuBATGc" class="text-muted no-decoration">Discord</a>
+            <a href="https://discord.gg/dP3MuBATGc" class="text-muted no-decoration">Discord</a> •
+            <a href="https://github.com/axtonprice/quickblaze-encrypt/releases" class="text-muted no-decoration"><?= determineSystemVersion(); ?></a>
         </p>
     </main>
 

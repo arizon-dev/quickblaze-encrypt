@@ -18,16 +18,13 @@
 <body class="text-center">
 
     <main class="form-submit">
-        <h1>404</h1>
-        <h5 class="text-muted"><?= translate("This page does not exist. It was most likely removed!", "en") ?></h5>
-
+        <h1><?= translate("Database Error", "en") ?></h1>
         <br>
-        <a class="btn btn-primary submit-button darkmode-ignore" href="./"><?= translate("Return Home", "en") ?></a>
+        <h5 class="text-muted"><?= translate("You have not configured the database correctly!", "en") ?> <br><br><a style="text-decoration:none" href="https://github.com/axtonprice-dev/quickblaze-encrypt/#installation" target="_blank"><?= translate("Please refer to the GitHub repository.", "en") ?></a></h5>
 
         <p class="mt-5 mb-3 text-muted">
             <a href="https://github.com/axtonprice/quickblaze-encrypt" class="text-muted no-decoration">GitHub</a> •
-            <a href="https://discord.gg/dP3MuBATGc" class="text-muted no-decoration">Discord</a> •
-            <a href="https://github.com/axtonprice/quickblaze-encrypt/releases" class="text-muted no-decoration"><?= determineSystemVersion(); ?></a>
+            <a href="https://discord.gg/dP3MuBATGc" class="text-muted no-decoration">Discord</a>
         </p>
     </main>
 
