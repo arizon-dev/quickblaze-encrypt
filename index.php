@@ -54,6 +54,6 @@ if ($url == "translate") {
     /* View Message Page */
     require("./Modules/Functions.php");
     checkDatabase(); // Check database
-    require("./Modules/TranslationCore.php");
+    require("./public/translate.php");
     return;
 }

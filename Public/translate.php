@@ -4,5 +4,4 @@ function translate($q, $sl, $tl){
     $res=json_decode($res);
     return $res[0][0][0];
 }
-
 echo translate($_GET["text"], "en", "is");
