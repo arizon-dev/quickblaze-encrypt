@@ -4,7 +4,7 @@ $url = $_SERVER['REQUEST_URI'];
 $url = substr($url, strrpos($url, '/') + 1);
 if (strpos($url, '?') !== false) $url = substr($url, 0, strpos($url, "?"));
 
-// /* Initialise Displays */
+/* Initialise Displays */
 if ($url == "processForm") {
     /* Form Submission Handler */
     require("./Modules/Functions.php");
@@ -17,6 +17,14 @@ if ($url == "view") {
     require("./Modules/Functions.php");
     checkDatabase(); // Check database
     require("./Public/view.php");
+    return;
+}
+// Testing
+if ($url == "translate") {
+    /* View Message Page */
+    require("./Modules/Functions.php");
+    checkDatabase(); // Check database
+    require("./Public/translate.php");
     return;
 }
 if ($url == "") {
@@ -47,13 +55,4 @@ if ($url == "") {
         require("./Public/Error/404.html");
         return;
     }
-}
-
-// Testing
-if ($url == "translate") {
-    /* View Message Page */
-    require("./Modules/Functions.php");
-    checkDatabase(); // Check database
-    require("./Public/translate.php");
-    return;
 }
