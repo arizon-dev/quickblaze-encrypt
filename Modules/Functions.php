@@ -150,7 +150,8 @@ function setupDatabase()
         try { // attempt database connection
             $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
         } catch (mysqli_sql_exception $e) {
-            return require "./Public/Error/DatabaseCredentials.php"; // throw error page if invalid credentials
+            require "./Public/Error/DatabaseCredentials.php"; // throw error page if invalid credentials
+            die();
         }
         $tableCreateSQL = "CREATE TABLE IF NOT EXISTS `quickblaze_records` (`record_id` int(11) NOT NULL,`encrypted_contents` longtext NOT NULL,`encryption_token` varchar(128) NOT NULL,`source_ip` varchar(100) NOT NULL, `record_date` timestamp(5) NOT NULL DEFAULT current_timestamp(5)) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         $addPrimaryKeySQL = "ALTER TABLE `quickblaze_records` ADD PRIMARY KEY (`record_id`);";
@@ -161,13 +162,16 @@ function setupDatabase()
                     file_put_contents("./Modules/InstallationStatus.json", json_encode(array("INSTALLED" => "true")));
                     return true;
                 } else {
-                    return require "./Public/Error/DatabaseCredentials.php"; // throw error page if invalid credentials
+                    require "./Public/Error/DatabaseCredentials.php"; // throw error page if invalid credentials
+                    die();
                 }
             } else {
-                return require "./Public/Error/DatabaseCredentials.php"; // throw error page if invalid credentials
+                require "./Public/Error/DatabaseCredentials.php"; // throw error page if invalid credentials
+                die();
             }
         } else {
-            return require "./Public/Error/DatabaseCredentials.php"; // throw error page if invalid credentials
+            require "./Public/Error/DatabaseCredentials.php"; // throw error page if invalid credentials
+            die();
         }
 
         $mysqli->close();
@@ -179,11 +183,13 @@ function checkDatabase()
     error_reporting(0); // disable error reporting
     if (!file_exists("./Modules/Database.env")) {
         touch("./Modules/Database.env");
-        return require "./Public/Error/DatabaseConfig.php";
+        require "./Public/Error/DatabaseConfig.php";
+        die();
     } else {
         $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
         if ($json["DATABASE"] == "" || $json["HOSTNAME"] == "") {
-            return require "./Public/Error/DatabaseConfig.php";
+            require "./Public/Error/DatabaseConfig.php";
+            die();
         }
     }
     $status = json_decode(file_get_contents("./Modules/InstallationStatus.json", true), true);
@@ -198,7 +204,8 @@ function insertRecord($encrypted_contents, $encryption_token)
     $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
     $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
     if ($mysqli->connect_errno) {
-        return require "./Public/Error/DatabaseCredentials.php";
+        require "./Public/Error/DatabaseCredentials.php";
+        die();
     }
     $source_ip = filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP) ?? filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
     $record_date = date("Y-m-d H:i:s");
@@ -215,7 +222,8 @@ function destroyRecord($token)
     $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
     $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
     if ($mysqli->connect_errno) {
-        return require "./Public/Error/DatabaseCredentials.php";
+        require "./Public/Error/DatabaseCredentials.php";
+        die();
     }
     $token = filter_var($token, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     if ($mysqli->query("DELETE FROM `quickblaze_records` WHERE `encryption_token` = '$token';") === TRUE) {
@@ -231,7 +239,8 @@ function getRecord($dataToFetch, $encryption_token)
     $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
     $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
     if ($mysqli->connect_errno) {
-        return require "./Public/Error/DatabaseCredentials.php";
+        require "./Public/Error/DatabaseCredentials.php";
+        die();
     }
     $encryption_token = filter_var($encryption_token, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $result = $mysqli->query("SELECT `$dataToFetch` FROM `quickblaze_records` WHERE `encryption_token` = '$encryption_token'");
