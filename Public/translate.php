@@ -4,4 +4,12 @@ function translate($q, $sl, $tl){
     $res=json_decode($res);
     return $res[0][0][0];
 }
-echo translate($_GET["text"], "en", "is");
+function getBrowserLang(){
+    $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+    $acceptLang = ['fr', 'it', 'en']; 
+    $lang = in_array($lang, $acceptLang) ? $lang : 'en';
+    return $lang;
+}
+echo translate($_GET["text"], "en", getBrowserLang());
+echo "<Br>";
+echo getBrowserLang();
