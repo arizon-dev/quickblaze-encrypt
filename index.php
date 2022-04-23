@@ -19,14 +19,6 @@ if ($url == "view") {
     require("./Public/view.php");
     return;
 }
-// Testing
-if ($url == "translate") {
-    /* View Message Page */
-    require("./Modules/Functions.php");
-    checkDatabase(); // Check database
-    require("./Public/translate.php");
-    return;
-}
 if ($url == "") {
     /* Primary Display Page */
     require("./Modules/Functions.php");
@@ -36,23 +28,19 @@ if ($url == "") {
 } elseif ($url == "404") {
     /* Not Found Page */
     require("./Modules/Functions.php");
-    require("./Public/Error/404.html");
-    return;
+    return require("./Public/Error/404.php");
 } elseif ($url == "403") {
     /* Not Found Page */
     require("./Modules/Functions.php");
-    require("./Public/Error/403.html");
-    return;
+    return require("./Public/Error/403.php");
 } else {
     if ($url == "500") {
         /* Server Error Page */
         require("./Modules/Functions.php");
-        require("./Public/Error/500.html");
-        return;
+        return require("./Public/Error/500.php");
     } else {
         /* Not Found Page */
         require("./Modules/Functions.php");
-        require("./Public/Error/404.html");
-        return;
+        return require("./Public/Error/404.php");
     }
 }

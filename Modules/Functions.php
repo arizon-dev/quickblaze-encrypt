@@ -9,6 +9,15 @@ function sanitizeXSS()
 }
 
 /* Internal Script Functions */
+function get_string_between($string, $start, $end)
+{
+    $string = ' ' . $string;
+    $ini = strpos($string, $start);
+    if ($ini == 0) return '';
+    $ini += strlen($start);
+    $len = strpos($string, $end, $ini) - $ini;
+    return substr($string, $ini, $len);
+}
 function processData($data)
 {
     $encryptionKey = generateKey(64); // Create new key
@@ -30,23 +39,23 @@ function determineMessageContent()
         if (!isset($_GET["confirm"])) {
             echo '
             <h6>
-                Decrypt & View Message?
+                ' . translate("Decrypt & View Message?", "en") . '
             </h6>
             <a class="btn btn-primary submit-button darkmode-ignore" href="?confirm&key=' . htmlspecialchars($_GET["key"]) . '">
-                View Message
+            ' . translate("View Message", "en") . '
             </a>';
         } else {
             echo '
             <h6>
-                This message has been destroyed!
+                ' . translate("This message has been destroyed!", "en") . '
             </h6>
             <textarea disabled type="text" class="form-control" id="linkbox" name="data">' . htmlspecialchars(decryptData(htmlspecialchars($_GET["key"]))) . '</textarea>
             <br>
             <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard(\'#linkbox\')">
-                Copy Message
+                ' . translate("Copy Message", "en") . '
             </button>
             <a class="btn btn-secondary submit-button darkmode-ignore" href="./">
-                Return Home
+                ' . translate("Return Home", "en") . '
             </a>';
             destroyRecord(htmlspecialchars($_GET["key"], ENT_QUOTES, 'UTF-8')); // destroy record
         }
@@ -71,21 +80,21 @@ function determineSubmissionFooter()
         echo '
         <br>
         <p class="text-muted">
-            Share this link anywhere on the internet. The message will be automatically destroyed once viewed.
+            ' . translate("Share this link anywhere on the internet. The message will be automatically destroyed once viewed.", "en") . '
         </p>
 
         <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard(\'#linkbox\')">
-            Copy Link
+            ' . translate("Copy Link", "en") . '
         </button>
     
         <a class="btn btn-secondary submit-button darkmode-ignore" href="./">
-            Create New
+            ' . translate("Create New", "en") . '
         </a>';
     } else {
         echo '
         <br>
         <button class="btn btn-primary submit-button darkmode-ignore" type="submit">
-            Generate Link
+            ' . translate("Generate Link", "en") . '
         </button>';
     }
 }
@@ -179,8 +188,6 @@ function checkDatabase()
     }
     $status = json_decode(file_get_contents("./Modules/InstallationStatus.json", true), true);
     if ($status["INSTALLED"] == "false") {
-        // file_put_contents("./Modules/InstallationStatus.json", json_encode(array("INSTALLED" => "true")));
-        // header("Location: ./");
         setupDatabase();
     }
     error_reporting(E_ALL); // enable error reporting
@@ -236,4 +243,22 @@ function getRecord($dataToFetch, $encryption_token)
         return false;
     }
     $mysqli->close();
+}
+
+/* Translation Feature */
+function translate($q, $sl)
+{
+    $config = json_decode(file_get_contents("./.version", true), true);
+    if ($config["LANGUAGE"] == "auto") {
+        $tl = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+    } else {
+        if ($config["LANGUAGE"] != "") {
+            $tl = $config["LANGUAGE"];
+        } else {
+            $tl = "en";
+        }
+    }
+    $res = file_get_contents("https://translate.googleapis.com/translate_a/single?client=gtx&ie=UTF-8&oe=UTF-8&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&sl=" . $sl . "&tl=" . $tl . "&hl=hl&q=" . urlencode($q), $_SERVER['DOCUMENT_ROOT'] . "/transes.html");
+    $res = json_decode($res);
+    return $res[0][0][0];
 }

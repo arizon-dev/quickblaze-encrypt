@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="./Public/assets/img/favicon.png">
-    <meta name="description" content="An extremely simple, one-time view encryption message system. Send anybody passwords, or secret messages on a one-time view basis.">
+    <meta name="description" content="<?= translate("An extremely simple, one-time view encryption message system. Send anybody passwords, or secret messages on a one-time view basis.", "en") ?>">
     <title>QuickBlaze</title>
 
     <!-- Bootstrap core CSS -->
@@ -20,10 +20,10 @@
     <main class="form-submit">
         <form action="processForm" method="post">
             <h1>QuickBlaze</h1>
-            <h5 class="text-muted">One time view encrypted message sharing system</h5>
+            <h5 class="text-muted"><?= translate("One time view encrypted message sharing system", "en") ?></h5>
             <br><br>
 
-            <textarea type="text" class="form-control" id="linkbox" name="data" placeholder="Enter your secret message!" <?= ifTextBoxDisabled(); ?> required value="<?= getSubmittedKey() ?>"><?= getSubmittedKey() ?></textarea>
+            <textarea type="text" class="form-control" id="linkbox" name="data" placeholder="<?= translate("Enter your secret message!", "en") ?>" <?= ifTextBoxDisabled(); ?> required value="<?= getSubmittedKey() ?>"><?= getSubmittedKey() ?></textarea>
 
             <?= determineSubmissionFooter() ?>
 
@@ -37,7 +37,7 @@
     </main>
 
     <!-- Snackbar Notification -->
-    <div id="snackbar">✅ URL has been copied to clipboard!</div>
+    <div id="snackbar"><?= translate("✅ URL has been copied to clipboard!", "en") ?></div>
 
     <!-- Dark Mode Widget -->
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>

@@ -5,12 +5,12 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^.* index.php [L,QSA]
 
 # Error handling
-ErrorDocument 404 /404
-ErrorDocument 403 /403
-ErrorDocument 500 /500
+ErrorDocument 404 /Public/Error/404.php
+ErrorDocument 403 /Public/Error/403.php
+ErrorDocument 500 /Public/Error/500.php
 
 # File security
-<FilesMatch "\.(json|sarif|md|gitignore|version|LICENSE|htaccess|env)$">
+<FilesMatch "\.(json|sarif|md|gitignore|version|htaccess|env|yml)$">
 Order allow,deny
 Deny from all
 </FilesMatch>
