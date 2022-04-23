@@ -20,7 +20,10 @@
     <main class="form-submit">
         <h1><?= translate("Database Error", "en") ?></h1>
         <br>
-        <h5 class="text-muted"><?= translate("Failed to connect to the database using the connection credentials you have provided.", "en") ?> <br><br><a style="text-decoration:none" href="https://github.com/axtonprice-dev/quickblaze-encrypt/#installation" target="_blank"><?= translate("Please refer to the GitHub repository.", "en") ?></a></h5>
+        <h5 class="text-muted">
+            <?= translate("Failed to connect to the database using the connection credentials you have provided.", "en") ?> <br><br>
+            <a style="text-decoration:none" href="https://github.com/axtonprice-dev/quickblaze-encrypt/#installation" target="_blank"><?= translate("Please refer to the GitHub repository.", "en") ?></a>
+        </h5>
 
         <p class="mt-5 mb-3 text-muted">
             <a href="https://github.com/axtonprice/quickblaze-encrypt" class="text-muted no-decoration">GitHub</a> •
