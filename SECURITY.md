@@ -1,16 +1,23 @@
-# Security Policy
+# QuickBlaze Security Policy
 
 ## Supported Versions
 
-| Version  | Supported          |
-| -------- | ------------------ |
-| 1.0.4>   | :white_check_mark: | 
+| Version    | Supported          |
+| ---------- | ------------------ |
+|  v1.0.8 >  | :white_check_mark: | 
+|  v1.0.7    | :white_check_mark: | 
+|  v1.0.6    | :white_check_mark: | 
+|  v1.0.5    | :white_check_mark: | 
+|  v1.0.4    | :white_check_mark: | 
+| <= v1.0.3  | :x:                | 
 
-*We only support versions above v1.0.4! Versions below this are not considered "stable", and we will not be providing support for them!*
+*Versions below v1.0.4 are not supported, as they are not stable releases. We will not be providing support for them and suggestions, bug reports and other requests will automatically be ignored*
 
-## Reporting a Vulnerability
+## Reports & Submissions
 
-Please report all security vulnerabilities to the lead project developer @axtonprice.
-You can also contact via Discord: *Axton P.#1234*.
+Please report all security vulnerabilities, bug reports, as well as suggestions to either the GitHub [issues](https://github.com/axtonprice-dev/quickblaze-encrypt/issues) page, [discussion](https://github.com/axtonprice-dev/quickblaze-encrypt/discussions) page, or the community [Discord server](https://discord.gg/dP3MuBATGc).
+You can also directly contact the project lead developer via Discord, in order to submit reports or suggestions.
+
+*[@axtonprice](https://github.com/axtonprice): Axton P.#1234*
 
 Thank you.

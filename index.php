@@ -4,7 +4,7 @@ $url = $_SERVER['REQUEST_URI'];
 $url = substr($url, strrpos($url, '/') + 1);
 if (strpos($url, '?') !== false) $url = substr($url, 0, strpos($url, "?"));
 
-// /* Initialise Displays */
+/* Initialise Displays */
 if ($url == "processForm") {
     /* Form Submission Handler */
     require("./Modules/Functions.php");
@@ -28,23 +28,19 @@ if ($url == "") {
 } elseif ($url == "404") {
     /* Not Found Page */
     require("./Modules/Functions.php");
-    require("./Public/Error/404.html");
-    return;
+    return require("./Public/Error/404.php");
 } elseif ($url == "403") {
     /* Not Found Page */
-    require("./Modules/Functions.php"); 
-    require("./Public/Error/403.html");
-    return;
+    require("./Modules/Functions.php");
+    return require("./Public/Error/403.php");
 } else {
     if ($url == "500") {
         /* Server Error Page */
         require("./Modules/Functions.php");
-        require("./Public/Error/500.html");
-        return;
+        return require("./Public/Error/500.php");
     } else {
         /* Not Found Page */
         require("./Modules/Functions.php");
-        require("./Public/Error/404.html");
-        return;
+        return require("./Public/Error/404.php");
     }
 }
