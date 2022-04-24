@@ -8,4 +8,4 @@ Modules/InstallationStatus.json
 
 # QuickBlaze Composer
 /vendor/
-./composer.lock
+composer.lock
