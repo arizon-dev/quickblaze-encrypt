@@ -42,3 +42,4 @@ jobs:
           SEMVER: '${{ github.event.inputs.semver }}'
           LABEL: '${{ github.event.inputs.label }}'
           NOTES: '${{ steps.gen-notes.outputs.notes }}'
+          
