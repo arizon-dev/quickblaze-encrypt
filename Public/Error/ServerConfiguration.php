@@ -20,11 +20,11 @@
         <div class="errorCautionContainer">
             <i class="fa-solid fa-triangle-exclamation fa-2xl darkmode-ignore errorCautionSymbol"></i>
         </div>
-        <h1><?= translate("Database Error", "en") ?></h1>
+        <h1><?= translate("Configuration Error", "en") ?></h1>
         <br>
         <h5 class="text-muted">
-            <?= translate("You have not configured the database correctly!", "en") ?> <br><br>
-            <a style="text-decoration:none" class="darkmode-ignore" href="https://github.com/axtonprice-dev/quickblaze-encrypt/#installation" target="_blank"><?= translate("Please refer to the GitHub repository.", "en") ?></a>
+            <?= translate("The system configuration is not present or has been misconfigured.", "en") ?> <br><br>
+            <a style="text-decoration:none" class="darkmode-ignore" href="https://github.com/axtonprice-dev/quickblaze-encrypt/#configuration" target="_blank"><?= translate("Please refer to the GitHub repository.", "en") ?></a>
         </h5>
 
         <p class="mt-5 mb-3 text-muted">

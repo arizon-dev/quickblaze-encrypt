@@ -19,7 +19,6 @@
 
 - Accessible webserver with PHP support.
 - PHP v7 or higher.
-- PHP composer `v2.0.11` or later.
 - PHP [MBSTRING](http://php.net/manual/en/book.mbstring.php) module for full UTF-8 support.
 - PHP [JSON](http://php.net/manual/en/book.json.php) module for JSON manipulation
 
@@ -33,16 +32,32 @@
 6. Visit your domain installation directory or subdomain https://example.com/quickblaze-encrypt/
 7. **Enjoy!**
 
-⚠️ *Don't delete the `.version` file! It contains necessary version data, and modifying it may cause issues!*
+⚠️ *Don't delete the `.version` or `.config` files! They contains necessary version and configuration data, and removing them may cause issues!*
 
-## Configuration
-Example configuration layout of `Database.env`:
+## System Configurations
+Example configuration layout of `Modules/Database.env`:
 ```json
 {
     "HOSTNAME": "mysql.example.com",
     "USERNAME": "admin",
     "PASSWORD": "admin123",
     "DATABASE": "quickblaze_db"
+}
+```
+Example configuration of `.config`:
+```json
+{ 
+  /* Options
+  MySQL     - Use a standard database connection (Located '/Modules/Database.env')
+  Filetree  - Use webserver folder/file storage method (Located '/local-storage/')
+  */
+  "STORAGE_METHOD": "mysql", // Default: "MySQL"
+
+  /* Options
+  Auto           - Determine language automatically based off client IP location.
+  Country Code   - Set language manually ('en', 'is', etc).
+  */
+  "LANGUAGE": "auto" // Default: "auto"
 }
 ```
 

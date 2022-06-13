@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="./Public/assets/img/favicon.png">
-    <meta name="description" content="<?= translate("An extremely simple, one-time view encryption message system. Send anybody passwords, or secret messages on a one-time view basis.", "en") ?>">
+    <meta name="description" content="<?= translate("An extremely simple, one-time view encrypted message system. Send anybody passwords, or secret messages on a one-time view basis.", "en") ?>">
     <title>QuickBlaze</title>
 
     <!-- Bootstrap core CSS -->
@@ -28,14 +28,14 @@
             <p class="mt-5 mb-3 text-muted">
                 <a href="https://github.com/axtonprice/quickblaze-encrypt" class="text-muted no-decoration">GitHub</a> •
                 <a href="https://discord.gg/dP3MuBATGc" class="text-muted no-decoration">Discord</a> •
-                <a href="https://github.com/axtonprice/quickblaze-encrypt/releases" class="text-muted no-decoration"><?= determineSystemVersion(); ?></a>
+                <a href="https://github.com/axtonprice/quickblaze-encrypt/releases" class="text-muted no-decoration darkmode-ignore"><?= determineSystemVersion(); ?></a>
             </p>
 
         </form>
     </main>
 
     <!-- Snackbar Notification -->
-    <div id="snackbar"><?= translate("✅ Message has been copied to clipboard!", "en") ?></div>
+    <div id="snackbar">✅ <?= translate("Message has been copied to clipboard!", "en") ?></div>
 
     <!-- Dark Mode Widget -->
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>

@@ -8,22 +8,21 @@ if (strpos($url, '?') !== false) $url = substr($url, 0, strpos($url, "?"));
 if ($url == "processForm") {
     /* Form Submission Handler */
     require("./Modules/Functions.php");
-    checkDatabase(); // Check database
+    setupStorageMethod(); // Check database
     require("./Public/processForm.php");
     return;
 }
 if ($url == "view") {
     /* View Message Page */
     require("./Modules/Functions.php");
-    checkDatabase(); // Check database
+    //setupStorageMethod(); // Check database
     require("./Public/view.php");
     return;
 }
 if ($url == "") {
     /* Primary Display Page */
     require("./Modules/Functions.php");
-    checkDatabase(); // Check database
-    setupDatabase(); // Initialise Database
+    setupStorageMethod(); // Check database
     require("./Public/index.php");
 } elseif ($url == "404") {
     /* Not Found Page */

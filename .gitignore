@@ -5,6 +5,7 @@
 # QuickBlaze Security
 Modules/Database.env
 Modules/InstallationStatus.json
+/local-storage
 
 # QuickBlaze Composer
 /vendor/
