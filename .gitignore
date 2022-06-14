@@ -10,3 +10,6 @@ Modules/InstallationStatus.json
 # QuickBlaze Composer
 /vendor/
 composer.lock
+
+# Other
+/.vscode
