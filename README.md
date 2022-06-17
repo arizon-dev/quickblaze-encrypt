@@ -25,7 +25,7 @@
 ## Installation
 
 1. Download the latest version from the <a href="https://github.com/axtonprice-dev/quickblaze-encrypt/releases">releases page</a>. 
-2. Upload and extract the file to your web server. You can also pull the repo with `git pull`.
+2. Upload and extract the contents to your web server. You can also pull the repo with `git pull`.
 3. Visit your domain installation directory or subdomain https://example.com/quickblaze-encrypt/
 
 » ***IF USING MYSQL AS STORAGE METHOD:***
