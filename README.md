@@ -1,11 +1,11 @@
 <h1 align="center">QuickBlaze Encryption 👋</h1>
 
 <p align="center">
-  <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/axtonprice/quickblaze-encrypt?label=Version">
-  <a href="https://github.com/axtonprice/quickblaze-encrypt/blob/main/LICENSE" target="_blank">
+  <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/axtonprice-dev/quickblaze-encrypt?label=Version">
+  <a href="https://github.com/axtonprice-dev/quickblaze-encrypt/blob/main/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
-  <img alt="License: Total Lines" src="https://img.shields.io/tokei/lines/github/axtonprice/quickblaze-encrypt?label=Total%20lines" />
+  <img alt="License: Total Lines" src="https://img.shields.io/tokei/lines/github/axtonprice-dev/quickblaze-encrypt?label=Total%20lines" />
   <a href="https://axtonprice.com?discord" target="_blank">
     <img alt="Discord: axtonprice" src="https://discord.com/api/guilds/826239258590969897/widget.png?style=shield" />
   </a>
@@ -24,7 +24,7 @@
 
 ## Installation
 
-1. Download the latest version from the <a href="https://github.com/axtonprice/quickblaze-encrypt/releases">releases page</a>. 
+1. Download the latest version from the <a href="https://github.com/axtonprice-dev/quickblaze-encrypt/releases">releases page</a>. 
 2. Upload and extract the file to your web server. 
 3. Install composer requirements with ```composer install```.
 4. Update the database information in `/modules/Database_example.env`.
@@ -32,7 +32,7 @@
 6. Visit your domain installation directory or subdomain https://example.com/quickblaze-encrypt/
 7. **Enjoy!**
 
-⚠️ *Don't delete the `.version` or `.config` files! They contains necessary version and configuration data, and removing them may cause issues!*
+⚠️ *Don't delete the `.version`, `.config`, or `.cache` files! They contains necessary version and configuration data, and removing them may cause issues!*
 
 ## System Configurations
 Example configuration layout of `Modules/Database.env`:
@@ -93,7 +93,7 @@ If you like this project, give a ⭐️ to support us!
 ## 📝 License
 
 Copyright © 2022 [axtonprice](https://github.com/axtonprice).<br />
-This project is [MIT](https://github.com/axtonprice/quickblaze-encrypt/blob/main/LICENSE) licensed.
+This project is [MIT](https://github.com/axtonprice-dev/quickblaze-encrypt/blob/main/LICENSE) licensed.
 
 <hr>
 

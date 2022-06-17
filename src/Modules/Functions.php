@@ -144,21 +144,31 @@ function setupStorageMethod()
             } else { // Test database connection
                 $conn = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
                 if ($conn->connect_error) {
-                    // require "./Public/Error/DatabaseCredentials.php"; // throw error page if invalid credentials
-                    // die();
+                    require "./Public/Error/DatabaseCredentials.php"; // throw error page if invalid credentials
+                    die();
                 } else {
-                    $tableCreateSQL = "CREATE TABLE IF NOT EXISTS `quickblaze_records` (`record_id` int(11) NOT NULL,`encrypted_contents` longtext NOT NULL,`encryption_token` varchar(128) NOT NULL,`source_ip` varchar(100) NOT NULL, `record_date` timestamp(5) NOT NULL DEFAULT current_timestamp(5)) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-                    $addPrimaryKeySQL = "ALTER TABLE `quickblaze_records` ADD PRIMARY KEY (`record_id`);";
-                    $autoIncrementSQL = "ALTER TABLE `quickblaze_records` MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT;";
-                    // $mysqli->query($tableCreateSQL);
-                    // if ($mysqli->query($addPrimaryKeySQL) === TRUE) {
-                    //     $mysqli->query($autoIncrementSQL);
-                    // } else {
-                    //     require "./Public/Error/DatabaseCredentials.php"; // throw error page if invalid credentials
-                    //     die();
-                    // }
+                    if (!is_dir("./local-storage/")) mkdir("./local-storage/");
+                    if (!file_exists("./local-storage/.cache")) file_put_contents("./local-storage/.cache", '{"DO-NOT-TOUCH:database_installation_status": "false"}');;
+                    $cache = json_decode(file_get_contents("./local-storage/.cache"), true);
+                    if ($cache["DO-NOT-TOUCH:database_installation_status"] == "false") {
+                        $tableCreateSQL = "CREATE TABLE IF NOT EXISTS `quickblaze_records` (`record_id` int(11) NOT NULL, `encrypted_contents` longtext NOT NULL, `encryption_token` varchar(128) NOT NULL, `source_ip` varchar(100) NOT NULL, `record_date` timestamp(5) NOT NULL DEFAULT current_timestamp(5)) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+                        $addPrimaryKeySQL = "ALTER TABLE `quickblaze_records` ADD PRIMARY KEY (`record_id`);";
+                        if ($conn->query($tableCreateSQL)) {
+                            if ($conn->query($addPrimaryKeySQL)) {
+                                file_put_contents("./local-storage/.cache", '{"DO-NOT-TOUCH:database_installation_status": "true"}');
+                            }
+                        } else {
+                            require "./Public/Error/DatabaseCredentials.php"; // throw error page if invalid credentials
+                            die();
+                        }
+                    }
+                    // Always reset auto-increment
+                    if (!$conn->query("ALTER TABLE `quickblaze_records` MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT;")) {
+                        require "./Public/Error/DatabaseConfig.php"; // throw error page if invalid credentials
+                        die();
+                    }
                 }
-                // $mysqli->close();
+                $conn->close();
             }
         }
     } elseif (strtolower($configuration["STORAGE_METHOD"]) == "filetree") {

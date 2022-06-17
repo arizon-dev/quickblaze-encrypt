@@ -1,15 +1,17 @@
 # Quickblaze Files
 .gitattributes
 .dccache
+src/.dccache
 
 # QuickBlaze Security
-Modules/Database.env
-Modules/InstallationStatus.json
-/local-storage
+src/Modules/Database.env
+src/Modules/InstallationStatus.json
+src/local-storage
 
 # QuickBlaze Composer
-/vendor/
-composer.lock
+src/vendor/
+src/composer.lock
 
-# Other
-/.vscode
+# Docker (Unreleased)
+Dockerfile
+.dockerignore
