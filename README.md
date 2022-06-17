@@ -1,11 +1,11 @@
 <h1 align="center">QuickBlaze Encryption 👋</h1>
 
 <p align="center">
-  <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/axtonprice/quickblaze-encrypt?label=Version">
-  <a href="https://github.com/axtonprice/quickblaze-encrypt/blob/main/LICENSE" target="_blank">
+  <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/axtonprice-dev/quickblaze-encrypt?label=Version">
+  <a href="https://github.com/axtonprice-dev/quickblaze-encrypt/blob/main/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
-  <img alt="License: Total Lines" src="https://img.shields.io/tokei/lines/github/axtonprice/quickblaze-encrypt?label=Total%20lines" />
+  <img alt="License: Total Lines" src="https://img.shields.io/tokei/lines/github/axtonprice-dev/quickblaze-encrypt?label=Total%20lines" />
   <a href="https://axtonprice.com?discord" target="_blank">
     <img alt="Discord: axtonprice" src="https://discord.com/api/guilds/826239258590969897/widget.png?style=shield" />
   </a>
@@ -19,30 +19,48 @@
 
 - Accessible webserver with PHP support.
 - PHP v7 or higher.
-- PHP composer `v2.0.11` or later.
 - PHP [MBSTRING](http://php.net/manual/en/book.mbstring.php) module for full UTF-8 support.
 - PHP [JSON](http://php.net/manual/en/book.json.php) module for JSON manipulation
 
 ## Installation
 
-1. Download the latest version from the <a href="https://github.com/axtonprice/quickblaze-encrypt/releases">releases page</a>. 
-2. Upload and extract the file to your web server. 
-3. Install composer requirements with ```composer install```.
-4. Update the database information in `/modules/Database_example.env`.
-5. Rename the configuration file to `Database.env` [(Example configuration)](#configuration).
-6. Visit your domain installation directory or subdomain https://example.com/quickblaze-encrypt/
-7. **Enjoy!**
+1. Download the latest version from the <a href="https://github.com/axtonprice-dev/quickblaze-encrypt/releases">releases page</a>. 
+2. Upload and extract the file to your web server. You can also pull the repo with `git pull`.
+3. Visit your domain installation directory or subdomain https://example.com/quickblaze-encrypt/
 
-⚠️ *Don't delete the `.version` file! It contains necessary version data, and modifying it may cause issues!*
+» ***IF USING MYSQL AS STORAGE METHOD:***
+<ul>
+  <li>Update the database information in <code>/modules/Database_example.env</code>.</li>
+  <li>Rename the configuration file to <code>Database.env</code>. <a href="#configuration">View example configuration</a>.</li>
+</ul>
 
-## Configuration
-Example configuration layout of `Database.env`:
+__<br>
+⚠️ *Don't delete the `.version`, `.config`, or `.cache` files once the installation is completed! They contains necessary version and configuration data, and removing them **will** cause issues!*
+
+## System Configurations
+Example configuration layout of `Modules/Database.env`:
 ```json
 {
     "HOSTNAME": "mysql.example.com",
     "USERNAME": "admin",
     "PASSWORD": "admin123",
     "DATABASE": "quickblaze_db"
+}
+```
+Example configuration of `.config`:
+```
+__ STORAGE_METHOD Options: __
+MySQL        - Use a standard database connection.
+Filetree     - Use webserver based storage method.
+
+__ LANGUAGE Options: __
+auto         - Determine language automatically based off IP location.
+en           - Set language manually ('en' for english, etc).
+```
+```json
+{ 
+  "STORAGE_METHOD": "mysql",
+  "LANGUAGE": "en"
 }
 ```
 
@@ -78,7 +96,7 @@ If you like this project, give a ⭐️ to support us!
 ## 📝 License
 
 Copyright © 2022 [axtonprice](https://github.com/axtonprice).<br />
-This project is [MIT](https://github.com/axtonprice/quickblaze-encrypt/blob/main/LICENSE) licensed.
+This project is [MIT](https://github.com/axtonprice-dev/quickblaze-encrypt/blob/main/LICENSE) licensed.
 
 <hr>
 

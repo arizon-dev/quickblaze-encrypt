@@ -1,0 +1,2 @@
+- name: Automatic Semver Release
+  uses: rui-costa/action-automatic-semver-releases@1.1.0
