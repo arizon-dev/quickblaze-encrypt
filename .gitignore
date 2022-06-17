@@ -4,7 +4,7 @@
 src/.dccache
 
 # QuickBlaze Security
-src/local-storage/
+src/local-storage
 src/Modules/Database.env
 src/Modules/InstallationStatus.json
 

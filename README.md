@@ -32,7 +32,7 @@
 6. Visit your domain installation directory or subdomain https://example.com/quickblaze-encrypt/
 7. **Enjoy!**
 
-⚠️ *Don't delete the `.version`, `.config`, or `.cache` files! They contains necessary version and configuration data, and removing them may cause issues!*
+⚠️ *Don't delete the `.version`, `.config`, or `.cache` files once the installation is completed! They contains necessary version and configuration data, and removing them **will** cause issues!*
 
 ## System Configurations
 Example configuration layout of `Modules/Database.env`:
@@ -45,19 +45,19 @@ Example configuration layout of `Modules/Database.env`:
 }
 ```
 Example configuration of `.config`:
+```
+__ STORAGE_METHOD Options: __
+MySQL        - Use a standard database connection.
+Filetree     - Use webserver based storage method.
+
+__ LANGUAGE Options: __
+auto         - Determine language automatically based off IP location.
+en           - Set language manually ('en' for english, etc).
+```
 ```json
 { 
-  /* Options
-  MySQL     - Use a standard database connection (Located '/Modules/Database.env')
-  Filetree  - Use webserver folder/file storage method (Located '/local-storage/')
-  */
-  "STORAGE_METHOD": "mysql", // Default: "MySQL"
-
-  /* Options
-  Auto           - Determine language automatically based off client IP location.
-  Country Code   - Set language manually ('en', 'is', etc).
-  */
-  "LANGUAGE": "auto" // Default: "auto"
+  "STORAGE_METHOD": "mysql",
+  "LANGUAGE": "en"
 }
 ```
 
