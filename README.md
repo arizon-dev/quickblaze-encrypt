@@ -25,13 +25,16 @@
 ## Installation
 
 1. Download the latest version from the <a href="https://github.com/axtonprice-dev/quickblaze-encrypt/releases">releases page</a>. 
-2. Upload and extract the file to your web server. 
-3. Install composer requirements with ```composer install```.
-4. Update the database information in `/modules/Database_example.env`.
-5. Rename the configuration file to `Database.env` [(Example configuration)](#configuration).
-6. Visit your domain installation directory or subdomain https://example.com/quickblaze-encrypt/
-7. **Enjoy!**
+2. Upload and extract the file to your web server. You can also pull the repo with `git pull`.
+3. Visit your domain installation directory or subdomain https://example.com/quickblaze-encrypt/
 
+» ***IF USING MYSQL AS STORAGE METHOD:***
+<ul>
+  <li>Update the database information in <code>/modules/Database_example.env</code>.</li>
+  <li>Rename the configuration file to <code>Database.env</code>. <a href="#configuration">View example configuration</a>.</li>
+</ul>
+
+__<br>
 ⚠️ *Don't delete the `.version`, `.config`, or `.cache` files once the installation is completed! They contains necessary version and configuration data, and removing them **will** cause issues!*
 
 ## System Configurations
