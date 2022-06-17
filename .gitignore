@@ -4,9 +4,9 @@
 src/.dccache
 
 # QuickBlaze Security
+src/local-storage/
 src/Modules/Database.env
 src/Modules/InstallationStatus.json
-src/local-storage
 
 # QuickBlaze Composer
 src/vendor/
