@@ -4,23 +4,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="../Public/assets/img/favicon.png">
+    <link rel="icon" type="image/x-icon" href="./Public/assets/img/favicon.png">
     <meta name="description" content="<?= translate("An extremely simple, one-time view encryption message system. Send anybody passwords, or secret messages on a one-time view basis.", "en") ?>">
     <title>QuickBlaze</title>
 
-    <!-- Site CSS -->
-    <link href="../Public/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../Public/assets/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="./Public/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link href="./Public/assets/css/style.css" rel="stylesheet">
 </head>
 
 <body class="text-center">
 
     <main class="form-submit">
-        <div class="errorCautionContainer">
-            <i class="fa-solid fa-triangle-exclamation fa-2xl darkmode-ignore errorCautionSymbol"></i>
-        </div>
-        <br>
         <h1><?= translate("Database Error", "en") ?></h1>
         <br>
         <h5 class="text-muted">

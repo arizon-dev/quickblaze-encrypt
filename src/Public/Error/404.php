@@ -4,28 +4,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="../Public/assets/img/favicon.png">
+    <link rel="icon" type="image/x-icon" href="./Public/assets/img/favicon.png">
     <meta name="description" content="<?= translate("An extremely simple, one-time view encryption message system. Send anybody passwords, or secret messages on a one-time view basis.", "en") ?>">
     <title>QuickBlaze</title>
 
-    <!-- Site CSS -->
-    <link href="../Public/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../Public/assets/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="./Public/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link href="./Public/assets/css/style.css" rel="stylesheet">
 </head>
 
 <body class="text-center">
 
     <main class="form-submit">
-        <div class="errorCautionContainer">
-            <i class="fa-solid fa-triangle-exclamation fa-2xl darkmode-ignore errorCautionSymbol"></i>
-        </div>
-        <br>
-        <h1><?= translate("Error", "en") ?> 404</h1>
+        <h1>404</h1>
         <h5 class="text-muted"><?= translate("This page does not exist. It was most likely removed!", "en") ?></h5>
 
         <br>
-        <a class="btn btn-primary submit-button darkmode-ignore" href="../"><?= translate("Return Home", "en") ?></a>
+        <a class="btn btn-primary submit-button darkmode-ignore" href="./"><?= translate("Return Home", "en") ?></a>
 
         <p class="mt-5 mb-3 text-muted">
             <a href="https://github.com/axtonprice/quickblaze-encrypt" class="text-muted no-decoration">GitHub</a> •
