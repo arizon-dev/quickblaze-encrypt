@@ -15,7 +15,6 @@
 </head>
 
 <body class="text-center">
-    <div class="header-bg"></div>
 
     <main class="main-form">
         <form onsubmit="return false;">

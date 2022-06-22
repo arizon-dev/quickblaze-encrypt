@@ -4,19 +4,10 @@ body {
 }
 
 body {
-	/* display: flex; */
-	/* display:; */
+	display: flex;
 	align-items: center;
-	/* padding-top: 40px; */
+	padding-top: 40px;
 	padding-bottom: 40px;
-}
-
-.header-bg {
-	padding: 5px;
-	text-align: center;
-	background: linear-gradient(to right, rgb(212, 63, 63), rgb(221, 210, 57));
-	color: white;
-	font-size: 30px;
 }
 
 textarea {
