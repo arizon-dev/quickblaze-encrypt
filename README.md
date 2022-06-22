@@ -6,6 +6,7 @@
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
   <a href="https://www.codacy.com/gh/axtonprice-dev/quickblaze-encrypt/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=axtonprice-dev/quickblaze-encrypt&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/3d4571a7a1a34c548bce562c16ba1221"/></a>
+  <a href="https://github.com/axtonprice-dev/quickblaze-encrypt/actions/workflows/codacy.yml"><img src="https://github.com/axtonprice-dev/quickblaze-encrypt/actions/workflows/codacy.yml/badge.svg"/></a>
   <a href="https://axtonprice.com?discord" target="_blank">
     <img alt="Discord: axtonprice" src="https://discord.com/api/guilds/826239258590969897/widget.png?style=shield" />
   </a>

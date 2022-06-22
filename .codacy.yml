@@ -1,0 +1,7 @@
+---
+languages:
+  css:
+    extensions:
+      - ".scss"
+exclude_paths:
+  - "Public/assets/css/**"
