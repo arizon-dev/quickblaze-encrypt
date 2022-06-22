@@ -75,7 +75,12 @@ function setupStorageMethod()
     /* End Prerequisites */
     error_reporting(0); // disable error reporting
     if (!file_exists("./.config") || $configuration["INSTALLATION_PATH"] == "") { // Check if config file is present
-        $path = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://"  . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $path = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
+        if ($_SERVER["SERVER_PORT"] != "80") {
+            $path .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
+        } else {
+            $path .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+        }
         touch("./.config"); // Create config file if not present
         file_put_contents("./.config", json_encode(array("STORAGE_METHOD" => "mysql", "LANGUAGE" => "auto", "INSTALLATION_PATH" => $path))); // Set contents of new config file
     }
