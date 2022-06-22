@@ -6,8 +6,12 @@ const updateFormDisplay = () => {
 
     fetch(`dataProcessing?data=${formvalue}`).then(response => response.json()).then(data => {
         log(`Server responsed with '${data.response}'`);
-        document.getElementById('submissiontextbox').value = `${window.location}view?key=${data.response}`; log(`Updated 'submissiontextbox.value'`); // Set text box to view message URL
-        document.getElementById('submissiontextbox').innerHTML = `${window.location}view?key=${data.response}`; log(`Updated 'submissiontextbox.innerHTML'`); // Set text box to view message URL
+
+        document.getElementById('submissiontextbox').value = `${window.location}view?key=${data.response}`; // Set text box to view message URL
+        log(`Updated 'submissiontextbox.value'`); 
+
+        document.getElementById('submissiontextbox').innerHTML = `${window.location}view?key=${data.response}`; // Set text box to view message URL
+        log(`Updated 'submissiontextbox.innerHTML'`);
     });
     setTimeout(() => {
         $('#form_submission').fadeIn('fast'); // fade in new content
