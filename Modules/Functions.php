@@ -254,7 +254,7 @@ function getRecord($dataToFetch, $encryption_token)
 /* Translation Feature */
 function translate($q)
 {
-    $sl = "en"; // Default language
+    $lang = "en"; // Default language
     $configuration = json_decode(file_get_contents("./.config", true), true);
     if ($configuration["LANGUAGE"] == "auto") {
         $tl = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
@@ -265,7 +265,7 @@ function translate($q)
             $tl = "en";
         }
     }
-    $res = file_get_contents("https://translate.googleapis.com/translate_a/single?client=gtx&ie=UTF-8&oe=UTF-8&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&sl=" . $sl . "&tl=" . $tl . "&hl=hl&q=" . urlencode($q), $_SERVER['DOCUMENT_ROOT'] . "/transes.html");
+    $res = file_get_contents("https://translate.googleapis.com/translate_a/single?client=gtx&ie=UTF-8&oe=UTF-8&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&sl=" . $lang . "&tl=" . $tl . "&hl=hl&q=" . urlencode($q), $_SERVER['DOCUMENT_ROOT'] . "/transes.html");
     $res = json_decode($res);
     return $res[0][0][0];
 }
