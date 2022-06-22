@@ -8,16 +8,15 @@
     <meta name="description" content="<?= translate("An extremely simple, one-time view encryption message system. Send anybody passwords, or secret messages on a one-time view basis.") ?>">
     <title>QuickBlaze</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="<?=getInstallationPath()?>/Public/assets/css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom styles -->
-    <link href="<?=getInstallationPath()?>/Public/assets/css/style.css" rel="stylesheet">
+    <!-- Site CSS -->
+    <link href="<?= getInstallationPath() ?>/Public/assets/css/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
 </head>
 
 <body class="text-center">
 
-    <main class="form-submit">
+    <main class="main-form">
         <h1><?= translate("Database Error") ?></h1>
         <br>
         <h5 class="text-muted">
@@ -32,22 +31,11 @@
         </p>
     </main>
 
-    <!-- Dark Mode Widget -->
+    <!-- Site Javascript -->
+    <script src="<?= getInstallationPath() ?>/Public/assets/js/globalFunctions.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
-    <script>
-        function addDarkmodeWidget() {
-            const options = {
-                time: '0.0s', // default: '0.3s'
-                saveInCookies: true, // default: true,
-                label: '🌓', // default: ''
-            }
-
-            const darkmode = new Darkmode(options);
-            darkmode.showWidget();
-        }
-        window.addEventListener('load', addDarkmodeWidget);
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 </body>
-
 </html>

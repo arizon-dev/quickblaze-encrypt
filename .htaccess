@@ -16,7 +16,7 @@ Deny from all
 </FilesMatch>
 
 # Deny access to .htaccess
-<Files .htaccess>
+<Files .htaccess, .config, .version, .security-scan>
 Order allow,deny
 Deny from all
 </Files>
