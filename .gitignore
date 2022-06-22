@@ -1,12 +1,11 @@
 # Quickblaze Files
 .gitattributes
 .dccache
-.dccache
 
 # QuickBlaze Security
 local-storage
 Modules/Database.env
-Modules/InstallationStatus.json
+.config
 
 # QuickBlaze Composer
 vendor/

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="./Public/assets/img/favicon.png">
-    <meta name="description" content="<?= translate("An extremely simple, one-time view encryption message system. Send anybody passwords, or secret messages on a one-time view basis.", "en") ?>">
+    <meta name="description" content="<?= translate("An extremely simple, one-time view encryption message system. Send anybody passwords, or secret messages on a one-time view basis.") ?>">
     <title>QuickBlaze</title>
 
     <!-- Custom styles -->
@@ -118,8 +118,8 @@
 <body>
     <div class="lock"></div>
     <div class="message">
-        <h1><?= translate("Access to this page is restricted", "en") ?></h1>
-        <p style="text-align: center"><?= translate("Please check with the site admin if you believe this is a mistake.", "en") ?></p>
+        <h1><?= translate("Access to this page is restricted") ?></h1>
+        <p style="text-align: center"><?= translate("Please check with the site admin if you believe this is a mistake.") ?></p>
     </div>
 </body>
 
