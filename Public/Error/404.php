@@ -9,7 +9,7 @@
     <title>QuickBlaze</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<?= getInstallationPath() ?>/Public/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= getInstallationPath() ?>/Public/assets/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles -->
     <link href="<?= getInstallationPath() ?>/Public/assets/css/style.css" rel="stylesheet">
