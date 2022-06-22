@@ -1,7 +1,17 @@
 ---
+engines:
+  rubocop:
+    exclude_paths:
+      - config/engines.yml
+  duplication:
+    exclude_paths:
+      - config/engines.yml
+  metric:
+    exclude_paths:
+      - config/engines.yml
 languages:
   css:
     extensions:
-      - ".scss"
+      - '.scss'
 exclude_paths:
   - "Public/assets/css/**"
