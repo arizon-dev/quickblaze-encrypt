@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="./Public/assets/img/favicon.png">
-    <meta name="description" content="<?= translate("An extremely simple, one-time view encryption message system. Send anybody passwords, or secret messages on a one-time view basis.", "en") ?>">
+    <meta name="description" content="<?= translate("An extremely simple, one-time view encryption message system. Send anybody passwords, or secret messages on a one-time view basis.") ?>">
     <title>QuickBlaze</title>
 
     <!-- Bootstrap core CSS -->
@@ -18,11 +18,11 @@
 <body class="text-center">
 
     <main class="form-submit">
-        <h1><?= translate("Database Error", "en") ?></h1>
+        <h1><?= translate("Database Error") ?></h1>
         <br>
         <h5 class="text-muted">
-            <?= translate("You have not configured the database correctly!", "en") ?> <br><br>
-            <a style="text-decoration:none" href="https://github.com/axtonprice-dev/quickblaze-encrypt/#installation" target="_blank"><?= translate("Please refer to the GitHub repository.", "en") ?></a>
+            <?= translate("You have not configured the database correctly!") ?> <br><br>
+            <a style="text-decoration:none" href="https://github.com/axtonprice-dev/quickblaze-encrypt/#installation" target="_blank"><?= translate("Please refer to the GitHub repository.") ?></a>
         </h5>
 
         <p class="mt-5 mb-3 text-muted">
@@ -37,7 +37,7 @@
     <script>
         function addDarkmodeWidget() {
             const options = {
-                time: '0.3s', // default: '0.3s'
+                time: '0.0s', // default: '0.3s'
                 saveInCookies: true, // default: true,
                 label: '🌓', // default: ''
             }

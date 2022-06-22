@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="../Public/assets/img/favicon.png">
-    <meta name="description" content="<?= translate("An extremely simple, one-time view encrypted message system. Send anybody passwords, or secret messages on a one-time view basis.", "en") ?>">
+    <meta name="description" content="<?= translate("An extremely simple, one-time view encrypted message system. Send anybody passwords, or secret messages on a one-time view basis.") ?>">
     <title>QuickBlaze</title>
 
     <!-- Site CSS -->
@@ -21,11 +21,11 @@
             <i class="fa-solid fa-triangle-exclamation fa-2xl darkmode-ignore errorCautionSymbol"></i>
         </div>
         <br>
-        <h1><?= translate("Configuration Error", "en") ?></h1>
+        <h1><?= translate("Configuration Error") ?></h1>
         <br>
         <h5 class="text-muted">
-            <?= translate("The system configuration is not present or has been misconfigured.", "en") ?> <br><br>
-            <a style="text-decoration:none" class="darkmode-ignore" href="https://github.com/axtonprice-dev/quickblaze-encrypt/#configuration" target="_blank"><?= translate("Please refer to the GitHub repository.", "en") ?></a>
+            <?= translate("The system configuration is not present or has been misconfigured.") ?> <br><br>
+            <a style="text-decoration:none" class="darkmode-ignore" href="https://github.com/axtonprice-dev/quickblaze-encrypt/#configuration" target="_blank"><?= translate("Please refer to the GitHub repository.") ?></a>
         </h5>
 
         <p class="mt-5 mb-3 text-muted">
@@ -40,7 +40,7 @@
     <script>
         function addDarkmodeWidget() {
             const options = {
-                time: '0.3s', // default: '0.3s'
+                time: '0.0s', // default: '0.3s'
                 saveInCookies: true, // default: true,
                 label: '🌓', // default: ''
             }

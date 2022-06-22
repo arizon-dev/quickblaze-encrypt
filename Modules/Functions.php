@@ -22,36 +22,6 @@ function ifTextBoxDisabled()
         echo "disabled";
     }
 }
-function determineMessageContent()
-{
-    if (getRecord("encrypted_contents", htmlspecialchars($_GET["key"]), ENT_QUOTES, 'UTF-8') == null) {
-        header("Location: 404");
-    } else {
-        if (!isset($_GET["confirm"])) {
-            echo '
-            <h6>
-                ' . translate("Decrypt & View Message?", "en") . '
-            </h6>
-            <a class="btn btn-primary submit-button darkmode-ignore" href="?confirm&key=' . htmlspecialchars($_GET["key"]) . '">
-                ' . translate("View Message", "en") . '
-            </a>';
-        } else {
-            echo '
-            <h6>
-                ' . translate("This message has been destroyed!", "en") . '
-            </h6>
-            <textarea disabled type="text" class="form-control darkmode-ignore" id="linkbox" name="data">' . htmlspecialchars(decryptData(htmlspecialchars($_GET["key"]))) . '</textarea>
-            <br>
-            <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard(\'#linkbox\')">
-                ' . translate("Copy Message", "en") . '
-            </button>
-            <a class="btn btn-secondary submit-button darkmode-ignore" href="./">
-                ' . translate("Return Home", "en") . '
-            </a>';
-            destroyRecord(htmlspecialchars($_GET["key"], ENT_QUOTES, 'UTF-8')); // destroy record
-        }
-    }
-}
 function getSubmittedKey()
 {
     error_reporting(0); // disable error reporting
@@ -65,28 +35,6 @@ function getSubmittedKey()
     }
     error_reporting(E_ALL); // enable error reporting
 }
-function determineSubmissionFooter()
-{
-    if (isset($_GET["submitted"])) {
-        echo '
-        <br>
-        <p class="text-muted">
-            ' . translate("Share this link anywhere on the internet. The message will be automatically destroyed once viewed.", "en") . '
-        </p>
-        <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard(\'#linkbox\')">
-            ' . translate("Copy Link", "en") . '
-        </button>
-        <a class="btn btn-secondary submit-button darkmode-ignore" href="./">
-            ' . translate("Create New", "en") . '
-        </a>';
-    } else {
-        echo '
-        <br>
-        <button class="btn btn-primary submit-button darkmode-ignore" type="submit">
-            ' . translate("Generate Link", "en") . '
-        </button>';
-    }
-}
 function determineSystemVersion()
 {
     if (!file_exists("./.version")) {
@@ -96,10 +44,14 @@ function determineSystemVersion()
     }
     $thisVersion = json_decode(file_get_contents("./.version", true), true);
     $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/" . filter_var(htmlspecialchars($thisVersion["BRANCH"]), FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "/.version?cacheUpdate=" . rand(0, 100), true), true);
-    if ($thisVersion["VERSION"] != $latestVersion["VERSION"]) {
-        return '<x style="color:red">v' . $thisVersion["VERSION"] . ' (Outdated!)</x>';
+    if ($thisVersion["BRANCH"] == "dev" && $thisVersion["VERSION"] != $latestVersion["VERSION"]) {
+        return '<x style="color:orange">v' . $thisVersion["VERSION"] . ' (' . translate("Unreleased") . '!)</x>';
     } else {
-        return 'v' . $thisVersion["VERSION"] . '';
+        if ($thisVersion["BRANCH"] == "main" && $thisVersion["VERSION"] != $latestVersion["VERSION"]) {
+            return '<x style="color:red">v' . $thisVersion["VERSION"] . ' (' . translate("Outdated") . '!)</x>';
+        } else {
+            return 'v' . $thisVersion["VERSION"] . '';
+        }
     }
 }
 function generateKey($length)
@@ -126,6 +78,10 @@ function decryptData($encryption_key) // getRecord("encrypted_contents", $dataKe
 function setupStorageMethod()
 {
     error_reporting(0); // disable error reporting
+    if(!file_exists("./.config")) { // Check if config file is present
+        touch("./.config"); // Create config file if not present
+        file_put_contents("./.config", '{ "STORAGE_METHOD": "mysql", "LANGUAGE": "auto" }'); // Set contents of new config file
+    }
     $configuration = json_decode(file_get_contents("./.config", true), true);
     if (strtolower($configuration["LANGUAGE"]) == "") {
         require "./Public/Error/ServerConfiguration.php"; // throw error page if no language is provided
@@ -185,8 +141,10 @@ function setupStorageMethod()
 }
 function insertRecord($encrypted_contents, $encryption_token)
 {
+    error_reporting(0);
     $configuration = json_decode(file_get_contents("./.config", true), true);
     $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
+    if($_SERVER['HTTP_CF_CONNECTING_IP'] == "" || !isset($_SERVER['HTTP_CF_CONNECTING_IP'])) $_SERVER['HTTP_CF_CONNECTING_IP'] = $_SERVER["REMOTE_ADDR"];
     if (strtolower($configuration["STORAGE_METHOD"]) == "mysql") {
         $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
         if ($mysqli->connect_errno) {
@@ -294,8 +252,9 @@ function getRecord($dataToFetch, $encryption_token)
 }
 
 /* Translation Feature */
-function translate($q, $sl)
+function translate($q)
 {
+    $sl = "en"; // Default language
     $configuration = json_decode(file_get_contents("./.config", true), true);
     if ($configuration["LANGUAGE"] == "auto") {
         $tl = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
