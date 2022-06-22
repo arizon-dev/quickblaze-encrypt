@@ -22,18 +22,10 @@ function ifTextBoxDisabled()
         echo "disabled";
     }
 }
-function getSubmittedKey()
+function getInstallationPath()
 {
-    error_reporting(0); // disable error reporting
-    if (isset($_GET["submitted"]) && $_GET["submitted"] != "") {
-        $fullUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . str_replace("?submitted=", "view?key=", htmlspecialchars($_SERVER['REQUEST_URI']));
-        echo htmlspecialchars($fullUrl, ENT_QUOTES, 'UTF-8');
-    } else {
-        if (isset($_GET["submitted"])) {
-            header("Location: ./");
-        }
-    }
-    error_reporting(E_ALL); // enable error reporting
+    $config = json_decode(file_get_contents("./.config", true), true);
+    echo $config["INSTALLATION_PATH"];
 }
 function determineSystemVersion()
 {
@@ -77,12 +69,16 @@ function decryptData($encryption_key) // getRecord("encrypted_contents", $dataKe
 /* Database Interaction Functions */
 function setupStorageMethod()
 {
-    error_reporting(0); // disable error reporting
-    if(!file_exists("./.config")) { // Check if config file is present
-        touch("./.config"); // Create config file if not present
-        file_put_contents("./.config", '{ "STORAGE_METHOD": "mysql", "LANGUAGE": "auto" }'); // Set contents of new config file
-    }
+    /* Prerequisites */
+    $cache = json_decode(file_get_contents("./local-storage/.cache", true), true);
     $configuration = json_decode(file_get_contents("./.config", true), true);
+    /* End Prerequisites */
+    error_reporting(0); // disable error reporting
+    if (!file_exists("./.config") || $configuration["INSTALLATION_PATH"] == "") { // Check if config file is present
+        $path = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://"  . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        touch("./.config"); // Create config file if not present
+        file_put_contents("./.config", json_encode(array("STORAGE_METHOD" => "mysql", "LANGUAGE" => "auto", "INSTALLATION_PATH" => $path))); // Set contents of new config file
+    }
     if (strtolower($configuration["LANGUAGE"]) == "") {
         require "./Public/Error/ServerConfiguration.php"; // throw error page if no language is provided
         die();
@@ -131,8 +127,6 @@ function setupStorageMethod()
         $baseStorageFolder = "./local-storage";
         if (!is_dir("$baseStorageFolder/")) mkdir("$baseStorageFolder/");
         if (!is_dir("$baseStorageFolder/encryptions/")) mkdir("$baseStorageFolder/encryptions/");
-        if (!file_exists("$baseStorageFolder/.htaccess")) touch("$baseStorageFolder/.htaccess"); // Create htaccess file
-        file_put_contents("$baseStorageFolder/.htaccess", "deny from all"); // Sets storage folder permissions
     } else { // Server storage method not set
         require "./Public/Error/ServerConfiguration.php"; // throw error page if invalid configuration
         die();
@@ -144,7 +138,7 @@ function insertRecord($encrypted_contents, $encryption_token)
     error_reporting(0);
     $configuration = json_decode(file_get_contents("./.config", true), true);
     $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
-    if($_SERVER['HTTP_CF_CONNECTING_IP'] == "" || !isset($_SERVER['HTTP_CF_CONNECTING_IP'])) $_SERVER['HTTP_CF_CONNECTING_IP'] = $_SERVER["REMOTE_ADDR"];
+    if ($_SERVER['HTTP_CF_CONNECTING_IP'] == "" || !isset($_SERVER['HTTP_CF_CONNECTING_IP'])) $_SERVER['HTTP_CF_CONNECTING_IP'] = $_SERVER["REMOTE_ADDR"];
     if (strtolower($configuration["STORAGE_METHOD"]) == "mysql") {
         $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
         if ($mysqli->connect_errno) {
@@ -167,7 +161,6 @@ function insertRecord($encrypted_contents, $encryption_token)
         $source_ip = filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP) ?? filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
         $record_date = date("Y-m-d H:i:s");
         file_put_contents("$baseStorageFolder/encryptions/$uniqueIdentifier/data.json", '{"filestore_id": "' . $uniqueIdentifier . '", "encrypted_contents": "' . $encrypted_contents . '", "encryption_token": "' . $encryption_token . '", "source_ip": "' . $source_ip . '", "record_date": "' . $record_date . '"}'); // Set data file encryption data
-    } else { // Server storage method not set
         require "./Public/Error/ServerConfiguration.php"; // throw error page if invalid configuration
         die();
     }
@@ -254,7 +247,7 @@ function getRecord($dataToFetch, $encryption_token)
 /* Translation Feature */
 function translate($q)
 {
-    $sl = "en"; // Default language
+    $lang = "en"; // Default language
     $configuration = json_decode(file_get_contents("./.config", true), true);
     if ($configuration["LANGUAGE"] == "auto") {
         $tl = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
@@ -265,7 +258,7 @@ function translate($q)
             $tl = "en";
         }
     }
-    $res = file_get_contents("https://translate.googleapis.com/translate_a/single?client=gtx&ie=UTF-8&oe=UTF-8&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&sl=" . $sl . "&tl=" . $tl . "&hl=hl&q=" . urlencode($q), $_SERVER['DOCUMENT_ROOT'] . "/transes.html");
+    $res = file_get_contents("https://translate.googleapis.com/translate_a/single?client=gtx&ie=UTF-8&oe=UTF-8&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&sl=" . $lang . "&tl=" . $tl . "&hl=hl&q=" . urlencode($q), $_SERVER['DOCUMENT_ROOT'] . "/transes.html");
     $res = json_decode($res);
     return $res[0][0][0];
 }

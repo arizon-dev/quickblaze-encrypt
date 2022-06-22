@@ -4,15 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="./Public/assets/img/favicon.png">
+    <link rel="icon" type="image/x-icon" href="<?= getInstallationPath() ?>/Public/assets/img/favicon.png">
     <meta name="description" content="<?= translate("An extremely simple, one-time view encryption message system. Send anybody passwords, or secret messages on a one-time view basis.") ?>">
     <title>QuickBlaze</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="./Public/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= getInstallationPath() ?>/Public/assets/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles -->
-    <link href="./Public/assets/css/style.css" rel="stylesheet">
+    <link href="<?= getInstallationPath() ?>/Public/assets/css/style.css" rel="stylesheet">
 </head>
 
 <body class="text-center">

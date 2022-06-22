@@ -9,7 +9,7 @@
     <title>QuickBlaze</title>
 
     <!-- Site CSS -->
-    <link href="../Public/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../Public/assets/css/bootstrap.css" rel="stylesheet">
     <link href="../Public/assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
 </head>
