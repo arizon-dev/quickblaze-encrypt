@@ -31,7 +31,7 @@
 » ***IF USING MYSQL AS STORAGE METHOD:***
 <ul>
   <li>Update the database information in <code>/modules/Database_example.env</code>.</li>
-  <li>Rename the configuration file to <code>Database.env</code>. <a href="#configuration">View example configuration</a>.</li>
+  <li>Rename the configuration file to <code>Database.env</code>. <a href="#system-configurations">View example configuration</a>.</li>
 </ul>
 
 __<br>
