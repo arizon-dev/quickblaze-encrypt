@@ -5,11 +5,11 @@ function copyToClipboard(element) {
     document.execCommand("copy");
     log(`Copied text to clipboard`);
     $temp.remove();
-    snackBar(); // show snackbar notification
+    showSnackBar('snackbar'); // show snackbar notification
 }
 
-function snackBar() {
-    var x = document.getElementById("snackbar");
+function showSnackBar(snackbarId) {
+    var x = document.getElementById(snackbarId);
     x.className = "show";
     var time = 3000;
     log(`Displaying snackbar for ${time}ms`);

@@ -46,6 +46,14 @@
                 </a>
             </div>
 
+            <div id="form_error" style="display:none">
+                <h6>
+                    <?= translate("This message has already been destroyed!"); ?>
+                </h6>
+                <br>
+                <p><?= translate("You will now be redirected.."); ?></p>
+            </div>
+
             <p class="mt-5 mb-3 text-muted">
                 <a href="https://github.com/axtonprice/quickblaze-encrypt" class="text-muted no-decoration">GitHub</a> •
                 <a href="https://discord.gg/dP3MuBATGc" class="text-muted no-decoration">Discord</a> •
@@ -55,8 +63,9 @@
         </form>
     </main>
 
-    <!-- Snackbar Notification -->
+    <!-- Snackbar Notifications -->
     <div id="snackbar">✅ <?= translate("Message has been copied to clipboard!") ?></div>
+    <div id="snackbarError"><?= translate("❌ This message could not be found!") ?></div>
 
     <!-- Site Javascript -->
     <script src="<?= getInstallationPath() ?>/Public/assets/js/globalFunctions.js"></script>
@@ -65,6 +74,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
 
 </body>
 

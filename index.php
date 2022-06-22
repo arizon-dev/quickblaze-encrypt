@@ -5,11 +5,11 @@ $url = substr($url, strrpos($url, '/') + 1);
 if (strpos($url, '?') !== false) $url = substr($url, 0, strpos($url, "?"));
 
 /* Initialise Displays */
-if ($url == "processForm") {
+if ($url == "dataProcessing") {
     /* Form Submission Handler */
     require("./Modules/Functions.php");
-    setupStorageMethod(); // Check database
-    require("./Public/processForm.php");
+    //setupStorageMethod(); // Check database
+    require("./Public/dataProcessing.php");
     return;
 }
 if ($url == "view") {

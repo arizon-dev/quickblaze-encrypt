@@ -5688,6 +5688,10 @@
 //
 //
 
+document.addEventListener('DOMContentLoaded', function () {
+    log(`${moment()}`, `Initialisation/DEBUG`);
+    log(`Successfully loaded all assets`, `Initialisation/DEBUG`);
+}, false);
 
 function addDarkmodeWidget() {
     const options = {
@@ -5698,7 +5702,9 @@ function addDarkmodeWidget() {
     const darkmode = new Darkmode(options);
     darkmode.showWidget();
 }
-window.addEventListener('load', addDarkmodeWidget); log(`Initialized darkmode widget`, `Initialisation/DEBUG`);
+document.addEventListener('DOMContentLoaded', function () {
+    addDarkmodeWidget(); log(`Initialized darkmode widget`, `Initialisation/DEBUG`);
+})
 
 function log(content, type = null) {
     if (!type) {

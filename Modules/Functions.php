@@ -76,13 +76,24 @@ function setupStorageMethod()
     error_reporting(0); // disable error reporting
     if (!file_exists("./.config") || $configuration["INSTALLATION_PATH"] == "") { // Check if config file is present
         $path = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
-        if ($_SERVER["SERVER_PORT"] != "80") {
-            $path .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
-        } else {
+        if ($_SERVER["SERVER_PORT"] == "80" || $_SERVER["SERVER_PORT"] == "443") {
             $path .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+        } else { // Webserver is using a custom port!
+            $path .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
         }
+        $path = rtrim($path, '/'); // Remove last slash from the new URL
         touch("./.config"); // Create config file if not present
-        file_put_contents("./.config", json_encode(array("STORAGE_METHOD" => "mysql", "LANGUAGE" => "auto", "INSTALLATION_PATH" => $path))); // Set contents of new config file
+        if($configuration["STORAGE_METHOD"] == ""){
+            $TEMP_STORAGE_METHOD = "mysql"; // Reset configuration to default value
+        } else{
+            $TEMP_STORAGE_METHOD = $configuration["STORAGE_METHOD"];
+        }
+        if($configuration["LANGUAGE"] == ""){
+            $TEMP_LANGUAGE = "auto"; // Reset configuration to default value
+        } else{
+            $TEMP_LANGUAGE = $configuration["LANGUAGE"];
+        }
+        file_put_contents("./.config", json_encode(array("STORAGE_METHOD" => "$TEMP_STORAGE_METHOD", "LANGUAGE" => "$TEMP_LANGUAGE", "INSTALLATION_PATH" => "$path"))); // Set contents of new config file
     }
     if (strtolower($configuration["LANGUAGE"]) == "") {
         require "./Public/Error/ServerConfiguration.php"; // throw error page if no language is provided
