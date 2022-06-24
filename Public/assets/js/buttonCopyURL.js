@@ -3,15 +3,14 @@ function copyToClipboard(element) {
     $('body').append($temp);
     $temp.val($(element).text()).select();
     document.execCommand('copy');
+    showSnackBar('snackbar'); // show snackbar notification
     log(`Copied text to clipboard`);
     $temp.remove();
-    showSnackBar('snackbar'); // show snackbar notification
-};
+}
 
 function showSnackBar(snackbarId) {
-    let x = document.getElementById(snackbarId);
-    x.className = 'show';
-    var time = 3000;
-    log(`Displaying snackbar for ${time}ms`);
-    setTimeout(x.className = x.className.replace('show', ''), time);
-};
+    var element = document.getElementById(`${snackbarId}`);
+    element.className = element.className.replace('', 'show');
+    log(`Displaying snackbar for ${4000}ms`);
+    setTimeout(function () { element.className = element.className.replace("show", ""); }, 4000);
+}
