@@ -6,12 +6,8 @@ function updateFormDisplay() {
         return fetch(`dataProcessing?action=submit&data=${formvalue}`)
             .then((response) => response.json())
             .then((responseData) => {
-                console.log(responseData);
                 return responseData;
             }).catch(error => log(error, 'warn'));
-        // }).catch ((error) => {
-        //     log(error, `Error/DEBUG`);
-        // });
     }
     fetchData().then(data => {
         log(`Server responsed with '${data.response}'`);
