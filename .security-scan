@@ -10,16 +10,16 @@
           "version": "1.0.0",
           "rules": [
             {
-              "id": "php/XSS",
-              "name": "XSS",
+              "id": "php/InsecureRandomData",
+              "name": "InsecureRandomData",
               "shortDescription": {
-                "text": "Cross-site Scripting (XSS)"
+                "text": "Use of Insufficiently Random Values"
               },
               "defaultConfiguration": {
                 "level": "error"
               },
               "help": {
-                "markdown": "## Details\n\nA cross-site scripting attack occurs when the attacker tricks a legitimate web-based application or site to accept a request as originating from a trusted source.\n\nThis is done by escaping the context of the web application; the web application then delivers that data to its users along with other trusted dynamic content, without validating it. The browser unknowingly executes malicious script on the client side (through client-side languages; usually JavaScript or HTML)  in order to perform actions that are otherwise typically blocked by the browser's Same Origin Policy.\n\nInjecting malicious code is the most prevalent manner by which XSS is exploited; for this reason, escaping characters in order to prevent this manipulation is the top method for securing code against this vulnerability.\n\nEscaping means that the application is coded to mark key characters, and particularly key characters included in user input, to prevent those characters from being interpreted in a dangerous context. For example, in HTML, `<` can be coded as  `&lt`; and `>` can be coded as `&gt`; in order to be interpreted and displayed as themselves in text, while within the code itself, they are used for HTML tags. If malicious content is injected into an application that escapes special characters and that malicious content uses `<` and `>` as HTML tags, those characters are nonetheless not interpreted as HTML tags by the browser if they've been correctly escaped in the application code and in this way the attempted attack is diverted.\n\nThe most prominent use of XSS is to steal cookies (source: OWASP HttpOnly) and hijack user sessions, but XSS exploits have been used to expose sensitive information, enable access to privileged services and functionality and deliver malware.\n\n### Types of attacks\nThere are a few methods by which XSS can be manipulated:\n\n|Type|Origin|Description|\n|--|--|--|\n|**Stored**|Server|The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link.|\n|**Reflected**|Server|The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user's browser.|\n|**DOM-based**|Client|The attacker forces the user's browser to render a malicious page. The data in the page itself delivers the cross-site scripting data.|\n|**Mutated**| |The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters.|\n\n### Affected environments\nThe following environments are susceptible to an XSS attack:\n\n* Web servers\n* Application servers\n* Web application environments\n\n### How to prevent\nThis section describes the top best practices designed to specifically protect your code:\n\n* Sanitize data input in an HTTP request before reflecting it back, ensuring all data is validated, filtered or escaped before echoing anything back to the user, such as the values of query parameters during searches.\n* Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces to their respective HTML or URL encoded equivalents.\n* Give users the option to disable client-side scripts.\n* Redirect invalid requests.\n* Detect simultaneous logins, including those from two separate IP addresses, and invalidate those sessions.\n* Use and enforce a Content Security Policy (source: Wikipedia) to disable any features that might be manipulated for an XSS attack.\n* Read the documentation for any of the libraries referenced in your code to understand which elements allow for embedded HTML.",
+                "markdown": "\n## Details\n\nComputer security relies on random numbers for many things: generating secure, confidential session keys; hashing password data; encryption for transmitting sensitive data, and more. It's easy to understand why. If session keys, for example, were generated sequentially, attackers would be able to guess these easily and then hijack legitimate user sessions. Similarly, if encryption techniques used easy-to-guess numbers, attackers could use brute-force attacks to gain unauthorized access.\n\nIn reality, since computers cannot generate truly random numbers, they use \"pseudorandom\" numbers instead, generated using an algorithm that is \"seeded\" in a variety of ways to produce highly variable values in a random-seeming order, making them very hard-in theory-for attackers to guess. However, if developers inadvertently make use of a weak random algorithm, attackers may be able to discover the algorithm, seed, or pattern, ultimately unlocking access to commands or sensitive data, which can then be held for ransom or sold.\n\n### Best practices for prevention\n* Avoid using weak pseudorandom number generators (PRNGs), such as statistical PRNGs. Instead, choose a cryptographically secure PRNG.\n* Avoid using predictable seed values, such as user ID or server start time. Instead, use a seed that is itself pseudorandom, such as one taken from an external hardware source.\n* Use standard, accepted security algorithms and libraries rather than taking a DIY approach and creating custom code that may contain inherent weaknesses or overlook critical flaws.\n* Use static analysis tools to identify potential instances of this weakness in code and then ensure good test coverage with appropriate white-box testing.\n* Educate developers about the importance of entropy in security systems development, and consider adopting tools that are FIPS 140-2 compliant.",
                 "text": ""
               },
               "properties": {
@@ -29,127 +29,12 @@
                 "categories": [
                   "Security"
                 ],
-                "exampleCommitFixes": [
-                  {
-                    "commitURL": "https://github.com/minkphp/Mink/commit/232919c0c44a2b35d410373c12db404b709ec25c?diff=split#diff-b51e2215d4bd4e189c9360d91a412970L6",
-                    "lines": [
-                      {
-                        "line": "    setcookie(\"tc\", $_POST['cookie_value'], null, '/');",
-                        "lineNumber": 3,
-                        "lineChange": "none"
-                      },
-                      {
-                        "line": "} elseif (isset($_GET[\"show_value\"])) {",
-                        "lineNumber": 4,
-                        "lineChange": "none"
-                      },
-                      {
-                        "line": "    echo $_COOKIE[\"tc\"];",
-                        "lineNumber": 5,
-                        "lineChange": "removed"
-                      },
-                      {
-                        "line": "    echo htmlspecialchars($_COOKIE[\"tc\"],  ENT_QUOTES, 'UTF-8');",
-                        "lineNumber": 5,
-                        "lineChange": "added"
-                      },
-                      {
-                        "line": "    die();",
-                        "lineNumber": 6,
-                        "lineChange": "none"
-                      },
-                      {
-                        "line": "}",
-                        "lineNumber": 7,
-                        "lineChange": "none"
-                      }
-                    ]
-                  },
-                  {
-                    "commitURL": "https://github.com/yunluo/Git/commit/1cb7eddf43f770c055cd685c7f73bb3dac713789?diff=split#diff-34390932035b5d4fd059e5e9a4c629b6L69",
-                    "lines": [
-                      {
-                        "line": "    the_content(); ?>",
-                        "lineNumber": 66,
-                        "lineChange": "none"
-                      },
-                      {
-                        "line": "<form class=\"googlo-tougao\" method=\"post\" action=\"<?php",
-                        "lineNumber": 67,
-                        "lineChange": "none"
-                      },
-                      {
-                        "line": "    echo $_SERVER[\"REQUEST_URI\"];",
-                        "lineNumber": 68,
-                        "lineChange": "removed"
-                      },
-                      {
-                        "line": "    echo htmlspecialchars($_SERVER[\"REQUEST_URI\"]);",
-                        "lineNumber": 68,
-                        "lineChange": "added"
-                      },
-                      {
-                        "line": "    $current_user = wp_get_current_user(); ?>\">",
-                        "lineNumber": 69,
-                        "lineChange": "none"
-                      },
-                      {
-                        "line": "<div style=\"text-align: left; padding-top: 10px;\">",
-                        "lineNumber": 70,
-                        "lineChange": "none"
-                      }
-                    ]
-                  },
-                  {
-                    "commitURL": "https://github.com/railt/railt/commit/856e3456f6b87c94c1262a842c6df29a76cf9be1?diff=split#diff-eaa75d4030b62891c20b9f9d83a58fd2L59",
-                    "lines": [
-                      {
-                        "line": "        echo $request->get('schema');",
-                        "lineNumber": 56,
-                        "lineChange": "removed"
-                      },
-                      {
-                        "line": "        echo htmlspecialchars($request->get('schema'));",
-                        "lineNumber": 73,
-                        "lineChange": "added"
-                      },
-                      {
-                        "line": "    } else {",
-                        "lineNumber": 74,
-                        "lineChange": "none"
-                      },
-                      {
-                        "line": "        echo file_get_contents(__DIR__ . '/gql/schema.graphqls');",
-                        "lineNumber": 58,
-                        "lineChange": "removed"
-                      },
-                      {
-                        "line": "        echo htmlspecialchars(file_get_contents(__DIR__ . '/gql/schema.graphqls'));",
-                        "lineNumber": 75,
-                        "lineChange": "added"
-                      },
-                      {
-                        "line": "    }",
-                        "lineNumber": 76,
-                        "lineChange": "none"
-                      },
-                      {
-                        "line": "?></div>",
-                        "lineNumber": 77,
-                        "lineChange": "none"
-                      }
-                    ]
-                  }
-                ],
-                "exampleCommitDescriptions": [
-                  "Uploaded files now appear on profile pages",
-                  "Add files via upload",
-                  "remove file name from output to avoid XSS"
-                ],
+                "exampleCommitFixes": [],
+                "exampleCommitDescriptions": [],
                 "precision": "very-high",
-                "repoDatasetSize": 526,
+                "repoDatasetSize": 0,
                 "cwe": [
-                  "CWE-79"
+                  "CWE-330"
                 ]
               }
             },
@@ -376,16 +261,16 @@
               }
             },
             {
-              "id": "php/InsecureRandomData",
-              "name": "InsecureRandomData",
+              "id": "php/XSS",
+              "name": "XSS",
               "shortDescription": {
-                "text": "Use of Insufficiently Random Values"
+                "text": "Cross-site Scripting (XSS)"
               },
               "defaultConfiguration": {
                 "level": "error"
               },
               "help": {
-                "markdown": "\n## Details\n\nComputer security relies on random numbers for many things: generating secure, confidential session keys; hashing password data; encryption for transmitting sensitive data, and more. It's easy to understand why. If session keys, for example, were generated sequentially, attackers would be able to guess these easily and then hijack legitimate user sessions. Similarly, if encryption techniques used easy-to-guess numbers, attackers could use brute-force attacks to gain unauthorized access.\n\nIn reality, since computers cannot generate truly random numbers, they use \"pseudorandom\" numbers instead, generated using an algorithm that is \"seeded\" in a variety of ways to produce highly variable values in a random-seeming order, making them very hard-in theory-for attackers to guess. However, if developers inadvertently make use of a weak random algorithm, attackers may be able to discover the algorithm, seed, or pattern, ultimately unlocking access to commands or sensitive data, which can then be held for ransom or sold.\n\n### Best practices for prevention\n* Avoid using weak pseudorandom number generators (PRNGs), such as statistical PRNGs. Instead, choose a cryptographically secure PRNG.\n* Avoid using predictable seed values, such as user ID or server start time. Instead, use a seed that is itself pseudorandom, such as one taken from an external hardware source.\n* Use standard, accepted security algorithms and libraries rather than taking a DIY approach and creating custom code that may contain inherent weaknesses or overlook critical flaws.\n* Use static analysis tools to identify potential instances of this weakness in code and then ensure good test coverage with appropriate white-box testing.\n* Educate developers about the importance of entropy in security systems development, and consider adopting tools that are FIPS 140-2 compliant.",
+                "markdown": "## Details\n\nA cross-site scripting attack occurs when the attacker tricks a legitimate web-based application or site to accept a request as originating from a trusted source.\n\nThis is done by escaping the context of the web application; the web application then delivers that data to its users along with other trusted dynamic content, without validating it. The browser unknowingly executes malicious script on the client side (through client-side languages; usually JavaScript or HTML)  in order to perform actions that are otherwise typically blocked by the browser's Same Origin Policy.\n\nInjecting malicious code is the most prevalent manner by which XSS is exploited; for this reason, escaping characters in order to prevent this manipulation is the top method for securing code against this vulnerability.\n\nEscaping means that the application is coded to mark key characters, and particularly key characters included in user input, to prevent those characters from being interpreted in a dangerous context. For example, in HTML, `<` can be coded as  `&lt`; and `>` can be coded as `&gt`; in order to be interpreted and displayed as themselves in text, while within the code itself, they are used for HTML tags. If malicious content is injected into an application that escapes special characters and that malicious content uses `<` and `>` as HTML tags, those characters are nonetheless not interpreted as HTML tags by the browser if they've been correctly escaped in the application code and in this way the attempted attack is diverted.\n\nThe most prominent use of XSS is to steal cookies (source: OWASP HttpOnly) and hijack user sessions, but XSS exploits have been used to expose sensitive information, enable access to privileged services and functionality and deliver malware.\n\n### Types of attacks\nThere are a few methods by which XSS can be manipulated:\n\n|Type|Origin|Description|\n|--|--|--|\n|**Stored**|Server|The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link.|\n|**Reflected**|Server|The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user's browser.|\n|**DOM-based**|Client|The attacker forces the user's browser to render a malicious page. The data in the page itself delivers the cross-site scripting data.|\n|**Mutated**| |The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters.|\n\n### Affected environments\nThe following environments are susceptible to an XSS attack:\n\n* Web servers\n* Application servers\n* Web application environments\n\n### How to prevent\nThis section describes the top best practices designed to specifically protect your code:\n\n* Sanitize data input in an HTTP request before reflecting it back, ensuring all data is validated, filtered or escaped before echoing anything back to the user, such as the values of query parameters during searches.\n* Convert special characters such as `?`, `&`, `/`, `<`, `>` and spaces to their respective HTML or URL encoded equivalents.\n* Give users the option to disable client-side scripts.\n* Redirect invalid requests.\n* Detect simultaneous logins, including those from two separate IP addresses, and invalidate those sessions.\n* Use and enforce a Content Security Policy (source: Wikipedia) to disable any features that might be manipulated for an XSS attack.\n* Read the documentation for any of the libraries referenced in your code to understand which elements allow for embedded HTML.",
                 "text": ""
               },
               "properties": {
@@ -395,12 +280,127 @@
                 "categories": [
                   "Security"
                 ],
-                "exampleCommitFixes": [],
-                "exampleCommitDescriptions": [],
+                "exampleCommitFixes": [
+                  {
+                    "commitURL": "https://github.com/minkphp/Mink/commit/232919c0c44a2b35d410373c12db404b709ec25c?diff=split#diff-b51e2215d4bd4e189c9360d91a412970L6",
+                    "lines": [
+                      {
+                        "line": "    setcookie(\"tc\", $_POST['cookie_value'], null, '/');",
+                        "lineNumber": 3,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "} elseif (isset($_GET[\"show_value\"])) {",
+                        "lineNumber": 4,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "    echo $_COOKIE[\"tc\"];",
+                        "lineNumber": 5,
+                        "lineChange": "removed"
+                      },
+                      {
+                        "line": "    echo htmlspecialchars($_COOKIE[\"tc\"],  ENT_QUOTES, 'UTF-8');",
+                        "lineNumber": 5,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "    die();",
+                        "lineNumber": 6,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "}",
+                        "lineNumber": 7,
+                        "lineChange": "none"
+                      }
+                    ]
+                  },
+                  {
+                    "commitURL": "https://github.com/yunluo/Git/commit/1cb7eddf43f770c055cd685c7f73bb3dac713789?diff=split#diff-34390932035b5d4fd059e5e9a4c629b6L69",
+                    "lines": [
+                      {
+                        "line": "    the_content(); ?>",
+                        "lineNumber": 66,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "<form class=\"googlo-tougao\" method=\"post\" action=\"<?php",
+                        "lineNumber": 67,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "    echo $_SERVER[\"REQUEST_URI\"];",
+                        "lineNumber": 68,
+                        "lineChange": "removed"
+                      },
+                      {
+                        "line": "    echo htmlspecialchars($_SERVER[\"REQUEST_URI\"]);",
+                        "lineNumber": 68,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "    $current_user = wp_get_current_user(); ?>\">",
+                        "lineNumber": 69,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "<div style=\"text-align: left; padding-top: 10px;\">",
+                        "lineNumber": 70,
+                        "lineChange": "none"
+                      }
+                    ]
+                  },
+                  {
+                    "commitURL": "https://github.com/railt/railt/commit/856e3456f6b87c94c1262a842c6df29a76cf9be1?diff=split#diff-eaa75d4030b62891c20b9f9d83a58fd2L59",
+                    "lines": [
+                      {
+                        "line": "        echo $request->get('schema');",
+                        "lineNumber": 56,
+                        "lineChange": "removed"
+                      },
+                      {
+                        "line": "        echo htmlspecialchars($request->get('schema'));",
+                        "lineNumber": 73,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "    } else {",
+                        "lineNumber": 74,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "        echo file_get_contents(__DIR__ . '/gql/schema.graphqls');",
+                        "lineNumber": 58,
+                        "lineChange": "removed"
+                      },
+                      {
+                        "line": "        echo htmlspecialchars(file_get_contents(__DIR__ . '/gql/schema.graphqls'));",
+                        "lineNumber": 75,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "    }",
+                        "lineNumber": 76,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "?></div>",
+                        "lineNumber": 77,
+                        "lineChange": "none"
+                      }
+                    ]
+                  }
+                ],
+                "exampleCommitDescriptions": [
+                  "Uploaded files now appear on profile pages",
+                  "Add files via upload",
+                  "remove file name from output to avoid XSS"
+                ],
                 "precision": "very-high",
-                "repoDatasetSize": 0,
+                "repoDatasetSize": 526,
                 "cwe": [
-                  "CWE-330"
+                  "CWE-79"
                 ]
               }
             },
@@ -598,37 +598,36 @@
       },
       "results": [
         {
-          "ruleId": "php/XSS",
+          "ruleId": "php/InsecureRandomData",
           "ruleIndex": 0,
           "level": "error",
           "message": {
-            "text": "Unsanitized input from data from a remote resource flows into the echo statement, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
-            "markdown": "Unsanitized input from {0} {1} into {2}, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
+            "text": "An insecure random number generator is used to create an URL (the random value flows from rand). Consider using CSPRNG functions instead.",
+            "markdown": "An insecure random number generator is used to create {0} (the random value flows from {1}). Consider using CSPRNG functions instead.",
             "arguments": [
-              "[data from a remote resource](0)",
-              "[flows](1),(2),(3),(4),(5),(6)",
-              "[the echo statement](7)"
+              "[an URL](0)",
+              "[rand](1)"
             ]
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "Modules/functions.php",
+                  "uri": "Modules/Functions.php",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
-                  "startLine": 28,
-                  "endLine": 28,
-                  "startColumn": 5,
-                  "endColumn": 38
+                  "startLine": 42,
+                  "endLine": 42,
+                  "startColumn": 155,
+                  "endColumn": 166
                 }
               }
             }
           ],
           "fingerprints": {
-            "0": "29c260e0ccd25239a67250a24130f564453f63289eda24916fd5afcf7ccdd867",
-            "1": "2c80a54c.18ef32d2.2683ade8.1f144feb.b76b24a1.7dac33c0.60b22c1d.8fbce61d.86be1e70.464a7316.c3dea7ce.abd479c7.c7a41f28.c62804f2.60b22c1d.be170d97"
+            "0": "0f550df17938bb94681707570673cc19e46953462194a357db4017020d169477",
+            "1": "703ebb77.464a7316.c3dea7ce.73a3d5be.af50231a.773652eb.a7efae7e.be170d97.703ebb77.464a7316.c3dea7ce.73a3d5be.af50231a.773652eb.a7efae7e.be170d97"
           },
           "codeFlows": [
             {
@@ -640,14 +639,14 @@
                         "id": 0,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "Modules/functions.php",
+                            "uri": "Modules/Functions.php",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 27,
-                            "endLine": 27,
-                            "startColumn": 27,
-                            "endColumn": 62
+                            "startLine": 42,
+                            "endLine": 42,
+                            "startColumn": 155,
+                            "endColumn": 166
                           }
                         }
                       }
@@ -657,116 +656,14 @@
                         "id": 1,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "Modules/functions.php",
+                            "uri": "Modules/Functions.php",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 27,
-                            "endLine": 27,
-                            "startColumn": 27,
-                            "endColumn": 62
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 2,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 27,
-                            "endLine": 27,
-                            "startColumn": 15,
-                            "endColumn": 69
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 3,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 27,
-                            "endLine": 27,
-                            "startColumn": 5,
-                            "endColumn": 11
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 4,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 28,
-                            "endLine": 28,
-                            "startColumn": 10,
-                            "endColumn": 16
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 5,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 28,
-                            "endLine": 28,
-                            "startColumn": 10,
-                            "endColumn": 37
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 6,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 28,
-                            "endLine": 28,
-                            "startColumn": 5,
-                            "endColumn": 38
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 7,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 28,
-                            "endLine": 28,
-                            "startColumn": 5,
-                            "endColumn": 38
+                            "startLine": 42,
+                            "endLine": 42,
+                            "startColumn": 155,
+                            "endColumn": 166
                           }
                         }
                       }
@@ -777,12 +674,308 @@
             }
           ],
           "properties": {
-            "priorityScore": 807,
+            "priorityScore": 623,
             "priorityScoreFactors": [
               {
                 "label": true,
                 "type": "multipleOccurrence"
               },
+              {
+                "label": true,
+                "type": "hotFileSource"
+              }
+            ]
+          }
+        },
+        {
+          "ruleId": "php/InsecureRandomData",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "An insecure random number generator is used to create an URL (the random value flows from rand). Consider using CSPRNG functions instead.",
+            "markdown": "An insecure random number generator is used to create {0} (the random value flows from {1}). Consider using CSPRNG functions instead.",
+            "arguments": [
+              "[an URL](0)",
+              "[rand](1)"
+            ]
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Modules/Functions.php",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 46,
+                  "endLine": 46,
+                  "startColumn": 243,
+                  "endColumn": 254
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "0": "bb5b16cda5ab8c4e61b23f77da48774cb8c58cc5dfe565392d9f49859778c3ee",
+            "1": "703ebb77.464a7316.c3dea7ce.37e648b5.af50231a.773652eb.a7efae7e.be170d97.703ebb77.464a7316.a666b580.37e648b5.af50231a.dd23c7e4.a7efae7e.047105df"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/Functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 46,
+                            "endLine": 46,
+                            "startColumn": 243,
+                            "endColumn": 254
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 1,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/Functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 46,
+                            "endLine": 46,
+                            "startColumn": 243,
+                            "endColumn": 254
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "priorityScore": 623,
+            "priorityScoreFactors": [
+              {
+                "label": true,
+                "type": "multipleOccurrence"
+              },
+              {
+                "label": true,
+                "type": "hotFileSource"
+              }
+            ]
+          }
+        },
+        {
+          "ruleId": "php/PT",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Unsanitized input from an HTTP header flows into file_get_contents, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
+            "markdown": "Unsanitized input from {0} {1} into {2}, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
+            "arguments": [
+              "[an HTTP header](0)",
+              "[flows](1),(2),(3),(4),(5),(6),(7)",
+              "[file_get_contents](8)"
+            ]
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Modules/Functions.php",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 264,
+                  "endLine": 264,
+                  "startColumn": 12,
+                  "endColumn": 272
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "0": "cd60ba051bddf7fcd35511946d7848d5d79431a55fdf9d08e8012cd36a90070d",
+            "1": "80f1517a.464a7316.c3dea7ce.f18a7ecf.20a8e692.39e0148c.480b110d.be170d97.43f154ae.abf264c1.2173882d.abd479c7.20a8e692.c1b6b7bc.b2a0b7cd.58bf5da9"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/Functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 256,
+                            "endLine": 256,
+                            "startColumn": 22,
+                            "endColumn": 53
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 1,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/Functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 256,
+                            "endLine": 256,
+                            "startColumn": 22,
+                            "endColumn": 53
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 2,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/Functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 256,
+                            "endLine": 256,
+                            "startColumn": 15,
+                            "endColumn": 60
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 3,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/Functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 256,
+                            "endLine": 256,
+                            "startColumn": 9,
+                            "endColumn": 11
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 4,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/Functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 264,
+                            "endLine": 264,
+                            "startColumn": 194,
+                            "endColumn": 196
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 5,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/Functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 264,
+                            "endLine": 264,
+                            "startColumn": 30,
+                            "endColumn": 196
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 6,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/Functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 264,
+                            "endLine": 264,
+                            "startColumn": 30,
+                            "endColumn": 210
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 7,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/Functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 264,
+                            "endLine": 264,
+                            "startColumn": 30,
+                            "endColumn": 226
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 8,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/Functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 264,
+                            "endLine": 264,
+                            "startColumn": 12,
+                            "endColumn": 272
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "priorityScore": 812,
+            "priorityScoreFactors": [
               {
                 "label": true,
                 "type": "hotFileSource"
@@ -796,7 +989,7 @@
         },
         {
           "ruleId": "php/XSS",
-          "ruleIndex": 0,
+          "ruleIndex": 2,
           "level": "error",
           "message": {
             "text": "Unsanitized input from an HTTP parameter flows into the echo statement, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
@@ -824,7 +1017,7 @@
             }
           ],
           "fingerprints": {
-            "0": "3ac3ee4ef76fb9f716bd650fdb855e283cbf976f1fab3f7629f572d2da633f54",
+            "0": "a77d63e65619911c7fbf67781d629d70e3d228f9efe1b5a89dd879d20ac846c8",
             "1": "4dc0a121.18ef32d2.c3dea7ce.1f144feb.b76b24a1.5f7acf51.a7efae7e.90b5ecc0.41cc2907.18ef32d2.3e2efea6.1f144feb.712d0e1a.e8bbe0f7.84054387.05d353bf"
           },
           "codeFlows": [
@@ -940,7 +1133,7 @@
             }
           ],
           "properties": {
-            "priorityScore": 807,
+            "priorityScore": 823,
             "priorityScoreFactors": [
               {
                 "label": true,
@@ -959,7 +1152,7 @@
         },
         {
           "ruleId": "php/XSS",
-          "ruleIndex": 0,
+          "ruleIndex": 2,
           "level": "error",
           "message": {
             "text": "Unsanitized input from an HTTP parameter flows into the echo statement, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
@@ -978,8 +1171,8 @@
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
-                  "startLine": 24,
-                  "endLine": 24,
+                  "startLine": 9,
+                  "endLine": 9,
                   "startColumn": 5,
                   "endColumn": 62
                 }
@@ -987,7 +1180,7 @@
             }
           ],
           "fingerprints": {
-            "0": "aa3a386f44af6799da63f5369a33b66b9c0f691f92365ac89d4704258770cebf",
+            "0": "802a51b40b0315b9788f624ca016e2f354367851aab5e310c5339c52ab8df053",
             "1": "41cc2907.d3fa0bdc.c3dea7ce.1f144feb.ca23a647.e8bbe0f7.a7efae7e.05d353bf.41cc2907.464a7316.3e2efea6.1f144feb.712d0e1a.e8bbe0f7.84054387.be170d97"
           },
           "codeFlows": [
@@ -1004,8 +1197,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 24,
-                            "endLine": 24,
+                            "startLine": 9,
+                            "endLine": 9,
                             "startColumn": 41,
                             "endColumn": 53
                           }
@@ -1021,8 +1214,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 24,
-                            "endLine": 24,
+                            "startLine": 9,
+                            "endLine": 9,
                             "startColumn": 41,
                             "endColumn": 53
                           }
@@ -1038,8 +1231,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 24,
-                            "endLine": 24,
+                            "startLine": 9,
+                            "endLine": 9,
                             "startColumn": 29,
                             "endColumn": 54
                           }
@@ -1055,8 +1248,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 24,
-                            "endLine": 24,
+                            "startLine": 9,
+                            "endLine": 9,
                             "startColumn": 10,
                             "endColumn": 54
                           }
@@ -1072,8 +1265,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 24,
-                            "endLine": 24,
+                            "startLine": 9,
+                            "endLine": 9,
                             "startColumn": 10,
                             "endColumn": 61
                           }
@@ -1089,8 +1282,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 24,
-                            "endLine": 24,
+                            "startLine": 9,
+                            "endLine": 9,
                             "startColumn": 5,
                             "endColumn": 62
                           }
@@ -1106,8 +1299,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 24,
-                            "endLine": 24,
+                            "startLine": 9,
+                            "endLine": 9,
                             "startColumn": 5,
                             "endColumn": 62
                           }
@@ -1120,7 +1313,7 @@
             }
           ],
           "properties": {
-            "priorityScore": 807,
+            "priorityScore": 823,
             "priorityScoreFactors": [
               {
                 "label": true,
@@ -1133,403 +1326,13 @@
               {
                 "label": true,
                 "type": "fixExamples"
-              }
-            ]
-          }
-        },
-        {
-          "ruleId": "php/PT",
-          "ruleIndex": 2,
-          "level": "error",
-          "message": {
-            "text": "Unsanitized input from an HTTP header flows into file_get_contents, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
-            "markdown": "Unsanitized input from {0} {1} into {2}, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
-            "arguments": [
-              "[an HTTP header](0)",
-              "[flows](1),(2),(3),(4),(5),(6),(7)",
-              "[file_get_contents](8)"
-            ]
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "Modules/functions.php",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 277,
-                  "endLine": 277,
-                  "startColumn": 12,
-                  "endColumn": 274
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "0": "ac72e8befb5418cdba449ed984f2c1a51a30eeb629ba063ecf4d7e9212818918",
-            "1": "80f1517a.464a7316.c3dea7ce.f18a7ecf.20a8e692.39e0148c.480b110d.be170d97.43f154ae.abf264c1.2173882d.abd479c7.20a8e692.c1b6b7bc.b2a0b7cd.58bf5da9"
-          },
-          "codeFlows": [
-            {
-              "threadFlows": [
-                {
-                  "locations": [
-                    {
-                      "location": {
-                        "id": 0,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 269,
-                            "endLine": 269,
-                            "startColumn": 22,
-                            "endColumn": 53
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 1,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 269,
-                            "endLine": 269,
-                            "startColumn": 22,
-                            "endColumn": 53
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 2,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 269,
-                            "endLine": 269,
-                            "startColumn": 15,
-                            "endColumn": 60
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 3,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 269,
-                            "endLine": 269,
-                            "startColumn": 9,
-                            "endColumn": 11
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 4,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 277,
-                            "endLine": 277,
-                            "startColumn": 196,
-                            "endColumn": 198
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 5,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 277,
-                            "endLine": 277,
-                            "startColumn": 30,
-                            "endColumn": 198
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 6,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 277,
-                            "endLine": 277,
-                            "startColumn": 30,
-                            "endColumn": 212
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 7,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 277,
-                            "endLine": 277,
-                            "startColumn": 30,
-                            "endColumn": 228
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 8,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 277,
-                            "endLine": 277,
-                            "startColumn": 12,
-                            "endColumn": 274
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "properties": {
-            "priorityScore": 803,
-            "priorityScoreFactors": [
-              {
-                "label": true,
-                "type": "hotFileSource"
-              },
-              {
-                "label": true,
-                "type": "fixExamples"
-              }
-            ]
-          }
-        },
-        {
-          "ruleId": "php/InsecureRandomData",
-          "ruleIndex": 3,
-          "level": "error",
-          "message": {
-            "text": "An insecure random number generator is used to create an URL (the random value flows from rand). Consider using CSPRNG functions instead.",
-            "markdown": "An insecure random number generator is used to create {0} (the random value flows from {1}). Consider using CSPRNG functions instead.",
-            "arguments": [
-              "[an URL](0)",
-              "[rand](1)"
-            ]
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "Modules/functions.php",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 34,
-                  "endLine": 34,
-                  "startColumn": 155,
-                  "endColumn": 166
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "0": "dbf4802669cbd55306019dbf6843ee23cbdde06c5350688a9a08f7590d3b47ee",
-            "1": "703ebb77.464a7316.c3dea7ce.73a3d5be.af50231a.773652eb.a7efae7e.be170d97.703ebb77.464a7316.c3dea7ce.73a3d5be.af50231a.773652eb.a7efae7e.be170d97"
-          },
-          "codeFlows": [
-            {
-              "threadFlows": [
-                {
-                  "locations": [
-                    {
-                      "location": {
-                        "id": 0,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 34,
-                            "endLine": 34,
-                            "startColumn": 155,
-                            "endColumn": 166
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 1,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 34,
-                            "endLine": 34,
-                            "startColumn": 155,
-                            "endColumn": 166
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "properties": {
-            "priorityScore": 605,
-            "priorityScoreFactors": [
-              {
-                "label": true,
-                "type": "multipleOccurrence"
-              },
-              {
-                "label": true,
-                "type": "hotFileSource"
-              }
-            ]
-          }
-        },
-        {
-          "ruleId": "php/InsecureRandomData",
-          "ruleIndex": 3,
-          "level": "error",
-          "message": {
-            "text": "An insecure random number generator is used to create an URL (the random value flows from rand). Consider using CSPRNG functions instead.",
-            "markdown": "An insecure random number generator is used to create {0} (the random value flows from {1}). Consider using CSPRNG functions instead.",
-            "arguments": [
-              "[an URL](0)",
-              "[rand](1)"
-            ]
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "Modules/functions.php",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 38,
-                  "endLine": 38,
-                  "startColumn": 243,
-                  "endColumn": 254
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "0": "1506c85c940ef34c75dcd44ae919caf062ea30f78a83baf8e39225fa49188919",
-            "1": "703ebb77.464a7316.c3dea7ce.37e648b5.af50231a.773652eb.a7efae7e.be170d97.703ebb77.464a7316.a666b580.37e648b5.af50231a.dd23c7e4.a7efae7e.047105df"
-          },
-          "codeFlows": [
-            {
-              "threadFlows": [
-                {
-                  "locations": [
-                    {
-                      "location": {
-                        "id": 0,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 38,
-                            "endLine": 38,
-                            "startColumn": 243,
-                            "endColumn": 254
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 1,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 38,
-                            "endLine": 38,
-                            "startColumn": 243,
-                            "endColumn": 254
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "properties": {
-            "priorityScore": 605,
-            "priorityScoreFactors": [
-              {
-                "label": true,
-                "type": "multipleOccurrence"
-              },
-              {
-                "label": true,
-                "type": "hotFileSource"
               }
             ]
           }
         },
         {
           "ruleId": "javascript/DOMXSS",
-          "ruleIndex": 9,
+          "ruleIndex": 3,
           "level": "error",
           "message": {
             "text": "Unsanitized input from data from a remote resource flows into innerHTML, where it is used to dynamically construct the HTML page on client side. This may result in a DOM Based Cross-Site Scripting attack (DOMXSS).",
@@ -1548,8 +1351,8 @@
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
-                  "startLine": 7,
-                  "endLine": 7,
+                  "startLine": 6,
+                  "endLine": 6,
                   "startColumn": 9,
                   "endColumn": 62
                 }
@@ -1557,7 +1360,7 @@
             }
           ],
           "fingerprints": {
-            "0": "595526f51cc6124110a35ed4e3f6bf3a870f1b7696b3bb55694ccecf6916232e",
+            "0": "813ce9af60b3926effaf70fdad65240cf72bcc1637f37bc80a83fe32c8b8ae65",
             "1": "cf7733e4.4773f344.607187b5.a517c54b.9cde7c93.dbe83c7e.0b4f0b50.9b5cefb9.e34a61c9.7d4b7307.aff85a25.313735ce.69171dec.dbe83c7e.83265159.3406c8c7"
           },
           "codeFlows": [
@@ -1577,7 +1380,7 @@
                             "startLine": 4,
                             "endLine": 4,
                             "startColumn": 5,
-                            "endColumn": 45
+                            "endColumn": 42
                           }
                         }
                       }
@@ -1594,7 +1397,7 @@
                             "startLine": 4,
                             "endLine": 4,
                             "startColumn": 5,
-                            "endColumn": 45
+                            "endColumn": 42
                           }
                         }
                       }
@@ -1610,8 +1413,8 @@
                           "region": {
                             "startLine": 4,
                             "endLine": 4,
-                            "startColumn": 52,
-                            "endColumn": 59
+                            "startColumn": 49,
+                            "endColumn": 56
                           }
                         }
                       }
@@ -1627,8 +1430,8 @@
                           "region": {
                             "startLine": 4,
                             "endLine": 4,
-                            "startColumn": 64,
-                            "endColumn": 71
+                            "startColumn": 61,
+                            "endColumn": 68
                           }
                         }
                       }
@@ -1644,8 +1447,8 @@
                           "region": {
                             "startLine": 4,
                             "endLine": 4,
-                            "startColumn": 64,
-                            "endColumn": 76
+                            "startColumn": 61,
+                            "endColumn": 73
                           }
                         }
                       }
@@ -1661,8 +1464,8 @@
                           "region": {
                             "startLine": 4,
                             "endLine": 4,
-                            "startColumn": 64,
-                            "endColumn": 78
+                            "startColumn": 61,
+                            "endColumn": 75
                           }
                         }
                       }
@@ -1679,7 +1482,7 @@
                             "startLine": 4,
                             "endLine": 4,
                             "startColumn": 5,
-                            "endColumn": 50
+                            "endColumn": 47
                           }
                         }
                       }
@@ -1695,8 +1498,8 @@
                           "region": {
                             "startLine": 4,
                             "endLine": 4,
-                            "startColumn": 86,
-                            "endColumn": 89
+                            "startColumn": 83,
+                            "endColumn": 86
                           }
                         }
                       }
@@ -1712,8 +1515,8 @@
                           "region": {
                             "startLine": 5,
                             "endLine": 5,
-                            "startColumn": 39,
-                            "endColumn": 42
+                            "startColumn": 92,
+                            "endColumn": 95
                           }
                         }
                       }
@@ -1727,8 +1530,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 7,
-                            "endLine": 7,
+                            "startLine": 6,
+                            "endLine": 6,
                             "startColumn": 54,
                             "endColumn": 62
                           }
@@ -1744,8 +1547,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 7,
-                            "endLine": 7,
+                            "startLine": 6,
+                            "endLine": 6,
                             "startColumn": 9,
                             "endColumn": 62
                           }
@@ -1758,7 +1561,7 @@
             }
           ],
           "properties": {
-            "priorityScore": 905,
+            "priorityScore": 923,
             "priorityScoreFactors": [
               {
                 "label": true,
@@ -1781,7 +1584,7 @@
         },
         {
           "ruleId": "javascript/DOMXSS",
-          "ruleIndex": 9,
+          "ruleIndex": 3,
           "level": "error",
           "message": {
             "text": "Unsanitized input from data from a remote resource flows into innerHTML, where it is used to dynamically construct the HTML page on client side. This may result in a DOM Based Cross-Site Scripting attack (DOMXSS).",
@@ -1800,16 +1603,16 @@
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
-                  "startLine": 28,
-                  "endLine": 28,
-                  "startColumn": 13,
-                  "endColumn": 61
+                  "startLine": 26,
+                  "endLine": 26,
+                  "startColumn": 9,
+                  "endColumn": 57
                 }
               }
             }
           ],
           "fingerprints": {
-            "0": "b276558ea5854b3745c472a3d2be15dda59217096fbe3582f15454f0549d6eac",
+            "0": "e29119e1db096a20b89e5997b17efaa376dd6677918a56ed7c1a635db14710c0",
             "1": "3df95e84.7d4b7307.607187b5.a517c54b.9cde7c93.dbe83c7e.6977003a.aac0d16c.e34a61c9.7d4b7307.aff85a25.313735ce.fd1fa73f.dbe83c7e.83265159.3406c8c7"
           },
           "codeFlows": [
@@ -1829,7 +1632,7 @@
                             "startLine": 17,
                             "endLine": 17,
                             "startColumn": 5,
-                            "endColumn": 53
+                            "endColumn": 50
                           }
                         }
                       }
@@ -1846,7 +1649,7 @@
                             "startLine": 17,
                             "endLine": 17,
                             "startColumn": 5,
-                            "endColumn": 53
+                            "endColumn": 50
                           }
                         }
                       }
@@ -1862,8 +1665,8 @@
                           "region": {
                             "startLine": 17,
                             "endLine": 17,
-                            "startColumn": 60,
-                            "endColumn": 67
+                            "startColumn": 57,
+                            "endColumn": 64
                           }
                         }
                       }
@@ -1879,8 +1682,8 @@
                           "region": {
                             "startLine": 17,
                             "endLine": 17,
-                            "startColumn": 72,
-                            "endColumn": 79
+                            "startColumn": 69,
+                            "endColumn": 76
                           }
                         }
                       }
@@ -1896,8 +1699,8 @@
                           "region": {
                             "startLine": 17,
                             "endLine": 17,
-                            "startColumn": 72,
-                            "endColumn": 84
+                            "startColumn": 69,
+                            "endColumn": 81
                           }
                         }
                       }
@@ -1913,8 +1716,8 @@
                           "region": {
                             "startLine": 17,
                             "endLine": 17,
-                            "startColumn": 72,
-                            "endColumn": 86
+                            "startColumn": 69,
+                            "endColumn": 83
                           }
                         }
                       }
@@ -1931,7 +1734,7 @@
                             "startLine": 17,
                             "endLine": 17,
                             "startColumn": 5,
-                            "endColumn": 58
+                            "endColumn": 55
                           }
                         }
                       }
@@ -1947,8 +1750,8 @@
                           "region": {
                             "startLine": 17,
                             "endLine": 17,
-                            "startColumn": 94,
-                            "endColumn": 97
+                            "startColumn": 91,
+                            "endColumn": 94
                           }
                         }
                       }
@@ -1979,10 +1782,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 28,
-                            "endLine": 28,
-                            "startColumn": 53,
-                            "endColumn": 61
+                            "startLine": 26,
+                            "endLine": 26,
+                            "startColumn": 49,
+                            "endColumn": 57
                           }
                         }
                       }
@@ -1996,10 +1799,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 28,
-                            "endLine": 28,
-                            "startColumn": 13,
-                            "endColumn": 61
+                            "startLine": 26,
+                            "endLine": 26,
+                            "startColumn": 9,
+                            "endColumn": 57
                           }
                         }
                       }
@@ -2010,7 +1813,7 @@
             }
           ],
           "properties": {
-            "priorityScore": 905,
+            "priorityScore": 923,
             "priorityScoreFactors": [
               {
                 "label": true,
@@ -2040,7 +1843,7 @@
             "lang": "PHP"
           },
           {
-            "files": 4,
+            "files": 3,
             "isSupported": true,
             "lang": "JavaScript"
           }
