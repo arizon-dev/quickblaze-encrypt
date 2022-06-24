@@ -1,6 +1,7 @@
 <?php
-/* Process the Data */
 error_reporting(0);
+header("Access-Control-Allow-Origin: *"); // "*" could also be a site such as http://www.example.com
+if (!isset($_GET["action"]) || !$_GET["action"]) $_GET["action"] = "";
 
 if ($_GET["action"] == "decrypt" && $_GET["key"]) {
     echo '{"response": "' . htmlspecialchars(decryptData(htmlspecialchars($_GET["key"]))) . '", "key": "' . $_GET["key"] . '"}';
@@ -20,6 +21,9 @@ if ($_GET["action"] == "decrypt" && $_GET["key"]) {
             }
         }
     }
-} else {
+} else if ($_GET["action"] == "isDebugMode") {
+    $configuration = json_decode(file_get_contents("./.config", true), true);
+    echo '{"response": "' . $configuration["DEBUG_MODE"] . '"}';
+} else if ($_GET["action"] == "submit") {
     echo '{"response": "' . processData($_GET["data"]) . '"}';
 }

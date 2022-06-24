@@ -124,12 +124,3 @@ textarea {
 		opacity: 0;
 	}
 }
-
-#subheading_moto {
-	opacity: 0;
-	transition: opacity 1000ms;
-}
-
-#subheading_moto.show {
-	opacity: 1;
-}

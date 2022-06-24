@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="<?= getInstallationPath() ?>/Public/assets/img/favicon.png">
+    <link rel="icon" type="image/x-icon" href="<?= getInstallationPath() ?>/Public/assets/img/favicon-100x100.png">
     <meta name="description" content="<?= translate("An extremely simple, one-time view encryption message system. Send anybody passwords, or secret messages on a one-time view basis.") ?>">
     <title>QuickBlaze</title>
 
@@ -17,12 +17,17 @@
 <body class="text-center">
 
     <main class="main-form">
+        <div class="errorCautionContainer">
+            <i class="fa-solid fa-triangle-exclamation fa-2xl darkmode-ignore errorCautionSymbol"></i>
+        </div>
+        <br>
         <h1><?= translate("Database Error") ?></h1>
         <br>
         <h5 class="text-muted">
-            <?= translate("You have not configured the database correctly!") ?> <br><br>
+            <?= translate("Failed to connect to the database using the connection credentials you have provided.") ?> <br><br>
             <a style="text-decoration:none" href="https://github.com/axtonprice-dev/quickblaze-encrypt/#installation" target="_blank"><?= translate("Please refer to the GitHub repository.") ?></a>
         </h5>
+
         <p class="mt-5 mb-3 text-muted">
             <a href="https://github.com/axtonprice/quickblaze-encrypt" class="text-muted no-decoration">GitHub</a> •
             <a href="https://discord.gg/dP3MuBATGc" class="text-muted no-decoration">Discord</a> •

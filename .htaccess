@@ -10,7 +10,7 @@ ErrorDocument 403 /403
 ErrorDocument 500 /500
 
 # File security
-<FilesMatch "\.(json|sarif|md|gitignore|version|LICENSE|htaccess|env)$">
+<FilesMatch "\.(json|sarif|gitignore|version|htaccess|env|security-scan|config|cache)$">
 Order allow,deny
 Deny from all
 </FilesMatch>
