@@ -11,6 +11,6 @@ function copyToClipboard(element) {
 function showSnackBar(snackbarId) {
     var element = document.getElementById(`${snackbarId}`);
     element.className = element.className.replace('', 'show');
-    log(`Displaying snackbar for ${4000}ms`);
-    setTimeout(function () { element.className = element.className.replace("show", ""); }, 4000);
+    log(`Displaying snackbar for ${3000}ms`);
+    setTimeout(function () { element.className = element.className.replace("show", ""); }, 3000);
 }
