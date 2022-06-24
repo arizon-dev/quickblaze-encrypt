@@ -70,6 +70,8 @@ function decryptData($encryption_key) // getRecord("encrypted_contents", $dataKe
 function setupStorageMethod()
 {
     /* Prerequisites */
+    if (!is_dir("./local-storage/")) mkdir("./local-storage/");
+    if (!file_exists("./local-storage/.cache")) file_put_contents("./local-storage/.cache", '{"DO-NOT-TOUCH:database_installation_status": "false"}');;
     $cache = json_decode(file_get_contents("./local-storage/.cache", true), true);
     $configuration = json_decode(file_get_contents("./.config", true), true);
     /* End Prerequisites */
@@ -124,8 +126,6 @@ function setupStorageMethod()
                     require "./Public/error/DatabaseCredentials.php"; // throw error page if invalid credentials
                     die();
                 } else {
-                    if (!is_dir("./local-storage/")) mkdir("./local-storage/");
-                    if (!file_exists("./local-storage/.cache")) file_put_contents("./local-storage/.cache", '{"DO-NOT-TOUCH:database_installation_status": "false"}');;
                     $cache = json_decode(file_get_contents("./local-storage/.cache"), true);
                     if ($cache["DO-NOT-TOUCH:database_installation_status"] == "false") {
                         $tableCreateSQL = "CREATE TABLE IF NOT EXISTS `quickblaze_records` (`record_id` int(11) NOT NULL, `encrypted_contents` longtext NOT NULL, `encryption_token` varchar(128) NOT NULL, `source_ip` varchar(100) NOT NULL, `record_date` timestamp(5) NOT NULL DEFAULT current_timestamp(5)) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
