@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="<?= getInstallationPath() ?>/Public/assets/img/favicon.png">
+    <link rel="icon" type="image/x-icon" href="<?= getInstallationPath() ?>/Public/assets/img/favicon-100x100.png">
     <meta name="description" content="<?= translate("An extremely simple, one-time view encrypted message system. Send anybody passwords, or secret messages on a one-time view basis.") ?>">
     <title>QuickBlaze</title>
 
@@ -18,16 +18,17 @@
 
     <main class="main-form">
         <form onsubmit="return false;">
+            <img class="form-icon fa-fade" id="form-icon" draggable="false" alt="QuickBlaze Encrypt" aria-label="QuickBlaze Encrypt" title="QuickBlaze Encrypt" src="<?= getInstallationPath() ?>/Public/assets/img/favicon-100x100.png"></img>
             <h1>QuickBlaze</h1>
             <h5 class="text-muted">One time view encrypted message sharing system</h5>
             <br><br>
 
             <!-- Main Form Content -->
             <div id="form_input">
-                <textarea type="text" class="form-control" id="inputtextbot" placeholder="<?= translate("Enter your secret message!") ?>" <?= ifTextBoxDisabled(); ?> requireds></textarea>
+                <textarea type="text" class="form-control" id="inputtextbot" placeholder="<?= translate("Enter your top secret message!") ?>" <?= ifTextBoxDisabled(); ?> required></textarea>
                 <br>
                 <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="updateFormDisplay();">
-                    <?= translate("Generate Link"); ?>
+                    <?= translate("Encrypt Message"); ?>
                 </button>
             </div>
 
@@ -58,9 +59,9 @@
     <div id="snackbar"><?= translate("✅ URL has been copied to clipboard!") ?></div>
 
     <!-- Site Javascript -->
-    <script src="<?= getInstallationPath() ?>/Public/assets/js/globalFunctions.js"></script>
     <script src="<?= getInstallationPath() ?>/Public/assets/js/buttonCopyURL.js"></script>
     <script src="<?= getInstallationPath() ?>/Public/assets/js/formContentUpdate.js"></script>
+    <script src="<?= getInstallationPath() ?>/Public/assets/js/globalFunctions.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

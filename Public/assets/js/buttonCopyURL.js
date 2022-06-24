@@ -11,6 +11,7 @@ const copyToClipboard = (element) => {
 const showSnackBar = (snackbarId) => {
     let x = document.getElementById(snackbarId);
     x.className = 'show';
-    log(`Displaying snackbar for ${3000}ms`);
+    var time = 3000;
+    log(`Displaying snackbar for ${time}ms`);
     setTimeout(x.className = x.className.replace('show', ''), time);
 };

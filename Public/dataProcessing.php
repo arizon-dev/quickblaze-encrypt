@@ -10,16 +10,19 @@ if ($_GET["action"] == "decrypt" && $_GET["key"]) {
     if (!file_exists("./.config")) {
         echo '{"response": "false"}'; // Config file does not exist
     } else {
-        if($configuration["LANGUAGE"] == "" || $configuration["INSTALLATION_PATH"] == ""){
+        if ($configuration["LANGUAGE"] == "" || $configuration["INSTALLATION_PATH"] == "" || $configuration["DEBUG_MODE"] == "") {
             echo '{"response": "false"}'; // Config file is missing a configuration value
-        } else{
+        } else {
             if (strtolower($configuration["STORAGE_METHOD"]) == "mysql" || strtolower($configuration["STORAGE_METHOD"]) == "filetree") {
                 echo '{"response": "true"}'; // Config file has all values present and valid storage method
-            } else{
+            } else {
                 echo '{"response": "false"}'; // Config file has all values present and valid storage method
             }
         }
     }
+} else if ($_GET["action"] == "isDebugMode") {
+    $configuration = json_decode(file_get_contents("./.config", true), true);
+    echo '{"response": "' . $configuration["DEBUG_MODE"] . '"}';
 } else {
     echo '{"response": "' . processData($_GET["data"]) . '"}';
 }
