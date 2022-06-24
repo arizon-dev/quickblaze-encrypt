@@ -10,7 +10,7 @@ function updateFormDisplay() {
         document.getElementById('submissiontextbox').innerHTML = `${window.location}view?key=${data.response}`; // Set text box to view message URL
         log(`Updated 'submissiontextbox.innerHTML'`);
     }).catch((error) => {
-        reject(error)
+        log(error, `Error/DEBUG`)
     });
     setTimeout(() => {
         $('#form_submission').fadeIn('fast'); // fade in new content
