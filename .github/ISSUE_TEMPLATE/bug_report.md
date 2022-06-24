@@ -2,13 +2,13 @@
 name: Bug report
 about: Create a report to help us improve
 title: ''
-labels: ''
-assignees: ''
+labels: bug, security, enhancement
+assignees: axtonprice
 
 ---
 
 **Describe the bug**
-A clear and concise description of what the bug is.
+A clear and concise description of what the bug is. Please state the version of Quickblaze you are using. Do not submit bug report if you are not using the latest version!
 
 **To Reproduce**
 Steps to reproduce the behavior:
