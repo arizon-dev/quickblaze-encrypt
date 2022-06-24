@@ -20,24 +20,24 @@ if ($url == "view") {
 if ($url == "") {
     /* Primary Display Page */
     require("./Modules/functions.php");
-    setupStorageMethod(); // Check database
+    initialiseSystem(); // Call system functions to initialise
     require("./Public/index.php");
 } elseif ($url == "404") {
     /* Not Found Page */
     require("./Modules/functions.php");
-    return require("./Public/error/404.php");
+    return require("./Public/error_docs/404.php");
 } elseif ($url == "403") {
     /* Not Found Page */
     require("./Modules/functions.php");
-    return require("./Public/error/403.php");
+    return require("./Public/error_docs/403.php");
 } else {
     if ($url == "500") {
         /* Server Error Page */
         require("./Modules/functions.php");
-        return require("./Public/error/500.php");
+        return require("./Public/error_docs/500.php");
     } else {
         /* Not Found Page */
         require("./Modules/functions.php");
-        return require("./Public/error/404.php");
+        return require("./Public/error_docs/404.php");
     }
 }
