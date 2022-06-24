@@ -1,6 +1,6 @@
 <?php
-/* Process the Data */
 error_reporting(0);
+header("Access-Control-Allow-Origin: *"); // "*" could also be a site such as http://www.example.com
 if (!isset($_GET["action"]) || !$_GET["action"]) $_GET["action"] = "";
 
 if ($_GET["action"] == "decrypt" && $_GET["key"]) {
