@@ -17,6 +17,10 @@
 <body class="text-center">
 
     <main class="main-form">
+        <div class="errorCautionContainer">
+            <i class="fa-solid fa-triangle-exclamation fa-2xl darkmode-ignore errorCautionSymbol"></i>
+        </div>
+        <br>
         <h1><?= translate("Database Error") ?></h1>
         <br>
         <h5 class="text-muted">
