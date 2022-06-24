@@ -5,7 +5,7 @@
 | Version     | Supported          |
 | ----------  | -----------------  |
 |  ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/axtonprice-dev/quickblaze-encrypt?label=%20&style=flat-square) =>  | ✅                 | 
-| <= <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/axtonprice-dev/quickblaze-encrypt?label=%20&style=flat-square">   | ❌                 | 
+| < <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/axtonprice-dev/quickblaze-encrypt?label=%20&style=flat-square">   | ❌                 | 
 
 >Versions below the latest release are not supported. We will not be providing support for them and suggestions, bug reports and other requests will beautomatically ignored*
 
