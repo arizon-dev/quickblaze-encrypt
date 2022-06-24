@@ -1,6 +1,7 @@
 # Quickblaze Files
 .gitattributes
 .dccache
+Public\assets\img\Thumbs.db
 
 # QuickBlaze Security
 local-storage

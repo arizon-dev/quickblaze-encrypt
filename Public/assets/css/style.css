@@ -34,6 +34,11 @@ textarea {
 	z-index: 2;
 }
 
+.main-form .form-icon{
+	padding-bottom: 15px;
+	--fa-animation-duration: 3.5s
+}
+
 .no-decoration {
 	text-decoration: none;
 }
