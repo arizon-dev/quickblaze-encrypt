@@ -25,19 +25,19 @@ if ($url == "") {
 } elseif ($url == "404") {
     /* Not Found Page */
     require("./Modules/functions.php");
-    return require("./Public/error_docs/404.php");
+    return require("./Public/error_docs_docs/404.php");
 } elseif ($url == "403") {
     /* Not Found Page */
     require("./Modules/functions.php");
-    return require("./Public/error_docs/403.php");
+    return require("./Public/error_docs_docs/403.php");
 } else {
     if ($url == "500") {
         /* Server Error Page */
         require("./Modules/functions.php");
-        return require("./Public/error_docs/500.php");
+        return require("./Public/error_docs_docs/500.php");
     } else {
         /* Not Found Page */
         require("./Modules/functions.php");
-        return require("./Public/error_docs/404.php");
+        return require("./Public/error_docs_docs/404.php");
     }
 }
