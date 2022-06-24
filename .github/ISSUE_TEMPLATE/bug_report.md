@@ -1,14 +1,14 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: ''
+title: Bug/Issue Report
 labels: bug, security, enhancement
 assignees: axtonprice
 
 ---
 
 **Describe the bug**
-A clear and concise description of what the bug is. Please state the version of Quickblaze you are using. Do not submit bug report if you are not using the latest version!
+A clear and concise description of what the bug is. Do not submit bug report if you are not using the latest QuickBlaze version!
 
 **To Reproduce**
 Steps to reproduce the behavior:
