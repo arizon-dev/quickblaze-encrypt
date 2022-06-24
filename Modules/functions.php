@@ -163,7 +163,7 @@ function initialiseSystem()
                     $conn->close();
                 }
             }
-        } elseif (strtolower($configuration["STORAGE_METHOD"]) == "filetree") {
+        } else if (strtolower($configuration["STORAGE_METHOD"]) == "filetree") {
             $baseStorageFolder = "./local-storage";
             if (!is_dir("$baseStorageFolder/")) mkdir("$baseStorageFolder/");
             if (!is_dir("$baseStorageFolder/encryptions/")) mkdir("$baseStorageFolder/encryptions/");
@@ -208,6 +208,7 @@ function insertRecord($encrypted_contents, $encryption_token)
         $source_ip = filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP) ?? filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
         $record_date = date("Y-m-d H:i:s");
         file_put_contents("$baseStorageFolder/encryptions/$uniqueIdentifier/data.json", '{"filestore_id": "' . $uniqueIdentifier . '", "encrypted_contents": "' . $encrypted_contents . '", "encryption_token": "' . $encryption_token . '", "source_ip": "' . $source_ip . '", "record_date": "' . $record_date . '"}'); // Set data file encryption data
+    } else {
         require "./Public/error_docs/ServerConfiguration.php"; // throw error page if invalid configuration
         die();
     }

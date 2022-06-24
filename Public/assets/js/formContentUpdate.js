@@ -1,15 +1,11 @@
 function updateFormDisplay() {
     const formvalue = document.getElementById('inputtextbot').value; // Assign variable to the current value of the textbox
-
     $('#form_input').fadeOut('fast'); // fade out previous content
     log(`No longer showing 'form_input' element`);
-
-    fetch(`dataProcessing?data=${formvalue}`).then(response => response.json()).then(data => {
+    fetch(`dataProcessing?action=submit&data=${formvalue}`).then(response => response.json()).then(data => {
         log(`Server responsed with '${data.response}'`);
-
         document.getElementById('submissiontextbox').value = `${window.location}view?key=${data.response}`; // Set text box to view message URL
         log(`Updated 'submissiontextbox.value'`);
-
         document.getElementById('submissiontextbox').innerHTML = `${window.location}view?key=${data.response}`; // Set text box to view message URL
         log(`Updated 'submissiontextbox.innerHTML'`);
     });
@@ -29,10 +25,8 @@ function updateViewDisplay() {
     fetch(`dataProcessing?action=decrypt&key=${key}`).then(response => response.json()).then(data => {
         if (!data.response) {
             showSnackBar('snackbarError');
-
             $('#form_error').fadeIn('fast'); // fade in new content
             log(`Now showing 'form_error' element`);
-
             log(`Encryption not found; redirecting in 2s`);
             setTimeout(() => {
                 window.location.replace('./'); // Redirect to home page
@@ -40,10 +34,8 @@ function updateViewDisplay() {
         } else {
             document.getElementById('valuetextbox').value = data.response; // Set text box to decrypted message
             log(`Updated 'valuetextbox.value'`);
-
             document.getElementById('valuetextbox').innerHTML = data.response; // Set text box to decrypted message
             log(`Updated 'valuetextbox.innerHTML'`);
-
             setTimeout(() => {
                 $('#form_content').fadeIn('fast'); // fade in new content
                 log(`Now showing 'form_content' element`);

@@ -1,6 +1,6 @@
 <?php
 /* Process the Data */
-error_reporting(0);
+// error_reporting(0);
 //if (!isset($_GET["action"]) || !$_GET["action"]) $_GET["action"] = "";
 
 if ($_GET["action"] == "decrypt" && $_GET["key"]) {
@@ -24,6 +24,6 @@ if ($_GET["action"] == "decrypt" && $_GET["key"]) {
 } else if ($_GET["action"] == "isDebugMode") {
     $configuration = json_decode(file_get_contents("./.config", true), true);
     echo '{"response": "' . $configuration["DEBUG_MODE"] . '"}';
-} else {
+} else if ($_GET["action"] == "submit") {
     echo '{"response": "' . processData($_GET["data"]) . '"}';
 }
