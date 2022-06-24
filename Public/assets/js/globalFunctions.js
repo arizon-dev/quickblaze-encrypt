@@ -31,9 +31,15 @@ function log(content, type = null) {
                     `[${moment().format('hh:mm:ss')}] [Site Debug/INFO] ${content}`
                 );
             } else {
-                console.log(
-                    `[${moment().format('hh:mm:ss')}] [${type}] ${content}`
-                );
+                if(type == "warn"){
+                    console.warn(
+                        `[${moment().format('hh:mm:ss')}] ${content}`
+                    );
+                } else{
+                    console.log(
+                        `[${moment().format('hh:mm:ss')}] [${type}] ${content}`
+                    );
+                }
             }
         }
     });
