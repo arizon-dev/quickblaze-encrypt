@@ -3,7 +3,7 @@ function updateFormDisplay() {
     $('#form_input').fadeOut('fast'); // fade out previous content
     log(`No longer showing 'form_input' element`);
     function fetchData() {
-        fetch(`dataProcessing?action=submit&data=${formvalue}`)
+        return fetch(`dataProcessing?action=submit&data=${formvalue}`)
             .then((response) => response.json())
             .then((responseData) => {
                 console.log(responseData);
@@ -13,7 +13,7 @@ function updateFormDisplay() {
         //     log(error, `Error/DEBUG`);
         // });
     }
-    fetchData().then(response => {
+    fetchData().then(data => {
         log(`Server responsed with '${data.response}'`);
         document.getElementById('submissiontextbox').value = `${window.location}view?key=${data.response}`; // Set text box to view message URL
         log(`Updated 'submissiontextbox.value'`);
