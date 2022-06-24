@@ -128,17 +128,17 @@ function initialiseSystem()
         if (strtolower($configuration["STORAGE_METHOD"]) == "mysql") {
             if (!file_exists("./Modules/Database.env")) {
                 touch("./Modules/Database.env"); // Create database configuration file
-                require "./Public/error/DatabaseConfig.php";
+                require "./Public/error_docs/DatabaseConfig.php";
                 die();
             } else {
                 $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
                 if ($json["DATABASE"] == "" || $json["HOSTNAME"] == "") {
-                    require "./Public/error/DatabaseConfig.php";
+                    require "./Public/error_docs/DatabaseConfig.php";
                     die();
                 } else { // Test database connection
                     $conn = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
                     if ($conn->connect_error) {
-                        require "./Public/error/DatabaseCredentials.php"; // throw error page if invalid credentials
+                        require "./Public/error_docs/DatabaseCredentials.php"; // throw error page if invalid credentials
                         die();
                     } else {
                         $cache = json_decode(file_get_contents("./local-storage/.cache"), true);
@@ -150,13 +150,13 @@ function initialiseSystem()
                                     file_put_contents("./local-storage/.cache", '{"DO-NOT-TOUCH:database_installation_status": "true"}');
                                 }
                             } else {
-                                require "./Public/error/DatabaseCredentials.php"; // throw error page if invalid credentials
+                                require "./Public/error_docs/DatabaseCredentials.php"; // throw error page if invalid credentials
                                 die();
                             }
                         }
                         // Always reset auto-increment
                         if (!$conn->query("ALTER TABLE `quickblaze_records` MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT;")) {
-                            require "./Public/error/DatabaseConfig.php"; // throw error page if invalid credentials
+                            require "./Public/error_docs/DatabaseConfig.php"; // throw error page if invalid credentials
                             die();
                         }
                     }
@@ -168,7 +168,7 @@ function initialiseSystem()
             if (!is_dir("$baseStorageFolder/")) mkdir("$baseStorageFolder/");
             if (!is_dir("$baseStorageFolder/encryptions/")) mkdir("$baseStorageFolder/encryptions/");
         } else { // Server storage method not set
-            require "./Public/error/ServerConfiguration.php"; // throw error page if invalid configuration
+            require "./Public/error_docs/ServerConfiguration.php"; // throw error page if invalid configuration
             die();
         }
     }
@@ -189,7 +189,7 @@ function insertRecord($encrypted_contents, $encryption_token)
     if (strtolower($configuration["STORAGE_METHOD"]) == "mysql") {
         $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
         if ($mysqli->connect_errno) {
-            require "./Public/error/DatabaseCredentials.php";
+            require "./Public/error_docs/DatabaseCredentials.php";
             die();
         }
         $source_ip = filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP) ?? filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
@@ -208,7 +208,7 @@ function insertRecord($encrypted_contents, $encryption_token)
         $source_ip = filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP) ?? filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
         $record_date = date("Y-m-d H:i:s");
         file_put_contents("$baseStorageFolder/encryptions/$uniqueIdentifier/data.json", '{"filestore_id": "' . $uniqueIdentifier . '", "encrypted_contents": "' . $encrypted_contents . '", "encryption_token": "' . $encryption_token . '", "source_ip": "' . $source_ip . '", "record_date": "' . $record_date . '"}'); // Set data file encryption data
-        require "./Public/error/ServerConfiguration.php"; // throw error page if invalid configuration
+        require "./Public/error_docs/ServerConfiguration.php"; // throw error page if invalid configuration
         die();
     }
 }
@@ -219,7 +219,7 @@ function destroyRecord($token)
     if (strtolower($configuration["STORAGE_METHOD"]) == "mysql") {
         $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
         if ($mysqli->connect_errno) {
-            require "./Public/error/DatabaseCredentials.php";
+            require "./Public/error_docs/DatabaseCredentials.php";
             die();
         }
         $token = filter_var($token, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -250,7 +250,7 @@ function destroyRecord($token)
             }
         }
     } else { // Server storage method not set
-        require "./Public/error/ServerConfiguration.php"; // throw error page if invalid configuration
+        require "./Public/error_docs/ServerConfiguration.php"; // throw error page if invalid configuration
         die();
     }
 }
@@ -261,7 +261,7 @@ function getRecord($dataToFetch, $encryption_token)
     if (strtolower($configuration["STORAGE_METHOD"]) == "mysql") {
         $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
         if ($mysqli->connect_errno) {
-            require "./Public/error/DatabaseCredentials.php";
+            require "./Public/error_docs/DatabaseCredentials.php";
             die();
         }
         $encryption_token = filter_var($encryption_token, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -286,7 +286,7 @@ function getRecord($dataToFetch, $encryption_token)
             }
         }
     } else { // Server storage method not set
-        require "./Public/error/ServerConfiguration.php"; // throw error page if invalid configuration
+        require "./Public/error_docs/ServerConfiguration.php"; // throw error page if invalid configuration
         die();
     }
 }

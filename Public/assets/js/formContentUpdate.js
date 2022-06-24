@@ -4,7 +4,7 @@ function updateFormDisplay() {
     $('#form_input').fadeOut('fast'); // fade out previous content
     log(`No longer showing 'form_input' element`);
 
-    fetch(`../dataProcessing?data=${formvalue}`).then(response => response.json()).then(data => {
+    fetch(`dataProcessing?data=${formvalue}`).then(response => response.json()).then(data => {
         log(`Server responsed with '${data.response}'`);
 
         document.getElementById('submissiontextbox').value = `${window.location}view?key=${data.response}`; // Set text box to view message URL
@@ -26,7 +26,7 @@ function updateViewDisplay() {
     let key = new URL(window.location).searchParams.get('key'); // Get key variable from URL; replacing PHP usage
     log(`Got key variable from url -> ${key}`);
 
-    fetch(`../dataProcessing?action=decrypt&key=${key}`).then(response => response.json()).then(data => {
+    fetch(`dataProcessing?action=decrypt&key=${key}`).then(response => response.json()).then(data => {
         if (!data.response) {
             showSnackBar('snackbarError');
 
