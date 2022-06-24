@@ -11,12 +11,12 @@ if ($_GET["action"] == "decrypt" && $_GET["key"]) {
     if (!file_exists("./.config")) {
         echo '{"response": "false"}'; // Config file does not exist
     } else {
-        if ($configuration["LANGUAGE"] == "" || $configuration["INSTALLATION_PATH"] == "" || $configuration["DEBUG_MODE"] == "") {
+        if($configuration["LANGUAGE"] == "" || $configuration["INSTALLATION_PATH"] == ""){
             echo '{"response": "false"}'; // Config file is missing a configuration value
-        } else {
+        } else{
             if (strtolower($configuration["STORAGE_METHOD"]) == "mysql" || strtolower($configuration["STORAGE_METHOD"]) == "filetree") {
                 echo '{"response": "true"}'; // Config file has all values present and valid storage method
-            } else {
+            } else{
                 echo '{"response": "false"}'; // Config file has all values present and valid storage method
             }
         }

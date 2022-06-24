@@ -16,9 +16,8 @@ function updateFormDisplay() {
         document.getElementById('submissiontextbox').innerHTML = `${window.location}view?key=${data.response}`; // Set text box to view message URL
         log(`Updated 'submissiontextbox.innerHTML'`);
     });
-    setTimeout(() => {
-        $('#form_submission').fadeIn('fast'); // fade in new content
-        log(`Now showing 'form_submission' element`);
+    setTimeout(function () {
+        $('#form_submission').fadeIn('fast'); log(`Now showing 'form_submission' element`); // fade in new content
     }, 200);
 }
 
@@ -29,8 +28,11 @@ function updateViewDisplay() {
     let key = new URL(window.location).searchParams.get('key'); // Get key variable from URL; replacing PHP usage
     log(`Got key variable from url -> ${key}`);
 
+function updateViewDisplay() {
+    $('#form_confirmation').fadeOut('fast'); log(`No longer showing 'form_confirmation' element`); // fade out previous content
+    var key = new URL(window.location).searchParams.get("key"); log(`Got key variable from url -> ${key}`); // Get key variable from URL; replacing PHP usage
     fetch(`dataProcessing?action=decrypt&key=${key}`).then(response => response.json()).then(data => {
-        if (!data.response) {
+        if (data.response == "") {
             showSnackBar('snackbarError');
             $('#form_error').fadeIn('fast'); // fade in new content
             log(`Now showing 'form_error' element`);
@@ -48,6 +50,11 @@ function updateViewDisplay() {
                 log(`Now showing 'form_content' element`);
             }, 200);
             log(`Server responded with '${data.response}'`);
-        };
+            document.getElementById("valuetextbox").value = data.response; log(`Updated 'valuetextbox.value'`); // Set text box to decrypted message
+            document.getElementById("valuetextbox").innerHTML = data.response; log(`Updated 'valuetextbox.innerHTML'`); // Set text box to decrypted message
+            setTimeout(function () {
+                $('#form_content').fadeIn('fast'); log(`Now showing 'form_content' element`); // fade in new content
+            }, 200);
+        }
     });
 }
