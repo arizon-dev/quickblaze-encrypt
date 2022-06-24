@@ -10,35 +10,6 @@
           "version": "1.0.0",
           "rules": [
             {
-              "id": "php/InsecureRandomData",
-              "name": "InsecureRandomData",
-              "shortDescription": {
-                "text": "Use of Insufficiently Random Values"
-              },
-              "defaultConfiguration": {
-                "level": "error"
-              },
-              "help": {
-                "markdown": "\n## Details\n\nComputer security relies on random numbers for many things: generating secure, confidential session keys; hashing password data; encryption for transmitting sensitive data, and more. It's easy to understand why. If session keys, for example, were generated sequentially, attackers would be able to guess these easily and then hijack legitimate user sessions. Similarly, if encryption techniques used easy-to-guess numbers, attackers could use brute-force attacks to gain unauthorized access.\n\nIn reality, since computers cannot generate truly random numbers, they use \"pseudorandom\" numbers instead, generated using an algorithm that is \"seeded\" in a variety of ways to produce highly variable values in a random-seeming order, making them very hard-in theory-for attackers to guess. However, if developers inadvertently make use of a weak random algorithm, attackers may be able to discover the algorithm, seed, or pattern, ultimately unlocking access to commands or sensitive data, which can then be held for ransom or sold.\n\n### Best practices for prevention\n* Avoid using weak pseudorandom number generators (PRNGs), such as statistical PRNGs. Instead, choose a cryptographically secure PRNG.\n* Avoid using predictable seed values, such as user ID or server start time. Instead, use a seed that is itself pseudorandom, such as one taken from an external hardware source.\n* Use standard, accepted security algorithms and libraries rather than taking a DIY approach and creating custom code that may contain inherent weaknesses or overlook critical flaws.\n* Use static analysis tools to identify potential instances of this weakness in code and then ensure good test coverage with appropriate white-box testing.\n* Educate developers about the importance of entropy in security systems development, and consider adopting tools that are FIPS 140-2 compliant.",
-                "text": ""
-              },
-              "properties": {
-                "tags": [
-                  "php"
-                ],
-                "categories": [
-                  "Security"
-                ],
-                "exampleCommitFixes": [],
-                "exampleCommitDescriptions": [],
-                "precision": "very-high",
-                "repoDatasetSize": 0,
-                "cwe": [
-                  "CWE-330"
-                ]
-              }
-            },
-            {
               "id": "php/PT",
               "name": "PT",
               "shortDescription": {
@@ -257,6 +228,174 @@
                 "repoDatasetSize": 323,
                 "cwe": [
                   "CWE-23"
+                ]
+              }
+            },
+            {
+              "id": "php/InsecureRandomData",
+              "name": "InsecureRandomData",
+              "shortDescription": {
+                "text": "Use of Insufficiently Random Values"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "markdown": "\n## Details\n\nComputer security relies on random numbers for many things: generating secure, confidential session keys; hashing password data; encryption for transmitting sensitive data, and more. It's easy to understand why. If session keys, for example, were generated sequentially, attackers would be able to guess these easily and then hijack legitimate user sessions. Similarly, if encryption techniques used easy-to-guess numbers, attackers could use brute-force attacks to gain unauthorized access.\n\nIn reality, since computers cannot generate truly random numbers, they use \"pseudorandom\" numbers instead, generated using an algorithm that is \"seeded\" in a variety of ways to produce highly variable values in a random-seeming order, making them very hard-in theory-for attackers to guess. However, if developers inadvertently make use of a weak random algorithm, attackers may be able to discover the algorithm, seed, or pattern, ultimately unlocking access to commands or sensitive data, which can then be held for ransom or sold.\n\n### Best practices for prevention\n* Avoid using weak pseudorandom number generators (PRNGs), such as statistical PRNGs. Instead, choose a cryptographically secure PRNG.\n* Avoid using predictable seed values, such as user ID or server start time. Instead, use a seed that is itself pseudorandom, such as one taken from an external hardware source.\n* Use standard, accepted security algorithms and libraries rather than taking a DIY approach and creating custom code that may contain inherent weaknesses or overlook critical flaws.\n* Use static analysis tools to identify potential instances of this weakness in code and then ensure good test coverage with appropriate white-box testing.\n* Educate developers about the importance of entropy in security systems development, and consider adopting tools that are FIPS 140-2 compliant.",
+                "text": ""
+              },
+              "properties": {
+                "tags": [
+                  "php"
+                ],
+                "categories": [
+                  "Security"
+                ],
+                "exampleCommitFixes": [],
+                "exampleCommitDescriptions": [],
+                "precision": "very-high",
+                "repoDatasetSize": 0,
+                "cwe": [
+                  "CWE-330"
+                ]
+              }
+            },
+            {
+              "id": "php/TooPermissiveCorsHeader",
+              "name": "TooPermissiveCorsHeader",
+              "shortDescription": {
+                "text": "Origin Validation Error"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "help": {
+                "markdown": "\n## Details\n\nAs a legacy of early web design and site limitations, most web applications default, for security reasons, to a \"same origin policy\". This means that browsers can only retrieve data from another site if the two sites share the same domain. In today's complex online environment, however, sites and applications often need to retrieve data from other domains. This is done under fairly limited conditions through an exception to the same origin policy known as \"cross-origin resource sharing\".\n\nDevelopers may create definitions of trusted domains that are broader than absolutely necessary, inadvertently opening up wider access than intended. This weakness could result in data exposure or loss, or even allow an attacker to take over the site or application.\n\n### Best practices for prevention\n* Avoid using wildcards for cross-origin resource sharing. Instead, define intended domains explicitly.\n* Ensure that your site or app is well defended against cross-site scripting attacks (XSS), which could lead to takeover via an overly permissive cross-domain policy.\n* Do not mix secure and insecure protocols when defining cross-domain policies.\n* Consider defining a clear approved list to specify which domains will be given resource-level access; use this approved list to validate all domain access requests.\n* Clearly define which methods (view, read, and update) are permitted for each resource and domain to avoid abuse.",
+                "text": ""
+              },
+              "properties": {
+                "tags": [
+                  "php"
+                ],
+                "categories": [
+                  "Security"
+                ],
+                "exampleCommitFixes": [
+                  {
+                    "commitURL": "https://github.com/Atheos/Atheos/commit/95fd657bc7330097169248760c3387f1d5f600c4?diff=split#diff-828e0013b8f3bc1bb22b4f57172b019dL3",
+                    "lines": [
+                      {
+                        "line": "<?php",
+                        "lineNumber": 1,
+                        "lineChange": "removed"
+                      },
+                      {
+                        "line": "header(\"Access-Control-Allow-Origin: *\");",
+                        "lineNumber": 2,
+                        "lineChange": "removed"
+                      },
+                      {
+                        "line": " ",
+                        "lineNumber": 12,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": " ",
+                        "lineNumber": 29,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "// header(\"Access-Control-Allow-Origin: *\");",
+                        "lineNumber": 26,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "header(\"strict-transport-security: max-age=600\");",
+                        "lineNumber": 27,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "\\ No newline at end of file",
+                        "lineNumber": 55,
+                        "lineChange": "none"
+                      }
+                    ]
+                  },
+                  {
+                    "commitURL": "https://github.com/gsavio/player-shoutcast-html5/commit/8c901ad4543f56b09f2295ef0c95b473b38c6571?diff=split#diff-f14f8bd7d8d03135fc0f4ff68b0a3521L133",
+                    "lines": [
+                      {
+                        "line": "  $array = ['error' => 'URL parameter not found'];",
+                        "lineNumber": 130,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "}",
+                        "lineNumber": 131,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "header('Access-Control-Allow-Origin: *');",
+                        "lineNumber": 132,
+                        "lineChange": "removed"
+                      },
+                      {
+                        "line": "$urlHost = $_SERVER['HTTP_HOST'];",
+                        "lineNumber": 133,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "header('Access-Control-Allow-Origin: '.$urlHost);",
+                        "lineNumber": 135,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "header('Content-type: application/json', true);",
+                        "lineNumber": 136,
+                        "lineChange": "none"
+                      }
+                    ]
+                  },
+                  {
+                    "commitURL": "https://github.com/wgenial/cartrolandofc/commit/3d69f64001ffe84e89404bcd4ca627d2d1e95a33?diff=split#diff-5b9b7bac226602d432ba9969f7986f37L9",
+                    "lines": [
+                      {
+                        "line": " */",
+                        "lineNumber": 6,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "header(\"Access-Control-Allow-Origin: *\");",
+                        "lineNumber": 8,
+                        "lineChange": "removed"
+                      },
+                      {
+                        "line": "header('Content-type: application/json');",
+                        "lineNumber": 9,
+                        "lineChange": "removed"
+                      },
+                      {
+                        "line": "header('Content-type: application/json;charset=UTF-8');",
+                        "lineNumber": 8,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": " if (isset($_GET[\"api\"]) and $_GET[\"api\"] !== \"\") {",
+                        "lineNumber": 11,
+                        "lineChange": "none"
+                      }
+                    ]
+                  }
+                ],
+                "exampleCommitDescriptions": [
+                  "CORS added, DEMO constant deleted",
+                  "added handling of response headers overrides by config"
+                ],
+                "precision": "very-high",
+                "repoDatasetSize": 26,
+                "cwe": [
+                  "CWE-942",
+                  "CWE-346"
                 ]
               }
             },
@@ -598,188 +737,8 @@
       },
       "results": [
         {
-          "ruleId": "php/InsecureRandomData",
-          "ruleIndex": 0,
-          "level": "error",
-          "message": {
-            "text": "An insecure random number generator is used to create an URL (the random value flows from rand). Consider using CSPRNG functions instead.",
-            "markdown": "An insecure random number generator is used to create {0} (the random value flows from {1}). Consider using CSPRNG functions instead.",
-            "arguments": [
-              "[an URL](0)",
-              "[rand](1)"
-            ]
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "Modules/Functions.php",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 42,
-                  "endLine": 42,
-                  "startColumn": 155,
-                  "endColumn": 166
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "0": "0f550df17938bb94681707570673cc19e46953462194a357db4017020d169477",
-            "1": "703ebb77.464a7316.c3dea7ce.73a3d5be.af50231a.773652eb.a7efae7e.be170d97.703ebb77.464a7316.c3dea7ce.73a3d5be.af50231a.773652eb.a7efae7e.be170d97"
-          },
-          "codeFlows": [
-            {
-              "threadFlows": [
-                {
-                  "locations": [
-                    {
-                      "location": {
-                        "id": 0,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/Functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 42,
-                            "endLine": 42,
-                            "startColumn": 155,
-                            "endColumn": 166
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 1,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/Functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 42,
-                            "endLine": 42,
-                            "startColumn": 155,
-                            "endColumn": 166
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "properties": {
-            "priorityScore": 623,
-            "priorityScoreFactors": [
-              {
-                "label": true,
-                "type": "multipleOccurrence"
-              },
-              {
-                "label": true,
-                "type": "hotFileSource"
-              }
-            ]
-          }
-        },
-        {
-          "ruleId": "php/InsecureRandomData",
-          "ruleIndex": 0,
-          "level": "error",
-          "message": {
-            "text": "An insecure random number generator is used to create an URL (the random value flows from rand). Consider using CSPRNG functions instead.",
-            "markdown": "An insecure random number generator is used to create {0} (the random value flows from {1}). Consider using CSPRNG functions instead.",
-            "arguments": [
-              "[an URL](0)",
-              "[rand](1)"
-            ]
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "Modules/Functions.php",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 46,
-                  "endLine": 46,
-                  "startColumn": 243,
-                  "endColumn": 254
-                }
-              }
-            }
-          ],
-          "fingerprints": {
-            "0": "bb5b16cda5ab8c4e61b23f77da48774cb8c58cc5dfe565392d9f49859778c3ee",
-            "1": "703ebb77.464a7316.c3dea7ce.37e648b5.af50231a.773652eb.a7efae7e.be170d97.703ebb77.464a7316.a666b580.37e648b5.af50231a.dd23c7e4.a7efae7e.047105df"
-          },
-          "codeFlows": [
-            {
-              "threadFlows": [
-                {
-                  "locations": [
-                    {
-                      "location": {
-                        "id": 0,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/Functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 46,
-                            "endLine": 46,
-                            "startColumn": 243,
-                            "endColumn": 254
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "location": {
-                        "id": 1,
-                        "physicalLocation": {
-                          "artifactLocation": {
-                            "uri": "Modules/Functions.php",
-                            "uriBaseId": "%SRCROOT%"
-                          },
-                          "region": {
-                            "startLine": 46,
-                            "endLine": 46,
-                            "startColumn": 243,
-                            "endColumn": 254
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "properties": {
-            "priorityScore": 623,
-            "priorityScoreFactors": [
-              {
-                "label": true,
-                "type": "multipleOccurrence"
-              },
-              {
-                "label": true,
-                "type": "hotFileSource"
-              }
-            ]
-          }
-        },
-        {
           "ruleId": "php/PT",
-          "ruleIndex": 1,
+          "ruleIndex": 0,
           "level": "error",
           "message": {
             "text": "Unsanitized input from an HTTP header flows into file_get_contents, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
@@ -794,20 +753,20 @@
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "Modules/Functions.php",
+                  "uri": "Modules/functions.php",
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
-                  "startLine": 264,
-                  "endLine": 264,
+                  "startLine": 309,
+                  "endLine": 309,
                   "startColumn": 12,
-                  "endColumn": 272
+                  "endColumn": 274
                 }
               }
             }
           ],
           "fingerprints": {
-            "0": "cd60ba051bddf7fcd35511946d7848d5d79431a55fdf9d08e8012cd36a90070d",
+            "0": "74e0b3c5c5f55e198afe2b2f3265e677cfaaea0c3060460435b4e62578969335",
             "1": "80f1517a.464a7316.c3dea7ce.f18a7ecf.20a8e692.39e0148c.480b110d.be170d97.43f154ae.abf264c1.2173882d.abd479c7.20a8e692.c1b6b7bc.b2a0b7cd.58bf5da9"
           },
           "codeFlows": [
@@ -820,12 +779,12 @@
                         "id": 0,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "Modules/Functions.php",
+                            "uri": "Modules/functions.php",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 256,
-                            "endLine": 256,
+                            "startLine": 303,
+                            "endLine": 303,
                             "startColumn": 22,
                             "endColumn": 53
                           }
@@ -837,12 +796,12 @@
                         "id": 1,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "Modules/Functions.php",
+                            "uri": "Modules/functions.php",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 256,
-                            "endLine": 256,
+                            "startLine": 303,
+                            "endLine": 303,
                             "startColumn": 22,
                             "endColumn": 53
                           }
@@ -854,12 +813,12 @@
                         "id": 2,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "Modules/Functions.php",
+                            "uri": "Modules/functions.php",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 256,
-                            "endLine": 256,
+                            "startLine": 303,
+                            "endLine": 303,
                             "startColumn": 15,
                             "endColumn": 60
                           }
@@ -871,12 +830,12 @@
                         "id": 3,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "Modules/Functions.php",
+                            "uri": "Modules/functions.php",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 256,
-                            "endLine": 256,
+                            "startLine": 303,
+                            "endLine": 303,
                             "startColumn": 9,
                             "endColumn": 11
                           }
@@ -888,14 +847,14 @@
                         "id": 4,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "Modules/Functions.php",
+                            "uri": "Modules/functions.php",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 264,
-                            "endLine": 264,
-                            "startColumn": 194,
-                            "endColumn": 196
+                            "startLine": 309,
+                            "endLine": 309,
+                            "startColumn": 196,
+                            "endColumn": 198
                           }
                         }
                       }
@@ -905,14 +864,14 @@
                         "id": 5,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "Modules/Functions.php",
+                            "uri": "Modules/functions.php",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 264,
-                            "endLine": 264,
+                            "startLine": 309,
+                            "endLine": 309,
                             "startColumn": 30,
-                            "endColumn": 196
+                            "endColumn": 198
                           }
                         }
                       }
@@ -922,14 +881,14 @@
                         "id": 6,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "Modules/Functions.php",
+                            "uri": "Modules/functions.php",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 264,
-                            "endLine": 264,
+                            "startLine": 309,
+                            "endLine": 309,
                             "startColumn": 30,
-                            "endColumn": 210
+                            "endColumn": 212
                           }
                         }
                       }
@@ -939,14 +898,14 @@
                         "id": 7,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "Modules/Functions.php",
+                            "uri": "Modules/functions.php",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 264,
-                            "endLine": 264,
+                            "startLine": 309,
+                            "endLine": 309,
                             "startColumn": 30,
-                            "endColumn": 226
+                            "endColumn": 228
                           }
                         }
                       }
@@ -956,14 +915,14 @@
                         "id": 8,
                         "physicalLocation": {
                           "artifactLocation": {
-                            "uri": "Modules/Functions.php",
+                            "uri": "Modules/functions.php",
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 264,
-                            "endLine": 264,
+                            "startLine": 309,
+                            "endLine": 309,
                             "startColumn": 12,
-                            "endColumn": 272
+                            "endColumn": 274
                           }
                         }
                       }
@@ -974,7 +933,7 @@
             }
           ],
           "properties": {
-            "priorityScore": 812,
+            "priorityScore": 803,
             "priorityScoreFactors": [
               {
                 "label": true,
@@ -988,8 +947,412 @@
           }
         },
         {
-          "ruleId": "php/XSS",
+          "ruleId": "php/InsecureRandomData",
           "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "An insecure random number generator is used to create an URL (the random value flows from rand). Consider using CSPRNG functions instead.",
+            "markdown": "An insecure random number generator is used to create {0} (the random value flows from {1}). Consider using CSPRNG functions instead.",
+            "arguments": [
+              "[an URL](0)",
+              "[rand](1)"
+            ]
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Modules/functions.php",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 37,
+                  "endLine": 37,
+                  "startColumn": 155,
+                  "endColumn": 166
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "0": "5e44ae9973bcb6d745343eec5c8dc1799c1597798eaf9068de5e8b689b5bb1c2",
+            "1": "703ebb77.464a7316.c3dea7ce.73a3d5be.af50231a.773652eb.a7efae7e.be170d97.703ebb77.464a7316.c3dea7ce.73a3d5be.af50231a.773652eb.a7efae7e.be170d97"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 37,
+                            "endLine": 37,
+                            "startColumn": 155,
+                            "endColumn": 166
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 1,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 37,
+                            "endLine": 37,
+                            "startColumn": 155,
+                            "endColumn": 166
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "priorityScore": 605,
+            "priorityScoreFactors": [
+              {
+                "label": true,
+                "type": "multipleOccurrence"
+              },
+              {
+                "label": true,
+                "type": "hotFileSource"
+              }
+            ]
+          }
+        },
+        {
+          "ruleId": "php/InsecureRandomData",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "An insecure random number generator is used to create an URL (the random value flows from rand). Consider using CSPRNG functions instead.",
+            "markdown": "An insecure random number generator is used to create {0} (the random value flows from {1}). Consider using CSPRNG functions instead.",
+            "arguments": [
+              "[an URL](0)",
+              "[rand](1)"
+            ]
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Modules/functions.php",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 41,
+                  "endLine": 41,
+                  "startColumn": 243,
+                  "endColumn": 254
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "0": "c0efb0c50c453fe4570b71e4cc736a13f3033942968a441e5c12da9924f3f2d6",
+            "1": "703ebb77.464a7316.c3dea7ce.37e648b5.af50231a.773652eb.a7efae7e.be170d97.703ebb77.464a7316.a666b580.37e648b5.af50231a.dd23c7e4.a7efae7e.047105df"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 41,
+                            "endLine": 41,
+                            "startColumn": 243,
+                            "endColumn": 254
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 1,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 41,
+                            "endLine": 41,
+                            "startColumn": 243,
+                            "endColumn": 254
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "priorityScore": 605,
+            "priorityScoreFactors": [
+              {
+                "label": true,
+                "type": "multipleOccurrence"
+              },
+              {
+                "label": true,
+                "type": "hotFileSource"
+              }
+            ]
+          }
+        },
+        {
+          "ruleId": "php/TooPermissiveCorsHeader",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Setting Access-Control-Allow-Origin header to \"*\" in header might be too permissive. This allows malicious code on other domains to communicate with the application, which is a security risk",
+            "markdown": "Setting {0} to {1} in {2} might be too permissive. This allows malicious code on other domains to communicate with the application, which is a security risk",
+            "arguments": [
+              "[Access-Control-Allow-Origin header](0)",
+              "[\"*\"](1)",
+              "[header](2)"
+            ]
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Modules/functions.php",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3,
+                  "endLine": 3,
+                  "startColumn": 1,
+                  "endColumn": 40
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "0": "4f873614247ba637436288e094d94ae116f9fc982fc4503291c8af97978c2f5e",
+            "1": "ac863540.464a7316.5f4727d6.ae562fb3.975941ba.7e8b3801.42ed9a30.43dfb0a5.ac863540.464a7316.c3dea7ce.ae562fb3.975941ba.7e8b3801.a7efae7e.43dfb0a5"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 3,
+                            "endLine": 3,
+                            "startColumn": 1,
+                            "endColumn": 40
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 1,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 3,
+                            "endLine": 3,
+                            "startColumn": 1,
+                            "endColumn": 40
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 2,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 3,
+                            "endLine": 3,
+                            "startColumn": 1,
+                            "endColumn": 40
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "priorityScore": 555,
+            "priorityScoreFactors": [
+              {
+                "label": true,
+                "type": "multipleOccurrence"
+              },
+              {
+                "label": true,
+                "type": "hotFileSource"
+              },
+              {
+                "label": true,
+                "type": "fixExamples"
+              }
+            ]
+          }
+        },
+        {
+          "ruleId": "php/TooPermissiveCorsHeader",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Setting Access-Control-Allow-Origin header to \"*\" in header might be too permissive. This allows malicious code on other domains to communicate with the application, which is a security risk",
+            "markdown": "Setting {0} to {1} in {2} might be too permissive. This allows malicious code on other domains to communicate with the application, which is a security risk",
+            "arguments": [
+              "[Access-Control-Allow-Origin header](0)",
+              "[\"*\"](1)",
+              "[header](2)"
+            ]
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Public/dataProcessing.php",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3,
+                  "endLine": 3,
+                  "startColumn": 1,
+                  "endColumn": 40
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "0": "9363e1d27910dbadd77a6fe8ac1863ec80b7e0f941e879cccc2fb3a504996a2c",
+            "1": "ac863540.464a7316.5f4727d6.ae562fb3.975941ba.7e8b3801.42ed9a30.43dfb0a5.ac863540.464a7316.c3dea7ce.ae562fb3.975941ba.7e8b3801.a7efae7e.43dfb0a5"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Public/dataProcessing.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 3,
+                            "endLine": 3,
+                            "startColumn": 1,
+                            "endColumn": 40
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 1,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Public/dataProcessing.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 3,
+                            "endLine": 3,
+                            "startColumn": 1,
+                            "endColumn": 40
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 2,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Public/dataProcessing.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 3,
+                            "endLine": 3,
+                            "startColumn": 1,
+                            "endColumn": 40
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "priorityScore": 555,
+            "priorityScoreFactors": [
+              {
+                "label": true,
+                "type": "multipleOccurrence"
+              },
+              {
+                "label": true,
+                "type": "hotFileSource"
+              },
+              {
+                "label": true,
+                "type": "fixExamples"
+              }
+            ]
+          }
+        },
+        {
+          "ruleId": "php/XSS",
+          "ruleIndex": 9,
           "level": "error",
           "message": {
             "text": "Unsanitized input from an HTTP parameter flows into the echo statement, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
@@ -1008,8 +1371,8 @@
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
-                  "startLine": 6,
-                  "endLine": 6,
+                  "startLine": 7,
+                  "endLine": 7,
                   "startColumn": 5,
                   "endColumn": 128
                 }
@@ -1017,8 +1380,8 @@
             }
           ],
           "fingerprints": {
-            "0": "a77d63e65619911c7fbf67781d629d70e3d228f9efe1b5a89dd879d20ac846c8",
-            "1": "4dc0a121.18ef32d2.c3dea7ce.1f144feb.b76b24a1.5f7acf51.a7efae7e.90b5ecc0.41cc2907.18ef32d2.3e2efea6.1f144feb.712d0e1a.e8bbe0f7.84054387.05d353bf"
+            "0": "6d7887a143bb841936e299a9423e484f6bdf1b15113b847ea825b202faf9f4a2",
+            "1": "4dc0a121.18ef32d2.c3dea7ce.1f144feb.b76b24a1.5f7acf51.a7efae7e.90b5ecc0.41cc2907.18ef32d2.3e2efea6.1f144feb.894c4921.e8bbe0f7.84054387.05d353bf"
           },
           "codeFlows": [
             {
@@ -1034,8 +1397,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 6,
-                            "endLine": 6,
+                            "startLine": 7,
+                            "endLine": 7,
                             "startColumn": 109,
                             "endColumn": 120
                           }
@@ -1051,8 +1414,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 6,
-                            "endLine": 6,
+                            "startLine": 7,
+                            "endLine": 7,
                             "startColumn": 109,
                             "endColumn": 120
                           }
@@ -1068,8 +1431,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 6,
-                            "endLine": 6,
+                            "startLine": 7,
+                            "endLine": 7,
                             "startColumn": 10,
                             "endColumn": 120
                           }
@@ -1085,8 +1448,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 6,
-                            "endLine": 6,
+                            "startLine": 7,
+                            "endLine": 7,
                             "startColumn": 10,
                             "endColumn": 127
                           }
@@ -1102,8 +1465,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 6,
-                            "endLine": 6,
+                            "startLine": 7,
+                            "endLine": 7,
                             "startColumn": 5,
                             "endColumn": 128
                           }
@@ -1119,8 +1482,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 6,
-                            "endLine": 6,
+                            "startLine": 7,
+                            "endLine": 7,
                             "startColumn": 5,
                             "endColumn": 128
                           }
@@ -1133,7 +1496,7 @@
             }
           ],
           "properties": {
-            "priorityScore": 823,
+            "priorityScore": 809,
             "priorityScoreFactors": [
               {
                 "label": true,
@@ -1152,7 +1515,7 @@
         },
         {
           "ruleId": "php/XSS",
-          "ruleIndex": 2,
+          "ruleIndex": 9,
           "level": "error",
           "message": {
             "text": "Unsanitized input from an HTTP parameter flows into the echo statement, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
@@ -1171,8 +1534,8 @@
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
-                  "startLine": 9,
-                  "endLine": 9,
+                  "startLine": 28,
+                  "endLine": 28,
                   "startColumn": 5,
                   "endColumn": 62
                 }
@@ -1180,8 +1543,8 @@
             }
           ],
           "fingerprints": {
-            "0": "802a51b40b0315b9788f624ca016e2f354367851aab5e310c5339c52ab8df053",
-            "1": "41cc2907.d3fa0bdc.c3dea7ce.1f144feb.ca23a647.e8bbe0f7.a7efae7e.05d353bf.41cc2907.464a7316.3e2efea6.1f144feb.712d0e1a.e8bbe0f7.84054387.be170d97"
+            "0": "c6512659e3565383aa5e4e0815482db37f5bbb1759a95def68ff9db547b07461",
+            "1": "41cc2907.b87f6f01.c3dea7ce.1f144feb.caa16d4a.e8bbe0f7.a7efae7e.05d353bf.41cc2907.464a7316.d7c06288.1f144feb.894c4921.e8bbe0f7.a7efae7e.be170d97"
           },
           "codeFlows": [
             {
@@ -1197,8 +1560,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 9,
-                            "endLine": 9,
+                            "startLine": 28,
+                            "endLine": 28,
                             "startColumn": 41,
                             "endColumn": 53
                           }
@@ -1214,8 +1577,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 9,
-                            "endLine": 9,
+                            "startLine": 28,
+                            "endLine": 28,
                             "startColumn": 41,
                             "endColumn": 53
                           }
@@ -1231,8 +1594,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 9,
-                            "endLine": 9,
+                            "startLine": 28,
+                            "endLine": 28,
                             "startColumn": 29,
                             "endColumn": 54
                           }
@@ -1248,8 +1611,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 9,
-                            "endLine": 9,
+                            "startLine": 28,
+                            "endLine": 28,
                             "startColumn": 10,
                             "endColumn": 54
                           }
@@ -1265,8 +1628,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 9,
-                            "endLine": 9,
+                            "startLine": 28,
+                            "endLine": 28,
                             "startColumn": 10,
                             "endColumn": 61
                           }
@@ -1282,8 +1645,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 9,
-                            "endLine": 9,
+                            "startLine": 28,
+                            "endLine": 28,
                             "startColumn": 5,
                             "endColumn": 62
                           }
@@ -1299,8 +1662,8 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 9,
-                            "endLine": 9,
+                            "startLine": 28,
+                            "endLine": 28,
                             "startColumn": 5,
                             "endColumn": 62
                           }
@@ -1313,7 +1676,435 @@
             }
           ],
           "properties": {
-            "priorityScore": 823,
+            "priorityScore": 809,
+            "priorityScoreFactors": [
+              {
+                "label": true,
+                "type": "multipleOccurrence"
+              },
+              {
+                "label": true,
+                "type": "hotFileSource"
+              },
+              {
+                "label": true,
+                "type": "fixExamples"
+              }
+            ]
+          }
+        },
+        {
+          "ruleId": "php/XSS",
+          "ruleIndex": 9,
+          "level": "error",
+          "message": {
+            "text": "Unsanitized input from data from a remote resource flows into the echo statement, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
+            "markdown": "Unsanitized input from {0} {1} into {2}, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
+            "arguments": [
+              "[data from a remote resource](0)",
+              "[flows](1),(2),(3),(4),(5),(6)",
+              "[the echo statement](7)"
+            ]
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Modules/functions.php",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 31,
+                  "endLine": 31,
+                  "startColumn": 5,
+                  "endColumn": 38
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "0": "f2de60990abaacebbe831dbec854774e653603020e709cba3f8abbab304045d9",
+            "1": "2c80a54c.18ef32d2.2683ade8.1f144feb.b76b24a1.7dac33c0.60b22c1d.8fbce61d.86be1e70.464a7316.c3dea7ce.abd479c7.c7a41f28.c62804f2.60b22c1d.be170d97"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 30,
+                            "endLine": 30,
+                            "startColumn": 27,
+                            "endColumn": 62
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 1,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 30,
+                            "endLine": 30,
+                            "startColumn": 27,
+                            "endColumn": 62
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 2,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 30,
+                            "endLine": 30,
+                            "startColumn": 15,
+                            "endColumn": 69
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 3,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 30,
+                            "endLine": 30,
+                            "startColumn": 5,
+                            "endColumn": 11
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 4,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 31,
+                            "endLine": 31,
+                            "startColumn": 10,
+                            "endColumn": 16
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 5,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 31,
+                            "endLine": 31,
+                            "startColumn": 10,
+                            "endColumn": 37
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 6,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 31,
+                            "endLine": 31,
+                            "startColumn": 5,
+                            "endColumn": 38
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 7,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Modules/functions.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 31,
+                            "endLine": 31,
+                            "startColumn": 5,
+                            "endColumn": 38
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "priorityScore": 809,
+            "priorityScoreFactors": [
+              {
+                "label": true,
+                "type": "multipleOccurrence"
+              },
+              {
+                "label": true,
+                "type": "hotFileSource"
+              },
+              {
+                "label": true,
+                "type": "fixExamples"
+              }
+            ]
+          }
+        },
+        {
+          "ruleId": "php/XSS",
+          "ruleIndex": 9,
+          "level": "error",
+          "message": {
+            "text": "Unsanitized input from data from a remote resource flows into the echo statement, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
+            "markdown": "Unsanitized input from {0} {1} into {2}, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
+            "arguments": [
+              "[data from a remote resource](0)",
+              "[flows](1),(2),(3),(4),(5),(6),(7),(8)",
+              "[the echo statement](9)"
+            ]
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Public/dataProcessing.php",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 26,
+                  "endLine": 26,
+                  "startColumn": 5,
+                  "endColumn": 64
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "0": "6442d3eb793de560906527e0ef297b203cbab9d28ea6b4cd4259ac58183a56b9",
+            "1": "41cc2907.18ef32d2.2683ade8.1f144feb.caa16d4a.e8bbe0f7.445c8611.05d353bf.86be1e70.464a7316.2173882d.abd479c7.c7a41f28.e8bbe0f7.2174662d.be170d97"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Public/dataProcessing.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 25,
+                            "endLine": 25,
+                            "startColumn": 34,
+                            "endColumn": 69
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 1,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Public/dataProcessing.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 25,
+                            "endLine": 25,
+                            "startColumn": 34,
+                            "endColumn": 69
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 2,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Public/dataProcessing.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 25,
+                            "endLine": 25,
+                            "startColumn": 22,
+                            "endColumn": 76
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 3,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Public/dataProcessing.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 25,
+                            "endLine": 25,
+                            "startColumn": 5,
+                            "endColumn": 18
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 4,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Public/dataProcessing.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "endLine": 26,
+                            "startColumn": 29,
+                            "endColumn": 42
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 5,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Public/dataProcessing.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "endLine": 26,
+                            "startColumn": 29,
+                            "endColumn": 56
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 6,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Public/dataProcessing.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "endLine": 26,
+                            "startColumn": 10,
+                            "endColumn": 56
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 7,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Public/dataProcessing.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "endLine": 26,
+                            "startColumn": 10,
+                            "endColumn": 63
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 8,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Public/dataProcessing.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "endLine": 26,
+                            "startColumn": 5,
+                            "endColumn": 64
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 9,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Public/dataProcessing.php",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "endLine": 26,
+                            "startColumn": 5,
+                            "endColumn": 64
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "priorityScore": 809,
             "priorityScoreFactors": [
               {
                 "label": true,
@@ -1332,15 +2123,15 @@
         },
         {
           "ruleId": "javascript/DOMXSS",
-          "ruleIndex": 3,
+          "ruleIndex": 10,
           "level": "error",
           "message": {
             "text": "Unsanitized input from data from a remote resource flows into innerHTML, where it is used to dynamically construct the HTML page on client side. This may result in a DOM Based Cross-Site Scripting attack (DOMXSS).",
             "markdown": "Unsanitized input from {0} {1} into {2}, where it is used to dynamically construct the HTML page on client side. This may result in a DOM Based Cross-Site Scripting attack (DOMXSS).",
             "arguments": [
               "[data from a remote resource](0)",
-              "[flows](1),(2),(3),(4),(5),(6),(7),(8),(9)",
-              "[innerHTML](10)"
+              "[flows](1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11)",
+              "[innerHTML](12)"
             ]
           },
           "locations": [
@@ -1351,8 +2142,8 @@
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
-                  "startLine": 6,
-                  "endLine": 6,
+                  "startLine": 16,
+                  "endLine": 16,
                   "startColumn": 9,
                   "endColumn": 62
                 }
@@ -1360,8 +2151,8 @@
             }
           ],
           "fingerprints": {
-            "0": "813ce9af60b3926effaf70fdad65240cf72bcc1637f37bc80a83fe32c8b8ae65",
-            "1": "cf7733e4.4773f344.607187b5.a517c54b.9cde7c93.dbe83c7e.0b4f0b50.9b5cefb9.e34a61c9.7d4b7307.aff85a25.313735ce.69171dec.dbe83c7e.83265159.3406c8c7"
+            "0": "ce55a5838ef57ff201e4c536c1f045db02f4f3f291dc3f88216ea85f1909dce0",
+            "1": "cf7733e4.4773f344.607187b5.a517c54b.9cde7c93.dbe83c7e.0b4f0b50.9b5cefb9.e34a61c9.7d4b7307.aff85a25.313735ce.4111b6ce.dbe83c7e.4d06057c.3406c8c7"
           },
           "codeFlows": [
             {
@@ -1377,10 +2168,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 4,
-                            "endLine": 4,
-                            "startColumn": 5,
-                            "endColumn": 42
+                            "startLine": 6,
+                            "endLine": 6,
+                            "startColumn": 16,
+                            "endColumn": 70
                           }
                         }
                       }
@@ -1394,10 +2185,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 4,
-                            "endLine": 4,
-                            "startColumn": 5,
-                            "endColumn": 42
+                            "startLine": 6,
+                            "endLine": 6,
+                            "startColumn": 16,
+                            "endColumn": 70
                           }
                         }
                       }
@@ -1411,10 +2202,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 4,
-                            "endLine": 4,
-                            "startColumn": 49,
-                            "endColumn": 56
+                            "startLine": 7,
+                            "endLine": 7,
+                            "startColumn": 20,
+                            "endColumn": 27
                           }
                         }
                       }
@@ -1428,10 +2219,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 4,
-                            "endLine": 4,
-                            "startColumn": 61,
-                            "endColumn": 68
+                            "startLine": 7,
+                            "endLine": 7,
+                            "startColumn": 33,
+                            "endColumn": 40
                           }
                         }
                       }
@@ -1445,10 +2236,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 4,
-                            "endLine": 4,
-                            "startColumn": 61,
-                            "endColumn": 73
+                            "startLine": 7,
+                            "endLine": 7,
+                            "startColumn": 33,
+                            "endColumn": 45
                           }
                         }
                       }
@@ -1462,10 +2253,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 4,
-                            "endLine": 4,
-                            "startColumn": 61,
-                            "endColumn": 75
+                            "startLine": 7,
+                            "endLine": 7,
+                            "startColumn": 33,
+                            "endColumn": 47
                           }
                         }
                       }
@@ -1479,10 +2270,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 4,
-                            "endLine": 4,
-                            "startColumn": 5,
-                            "endColumn": 47
+                            "startLine": 8,
+                            "endLine": 8,
+                            "startColumn": 20,
+                            "endColumn": 31
                           }
                         }
                       }
@@ -1496,10 +2287,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 4,
-                            "endLine": 4,
-                            "startColumn": 83,
-                            "endColumn": 86
+                            "startLine": 9,
+                            "endLine": 9,
+                            "startColumn": 24,
+                            "endColumn": 35
                           }
                         }
                       }
@@ -1513,10 +2304,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 5,
-                            "endLine": 5,
-                            "startColumn": 92,
-                            "endColumn": 95
+                            "startLine": 12,
+                            "endLine": 12,
+                            "startColumn": 5,
+                            "endColumn": 15
                           }
                         }
                       }
@@ -1530,10 +2321,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 6,
-                            "endLine": 6,
-                            "startColumn": 54,
-                            "endColumn": 62
+                            "startLine": 12,
+                            "endLine": 12,
+                            "startColumn": 22,
+                            "endColumn": 25
                           }
                         }
                       }
@@ -1547,8 +2338,42 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 6,
-                            "endLine": 6,
+                            "startLine": 13,
+                            "endLine": 13,
+                            "startColumn": 39,
+                            "endColumn": 42
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 11,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Public/assets/js/formContentUpdate.js",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 16,
+                            "endLine": 16,
+                            "startColumn": 54,
+                            "endColumn": 62
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 12,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "Public/assets/js/formContentUpdate.js",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 16,
+                            "endLine": 16,
                             "startColumn": 9,
                             "endColumn": 62
                           }
@@ -1561,7 +2386,7 @@
             }
           ],
           "properties": {
-            "priorityScore": 923,
+            "priorityScore": 905,
             "priorityScoreFactors": [
               {
                 "label": true,
@@ -1584,7 +2409,7 @@
         },
         {
           "ruleId": "javascript/DOMXSS",
-          "ruleIndex": 3,
+          "ruleIndex": 10,
           "level": "error",
           "message": {
             "text": "Unsanitized input from data from a remote resource flows into innerHTML, where it is used to dynamically construct the HTML page on client side. This may result in a DOM Based Cross-Site Scripting attack (DOMXSS).",
@@ -1603,16 +2428,16 @@
                   "uriBaseId": "%SRCROOT%"
                 },
                 "region": {
-                  "startLine": 26,
-                  "endLine": 26,
-                  "startColumn": 9,
-                  "endColumn": 57
+                  "startLine": 44,
+                  "endLine": 44,
+                  "startColumn": 13,
+                  "endColumn": 61
                 }
               }
             }
           ],
           "fingerprints": {
-            "0": "e29119e1db096a20b89e5997b17efaa376dd6677918a56ed7c1a635db14710c0",
+            "0": "7bc01794a0e1a4d23f87d9a075625c2a7f880457adee8cefa8f17d797fc3c70e",
             "1": "3df95e84.7d4b7307.607187b5.a517c54b.9cde7c93.dbe83c7e.6977003a.aac0d16c.e34a61c9.7d4b7307.aff85a25.313735ce.fd1fa73f.dbe83c7e.83265159.3406c8c7"
           },
           "codeFlows": [
@@ -1629,10 +2454,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 17,
-                            "endLine": 17,
+                            "startLine": 32,
+                            "endLine": 32,
                             "startColumn": 5,
-                            "endColumn": 50
+                            "endColumn": 53
                           }
                         }
                       }
@@ -1646,10 +2471,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 17,
-                            "endLine": 17,
+                            "startLine": 32,
+                            "endLine": 32,
                             "startColumn": 5,
-                            "endColumn": 50
+                            "endColumn": 53
                           }
                         }
                       }
@@ -1663,10 +2488,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 17,
-                            "endLine": 17,
-                            "startColumn": 57,
-                            "endColumn": 64
+                            "startLine": 32,
+                            "endLine": 32,
+                            "startColumn": 60,
+                            "endColumn": 67
                           }
                         }
                       }
@@ -1680,10 +2505,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 17,
-                            "endLine": 17,
-                            "startColumn": 69,
-                            "endColumn": 76
+                            "startLine": 32,
+                            "endLine": 32,
+                            "startColumn": 72,
+                            "endColumn": 79
                           }
                         }
                       }
@@ -1697,10 +2522,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 17,
-                            "endLine": 17,
-                            "startColumn": 69,
-                            "endColumn": 81
+                            "startLine": 32,
+                            "endLine": 32,
+                            "startColumn": 72,
+                            "endColumn": 84
                           }
                         }
                       }
@@ -1714,10 +2539,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 17,
-                            "endLine": 17,
-                            "startColumn": 69,
-                            "endColumn": 83
+                            "startLine": 32,
+                            "endLine": 32,
+                            "startColumn": 72,
+                            "endColumn": 86
                           }
                         }
                       }
@@ -1731,10 +2556,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 17,
-                            "endLine": 17,
+                            "startLine": 32,
+                            "endLine": 32,
                             "startColumn": 5,
-                            "endColumn": 55
+                            "endColumn": 58
                           }
                         }
                       }
@@ -1748,10 +2573,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 17,
-                            "endLine": 17,
-                            "startColumn": 91,
-                            "endColumn": 94
+                            "startLine": 32,
+                            "endLine": 32,
+                            "startColumn": 94,
+                            "endColumn": 97
                           }
                         }
                       }
@@ -1765,10 +2590,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 18,
-                            "endLine": 18,
-                            "startColumn": 13,
-                            "endColumn": 16
+                            "startLine": 33,
+                            "endLine": 33,
+                            "startColumn": 14,
+                            "endColumn": 17
                           }
                         }
                       }
@@ -1782,10 +2607,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 26,
-                            "endLine": 26,
-                            "startColumn": 49,
-                            "endColumn": 57
+                            "startLine": 44,
+                            "endLine": 44,
+                            "startColumn": 53,
+                            "endColumn": 61
                           }
                         }
                       }
@@ -1799,10 +2624,10 @@
                             "uriBaseId": "%SRCROOT%"
                           },
                           "region": {
-                            "startLine": 26,
-                            "endLine": 26,
-                            "startColumn": 9,
-                            "endColumn": 57
+                            "startLine": 44,
+                            "endLine": 44,
+                            "startColumn": 13,
+                            "endColumn": 61
                           }
                         }
                       }
@@ -1813,7 +2638,7 @@
             }
           ],
           "properties": {
-            "priorityScore": 923,
+            "priorityScore": 905,
             "priorityScoreFactors": [
               {
                 "label": true,
@@ -1843,7 +2668,7 @@
             "lang": "PHP"
           },
           {
-            "files": 3,
+            "files": 4,
             "isSupported": true,
             "lang": "JavaScript"
           }
