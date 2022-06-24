@@ -1,4 +1,4 @@
-const copyToClipboard = (element) => {
+function copyToClipboard(element) {
     let $temp = $('<input>');
     $('body').append($temp);
     $temp.val($(element).text()).select();
@@ -8,7 +8,7 @@ const copyToClipboard = (element) => {
     showSnackBar('snackbar'); // show snackbar notification
 };
 
-const showSnackBar = (snackbarId) => {
+function showSnackBar(snackbarId) {
     let x = document.getElementById(snackbarId);
     x.className = 'show';
     var time = 3000;

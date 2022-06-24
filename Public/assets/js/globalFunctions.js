@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function log(content, type = null) {
     fetch(`dataProcessing?action=isDebugMode`).then(response => response.json()).then(data => {
-        if(data.response == "true"){
+        if (data.response == "true") {
             if (!type) {
                 console.log(
                     `[${moment().format('hh:mm:ss')}] [Site Debug/INFO] ${content}`
@@ -28,7 +28,7 @@ function log(content, type = null) {
                     `[${moment().format('hh:mm:ss')}] [${type}] ${content}`
                 );
             }
-        } else{
+        } else {
             console.log(
                 `[${moment().format('hh:mm:ss')}] [Initialisation/DEBUG] Debug mode is disabled!`
             );
