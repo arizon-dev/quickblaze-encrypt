@@ -18,6 +18,7 @@
 
     <main class="main-form">
         <form onsubmit="return false;">
+            <img class="form-icon fa-fade" id="form-icon" draggable="false" alt="QuickBlaze Encrypt" aria-label="QuickBlaze Encrypt" title="QuickBlaze Encrypt" src="<?= getInstallationPath() ?>/Public/assets/img/favicon-100x100.png">
             <h1>QuickBlaze</h1>
             <h5 class="text-muted"><?= translate("One time view encrypted message sharing system") ?></h5>
             <br><br>
