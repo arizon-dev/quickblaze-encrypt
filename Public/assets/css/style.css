@@ -9,6 +9,7 @@ body {
 	padding-top: 40px;
 	padding-bottom: 40px;
 }
+
 textarea {
 	width: 300px;
 	height: 150px;
@@ -30,6 +31,11 @@ textarea {
 	font-weight: 400;
 }
 
+.main-form .form-icon {
+	padding-bottom: 15px;
+	--fa-animation-duration: 3.5s
+}
+
 .main-form .form-floating:focus-within {
 	z-index: 2;
 }
@@ -39,7 +45,8 @@ textarea {
 }
 
 /* The snackbar - position it at the bottom and in the middle of the screen */
-#snackbar, #snackbarError {
+#snackbar,
+#snackbarError {
 	visibility: hidden;
 	/* Hidden by default. Visible on click */
 	min-width: 250px;
@@ -67,7 +74,8 @@ textarea {
 }
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
-#snackbar.show, #snackbarError.show {
+#snackbar.show,
+#snackbarError.show {
 	visibility: visible;
 	/* Show the snackbar */
 	/* Add animation: Take 0.5 seconds to fade in and out the snackbar.

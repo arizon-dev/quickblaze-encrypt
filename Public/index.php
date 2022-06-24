@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="<?= getInstallationPath() ?>/Public/assets/img/favicon.png">
+    <link rel="icon" type="image/x-icon" href="<?= getInstallationPath() ?>/Public/assets/img/favicon-100x100.png">
     <meta name="description" content="<?= translate("An extremely simple, one-time view encrypted message system. Send anybody passwords, or secret messages on a one-time view basis.") ?>">
     <title>QuickBlaze</title>
 
@@ -25,7 +25,7 @@
 
             <!-- Main Form Content -->
             <div id="form_input">
-                <textarea type="text" class="form-control" id="inputtextbot" placeholder="<?= translate("Enter your secret message!") ?>" <?= ifTextBoxDisabled(); ?> requireds></textarea>
+                <textarea type="text" class="form-control" id="inputtextbot" placeholder="<?= translate("Enter your secret message!") ?>" <?= ifTextBoxDisabled(); ?> required></textarea>
                 <br>
                 <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="updateFormDisplay();">
                     <?= translate("Encrypt Message"); ?>
