@@ -100,7 +100,7 @@ function setupStorageMethod()
         } else{
             $TEMP_DEBUGMODE = $configuration["DEBUG_MODE"];
         }
-        file_put_contents("./.config", json_encode(array("STORAGE_METHOD" => "$TEMP_STORAGE_METHOD", "LANGUAGE" => "$TEMP_LANGUAGE", "INSTALLATION_PATH" => "$path", "DEBUG_MODE" => $TEMP_DEBUGMODE))); // Set contents of new config file
+        file_put_contents("./.config", json_encode(array("STORAGE_METHOD" => "$TEMP_STORAGE_METHOD", "LANGUAGE" => "$TEMP_LANGUAGE", "INSTALLATION_PATH" => "$path", "DEBUG_MODE" => "$TEMP_DEBUGMODE"))); // Set contents of new config file
     }
     if (strtolower($configuration["LANGUAGE"]) == "") {
         require "./Public/error/ServerConfiguration.php"; // throw error page if no language is provided
