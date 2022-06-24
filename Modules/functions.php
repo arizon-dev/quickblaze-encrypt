@@ -1,4 +1,6 @@
-<?php error_reporting(0); // disable error reporting
+<?php
+error_reporting(0); // disable error reporting
+header("Access-Control-Allow-Origin: *");  // "*" could also be a site such as http://www.example.com
 
 /* Internal Script Functions */
 function get_string_between($string, $start, $end)
