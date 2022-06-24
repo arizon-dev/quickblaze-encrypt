@@ -1,7 +1,7 @@
 <?php
 /* Process the Data */
 error_reporting(0);
-if (!isset($_GET["action"]) || !$_GET["action"]) $_GET["action"] = "";
+//if (!isset($_GET["action"]) || !$_GET["action"]) $_GET["action"] = "";
 
 if ($_GET["action"] == "decrypt" && $_GET["key"]) {
     echo '{"response": "' . htmlspecialchars(decryptData(htmlspecialchars($_GET["key"]))) . '", "key": "' . $_GET["key"] . '"}';
