@@ -63,17 +63,12 @@ The user enters the message they would like to encrypt. The system then securely
 <br><br>
 ⚠️ *Keep your URL safe, it contains the encryption key! Exposing the URL means anybody will be able to view the encrypted message!*
 
-## Screenshots *(Light/Dark Mode)*
+## Screenshots
 
 <p align="center">
-  <!-- Light Mode -->
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/163854079-ae8ea359-fce3-4157-8cff-114da799ff89.png">
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/163854117-bba6e982-0a1b-4a16-b785-78a093cdb09b.png">
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/163854146-746635c3-fce3-4725-a733-bf7646f4618f.png">
-  <!-- Dark Mode -->
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/163853630-c5fe544d-9976-499f-859c-05efdc990947.png">
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/163853684-3ff0c1b5-039d-465c-abfb-dfc9af00c338.png">
-  <img height="150" src="https://user-images.githubusercontent.com/37771600/163853762-ee6d721b-a0bd-482c-9fb9-4020bcf7653c.png">
+  <img height="150" src="https://user-images.githubusercontent.com/37771600/176864561-488b84f0-5ac9-4cf1-a1de-189ca196ef3f.png">
+  <img height="150" src="https://user-images.githubusercontent.com/37771600/176864736-7ce09498-4e2f-44eb-9773-d0b3900bf6db.png">
+  <img height="150" src="https://user-images.githubusercontent.com/37771600/176864871-e5217f13-5934-4e30-bfb9-b9be179dcfc9.png">
 </p>
   
 ## Authors and Contributors
