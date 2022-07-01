@@ -35,7 +35,7 @@
   <li>Rename the configuration file to <code>Database.env</code>. <a href="#system-configurations">View example configuration</a>.</li>
 </ul>
 
-⚠️ *Don't delete the `.version`, `.config`, or `.cache` files once the installation has completed! They contains necessary version and configuration data, and removing them **will** cause issues!*
+⚠️ *Don't delete the `.version`, `.config`, or `.cache` files once the installation has completed! They contain necessary version data, configuration data; removing them **will** cause issues!*
 
 ## System Configurations
 Example configuration layout of `Modules/Database.env`:
@@ -59,7 +59,7 @@ Example configuration of `.config`:
 
 ## How it Works
 
-The user enters the message they would like to encrypt. The system then securely encrypts the message and generates and returns an encryption key integrated into a shareable URL. *The key can be used to decrypt the encrypted message.* The system then creates a new record via the chosen storage method, containing the encrypted data and the encryption key. As soon as the decryption function is called upon, the encryption record will automatically be deleted. This means the encrypted data is now permanently lost and cannot be viewed or accessed. 
+The user enters the message they would like to encrypt. The system then securely encrypts the message and generates, and returns, an encryption key integrated into a shareable URL. *The key can be used to decrypt the encrypted message.* The system then creates a new record via the chosen storage method, containing the encrypted data and the encryption key. As soon as the decryption function is called upon, the encryption record will automatically be deleted. This means the encrypted data is now permanently lost and cannot be viewed or accessed.
 <br><br>
 ⚠️ *Keep your URL safe, it contains the encryption key! Exposing the URL means anybody will be able to view the encrypted message!*
 
