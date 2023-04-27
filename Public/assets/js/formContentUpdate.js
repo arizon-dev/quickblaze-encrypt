@@ -11,10 +11,16 @@ function updateFormDisplay() {
     }
     fetchData().then(data => {
         log(`Server responsed with '${data.response}'`);
-        document.getElementById('submissiontextbox').value = `${window.location}view?key=${data.response}`; // Set text box to view message URL
-        log(`Updated 'submissiontextbox.value'`);
-        document.getElementById('submissiontextbox').innerHTML = `${window.location}view?key=${data.response}`; // Set text box to view message URL
-        log(`Updated 'submissiontextbox.innerHTML'`);
+        document.getElementById('submission_text_box').value = `${window.location}view?key=${data.response}`; // Set text box to view message URL
+        log(`Updated 'submission_text_box.value'`);
+        document.getElementById('submission_text_box').innerHTML = `${window.location}view?key=${data.response}`; // Set text box to view message URL
+        log(`Updated 'submission_text_box.innerHTML'`);
+
+        log(`Server responsed with '${data.response}'`);
+        document.getElementById('submission_password').value = `${window.location}view?key=${data.response}`; // Set text box to view message URL
+        log(`Updated 'submission_password.value'`);
+        document.getElementById('submission_password').innerHTML = `${window.location}view?key=${data.response}`; // Set text box to view message URL
+        log(`Updated 'submission_password.innerHTML'`);
     });
     setTimeout(() => {
         $('#form_submission').fadeIn('fast'); // fade in new content

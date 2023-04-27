@@ -26,8 +26,7 @@
             <!-- Main Form Content -->
             <div id="form_input">
                 <textarea type="text" class="form-control size-max" id="input_text_box" placeholder="<?= translate("Enter your secret message!") ?>" required></textarea>
-
-                <input class="form-control size-single" type="password" id="input_password" placeholder="<?= translate("Enter decryption password") ?>"></input>
+                <input class="form-control size-single" id="input_password" placeholder="<?= translate("Enter decryption password") ?>"></input>
                 <br>
                 <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="updateFormDisplay();">
                     <?= translate("Encrypt Message"); ?>
@@ -36,16 +35,15 @@
 
             <div id="form_submission" style="display:none">
                 <textarea type="text" class="form-control size-max" id="submission_text_box" disabled></textarea>
-                <br>
-                <textarea type="text" class="form-control size-single" id="submission_password" disabled></textarea>
+                <input type="text" class="form-control size-single" id="submission_password" disabled></input>
                 <br>
                 <p class="text-muted">
-                    <?= translate("Share this link anywhere on the internet. The message will be automatically destroyed once viewed.") ?>
+                    <?= translate("Share this link and decryption password anywhere on the internet. The message will be automatically destroyed once viewed.") ?>
                 </p>
-                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard('#submissiontextbox')">
+                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard('#submission_text_box')">
                     <?= translate("Copy Link") ?>
                 </button>
-                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard('#submissiontextbox')">
+                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard('#submission_password')">
                     <?= translate("Copy Password") ?>
                 </button>
                 <a class="btn btn-secondary submit-button darkmode-ignore" href="./">
