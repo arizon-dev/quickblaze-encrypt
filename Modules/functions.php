@@ -13,11 +13,12 @@ function get_string_between($string, $start, $end)
     $len = strpos($string, $end, $ini) - $ini;
     return substr($string, $ini, $len);
 }
-function processData($data)
+function processData($data, $password)
 {
     $encryptionKey = generateKey(64); // Create new key
     $encryptedData = encryptData($data, $encryptionKey); // Encrypt data
-    insertRecord($encryptedData, $encryptionKey); // Insert new database record
+    $encryptedPassword = encryptData($password, $encryptionKey); // Encrypt data
+    insertRecord($encryptedData, $encryptionKey, $encryptedPassword); // Insert new database record
     return $encryptionKey;
 }
 function ifTextBoxDisabled()

@@ -40,10 +40,10 @@
                 <p class="text-muted">
                     <?= translate("Share this link and decryption password anywhere on the internet. The message will be automatically destroyed once viewed.") ?>
                 </p>
-                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard('#submission_text_box')">
+                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard('#submission_text_box', '#snackbar_link')">
                     <?= translate("Copy Link") ?>
                 </button>
-                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard('#submission_password')">
+                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard('#submission_password', '#snackbar_password')">
                     <?= translate("Copy Password") ?>
                 </button>
                 <a class="btn btn-secondary submit-button darkmode-ignore" href="./">
@@ -63,11 +63,12 @@
     </main>
 
     <!-- Snackbar Notifications -->
-    <div id="snackbar"><?= translate("✅ URL has been copied to clipboard!") ?></div>
+    <div id="snackbar_link"><?= translate("✅ Link has been copied to clipboard!") ?></div>
+    <div id="snackbar_password"><?= translate("✅ Password has been copied to clipboard!") ?></div>
 
     <!-- Site Javascript -->
     <script src="<?= getInstallationPath() ?>/Public/assets/js/globalFunctions.js"></script>
-    <script src="<?= getInstallationPath() ?>/Public/assets/js/buttonCopyURL.js"></script>
+    <script src="<?= getInstallationPath() ?>/Public/assets/js/buttonSnackbar.js"></script>
     <script src="<?= getInstallationPath() ?>/Public/assets/js/formContentUpdate.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>

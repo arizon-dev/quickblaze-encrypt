@@ -25,5 +25,5 @@ if ($_GET["action"] == "decrypt" && $_GET["key"]) {
     $configuration = json_decode(file_get_contents("./.config", true), true);
     echo '{"response": "' . $configuration["DEBUG_MODE"] . '"}';
 } else if ($_GET["action"] == "submit") {
-    echo '{"response": "' . processData($_GET["data"]) . '"}';
+    echo '{"response": "' . processData($_GET["data"], $_GET["password"]) . '"}';
 }

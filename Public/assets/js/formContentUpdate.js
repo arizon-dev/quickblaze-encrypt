@@ -10,16 +10,17 @@ function updateFormDisplay() {
             }).catch(error => log(error, 'warn'));
     }
     fetchData().then(data => {
-        log(`Server responsed with '${data.response}'`);
+        // Element Updates
         document.getElementById('submission_text_box').value = `${window.location}view?key=${data.response}`; // Set text box to view message URL
-        log(`Updated 'submission_text_box.value'`);
         document.getElementById('submission_text_box').innerHTML = `${window.location}view?key=${data.response}`; // Set text box to view message URL
-        log(`Updated 'submission_text_box.innerHTML'`);
-
-        log(`Server responsed with '${data.response}'`);
         document.getElementById('submission_password').value = `${window.location}view?key=${data.response}`; // Set text box to view message URL
-        log(`Updated 'submission_password.value'`);
         document.getElementById('submission_password').innerHTML = `${window.location}view?key=${data.response}`; // Set text box to view message URL
+        // Debug Logging
+        log(`Server responsed with '${data.response}'`);
+        log(`Updated 'submission_text_box.value'`);
+        log(`Updated 'submission_text_box.innerHTML'`);
+        log(`Server responsed with '${data.response}'`);
+        log(`Updated 'submission_password.value'`);
         log(`Updated 'submission_password.innerHTML'`);
     });
     setTimeout(() => {
