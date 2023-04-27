@@ -1,5 +1,5 @@
 function updateFormDisplay() {
-    const formvalue = document.getElementById('input_text_box').value; // Assign variable to the current value of the textbox
+    const formvalue = document.getElementById('input_text_box').value; // Assign variable to the current value of the textbox element
     $('#form_input').fadeOut('fast'); // fade out previous content
     log(`No longer showing 'form_input' element`);
     function fetchData() {
