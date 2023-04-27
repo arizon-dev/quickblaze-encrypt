@@ -2,6 +2,7 @@
 error_reporting(0); // disable error reporting
 header("Access-Control-Allow-Origin: *"); // "*" could also be a site such as http://www.example.com
 
+
 /* Internal Script Functions */
 function get_string_between($string, $start, $end)
 {
@@ -57,6 +58,7 @@ function generateKey($length)
     return $hex;
 }
 
+
 /* Data Conversion Functions */
 function encryptData($data, $encryption_key)
 {
@@ -68,6 +70,7 @@ function decryptData($encryption_key)
     $encryption_iv = hex2bin($encryption_key);
     return openssl_decrypt(getRecord("encrypted_contents", $encryption_key), "AES-128-CTR", $encryption_key, 0, $encryption_iv);
 }
+
 
 /* System Setup & Checking Functions */
 function initialiseSystem()
