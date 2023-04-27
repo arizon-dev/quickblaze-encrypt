@@ -27,7 +27,7 @@
             <div id="form_input">
                 <textarea type="text" class="form-control size-max" id="input_text_box" placeholder="<?= translate("Enter your secret message!") ?>" required></textarea>
 
-                <input class="form-control" type="password" id="input_password" placeholder="<?= translate("Enter decryption password") ?>"></input>
+                <input class="form-control size-single" type="password" id="input_password" placeholder="<?= translate("Enter decryption password") ?>"></input>
                 <br>
                 <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="updateFormDisplay();">
                     <?= translate("Encrypt Message"); ?>
