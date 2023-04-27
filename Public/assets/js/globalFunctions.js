@@ -30,16 +30,14 @@ function log(content, type = null) {
                 console.log(
                     `[${moment().format('hh:mm:ss')}] [Site Debug/INFO] ${content}`
                 );
+            } else if (type == "warn") {
+                console.warn(
+                    `[${moment().format('hh:mm:ss')}] ${content}`
+                );
             } else {
-                if(type == "warn"){
-                    console.warn(
-                        `[${moment().format('hh:mm:ss')}] ${content}`
-                    );
-                } else{
-                    console.log(
-                        `[${moment().format('hh:mm:ss')}] [${type}] ${content}`
-                    );
-                }
+                console.log(
+                    `[${moment().format('hh:mm:ss')}] [${type}] ${content}`
+                );
             }
         }
     });
