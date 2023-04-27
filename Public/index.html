@@ -28,14 +28,14 @@
 
             <!-- Main Form Content -->
             <div id="form_input">
-                <textarea type="text" class="form-control size-max" id="input_text_box" placeholder="Enter your secret message!"
+                <textarea type="text" class="form-control size-max" id="input_text_box" placeholder="<?= translate("Enter your secret message!") ?>"
                     required></textarea>
                 
-                <input class="form-control" type="password" id="input_password" placeholder="Enter decryption password"></input>
+                <input class="form-control" type="password" id="input_password" placeholder="<?= translate("Enter decryption password") ?>"></input>
                 <br>
                 <button type="button" class="btn btn-primary submit-button darkmode-ignore"
                     onclick="updateFormDisplay();">
-                    Encrypt Message
+                    <?= translate("Encrypt Message"); ?>
                 </button>
             </div>
 
@@ -45,17 +45,18 @@
                 <textarea type="text" class="form-control size-single" id="submissiontextbox" disabled></textarea>
                 <br>
                 <p class="text-muted">
-                    Share this link anywhere on the internet. The message will be automatically destroyed once viewed.
+                    <?= translate("Share this link anywhere on the internet. The message will be automatically destroyed once viewed.") ?>
                 </p>
                 <button type="button" class="btn btn-primary submit-button darkmode-ignore"
                     onclick="copyToClipboard('#submissiontextbox')">
-                    Copy Link
+                    <?= translate("Copy Link") ?>
                 </button>
                 <button type="button" class="btn btn-primary submit-button darkmode-ignore"
                     onclick="copyToClipboard('#submissiontextbox')">
-                    Copy Password
+                    <?= translate("Copy Password") ?>
                 </button>
                 <a class="btn btn-secondary submit-button darkmode-ignore" href="./">
+                    <?= translate("Create New") ?>
                 </a>
             </div>
 
