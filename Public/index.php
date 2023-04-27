@@ -20,22 +20,21 @@
         <form onsubmit="return false;">
             <img class="form-icon fa-fade" id="form-icon" draggable="false" alt="QuickBlaze Encrypt" aria-label="QuickBlaze Encrypt" title="QuickBlaze Encrypt" src="<?= getInstallationPath() ?>/Public/assets/img/favicon-100x100.png">
             <h1>QuickBlaze</h1>
-            <h5 class="text-muted"><?=translate("One time view encrypted message sharing system")?></h5>
+            <h5 class="text-muted"><?= translate("One time view encrypted message sharing system") ?></h5>
             <br><br>
 
             <!-- Main Form Content -->
-            <div id="form_input">
-                <textarea type="text" class="form-control size-max" id="input_text_box" placeholder="<?= translate("Enter your secret message!") ?>" required></textarea>
-                <input class="form-control size-single" id="input_password" placeholder="<?= translate("Enter decryption password") ?>"></input>
-                <br>
+            <div id="form_input" class="form-area">
+                <textarea type="text" class="form-control form-input-item size-max" id="input_text_box" placeholder="<?= translate("Enter your secret message!") ?>" required></textarea>
+                <input class="form-control form-input-item size-single" id="input_password" placeholder="<?= translate("Enter decryption password") ?>"></input>
                 <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="updateFormDisplay();">
                     <?= translate("Encrypt Message"); ?>
                 </button>
             </div>
 
-            <div id="form_submission" style="display:none">
-                <textarea type="text" class="form-control size-max" id="submission_text_box" disabled></textarea>
-                <input type="text" class="form-control size-single" id="submission_password" disabled></input>
+            <div id="form_submission" class="form-area">
+                <textarea type="text" class="form-control form-input-item size-max" id="submission_text_box" disabled></textarea>
+                <input type="text" class="form-control form-input-item size-single" id="submission_password" disabled></input>
                 <br>
                 <p class="text-muted">
                     <?= translate("Share this link and decryption password anywhere on the internet. The message will be automatically destroyed once viewed.") ?>

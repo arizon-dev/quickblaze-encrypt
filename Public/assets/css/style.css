@@ -10,6 +10,10 @@ body {
 	padding-bottom: 40px;
 }
 
+#form_submission{
+	display: none;
+}
+
 .size-max {
 	width: 100%;
 	height: 100px;
@@ -20,15 +24,19 @@ body {
 	height: 43px;
 }
 
-.form-control{
+.form-control {
 	margin-bottom: 10px;
 }
 
-.pb-10{
+#form_input>.form-input-item:last-child {
+	margin-bottom: none;
+}
+
+.pb-10 {
 	padding-bottom: 10px;
 }
 
-.pb-20{
+.pb-20 {
 	padding-bottom: 20px;
 }
 
