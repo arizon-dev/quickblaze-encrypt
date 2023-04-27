@@ -70,8 +70,8 @@ body {
 }
 
 /* The snackbar - position it at the bottom and in the middle of the screen */
-#snackbar,
-#snackbarError {
+#snackbar_password,
+#snackbar_link {
 	visibility: hidden;
 	/* Hidden by default. Visible on click */
 	min-width: 250px;
@@ -99,8 +99,8 @@ body {
 }
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
-#snackbar.show,
-#snackbarError.show {
+#snackbar_password.show,
+#snackbar_link.show {
 	visibility: visible;
 	/* Show the snackbar */
 	/* Add animation: Take 0.5 seconds to fade in and out the snackbar.
