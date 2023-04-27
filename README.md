@@ -1,12 +1,12 @@
 <h1 align="center">QuickBlaze Encryption 👋</h1>
 
 <p align="center">
-  <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/axtonprice-dev/quickblaze-encrypt?label=Version">
-  <a href="https://github.com/axtonprice-dev/quickblaze-encrypt/blob/main/LICENSE" target="_blank">
+  <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/arizon-dev/quickblaze-encrypt?label=Version">
+  <a href="https://github.com/arizon-dev/quickblaze-encrypt/blob/main/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
-  <a href="https://www.codacy.com/gh/axtonprice-dev/quickblaze-encrypt/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=axtonprice-dev/quickblaze-encrypt&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/3d4571a7a1a34c548bce562c16ba1221"/></a>
-  <a href="https://github.com/axtonprice-dev/quickblaze-encrypt/actions/workflows/codacy.yml"><img src="https://github.com/axtonprice-dev/quickblaze-encrypt/actions/workflows/codacy.yml/badge.svg"/></a>
+  <a href="https://www.codacy.com/gh/arizon-dev/quickblaze-encrypt/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=arizon-dev/quickblaze-encrypt&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/3d4571a7a1a34c548bce562c16ba1221"/></a>
+  <a href="https://github.com/arizon-dev/quickblaze-encrypt/actions/workflows/codacy.yml"><img src="https://github.com/arizon-dev/quickblaze-encrypt/actions/workflows/codacy.yml/badge.svg"/></a>
   <a href="https://axtonprice.com?discord" target="_blank">
     <img alt="Discord: axtonprice" src="https://discord.com/api/guilds/826239258590969897/widget.png?style=shield" />
   </a>
@@ -25,7 +25,7 @@
 
 ## Installation
 
-1. Download the latest version from the <a href="https://github.com/axtonprice-dev/quickblaze-encrypt/releases">releases page</a>. 
+1. Download the latest version from the <a href="https://github.com/arizon-dev/quickblaze-encrypt/releases">releases page</a>. 
 2. Upload and extract the contents to your web server. You can also pull the repo with `git pull`.
 3. Visit your domain installation directory or subdomain https://example.com/quickblaze-encrypt/
 
@@ -91,7 +91,7 @@ If you like this project, give a ⭐️ to support us!
 ## 📝 License
 
 Copyright © 2022 [axtonprice](https://github.com/axtonprice).<br />
-This project is [MIT](https://github.com/axtonprice-dev/quickblaze-encrypt/blob/main/LICENSE) licensed.
+This project is [MIT](https://github.com/arizon-dev/quickblaze-encrypt/blob/main/LICENSE) licensed.
 
 <hr>
 

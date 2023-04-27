@@ -19,7 +19,7 @@ function processData($data, $password)
     $encryptedData = encryptData($data, $encryptionKey); // Encrypt data
     $encryptedPassword = encryptData($password, $encryptionKey); // Encrypt data
     insertRecord($encryptedData, $encryptionKey, $encryptedPassword); // Insert new database record
-    return $encryptionKey;
+    return array("encryptionKey" => $encryptionKey, "encryptedPassword" => $encryptedPassword);
 }
 function ifTextBoxDisabled()
 {
@@ -36,11 +36,11 @@ function determineSystemVersion()
 {
     if (!file_exists("./.version")) {
         touch("./.version");
-        $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/main/.version?cacheUpdate=" . rand(0, 100), true), true);
+        $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/arizon-dev/quickblaze-encrypt/main/.version?cacheUpdate=" . rand(0, 100), true), true);
         file_put_contents("./.version", json_encode(array("BRANCH" => $latestVersion["BRANCH"], "VERSION" => $latestVersion["VERSION"], "LANGUAGE" => "auto")));
     }
     $thisVersion = json_decode(file_get_contents("./.version", true), true);
-    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/" . filter_var(htmlspecialchars($thisVersion["BRANCH"]), FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "/.version?cacheUpdate=" . rand(0, 100), true), true);
+    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/arizon-dev/quickblaze-encrypt/" . filter_var(htmlspecialchars($thisVersion["BRANCH"]), FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "/.version?cacheUpdate=" . rand(0, 100), true), true);
     if ($thisVersion["BRANCH"] == "dev" && $thisVersion["VERSION"] != $latestVersion["VERSION"]) {
         return '<x style="color:orange">v' . $thisVersion["VERSION"] . ' (' . translate("Unreleased") . '!)</x>';
     } else {
@@ -70,6 +70,15 @@ function decryptData($encryption_key)
 {
     $encryption_iv = hex2bin($encryption_key);
     return openssl_decrypt(getRecord("encrypted_contents", $encryption_key), "AES-128-CTR", $encryption_key, 0, $encryption_iv);
+}
+function validatePassword($encryption_key, $password_attempt)
+{
+    $encryption_iv = hex2bin($encryption_key);
+    if (openssl_decrypt(getRecord("password", $encryption_key), "AES-128-CTR", $encryption_key, 0, $encryption_iv) == $password_attempt) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 
@@ -149,7 +158,7 @@ function initialiseSystem()
                     } else {
                         $cache = json_decode(file_get_contents("./local-storage/.cache"), true);
                         if ($cache["DO-NOT-TOUCH:database_installation_status"] == "false") {
-                            $tableCreateSQL = "CREATE TABLE IF NOT EXISTS `quickblaze_records` (`record_id` int(11) NOT NULL, `encrypted_contents` longtext NOT NULL, `encryption_token` varchar(128) NOT NULL, `source_ip` varchar(100) NOT NULL, `record_date` timestamp(5) NOT NULL DEFAULT current_timestamp(5)) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+                            $tableCreateSQL = "CREATE TABLE IF NOT EXISTS `quickblaze_records` (`record_id` int(11) NOT NULL, `encrypted_contents` longtext NOT NULL, `password` varchar(128) NOT NULL,`encryption_token` varchar(128) NOT NULL, `source_ip` varchar(100) NOT NULL, `record_date` timestamp(5) NOT NULL DEFAULT current_timestamp(5)) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
                             $addPrimaryKeySQL = "ALTER TABLE `quickblaze_records` ADD PRIMARY KEY (`record_id`);";
                             if ($conn->query($tableCreateSQL)) {
                                 if ($conn->query($addPrimaryKeySQL)) {
@@ -187,7 +196,7 @@ function initialiseSystem()
 }
 
 /* Database Interaction Functions */
-function insertRecord($encrypted_contents, $encryption_token)
+function insertRecord($encrypted_contents, $encryption_token, $password)
 {
     $configuration = json_decode(file_get_contents("./.config", true), true);
     $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
@@ -200,7 +209,7 @@ function insertRecord($encrypted_contents, $encryption_token)
         }
         $source_ip = filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP) ?? filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
         $record_date = date("Y-m-d H:i:s");
-        if ($mysqli->query("INSERT INTO `quickblaze_records` (`encrypted_contents`, `encryption_token`, `source_ip`, `record_date`) VALUES ('$encrypted_contents', '$encryption_token', '$source_ip', '$record_date');") === TRUE) {
+        if ($mysqli->query("INSERT INTO `quickblaze_records` (`encrypted_contents`, `password`, `encryption_token`, `source_ip`, `record_date`) VALUES ('$encrypted_contents', '$password', '$encryption_token', '$source_ip', '$record_date');") === TRUE) {
             return true;
         } else {
             die($mysqli->error);
