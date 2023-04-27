@@ -12,15 +12,15 @@ function updateFormDisplay() {
     }
     fetchData().then(data => {
         // Element Updates
-        document.getElementById('submission_text_box').value = `${window.location}view?key=${data.response["encryptedKey"]}`; // Set text box to view message URL
-        document.getElementById('submission_text_box').innerHTML = `${window.location}view?key=${data.response["encryptedKey"]}`; // Set text box to view message URL
-        document.getElementById('submission_password').value = data.response["encryptedPassword"]; // Set text box to view message URL
-        document.getElementById('submission_password').innerHTML = data.response["encryptedPassword"]; // Set text box to view message URL
+        document.getElementById('submission_text_box').value = `${window.location}view?key=${data.response.encryptedKey}`; // Set text box to view message URL
+        document.getElementById('submission_text_box').innerHTML = `${window.location}view?key=${data.response.encryptedKey}`; // Set text box to view message URL
+        document.getElementById('submission_password').value = data.response.encryptedPassword; // Set text box to view message URL
+        document.getElementById('submission_password').innerHTML = data.response.encryptedPassword; // Set text box to view message URL
         // Debug Logging
-        log(`Server responsed with '${data.response}'`);
+        log(`Server responsed with '${JSON.parse(data.response)}'`);
         log(`Updated 'submission_text_box.value'`);
         log(`Updated 'submission_text_box.innerHTML'`);
-        log(`Server responsed with '${data.response}'`);
+        log(`Server responsed with '${JSON.parse(data.response)}'`);
         log(`Updated 'submission_password.value'`);
         log(`Updated 'submission_password.innerHTML'`);
     });
