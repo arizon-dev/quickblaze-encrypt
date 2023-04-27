@@ -25,7 +25,7 @@
         <br>
         <h5 class="text-muted">
             <?= translate("The system configuration is not present or has been misconfigured.") ?> <br><br>
-            <a style="text-decoration:none" class="darkmode-ignore" href="https://github.com/axtonprice-dev/quickblaze-encrypt/#system-configurations" target="_blank"><?= translate("Please refer to the GitHub repository.") ?></a>
+            <a style="text-decoration:none" class="darkmode-ignore" href="https://github.com/arizon-dev/quickblaze-encrypt/#system-configurations" target="_blank"><?= translate("Please refer to the GitHub repository.") ?></a>
         </h5>
         <p class="mt-5 mb-3 text-muted">
             <a href="https://github.com/axtonprice/quickblaze-encrypt" class="text-muted no-decoration">GitHub</a> •

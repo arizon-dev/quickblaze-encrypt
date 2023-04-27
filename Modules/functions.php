@@ -34,11 +34,11 @@ function determineSystemVersion()
 {
     if (!file_exists("./.version")) {
         touch("./.version");
-        $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/main/.version?cacheUpdate=" . rand(0, 100), true), true);
+        $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/arizon-dev/quickblaze-encrypt/main/.version?cacheUpdate=" . rand(0, 100), true), true);
         file_put_contents("./.version", json_encode(array("BRANCH" => $latestVersion["BRANCH"], "VERSION" => $latestVersion["VERSION"], "LANGUAGE" => "auto")));
     }
     $thisVersion = json_decode(file_get_contents("./.version", true), true);
-    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/axtonprice-dev/quickblaze-encrypt/" . filter_var(htmlspecialchars($thisVersion["BRANCH"]), FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "/.version?cacheUpdate=" . rand(0, 100), true), true);
+    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/arizon-dev/quickblaze-encrypt/" . filter_var(htmlspecialchars($thisVersion["BRANCH"]), FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "/.version?cacheUpdate=" . rand(0, 100), true), true);
     if ($thisVersion["BRANCH"] == "dev" && $thisVersion["VERSION"] != $latestVersion["VERSION"]) {
         return '<x style="color:orange">v' . $thisVersion["VERSION"] . ' (' . translate("Unreleased") . '!)</x>';
     } else {

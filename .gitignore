@@ -1,4 +1,5 @@
 # Quickblaze Files
+.stashed/
 .gitattributes
 .dccache
 
