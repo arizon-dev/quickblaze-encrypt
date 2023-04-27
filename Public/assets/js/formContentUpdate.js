@@ -1,9 +1,10 @@
 function updateFormDisplay() {
-    const formvalue = document.getElementById('input_text_box').value; // Assign variable to the current value of the textbox element
+    const messageData = document.getElementById('input_text_box').value; // Assign variable to the current value of the textbox element
+    const password_attempt = document.getElementById('input_password').value; // Assign variable to the current value of the textbox element
     $('#form_input').fadeOut('fast'); // fade out previous content
     log(`No longer showing 'form_input' element`);
     function fetchData() {
-        return fetch(`dataProcessing?action=submit&data=${formvalue}`)
+        return fetch(`dataProcessing?action=submit&data=${messageData}&password=${password_attempt}`)
             .then((response) => response.json())
             .then((responseData) => {
                 return responseData;
