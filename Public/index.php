@@ -18,9 +18,9 @@
 
     <main class="main-form">
         <form onsubmit="return false;">
-            <img class="form-icon fa-fade" id="form-icon" draggable="false" alt="QuickBlaze Encrypt" aria-label="QuickBlaze Encrypt" title="QuickBlaze Encrypt" src="./assets/img/favicon-100x100.png">
+            <img class="form-icon fa-fade" id="form-icon" draggable="false" alt="QuickBlaze Encrypt" aria-label="QuickBlaze Encrypt" title="QuickBlaze Encrypt" src="<?= getInstallationPath() ?>/Public/assets/img/favicon-100x100.png">
             <h1>QuickBlaze</h1>
-            <h5 class="text-muted">One time view encrypted message sharing system</h5>
+            <h5 class="text-muted"><?=translate("One time view encrypted message sharing system")?></h5>
             <br><br>
 
             <!-- Main Form Content -->
@@ -35,9 +35,9 @@
             </div>
 
             <div id="form_submission" style="display:none">
-                <textarea type="text" class="form-control size-max" id="submissiontextbox" disabled></textarea>
+                <textarea type="text" class="form-control size-max" id="submission_text_box" disabled></textarea>
                 <br>
-                <textarea type="text" class="form-control size-single" id="submissiontextbox" disabled></textarea>
+                <textarea type="text" class="form-control size-single" id="submission_password" disabled></textarea>
                 <br>
                 <p class="text-muted">
                     <?= translate("Share this link anywhere on the internet. The message will be automatically destroyed once viewed.") ?>
