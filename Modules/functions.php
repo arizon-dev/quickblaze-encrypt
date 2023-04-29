@@ -4,15 +4,6 @@ header("Access-Control-Allow-Origin: *"); // "*" could also be a site such as ht
 
 
 /* Internal Script Functions */
-function get_string_between($string, $start, $end)
-{
-    $string = ' ' . $string;
-    $ini = strpos($string, $start);
-    if ($ini == 0) return '';
-    $ini += strlen($start);
-    $len = strpos($string, $end, $ini) - $ini;
-    return substr($string, $ini, $len);
-}
 function processData($data, $password)
 {
     $encryptionKey = generateKey(64); // Create new key
@@ -20,12 +11,6 @@ function processData($data, $password)
     $encryptedPassword = encryptData($password, $encryptionKey); // Encrypt data
     insertRecord($encryptedData, $encryptionKey, $encryptedPassword); // Insert new database record
     return $encryptionKey;
-}
-function ifTextBoxDisabled()
-{
-    if (isset($_GET["submitted"])) {
-        echo "disabled";
-    }
 }
 function getInstallationPath()
 {
@@ -59,7 +44,6 @@ function generateKey($length)
     return $hex;
 }
 
-
 /* Data Conversion Functions */
 function encryptData($dataForEncryption, $encryption_key)
 {
@@ -80,7 +64,6 @@ function validatePassword($encryption_key, $password_attempt)
         return false;
     }
 }
-
 
 /* System Setup & Checking Functions */
 function initialiseSystem()
@@ -192,7 +175,6 @@ function initialiseSystem()
     createStorageMethodEndpoints(); // Setup files and folders the system will store data.
     checkConfigValues(); // Validate if configuration values are correct & present.
     setupStorageMethod(); // Setup how the system will store the data via the configured method.
-    /* End Functions */
 }
 
 /* Database Interaction Functions */
@@ -222,7 +204,7 @@ function insertRecord($encrypted_contents, $encryption_token, $password)
         if (!file_exists("$baseStorageFolder/encryptions/$uniqueIdentifier/data.json")) touch("$baseStorageFolder/encryptions/$uniqueIdentifier/data.json"); // Create encryption data file
         $source_ip = filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP) ?? filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
         $record_date = date("Y-m-d H:i:s");
-        file_put_contents("$baseStorageFolder/encryptions/$uniqueIdentifier/data.json", '{"filestore_id": "' . $uniqueIdentifier . '", "encrypted_contents": "' . $encrypted_contents . '", "encryption_token": "' . $encryption_token . '", "source_ip": "' . $source_ip . '", "record_date": "' . $record_date . '"}'); // Set data file encryption data
+        file_put_contents("$baseStorageFolder/encryptions/$uniqueIdentifier/data.json", '{"filestore_id": "' . $uniqueIdentifier . '", "encrypted_contents": "' . $encrypted_contents . '", "password": "' . $password . '", "encryption_token": "' . $encryption_token . '", "source_ip": "' . $source_ip . '", "record_date": "' . $record_date . '"}'); // Set data file encryption data
     } else {
         require "./Public/error_docs/ServerConfiguration.php"; // throw error page if invalid configuration
         die();
