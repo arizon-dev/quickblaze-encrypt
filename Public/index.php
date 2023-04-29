@@ -21,7 +21,11 @@
             <img class="form-icon fa-fade" id="form-icon" draggable="false" alt="QuickBlaze Encrypt" aria-label="QuickBlaze Encrypt" title="QuickBlaze Encrypt" src="<?= getInstallationPath() ?>/Public/assets/img/favicon-100x100.png">
             <h1>QuickBlaze</h1>
             <h5 class="text-muted"><?= translate("One time view encrypted message sharing system") ?></h5>
-            <br><br>
+            <div class="snackbar-container darkmode-ignore" id="snackbar-container">
+                <div id="snackbar">
+                    <!-- Snackbar Contents -->
+                </div>
+            </div>
 
             <!-- Main Form Content -->
             <div id="form_input" class="form-area">
@@ -66,8 +70,28 @@
     </main>
 
     <!-- Snackbar Notifications -->
-    <div id="snackbar_link"><?= translate("✅ Link has been copied to clipboard!") ?></div>
-    <div id="snackbar_password"><?= translate("✅ Password has been copied to clipboard!") ?></div>
+    <div class="snackbar-messages">
+        <div id="snackbar_link">
+            <span class="snackbar-text" id="snackbar-text">
+                <?= translate("✅ Link has been copied to clipboard!") ?>
+            </span>
+        </div>
+        <div id="snackbar_password">
+            <span class="snackbar-text" id="snackbar-text">
+                <?= translate("✅ Password has been copied to clipboard!") ?>
+            </span>
+        </div>
+        <div id="snackbar_empty_fields">
+            <span class="snackbar-text" id="snackbar-text">
+                <?= translate("❌ <b>Error!</b> One or more fields are empty!") ?>
+            </span>
+        </div>
+        <div id="snackbar_error">
+            <span class="snackbar-text" id="snackbar-text">
+                <?=translate("❌ <b>Error!</b> An error occurred processing your message!") ?>
+            </span>
+        </div>
+    </div>
 
     <!-- Site Javascript -->
     <script src="<?= getInstallationPath() ?>/Public/assets/js/globalFunctions.js"></script>

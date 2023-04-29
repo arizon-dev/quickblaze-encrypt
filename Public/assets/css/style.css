@@ -1,16 +1,12 @@
 html,
 body {
 	height: 100%;
-}
-
-body {
-	display: flex;
 	align-items: center;
 	padding-top: 40px;
 	padding-bottom: 40px;
 }
 
-#form_submission{
+#form_submission {
 	display: none;
 }
 
@@ -24,7 +20,7 @@ body {
 	height: 43px;
 }
 
-label{
+label {
 	float: left;
 	padding-bottom: 10px;
 }
@@ -45,6 +41,38 @@ label{
 	padding-bottom: 20px;
 }
 
+.mt-2{
+	margin-top: 2px;
+}
+
+.mt-3{
+	margin-top: 3px;
+}
+
+.mt-4{
+	margin-top: 4px;
+}
+
+.mt-5{
+	margin-top: 5px;
+}
+
+.mb-2{
+	margin-bottom: 2px;
+}
+
+.mb-3{
+	margin-bottom: 3px;
+}
+
+.mb-4{
+	margin-bottom: 4px;
+}
+
+.mb-5{
+	margin-bottom: 5px;
+}
+
 .submit-button {
 	width: 35%;
 	margin-top: 20px;
@@ -54,7 +82,9 @@ label{
 	width: 100%;
 	max-width: 600px;
 	padding: 15px;
-	margin: auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5vh;
 }
 
 .main-form .checkbox {
@@ -75,41 +105,40 @@ label{
 }
 
 /* The snackbar - position it at the bottom and in the middle of the screen */
-#snackbar_password,
-#snackbar_link {
-	visibility: hidden;
-	/* Hidden by default. Visible on click */
-	min-width: 250px;
-	/* Set a default minimum width */
-	margin-left: -125px;
-	/* Divide value of min-width by 2 */
-	background-color: #333;
-	/* Black background color */
-	color: #fff;
-	/* White text color */
-	text-align: center;
-	/* Centered text */
-	border-radius: 2px;
-	/* Rounded borders */
-	padding: 16px;
-	/* Padding */
-	position: fixed;
-	/* Sit on top of the screen */
-	z-index: 1;
-	/* Add a z-index if needed */
-	left: 50%;
-	/* Center the snackbar */
-	bottom: 30px;
-	/* 30px from the bottom */
+.snackbar-error {
+	background-color: rgba(250, 76, 76, 0.479);
+	outline: rgb(206, 77, 77) 1px solid;
 }
 
-/* Show the snackbar when clicking on a button (class added with JavaScript) */
+.snackbar-success {
+	background-color: rgba(76, 250, 76, 0.479);
+	outline: rgb(77, 206, 77) 1px solid;
+}
+
+.snackbar-warn {
+	background-color: rgba(250, 250, 76, 0.479);
+	outline: rgb(206, 206, 77) 1px solid;
+}
+
+.snackbar-container {
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+	color: white;
+	border-radius: 2px;
+	text-align: center;
+	width: fit-content;
+}
+
+.snackbar-messages {
+	display: none;
+}
+
+#snackbar_link.show,
 #snackbar_password.show,
-#snackbar_link.show {
+#snackbar_empty_fields.show,
+#snackbar_error.show {
 	visibility: visible;
-	/* Show the snackbar */
-	/* Add animation: Take 0.5 seconds to fade in and out the snackbar.
-	However, delay the fade out process for 2.5 seconds */
 	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
 	animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }

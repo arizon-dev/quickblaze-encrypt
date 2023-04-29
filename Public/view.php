@@ -31,7 +31,7 @@
                 <br>
                 <label for="input_password_attempt">Decryption Password</label>
                 <input class="form-control form-input-item size-single" type="password" id="input_password_attempt" placeholder="<?= translate("Enter decryption password") ?>" required></input>
-                <button class="btn btn-primary submit-button darkmode-ignore" onclick="javascript:updateViewDisplay();">
+                <button class="btn btn-primary submit-button darkmode-ignore" onclick="formValidateDisplay();">
                     <?= translate("Decrypt Message") ?>
                 </button>
             </div>
@@ -42,7 +42,7 @@
                 </h6>
                 <textarea disabled type="text" class="form-control" id="valuetextbox" name="data"></textarea>
                 <br>
-                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="javascript:copyToClipboard('#valuetextbox')">
+                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard('#valuetextbox')">
                     <?= translate("Copy Message") ?>
                 </button>
                 <a class="btn btn-secondary submit-button darkmode-ignore" href="./">

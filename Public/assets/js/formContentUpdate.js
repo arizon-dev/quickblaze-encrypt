@@ -27,11 +27,16 @@ function updateFormDisplay() {
 }
 
 function formValidateDisplay() {
-    if (document.getElementById('input_text_box').value === "" || document.getElementById('input_password').value === "") {
-        log("Form validation failed; One or more fields are empty.")
-    } else{
-        updateFormDisplay();
-        log("Form validation passed; All fields are filled.")
+    if (window.location.pathname === "/view") {
+        // 
+    } else {
+        if (document.getElementById('input_text_box').value === "" || document.getElementById('input_password').value === "") {
+            showSnackBar('snackbar_empty_fields', 'error');
+            log("Form validation failed; One or more fields are empty.");
+        } else {
+            updateFormDisplay(); // Render new form
+            log("Form validation passed; All fields are filled.");
+        }
     }
 }
 
@@ -39,18 +44,20 @@ function updateFormDisplay() {
     $('#form_confirmation').fadeOut('fast'); // fade out previous content
     log(`No longer showing 'form_confirmation' element`);
 
-    let key = new URL(window.location).searchParams.get('key'); // Get key variable from URL; replacing PHP usage
-    log(`Fetched key variable from url -> ${key}`);
+    let key = new URL(window.location).searchParams.get('key'); // fetch key from url variable
+    log(`Fetched key variable from url (${key})`);
 
     fetch(`dataProcessing?action=decrypt&key=${key}`).then(response => response.json()).then(data => {
         if (!data.response) {
-            showSnackBar('snackbarError');
+            showSnackBar('snackbar_error', 'error');
             $('#form_error').fadeIn('fast'); // fade in new content
             log(`Now showing 'form_error' element`);
-            log(`Encryption not found; redirecting in 2s`);
-            setTimeout(() => {
-                window.location.replace('./'); // Redirect to home page
-            }, 2000);
+            log(`Encryption data response not found!`);
+            if (window.location.pathname === "/view") {
+                setTimeout(() => {
+                    window.location.replace('./'); // Redirect to home page
+                }, 2000);
+            }
         } else {
             document.getElementById('valuetextbox').value = data.response; // Set text box to decrypted message
             log(`Updated 'valuetextbox.value'`);
