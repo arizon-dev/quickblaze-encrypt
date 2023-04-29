@@ -25,7 +25,7 @@
             <h5 class="text-muted"><?= translate("One time view encrypted message sharing system") ?></h5>
 
             <!-- Snackbar -->
-            <div class="snackbar-container darkmode-ignore" id="snackbar-container">
+            <div class="alert snackbar-container" id="snackbar-container">
                 <div id="snackbar"></div>
             </div>
 
@@ -78,19 +78,9 @@
                 <?= translate("✅ Link has been copied to clipboard!") ?>
             </span>
         </div>
-        <div id="snackbar_password">
-            <span class="snackbar-text" id="snackbar-text">
-                <?= translate("✅ Password has been copied to clipboard!") ?>
-            </span>
-        </div>
         <div id="snackbar_empty_fields">
             <span class="snackbar-text" id="snackbar-text">
                 <?= translate("❌ <b>Error!</b> One or more fields are empty!") ?>
-            </span>
-        </div>
-        <div id="snackbar_incorrect_password">
-            <span class="snackbar-text" id="snackbar-text">
-                <?= translate("❌ <b>Error!</b> The password you entered is incorrect!") ?>
             </span>
         </div>
         <div id="snackbar_error">

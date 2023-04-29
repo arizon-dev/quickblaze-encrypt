@@ -123,11 +123,9 @@ label {
 .snackbar-container {
 	margin-left: auto;
 	margin-right: auto;
-	padding: 10px;
-	color: white;
-	border-radius: 2px;
+	padding: 10px 15px 10px 15px!important;
 	text-align: center;
-	width: fit-content;
+	max-width: fit-content;
 }
 
 .snackbar-messages {

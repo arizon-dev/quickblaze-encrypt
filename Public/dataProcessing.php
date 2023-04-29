@@ -5,11 +5,19 @@ header("Content-Type: application/json; charset=UTF-8");
 
 if (!isset($_GET["action"]) || !$_GET["action"]) $_GET["action"] = "";
 
-if ($_GET["action"] == "decrypt" && $_GET["key"]) {
-    echo '{"response": "' . htmlspecialchars(decryptData($_GET["key"])) . '", "key": "' . $_GET["key"] . '"}';
-    // destroyRecord(htmlspecialchars($_GET["key"], ENT_QUOTES, 'UTF-8')); // destroy record
-} elseif ($_GET["action"] == "validatePassword" && $_GET["key"]) {
-    echo '{"response": "' . htmlspecialchars(decryptData(htmlspecialchars($_GET["password"]))) . '""}';
+if ($_GET["action"] == "decrypt" && isset($_GET["key"]) && isset($_GET["password"])) {
+    if (decryptData("password", $_GET["key"]) == $_GET["password"]) {
+        echo '{"response": "' . htmlspecialchars(decryptData("encrypted_contents", $_GET["key"])) . '"}';
+        destroyRecord($_GET["key"]); // Destroy record after message decryption
+    } else {
+        echo '{"response": "badpass"}'; // Password is incorrect
+    }
+} else if ($_GET["action"] == "validatePassword" && isset($_GET["key"]) && isset($_GET["password"])) {
+    if (decryptData("password", $_GET["key"]) == $_GET["password"]) {
+        echo '{"response": true}'; // Password is correct
+    } else {
+        echo '{"response": false}'; // Password is incorrect
+    }
 } else if ($_GET["action"] == "checkConfig") {
     $configuration = json_decode(file_get_contents("./.config", true), true);
     if (!file_exists("./.config")) {
@@ -31,6 +39,13 @@ if ($_GET["action"] == "decrypt" && $_GET["key"]) {
 } else if ($_GET["action"] == "submit") {
     $dat = processData($_GET["data"], $_GET["password"]);
     echo '{"response": "' . $dat . '"}';
-} else{
+} else if ($_GET["action"] == "doesMessageExist" && isset($_GET["key"])) {
+    $dat = decryptData("password", $_GET["key"]);
+    if($dat == null || $dat == false || $dat == "" || $dat == "false") {
+        echo '{"response": false}';
+    } else {
+        echo '{"response": true}';
+    }
+} else {
     echo '{"response": "error"}';
 }

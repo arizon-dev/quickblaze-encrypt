@@ -61,15 +61,15 @@ function generateKey($length)
 
 
 /* Data Conversion Functions */
-function encryptData($data, $encryption_key)
+function encryptData($dataForEncryption, $encryption_key)
 {
     $encryption_iv = hex2bin($encryption_key);
-    return openssl_encrypt($data, "AES-128-CTR", $encryption_key, 0, $encryption_iv);
+    return openssl_encrypt($dataForEncryption, "AES-128-CTR", $encryption_key, 0, $encryption_iv);
 }
-function decryptData($encryption_key)
+function decryptData($dataForDecryption, $encryption_key)
 {
     $encryption_iv = hex2bin($encryption_key);
-    return openssl_decrypt(getRecord("encrypted_contents", $encryption_key), "AES-128-CTR", $encryption_key, 0, $encryption_iv);
+    return openssl_decrypt(getRecord($dataForDecryption, $encryption_key), "AES-128-CTR", $encryption_key, 0, $encryption_iv);
 }
 function validatePassword($encryption_key, $password_attempt)
 {

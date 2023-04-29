@@ -25,7 +25,7 @@
             <h5 class="text-muted"><?= translate("One time view encrypted message sharing system") ?></h5>
 
             <!-- Snackbar -->
-            <div class="snackbar-container darkmode-ignore" id="snackbar-container">
+            <div class="alert snackbar-container" id="snackbar-container">
                 <div id="snackbar"></div>
             </div>
 
@@ -45,9 +45,9 @@
                 <h6>
                     <?= translate("This message has now been destroyed!") ?>
                 </h6>
-                <textarea disabled type="text" class="form-control" id="valuetextbox" name="data"></textarea>
+                <textarea disabled type="text" class="form-control form-input-item size-max" id="valuetextbox" name="data"></textarea>
                 <br>
-                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard('#valuetextbox')">
+                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard('valuetextbox', 'snackbar_message')">
                     <?= translate("Copy Message") ?>
                 </button>
                 <a class="btn btn-secondary submit-button darkmode-ignore" href="./">
@@ -56,10 +56,6 @@
             </div>
 
             <div id="form_error" style="display:none">
-                <h6>
-                    <?= translate("This message has already been destroyed!"); ?>
-                </h6>
-                <br>
                 <p><?= translate("You will now be redirected.."); ?></p>
             </div>
 
@@ -74,14 +70,14 @@
 
     <!-- Snackbar Notifications -->
     <div class="snackbar-messages">
-        <div id="snackbar_link">
-            <span class="snackbar-text" id="snackbar-text">
-                <?= translate("✅ Link has been copied to clipboard!") ?>
-            </span>
-        </div>
         <div id="snackbar_password">
             <span class="snackbar-text" id="snackbar-text">
                 <?= translate("✅ Password has been copied to clipboard!") ?>
+            </span>
+        </div>
+        <div id="snackbar_message">
+            <span class="snackbar-text" id="snackbar-text">
+                <?= translate("✅ Message has been copied to clipboard!") ?>
             </span>
         </div>
         <div id="snackbar_empty_fields">
@@ -89,14 +85,14 @@
                 <?= translate("❌ <b>Error!</b> One or more fields are empty!") ?>
             </span>
         </div>
+        <div id="snackbar_message_nonexist">
+            <span class="snackbar-text" id="snackbar-text">
+                <?= translate("❌ <b>Error!</b> The requested message does not exist!") ?>
+            </span>
+        </div>
         <div id="snackbar_incorrect_password">
             <span class="snackbar-text" id="snackbar-text">
                 <?= translate("❌ <b>Error!</b> The password you entered is incorrect!") ?>
-            </span>
-        </div>
-        <div id="snackbar_error">
-            <span class="snackbar-text" id="snackbar-text">
-                <?= translate("❌ <b>Error!</b> An error occurred processing your message!") ?>
             </span>
         </div>
     </div>
@@ -109,6 +105,9 @@
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script>
+        checkEncryptionStatus(); // Check if encryption exists
+    </script>
 
 </body>
 
