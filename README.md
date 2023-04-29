@@ -12,10 +12,9 @@
   </a>
 </p>
 
-> An extremely simple, one-time view encryption system. Send links anywhere on the internet, and the encrypted message will automatically be destroyed after being viewed once!
+> An extremely simplistic, one-time view encryption system. Send links anywhere on the internet, and your encrypted message will automatically be destroyed after being viewed!
 
 ### ✨ [Click to view Demo](https://quickblaze.arizon.dev)
-
 
 ## Requirements
 
@@ -43,11 +42,9 @@ If using MYSQL as storage method:
 * Rename the database configuration file to `Database.env`.
 * View example database configuration below.
 
-
-
 ## System Configurations
 Example configuration of `Database.env`.
-```json
+```js
 {
     "HOSTNAME": "mysql.example.com", // Database Host
     "USERNAME": "admin", // Database Username
@@ -55,8 +52,8 @@ Example configuration of `Database.env`.
     "DATABASE": "quickblaze_db" // Database Name
 }
 ```
-Example default configuration of `.config`.
-```json
+ default configuration of `.config`.
+```js
 { 
   "STORAGE_METHOD": "mysql", // options: 'mysql', 'filetree'
   "LANGUAGE": "auto", // options: 'auto', 'en', 'ru', 'is', etc.
@@ -74,13 +71,10 @@ In the event that you misplace your password or decryption key*, it will be impo
 
 ## Screenshots
 
-<p align="center">
-  <!-- Light Mode -->
-  <img height="160" src=".github/images/screenshots/lightmode-1.png">
-  <img height="160" src=".github/images/screenshots/lightmode-2.png">
-  <img height="160" src=".github/images/screenshots/lightmode-3.png">
-  <img height="160" src=".github/images/screenshots/lightmode-4.png">
-</p>
+<img height="160" src=".github/images/screenshots/lightmode-1.png">
+<img height="160" src=".github/images/screenshots/lightmode-2.png">
+<img height="160" src=".github/images/screenshots/lightmode-3.png">
+<img height="160" src=".github/images/screenshots/lightmode-4.png">
   
 ## Authors and Contributors
 
@@ -93,14 +87,12 @@ In the event that you misplace your password or decryption key*, it will be impo
 ## Show your support
 
 * If you like this project, give a star to support us! ⭐️
-* If you LOVE this project, you can also [become a supporter](https://github.com/sponsorships/arizon-dev)! ❤️
+* Want to sponsor us? [Become an Arizon sponsor](https://github.com/sponsorships/arizon-dev)! ❤️
 
 ## 📝 License
 
 Copyright © 2023 [axtonprice](https://github.com/axtonprice) & [Arizon Software](https://github.com/arizon-dev).<br />
 This project is [MIT](https://github.com/arizon-dev/quickblaze-encrypt/blob/main/LICENSE) licensed.
-
 <hr>
-
 <a href="https://discord.gg/dP3MuBATGc"><img src="https://discord.com/api/guilds/826239258590969897/widget.png?style=banner3"/></a>
 <!-- end: README.md -->
