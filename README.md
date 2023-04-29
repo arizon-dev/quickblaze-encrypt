@@ -1,4 +1,10 @@
-<h1 align="center">Quickblaze Encrypt 🔥</h1>
+<div align="center">
+  <img alt="Quickblaze Logo" src=".github/images/logo.png"></img>
+</div>
+<br>
+<h1 align="center">
+  Quickblaze Encrypt 🔥
+</h1>
 
 <p align="center">
   <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/arizon-dev/quickblaze-encrypt?label=Version">
