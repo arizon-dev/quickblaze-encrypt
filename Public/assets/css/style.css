@@ -24,6 +24,11 @@ body {
 	height: 43px;
 }
 
+label{
+	float: left;
+	padding-bottom: 10px;
+}
+
 .form-control {
 	margin-bottom: 10px;
 }

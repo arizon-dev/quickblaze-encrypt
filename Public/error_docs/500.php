@@ -22,9 +22,9 @@
         <br>
         <a class="btn btn-primary submit-button darkmode-ignore" href="./"><?= translate("Return Home") ?></a>
         <p class="mt-5 mb-3 text-muted">
-            <a href="https://github.com/axtonprice/quickblaze-encrypt" class="text-muted no-decoration">GitHub</a> •
+            <a href="https://github.com/arizon-dev/quickblaze-encrypt" class="text-muted no-decoration">GitHub</a> •
             <a href="https://discord.gg/dP3MuBATGc" class="text-muted no-decoration">Discord</a> •
-            <a href="https://github.com/axtonprice/quickblaze-encrypt/releases" class="text-muted no-decoration"><?= determineSystemVersion(); ?></a>
+            <a href="https://github.com/arizon-dev/quickblaze-encrypt/releases" class="text-muted no-decoration"><?= determineSystemVersion(); ?></a>
         </p>
     </main>
 

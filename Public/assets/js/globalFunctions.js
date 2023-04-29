@@ -1,3 +1,4 @@
+// Onload Functions
 document.addEventListener('DOMContentLoaded', function () {
     fetch(`dataProcessing?action=isDebugMode`).then(response => response.json()).then(data => {
         if (data.response == "false") {
@@ -9,7 +10,12 @@ document.addEventListener('DOMContentLoaded', function () {
     log(`${moment()}`, `Initialisation/DEBUG`);
     log(`Successfully loaded all assets`, `Initialisation/DEBUG`);
 }, false);
+document.addEventListener('DOMContentLoaded', function () {
+    addDarkmodeWidget(); 
+    log(`Initialized darkmode widget`, `Initialisation/DEBUG`);
+})
 
+// Functions
 function addDarkmodeWidget() {
     const options = {
         time: '0.0s', // default: '0.3s'
@@ -19,10 +25,6 @@ function addDarkmodeWidget() {
     const darkmode = new Darkmode(options);
     darkmode.showWidget();
 }
-document.addEventListener('DOMContentLoaded', function () {
-    addDarkmodeWidget(); log(`Initialized darkmode widget`, `Initialisation/DEBUG`);
-})
-
 function log(content, type = null) {
     fetch(`dataProcessing?action=isDebugMode`).then(response => response.json()).then(data => {
         if (data.response == "true") {

@@ -1,10 +1,13 @@
+# Workspace Files
+.vscode/
+
 # Quickblaze Files
 .stashed/
 .gitattributes
 .dccache
 
 # QuickBlaze Security
-local-storage
+local-storage/
 Modules/Database.env
 .config
 

@@ -28,8 +28,11 @@
                 <h6>
                     <?= translate("Decrypt & View Message?") ?>
                 </h6>
+                <br>
+                <label for="input_password_attempt">Decryption Password</label>
+                <input class="form-control form-input-item size-single" type="password" id="input_password_attempt" placeholder="<?= translate("Enter decryption password") ?>" required></input>
                 <button class="btn btn-primary submit-button darkmode-ignore" onclick="javascript:updateViewDisplay();">
-                    <?= translate("View Message") ?>
+                    <?= translate("Decrypt Message") ?>
                 </button>
             </div>
 
@@ -56,17 +59,17 @@
             </div>
 
             <p class="mt-5 mb-3 text-muted">
-                <a href="https://github.com/axtonprice/quickblaze-encrypt" class="text-muted no-decoration">GitHub</a> •
+                <a href="https://github.com/arizon-dev/quickblaze-encrypt" class="text-muted no-decoration">GitHub</a> •
                 <a href="https://discord.gg/dP3MuBATGc" class="text-muted no-decoration">Discord</a> •
-                <a href="https://github.com/axtonprice/quickblaze-encrypt/releases" class="text-muted no-decoration"><?= determineSystemVersion(); ?></a>
+                <a href="https://github.com/arizon-dev/quickblaze-encrypt/releases" class="text-muted no-decoration"><?= determineSystemVersion(); ?></a>
             </p>
 
         </form>
     </main>
 
     <!-- Snackbar Notifications -->
-    <div id="snackbar">✅ <?= translate("Message has been copied to clipboard!") ?></div>
-    <div id="snackbarError"><?= translate("❌ This message could not be found!") ?></div>
+    <div id="snackbar_link"><?= translate("✅ Link has been copied to clipboard!") ?></div>
+    <div id="snackbar_password"><?= translate("✅ Password has been copied to clipboard!") ?></div>
 
     <!-- Site Javascript -->
     <script src="<?= getInstallationPath() ?>/Public/assets/js/globalFunctions.js"></script>

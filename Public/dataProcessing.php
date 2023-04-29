@@ -1,6 +1,8 @@
 <?php
 error_reporting(0);
-header("Access-Control-Allow-Origin: *"); // "*" could also be a site such as http://www.example.com
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
+
 if (!isset($_GET["action"]) || !$_GET["action"]) $_GET["action"] = "";
 
 if ($_GET["action"] == "decrypt" && $_GET["key"]) {
@@ -28,5 +30,7 @@ if ($_GET["action"] == "decrypt" && $_GET["key"]) {
     echo '{"response": "' . $configuration["DEBUG_MODE"] . '"}';
 } else if ($_GET["action"] == "submit") {
     $dat = processData($_GET["data"], $_GET["password"]);
-    echo '{"response": { "encryptedKey": "' . $dat["encryptedKey"] . '", "encryptedPassword": "' . $dat["encryptedPassword"] . '" }}';
+    echo '{"response": "' . $dat . '"}';
+} else{
+    echo '{"response": "error"}';
 }

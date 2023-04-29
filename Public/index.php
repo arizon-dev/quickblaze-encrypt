@@ -25,24 +25,28 @@
 
             <!-- Main Form Content -->
             <div id="form_input" class="form-area">
+                <label for="input_text_box"><?= translate("Secret Message") ?></label>
                 <textarea type="text" class="form-control form-input-item size-max" id="input_text_box" placeholder="<?= translate("Enter your secret message!") ?>" required></textarea>
+                <label for="input_password"><?= translate("Decryption Password") ?></label>
                 <input class="form-control form-input-item size-single" id="input_password" placeholder="<?= translate("Enter decryption password") ?>" required></input>
-                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="updateFormDisplay();">
+                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="formValidateDisplay();">
                     <?= translate("Encrypt Message"); ?>
                 </button>
             </div>
 
             <div id="form_submission" class="form-area">
+                <label for="submission_text_box"><?= translate("Share Link") ?></label>
                 <textarea type="text" class="form-control form-input-item size-max" id="submission_text_box" disabled></textarea>
+                <label for="submission_password"><?= translate("Decryption Password") ?></label>
                 <input type="text" class="form-control form-input-item size-single" id="submission_password" disabled></input>
                 <br>
                 <p class="text-muted">
                     <?= translate("Share this link and decryption password anywhere on the internet. The message will be automatically destroyed once viewed.") ?>
                 </p>
-                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard('#submission_text_box', '#snackbar_link')">
+                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard('submission_text_box', 'snackbar_link')">
                     <?= translate("Copy Link") ?>
                 </button>
-                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard('#submission_password', '#snackbar_password')">
+                <button type="button" class="btn btn-primary submit-button darkmode-ignore" onclick="copyToClipboard('submission_password', 'snackbar_password')">
                     <?= translate("Copy Password") ?>
                 </button>
                 <a class="btn btn-secondary submit-button darkmode-ignore" href="./">
@@ -51,9 +55,9 @@
             </div>
 
             <p class="mt-5 mb-3 text-muted">
-                <a href="https://github.com/axtonprice/quickblaze-encrypt" class="text-muted no-decoration">GitHub</a> •
+                <a href="https://github.com/arizon-dev/quickblaze-encrypt" class="text-muted no-decoration">GitHub</a> •
                 <a href="https://discord.gg/dP3MuBATGc" class="text-muted no-decoration">Discord</a> •
-                <a href="https://github.com/axtonprice/quickblaze-encrypt/releases" class="text-muted no-decoration">
+                <a href="https://github.com/arizon-dev/quickblaze-encrypt/releases" class="text-muted no-decoration">
                     <?= determineSystemVersion(); ?>
                 </a>
             </p>

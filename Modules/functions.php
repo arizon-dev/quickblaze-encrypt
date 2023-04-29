@@ -19,7 +19,7 @@ function processData($data, $password)
     $encryptedData = encryptData($data, $encryptionKey); // Encrypt data
     $encryptedPassword = encryptData($password, $encryptionKey); // Encrypt data
     insertRecord($encryptedData, $encryptionKey, $encryptedPassword); // Insert new database record
-    return array("encryptionKey" => $encryptionKey, "encryptedPassword" => $encryptedPassword);
+    return $encryptionKey;
 }
 function ifTextBoxDisabled()
 {
