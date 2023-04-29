@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="<?= getInstallationPath() ?>/Public/assets/img/favicon-100x100.png">
     <meta name="description" content="<?= translate("An extremely simple, one-time view encrypted message system. Send anybody passwords, or secret messages on a one-time view basis.") ?>">
-    <title>QuickBlaze</title>
+    <title>QuickBlaze Encrypt</title>
 
     <!-- Site CSS -->
     <link href="<?= getInstallationPath() ?>/Public/assets/css/style.css" rel="stylesheet">

@@ -26,10 +26,22 @@ if ($url == "") {
     /* Not Found Page */
     require("./Modules/functions.php");
     return require("./Public/error_docs/404.php");
-} elseif ($url == "403") {
+} elseif ($url == "404") {
     /* Not Found Page */
     require("./Modules/functions.php");
-    return require("./Public/error_docs/403.php");
+    return require("./Public/error_docs/404.php");
+} elseif ($url == "DatabaseConfig") {
+    /* Not Found Page */
+    require("./Modules/functions.php");
+    return require("./Public/error_docs/DatabaseConfig.php");
+} elseif ($url == "DatabaseCredentials") {
+    /* Not Found Page */
+    require("./Modules/functions.php");
+    return require("./Public/error_docs/DatabaseCredentials.php");
+} elseif ($url == "ServerConfiguration") {
+    /* Not Found Page */
+    require("./Modules/functions.php");
+    return require("./Public/error_docs/ServerConfiguration.php");
 } else {
     if ($url == "500") {
         /* Server Error Page */
