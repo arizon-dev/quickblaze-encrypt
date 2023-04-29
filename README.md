@@ -21,14 +21,19 @@
 
 - PHP v7 or higher.
 - Accessible webserver with PHP support.
-- MySQL server for database host.
+- MySQL server for database host. *(Optional\*)*
+- PHP [MYSQL](http://php.net/manual/en/book.mysql.php) module for database access. *(Optional\*)*
+- PHP [PDO](http://php.net/manual/en/book.pdo.php) module for database access. *(Optional\*)*
+- PHP [OPENSSL](http://php.net/manual/en/book.openssl.php) module for encryption. *(Optional\*)*
 - PHP [MBSTRING](http://php.net/manual/en/book.mbstring.php) module for full UTF-8 support.
 - PHP [JSON](http://php.net/manual/en/book.json.php) module for JSON manipulation.
 
+*\* **Optional:** dependant on storage method configuration in `.config`. [See below.](https://github.com/arizon-dev/quickblaze-encrypt/#system-configurations)*
+
 ## Installation
 
-1. Download the latest version of Quickblaze from the <a href="https://github.com/arizon-dev/quickblaze-encrypt/releases">releases page</a>. 
-2. Upload and extract the contents to your web server. You can also pull the repo with `git pull`.
+1. Download the latest version of Quickblaze from the [releases page](https://github.com/arizon-dev/quickblaze-encrypt/releases). 
+2. Upload and extract the contents to your web server. You can also pull the repo with GitHub Desktop.
 3. Visit your domain installation directory or subdomain https://example.com/quickblaze-encrypt/
 
 **Don't** delete the `.version`, `.config`, or `.cache` files once the installation has completed! They contain necessary version and configuration data, and removing them will cause issues!
@@ -50,7 +55,7 @@ Example configuration of `Database.env`.
     "DATABASE": "quickblaze_db" // Database Name
 }
 ```
-Example configuration of `.config`.
+Example default configuration of `.config`.
 ```json
 { 
   "STORAGE_METHOD": "mysql", // options: 'mysql', 'filetree'
