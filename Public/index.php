@@ -21,10 +21,10 @@
             <img class="form-icon fa-fade" id="form-icon" draggable="false" alt="QuickBlaze Encrypt" aria-label="QuickBlaze Encrypt" title="QuickBlaze Encrypt" src="<?= getInstallationPath() ?>/Public/assets/img/favicon-100x100.png">
             <h1>QuickBlaze</h1>
             <h5 class="text-muted"><?= translate("One time view encrypted message sharing system") ?></h5>
+
+            <!-- Snackbar -->
             <div class="snackbar-container darkmode-ignore" id="snackbar-container">
-                <div id="snackbar">
-                    <!-- Snackbar Contents -->
-                </div>
+                <div id="snackbar"></div>
             </div>
 
             <!-- Main Form Content -->
@@ -86,9 +86,14 @@
                 <?= translate("❌ <b>Error!</b> One or more fields are empty!") ?>
             </span>
         </div>
+        <div id="snackbar_incorrect_password">
+            <span class="snackbar-text" id="snackbar-text">
+                <?= translate("❌ <b>Error!</b> The password you entered is incorrect!") ?>
+            </span>
+        </div>
         <div id="snackbar_error">
             <span class="snackbar-text" id="snackbar-text">
-                <?=translate("❌ <b>Error!</b> An error occurred processing your message!") ?>
+                <?= translate("❌ <b>Error!</b> An error occurred processing your message!") ?>
             </span>
         </div>
     </div>

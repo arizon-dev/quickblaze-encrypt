@@ -1,13 +1,13 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 if (!isset($_GET["action"]) || !$_GET["action"]) $_GET["action"] = "";
 
 if ($_GET["action"] == "decrypt" && $_GET["key"]) {
-    echo '{"response": "' . htmlspecialchars(decryptData(htmlspecialchars($_GET["key"]))) . '", "key": "' . $_GET["key"] . '"}';
-    destroyRecord(htmlspecialchars($_GET["key"], ENT_QUOTES, 'UTF-8')); // destroy record
+    echo '{"response": "' . htmlspecialchars(decryptData($_GET["key"])) . '", "key": "' . $_GET["key"] . '"}';
+    // destroyRecord(htmlspecialchars($_GET["key"], ENT_QUOTES, 'UTF-8')); // destroy record
 } elseif ($_GET["action"] == "validatePassword" && $_GET["key"]) {
     echo '{"response": "' . htmlspecialchars(decryptData(htmlspecialchars($_GET["password"]))) . '""}';
 } else if ($_GET["action"] == "checkConfig") {

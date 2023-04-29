@@ -21,14 +21,17 @@
             <img class="form-icon fa-fade" id="form-icon" draggable="false" alt="QuickBlaze Encrypt" aria-label="QuickBlaze Encrypt" title="QuickBlaze Encrypt" src="<?= getInstallationPath() ?>/Public/assets/img/favicon-100x100.png">
             <h1>QuickBlaze</h1>
             <h5 class="text-muted"><?= translate("One time view encrypted message sharing system") ?></h5>
-            <br><br>
+
+            <!-- Snackbar -->
+            <div class="snackbar-container darkmode-ignore" id="snackbar-container">
+                <div id="snackbar"></div>
+            </div>
 
             <!-- Main Form Content -->
             <div id="form_confirmation">
                 <h6>
                     <?= translate("Decrypt & View Message?") ?>
                 </h6>
-                <br>
                 <label for="input_password_attempt">Decryption Password</label>
                 <input class="form-control form-input-item size-single" type="password" id="input_password_attempt" placeholder="<?= translate("Enter decryption password") ?>" required></input>
                 <button class="btn btn-primary submit-button darkmode-ignore" onclick="formValidateDisplay();">
@@ -38,7 +41,7 @@
 
             <div id="form_content" style="display:none">
                 <h6>
-                    <?= translate("This message has been destroyed!") ?>
+                    <?= translate("This message has now been destroyed!") ?>
                 </h6>
                 <textarea disabled type="text" class="form-control" id="valuetextbox" name="data"></textarea>
                 <br>
@@ -68,12 +71,37 @@
     </main>
 
     <!-- Snackbar Notifications -->
-    <div id="snackbar_link"><?= translate("✅ Link has been copied to clipboard!") ?></div>
-    <div id="snackbar_password"><?= translate("✅ Password has been copied to clipboard!") ?></div>
+    <div class="snackbar-messages">
+        <div id="snackbar_link">
+            <span class="snackbar-text" id="snackbar-text">
+                <?= translate("✅ Link has been copied to clipboard!") ?>
+            </span>
+        </div>
+        <div id="snackbar_password">
+            <span class="snackbar-text" id="snackbar-text">
+                <?= translate("✅ Password has been copied to clipboard!") ?>
+            </span>
+        </div>
+        <div id="snackbar_empty_fields">
+            <span class="snackbar-text" id="snackbar-text">
+                <?= translate("❌ <b>Error!</b> One or more fields are empty!") ?>
+            </span>
+        </div>
+        <div id="snackbar_incorrect_password">
+            <span class="snackbar-text" id="snackbar-text">
+                <?= translate("❌ <b>Error!</b> The password you entered is incorrect!") ?>
+            </span>
+        </div>
+        <div id="snackbar_error">
+            <span class="snackbar-text" id="snackbar-text">
+                <?= translate("❌ <b>Error!</b> An error occurred processing your message!") ?>
+            </span>
+        </div>
+    </div>
 
     <!-- Site Javascript -->
     <script src="<?= getInstallationPath() ?>/Public/assets/js/globalFunctions.js"></script>
-    <script src="<?= getInstallationPath() ?>/Public/assets/js/buttonCopyURL.js"></script>
+    <script src="<?= getInstallationPath() ?>/Public/assets/js/buttonSnackbar.js"></script>
     <script src="<?= getInstallationPath() ?>/Public/assets/js/formContentUpdate.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
