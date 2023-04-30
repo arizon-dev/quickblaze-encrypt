@@ -4,17 +4,8 @@
 # Quickblaze Files
 .stashed/
 .gitattributes
-.dccache
 
 # Quickblaze Security
 local-storage/
 Modules/Database.env
 .config
-
-# Quickblaze Composer
-vendor/
-composer.lock
-
-# Docker (Unreleased)
-Dockerfile
-.dockerignore
