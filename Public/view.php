@@ -82,17 +82,17 @@
         </div>
         <div id="snackbar_empty_fields">
             <span class="snackbar-text" id="snackbar-text">
-                <?= translate("❌ <b>Error!</b> One or more fields are empty!") ?>
+                <?= translate("❌ Error! One or more fields are empty!") ?>
             </span>
         </div>
         <div id="snackbar_message_nonexist">
             <span class="snackbar-text" id="snackbar-text">
-                <?= translate("❌ <b>Error!</b> The requested message does not exist!") ?>
+                <?= translate("❌ Error! The requested message does not exist!") ?>
             </span>
         </div>
         <div id="snackbar_incorrect_password">
             <span class="snackbar-text" id="snackbar-text">
-                <?= translate("❌ <b>Error!</b> The password you entered is incorrect!") ?>
+                <?= translate("❌ Error! The password you entered is incorrect!") ?>
             </span>
         </div>
     </div>
