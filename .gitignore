@@ -6,12 +6,12 @@
 .gitattributes
 .dccache
 
-# QuickBlaze Security
+# Quickblaze Security
 local-storage/
 Modules/Database.env
 .config
 
-# QuickBlaze Composer
+# Quickblaze Composer
 vendor/
 composer.lock
 

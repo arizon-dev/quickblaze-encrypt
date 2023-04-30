@@ -15,7 +15,7 @@ function processData($data, $password)
 function getInstallationPath()
 {
     $config = json_decode(file_get_contents("./.config", true), true);
-    echo $config["INSTALLATION_PATH"];
+    return htmlspecialchars($config["INSTALLATION_PATH"]);
 }
 function determineSystemVersion()
 {
@@ -27,12 +27,12 @@ function determineSystemVersion()
     $thisVersion = json_decode(file_get_contents("./.version", true), true);
     $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/arizon-dev/quickblaze-encrypt/" . filter_var(htmlspecialchars($thisVersion["BRANCH"]), FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "/.version?cacheUpdate=" . rand(0, 100), true), true);
     if ($thisVersion["BRANCH"] == "dev" && $thisVersion["VERSION"] != $latestVersion["VERSION"]) {
-        return '<x style="color:orange">v' . $thisVersion["VERSION"] . ' (' . translate("Unreleased") . '!)</x>';
+        return htmlspecialchars('<x style="color:orange">v' . $thisVersion["VERSION"] . ' (' . translate("Unreleased") . ')</x>');
     } else {
         if ($thisVersion["BRANCH"] == "main" && $thisVersion["VERSION"] != $latestVersion["VERSION"]) {
-            return '<x style="color:red">v' . $thisVersion["VERSION"] . ' (' . translate("Outdated") . '!)</x>';
+            return htmlspecialchars('<x style="color:red">v' . $thisVersion["VERSION"] . ' (' . translate("Outdated") . ')</x>');
         } else {
-            return 'v' . $thisVersion["VERSION"] . '';
+            return htmlspecialchars('v' . $thisVersion["VERSION"]);
         }
     }
 }
@@ -76,6 +76,7 @@ function initialiseSystem()
     }
     function checkConfigValues()
     {
+        if(empty($_SERVER['SERVER_PORT']) || empty($_SERVER['SERVER_NAME']) || empty($_SERVER['HTTPS']) || empty($_SERVER['REQUEST_URI'])) header("Location: ./500"); // Kill request if server vars are empty
         $configuration = json_decode(file_get_contents("./.config", true), true);
 
         /* Config File Variables */
@@ -84,12 +85,11 @@ function initialiseSystem()
         } else {
             $TEMP_STORAGE_METHOD = $configuration["STORAGE_METHOD"];
         }
+        $TEMP_PATH = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
         if ($_SERVER["SERVER_PORT"] == "80" || $_SERVER["SERVER_PORT"] == "443") {
-            $TEMP_PATH = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
             $TEMP_PATH .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
             $TEMP_PATH = rtrim($TEMP_PATH, '/'); // Remove last slash from the new URL
         } else { // Webserver is using a custom port!
-            $TEMP_PATH = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
             $TEMP_PATH .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
             $TEMP_PATH = rtrim($TEMP_PATH, '/'); // Remove last slash from the new URL
         }
@@ -182,6 +182,7 @@ function insertRecord($encrypted_contents, $encryption_token, $password)
 {
     $configuration = json_decode(file_get_contents("./.config", true), true);
     $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
+    if(empty($_SERVER['HTTP_CF_CONNECTING_IP']) || empty($_SERVER['REMOTE_ADDR'])) header("Location: ./500"); // Kill request if server vars are empty
     if ($_SERVER['HTTP_CF_CONNECTING_IP'] == "" || !isset($_SERVER['HTTP_CF_CONNECTING_IP'])) $_SERVER['HTTP_CF_CONNECTING_IP'] = $_SERVER["REMOTE_ADDR"];
     if (strtolower($configuration["STORAGE_METHOD"]) == "mysql") {
         $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
@@ -303,5 +304,5 @@ function translate($q)
     }
     $res = file_get_contents("https://translate.googleapis.com/translate_a/single?client=gtx&ie=UTF-8&oe=UTF-8&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&sl=" . $lang . "&tl=" . $tl . "&hl=hl&q=" . urlencode($q), $_SERVER['DOCUMENT_ROOT'] . "/transes.html");
     $res = json_decode($res);
-    return $res[0][0][0];
+    return htmlspecialchars($res[0][0][0]); // Escape response
 }

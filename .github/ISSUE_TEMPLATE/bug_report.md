@@ -8,7 +8,7 @@ assignees: axtonprice
 ---
 
 **Describe the bug**
-A clear and concise description of what the bug is. Do not submit bug report if you are not using the latest QuickBlaze version!
+A clear and concise description of what the bug is. Do not submit bug report if you are not using the latest Quickblaze version!
 
 **To Reproduce**
 Steps to reproduce the behavior:

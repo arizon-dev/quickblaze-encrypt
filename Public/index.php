@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="<?= getInstallationPath() ?>/Public/assets/img/favicon-100x100.png">
     <meta name="description" content="<?= translate("An extremely simple, one-time view encrypted message system. Send anybody passwords, or secret messages on a one-time view basis.") ?>">
-    <title>QuickBlaze Encrypt</title>
+    <title>Quickblaze Encrypt</title>
 
     <!-- Site CSS -->
     <link href="<?= getInstallationPath() ?>/Public/assets/css/style.css" rel="stylesheet">
@@ -19,9 +19,9 @@
     <main class="main-form">
         <form onsubmit="return false;">
             <a href="<?= getInstallationPath() ?>">
-                <img class="form-icon fa-fade" id="form-icon" draggable="false" alt="QuickBlaze Encrypt" aria-label="QuickBlaze Encrypt" title="QuickBlaze Encrypt" src="<?= getInstallationPath() ?>/Public/assets/img/favicon-100x100.png">
+                <img class="form-icon fa-fade" id="form-icon" draggable="false" alt="Quickblaze Encrypt" aria-label="Quickblaze Encrypt" title="Quickblaze Encrypt" src="<?= getInstallationPath() ?>/Public/assets/img/favicon-100x100.png">
             </a>
-            <h1>QuickBlaze</h1>
+            <h2>Quickblaze Encrypt</h2>
             <h5 class="text-muted"><?= translate("One time view encrypted message sharing system") ?></h5>
 
             <!-- Snackbar -->
@@ -80,12 +80,12 @@
         </div>
         <div id="snackbar_empty_fields">
             <span class="snackbar-text" id="snackbar-text">
-                <?= translate("❌ <b>Error!</b> One or more fields are empty!") ?>
+                <?= translate("❌ Error! One or more fields are empty!") ?>
             </span>
         </div>
         <div id="snackbar_error">
             <span class="snackbar-text" id="snackbar-text">
-                <?= translate("❌ <b>Error!</b> An error occurred processing your message!") ?>
+                <?= translate("❌ Error! An error occurred processing your message!") ?>
             </span>
         </div>
     </div>

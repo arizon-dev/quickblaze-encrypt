@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="<?= getInstallationPath() ?>/Public/assets/img/favicon-100x100.png">
     <meta name="description" content="<?= translate("An extremely simple, one-time view encryption message system. Send anybody passwords, or secret messages on a one-time view basis.") ?>">
-    <title>QuickBlaze Encrypt</title>
+    <title>Quickblaze Encrypt</title>
 
     <!-- Site CSS -->
     <link href="<?= getInstallationPath() ?>/Public/assets/css/style.css" rel="stylesheet">
@@ -18,7 +18,7 @@
 
     <main class="main-form">
         <a href="<?= getInstallationPath() ?>">
-            <img class="form-icon fa-fade" id="form-icon" draggable="false" alt="QuickBlaze Encrypt" aria-label="QuickBlaze Encrypt" title="QuickBlaze Encrypt" src="<?= getInstallationPath() ?>/Public/assets/img/favicon-100x100.png">
+            <img class="form-icon fa-fade" id="form-icon" draggable="false" alt="Quickblaze Encrypt" aria-label="Quickblaze Encrypt" title="Quickblaze Encrypt" src="<?= getInstallationPath() ?>/Public/assets/img/favicon-100x100.png">
         </a>
         <h1>Database Error</h1>
         <br>

@@ -1,7 +1,6 @@
 <div align="center">
   <img alt="Quickblaze Logo" src=".github/images/logo.png"></img>
 </div>
-<br>
 <h1 align="center">
   Quickblaze Encrypt 🔥
 </h1>
@@ -77,10 +76,12 @@ In the event that you misplace your password or decryption key*, it will be impo
 
 ## Screenshots
 
-<img height="160" src=".github/images/screenshots/lightmode-1.png">
-<img height="160" src=".github/images/screenshots/lightmode-2.png">
-<img height="160" src=".github/images/screenshots/lightmode-3.png">
-<img height="160" src=".github/images/screenshots/lightmode-4.png">
+<div align="center">
+  <img height="160" src=".github/images/screenshots/lightmode-1.png">
+  <img height="160" src=".github/images/screenshots/lightmode-2.png">
+  <img height="160" src=".github/images/screenshots/lightmode-3.png">
+  <img height="160" src=".github/images/screenshots/lightmode-4.png">
+</div>
   
 ## Authors and Contributors
 
