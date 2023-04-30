@@ -3,17 +3,20 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-if (!isset($_GET["action"]) || !$_GET["action"]) $_GET["action"] = "";
+if (empty($_GET["action"])) $_GET["action"] = "";
+if (empty($_GET["key"])) $_GET["key"] = "";
+if (empty($_GET["data"])) $_GET["data"] = "";
+if (empty($_GET["password"])) $_GET["password"] = "";
 
 if ($_GET["action"] == "decrypt" && isset($_GET["key"]) && isset($_GET["password"])) {
     if (decryptData("password", $_GET["key"]) == $_GET["password"]) {
-        echo '{"response": "' . htmlspecialchars(decryptData("encrypted_contents", $_GET["key"])) . '"}';
-        destroyRecord($_GET["key"]); // Destroy record after message decryption
+        echo '{"response": "' . htmlspecialchars(decryptData("encrypted_contents", stripslashes($_GET["key"]))) . '"}';
+        destroyRecord(stripslashes($_GET["key"])); // Destroy record after message decryption
     } else {
         echo '{"response": "badpass"}'; // Password is incorrect
     }
 } else if ($_GET["action"] == "validatePassword" && isset($_GET["key"]) && isset($_GET["password"])) {
-    if (decryptData("password", $_GET["key"]) == $_GET["password"]) {
+    if (decryptData("password", stripslashes($_GET["key"])) == $_GET["password"]) {
         echo '{"response": true}'; // Password is correct
     } else {
         echo '{"response": false}'; // Password is incorrect
@@ -37,11 +40,11 @@ if ($_GET["action"] == "decrypt" && isset($_GET["key"]) && isset($_GET["password
     $configuration = json_decode(file_get_contents("./.config", true), true);
     echo '{"response": "' . $configuration["DEBUG_MODE"] . '"}';
 } else if ($_GET["action"] == "submit") {
-    $dat = processData($_GET["data"], $_GET["password"]);
+    $dat = processData(stripslashes($_GET["data"]), stripslashes($_GET["password"]));
     echo '{"response": "' . $dat . '"}';
 } else if ($_GET["action"] == "doesMessageExist" && isset($_GET["key"])) {
     $dat = decryptData("password", $_GET["key"]);
-    if($dat == null || $dat == false || $dat == "" || $dat == "false") {
+    if ($dat == null || $dat == false || $dat == "" || $dat == "false") {
         echo '{"response": false}';
     } else {
         echo '{"response": true}';

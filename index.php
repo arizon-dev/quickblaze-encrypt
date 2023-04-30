@@ -1,9 +1,10 @@
 <?php
 /* Initialise the Application */
+if(empty($_SERVER['SCRIPT_NAME'])) header("Location: 500"); // No request server variable is available
+if(empty($_SERVER['REQUEST_URI'])) $_SERVER['REQUEST_URI'] = $_SERVER['SCRIPT_NAME'];
 $url = $_SERVER['REQUEST_URI'];
 $url = substr($url, strrpos($url, '/') + 1);
 if (strpos($url, '?') !== false) $url = substr($url, 0, strpos($url, "?"));
-
 /* Initialise Displays */
 if ($url == "dataProcessing") {
     /* Form Submission Handler */
