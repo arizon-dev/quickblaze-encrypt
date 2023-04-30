@@ -25,14 +25,14 @@ function determineSystemVersion()
         file_put_contents("./.version", json_encode(array("BRANCH" => $latestVersion["BRANCH"], "VERSION" => $latestVersion["VERSION"], "LANGUAGE" => "auto")));
     }
     $thisVersion = json_decode(file_get_contents("./.version", true), true);
-    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/arizon-dev/quickblaze-encrypt/" . filter_var(htmlspecialchars($thisVersion["BRANCH"]), FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "/.version?cacheUpdate=" . rand(0, 100), true), true);
+    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/arizon-dev/quickblaze-encrypt/" . filter_var($thisVersion["BRANCH"]) . "/.version?cacheUpdate=" . rand(0, 100), true), true);
     if ($thisVersion["BRANCH"] == "dev" && $thisVersion["VERSION"] != $latestVersion["VERSION"]) {
-        return htmlspecialchars('<x style="color:orange">v' . $thisVersion["VERSION"] . ' (' . translate("Unreleased") . ')</x>');
+        return '<x style="color:orange">v' . $thisVersion["VERSION"] . ' (' . translate("Unreleased") . ')</x>'; 
     } else {
         if ($thisVersion["BRANCH"] == "main" && $thisVersion["VERSION"] != $latestVersion["VERSION"]) {
-            return htmlspecialchars('<x style="color:red">v' . $thisVersion["VERSION"] . ' (' . translate("Outdated") . ')</x>');
+            return '<x style="color:red">v' . $thisVersion["VERSION"] . ' (' . translate("Outdated") . ')</x>';
         } else {
-            return htmlspecialchars('v' . $thisVersion["VERSION"]);
+            return 'v' . $thisVersion["VERSION"];
         }
     }
 }
