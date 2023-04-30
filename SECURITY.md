@@ -7,7 +7,7 @@
 | <img align="center" src="https://img.shields.io/github/v/tag/arizon-dev/quickblaze-encrypt?label=%20&style=flat-square"> and above.|✅| 
 | Below <img align="center" src="https://img.shields.io/github/v/tag/arizon-dev/quickblaze-encrypt?label=%20&style=flat-square">. |❌| 
 
-> Versions below the latest release are not supported. We will not be providing support for them and suggestions, bug reports and other requests will be automatically ignored.
+> Versions below the latest release are not supported. This includes **all** canary non-releases. We will not be providing support for them and suggestions, bug reports and other requests will be automatically ignored.
 
 ## Reports & Submissions
 

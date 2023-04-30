@@ -26,7 +26,7 @@ function determineSystemVersion()
     }
     $thisVersion = json_decode(file_get_contents("./.version", true), true);
     $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/arizon-dev/quickblaze-encrypt/" . filter_var($thisVersion["BRANCH"]) . "/.version?cacheUpdate=" . rand(0, 100), true), true);
-    if ($thisVersion["BRANCH"] == "dev" && $thisVersion["VERSION"] != $latestVersion["VERSION"]) {
+    if ($thisVersion["BRANCH"] == "canary" && $thisVersion["VERSION"] != $latestVersion["VERSION"]) {
         return '<x style="color:orange">v' . $thisVersion["VERSION"] . ' (' . translate("Unreleased") . ')</x>'; 
     } else {
         if ($thisVersion["BRANCH"] == "main" && $thisVersion["VERSION"] != $latestVersion["VERSION"]) {
