@@ -144,7 +144,7 @@ function initialiseSystem()
                         die();
                     } else {
                         $cache = json_decode(file_get_contents("./local-storage/.cache"), true);
-                        if ($cache["DO-NOT-TOUCH:database_installation_status"] == "false") {
+                        if ($cache["DO-NOT-TOUCH:database_installation_status"] == "false" || !isset($cache["DO-NOT-TOUCH:database_installation_status"])) {
                             $tableCreateSQL = "CREATE TABLE IF NOT EXISTS `quickblaze_records` (`record_id` int(11) NOT NULL, `encrypted_contents` longtext NOT NULL, `encryption_token` varchar(128) NOT NULL, `source_ip` varchar(100) NOT NULL, `record_date` timestamp(5) NOT NULL DEFAULT current_timestamp(5)) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
                             $addPrimaryKeySQL = "ALTER TABLE `quickblaze_records` ADD PRIMARY KEY (`record_id`);";
                             if ($conn->query($tableCreateSQL)) {
