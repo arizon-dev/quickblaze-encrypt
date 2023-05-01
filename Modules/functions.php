@@ -122,6 +122,7 @@ function initialiseSystem()
     {
         $cache = json_decode(file_get_contents("./local-storage/.cache", true), true);
         $configuration = json_decode(file_get_contents("./.config", true), true);
+        file_put_contents("./local-storage/.cache", '{"DO-NOT-TOUCH:database_installation_status": "notset", "config_created": "true"}');
 
         if (strtolower($configuration["STORAGE_METHOD"]) == "mysql") {
             if (!file_exists("./Modules/Database.env")) {
@@ -145,7 +146,7 @@ function initialiseSystem()
                             $addPrimaryKeySQL = "ALTER TABLE `quickblaze_records` ADD PRIMARY KEY (`record_id`);";
                             if ($conn->query($tableCreateSQL)) {
                                 if ($conn->query($addPrimaryKeySQL)) {
-                                    file_put_contents("./local-storage/.cache", '{"DO-NOT-TOUCH:database_installation_status": "true"}');
+                                    file_put_contents("./local-storage/.cache", '{"DO-NOT-TOUCH:database_installation_status": "true", "config_created": "true"}');
                                 }
                             } else {
                                 require "./Public/error_docs/DatabaseCredentials.php"; // throw error page if invalid credentials
@@ -293,16 +294,16 @@ function getRecord($dataToFetch, $encryption_token)
 /* Translation Feature */
 function translate($q)
 {
-    $lang = "en"; // Default language
+    $translateFrom = "en"; // Default language
     $configuration = json_decode(file_get_contents("./.config", true), true);
     if ($configuration["LANGUAGE"] == "auto") {
-        $tl = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        $translateTo = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
     } else if ($configuration["LANGUAGE"] != "") {
-        $tl = $configuration["LANGUAGE"];
+        $translateTo = $configuration["LANGUAGE"];
     } else {
-        $tl = "en";
+        $translateTo = "en";
     }
-    $res = file_get_contents("https://translate.googleapis.com/translate_a/single?client=gtx&ie=UTF-8&oe=UTF-8&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&sl=" . $lang . "&tl=" . $tl . "&hl=hl&q=" . urlencode($q), $_SERVER['DOCUMENT_ROOT'] . "/transes.html");
+    $res = file_get_contents("https://translate.googleapis.com/translate_a/single?client=gtx&ie=UTF-8&oe=UTF-8&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&sl=" . $translateFrom . "&tl=" . $translateTo . "&hl=hl&q=" . urlencode($q), $_SERVER['DOCUMENT_ROOT'] . "/transes.html");
     $res = json_decode($res);
     return htmlspecialchars($res[0][0][0]); // Escape response
 }
