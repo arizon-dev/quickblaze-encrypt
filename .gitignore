@@ -1,11 +1,8 @@
 # Workspace Files
 .vscode/
-
-# Quickblaze Files
-.stashed/
 .gitattributes
 
-# Quickblaze Security
+# Quickblaze Files
 local-storage/
 Modules/Database.env
 .config
