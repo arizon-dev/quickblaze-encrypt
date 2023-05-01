@@ -80,8 +80,25 @@ function decryptFormSubmit() {
             showSnackBar('snackbar_incorrect_password', 'danger');
         }
     }).catch(error => log(error, 'warn'));
+}
 
-
-
-
+function checkEncryptionStatus() {
+    let key = new URL(window.location).searchParams.get('key'); // fetch key from url variable
+    fetch(`dataProcessing?action=doesMessageExist&key=${key}`).then(response => response.json()).then(data => {
+        if (data.response === false) {
+            $('#form_confirmation').fadeOut('fast'); // fade out previous content 
+            log(`No longer showing 'form_confirmation' element.`);
+            showSnackBar('snackbar_message_nonexist', 'danger', true);
+            log(`Updated 'valuetextbox.value'.`);
+            log(`Encryption data response not found!`);
+            // Change page contents
+            setTimeout(() => {
+                $('#form_error').fadeIn('fast'); // fade in new content
+                log(`Now showing 'form_error' element.`);
+            }, 200);
+            setTimeout(() => {
+                // window.location.replace('./'); // Redirect to home page
+            }, 4000);
+        }
+    });
 }

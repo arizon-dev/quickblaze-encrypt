@@ -1,0 +1,11 @@
+#form_submission {
+	display: none;
+}
+
+.no-decoration {
+	text-decoration: none;
+}
+
+.error-details-container {
+	padding-top: 10px;
+}

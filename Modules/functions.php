@@ -1,5 +1,5 @@
 <?php
-error_reporting(0); // disable error reporting
+// error_reporting(0); // disable error reporting
 header("Access-Control-Allow-Origin: *"); // "*" could also be a site such as http://www.example.com
 
 
@@ -19,22 +19,20 @@ function getInstallationPath()
 }
 function determineSystemVersion()
 {
+    $config = json_decode(file_get_contents("./.config", true), true);
     if (!file_exists("./.version")) {
-        touch("./.version");
+        touch("./.version"); // Create version file if not exists
+        if (!is_dir("./local-storage/")) mkdir("./local-storage/");
+        touch("./local-storage/.version-cache"); // Create version file cache if not exists
         $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/arizon-dev/quickblaze-encrypt/main/.version?cacheUpdate=" . rand(0, 100), true), true);
+        $date = date("Y-m-d H:i:s"); // Current date for cache
         file_put_contents("./.version", json_encode(array("BRANCH" => $latestVersion["BRANCH"], "VERSION" => $latestVersion["VERSION"], "LANGUAGE" => "auto")));
+        file_put_contents("./local-storage/.version", json_encode(array("cacheDate" => $date, "BRANCH" => $latestVersion["BRANCH"], "VERSION" => $latestVersion["VERSION"], "LANGUAGE" => "auto")));
     }
     $thisVersion = json_decode(file_get_contents("./.version", true), true);
-    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/arizon-dev/quickblaze-encrypt/" . filter_var($thisVersion["BRANCH"]) . "/.version?cacheUpdate=" . rand(0, 100), true), true);
-    if ($thisVersion["BRANCH"] == "canary" && $thisVersion["VERSION"] != $latestVersion["VERSION"]) {
-        return '<x style="color:orange">v' . $thisVersion["VERSION"] . ' (' . translate("Unreleased") . ')</x>'; 
-    } else {
-        if ($thisVersion["BRANCH"] == "main" && $thisVersion["VERSION"] != $latestVersion["VERSION"]) {
-            return '<x style="color:red">v' . $thisVersion["VERSION"] . ' (' . translate("Outdated") . ')</x>';
-        } else {
-            return 'v' . $thisVersion["VERSION"];
-        }
-    }
+    $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/arizon-dev/quickblaze-encrypt/" . htmlspecialchars($thisVersion["BRANCH"]) . "/.version?cacheUpdate=" . rand(0, 100), true), true);
+    $releaseType = ($thisVersion["BRANCH"] == "canary") ? $releaseType = "Canary" : $releaseType = "Stable";
+    return 'v' . $thisVersion["VERSION"] . '-' . $releaseType;
 }
 function generateKey($length)
 {
@@ -76,7 +74,7 @@ function initialiseSystem()
     }
     function checkConfigValues()
     {
-        if(empty($_SERVER['SERVER_PORT']) || empty($_SERVER['SERVER_NAME']) || empty($_SERVER['HTTPS']) || empty($_SERVER['REQUEST_URI'])) header("Location: ./500"); // Kill request if server vars are empty
+        if (empty($_SERVER['SERVER_PORT']) || empty($_SERVER['SERVER_NAME']) || empty($_SERVER['HTTPS']) || empty($_SERVER['REQUEST_URI'])) header("Location: ./500"); // Kill request if server vars are empty
         $configuration = json_decode(file_get_contents("./.config", true), true);
 
         /* Config File Variables */
@@ -127,17 +125,20 @@ function initialiseSystem()
         if (strtolower($configuration["STORAGE_METHOD"]) == "mysql") {
             if (!file_exists("./Modules/Database.env")) {
                 touch("./Modules/Database.env"); // Create database configuration file
-                require "./Public/error_docs/DatabaseConfig.php";
+                $_GET["errorCode"] = "DatabaseConfig"; // set error code
+                require "./Public/error.php"; // throw error page if invalid configuration
                 die();
             } else {
                 $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
                 if ($json["DATABASE"] == "" || $json["HOSTNAME"] == "") {
-                    require "./Public/error_docs/DatabaseConfig.php";
+                    $_GET["errorCode"] = "DatabaseConfig"; // set error code
+                    require "./Public/error.php"; // throw error page if invalid configuration
                     die();
                 } else { // Test database connection
                     $conn = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
                     if ($conn->connect_error) {
-                        require "./Public/error_docs/DatabaseCredentials.php"; // throw error page if invalid credentials
+                        $_GET["errorCode"] = "DatabaseCredentials"; // set error code
+                        require "./Public/error.php"; // throw error page if invalid configuration
                         die();
                     } else {
                         $cache = json_decode(file_get_contents("./local-storage/.cache"), true);
@@ -149,13 +150,15 @@ function initialiseSystem()
                                     file_put_contents("./local-storage/.cache", '{"DO-NOT-TOUCH:database_installation_status": "true", "config_created": "true"}');
                                 }
                             } else {
-                                require "./Public/error_docs/DatabaseCredentials.php"; // throw error page if invalid credentials
+                                $_GET["errorCode"] = "DatabaseCredentials"; // set error code
+                                require "./Public/error.php"; // throw error page if invalid configuration
                                 die();
                             }
                         }
                         // Always reset auto-increment
                         if (!$conn->query("ALTER TABLE `quickblaze_records` MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT;")) {
-                            require "./Public/error_docs/DatabaseConfig.php"; // throw error page if invalid credentials
+                            $_GET["errorCode"] = "DatabaseConfig"; // set error code
+                            require "./Public/error.php"; // throw error page if invalid configuration
                             die();
                         }
                     }
@@ -167,7 +170,8 @@ function initialiseSystem()
             if (!is_dir("$baseStorageFolder/")) mkdir("$baseStorageFolder/");
             if (!is_dir("$baseStorageFolder/encryptions/")) mkdir("$baseStorageFolder/encryptions/");
         } else { // Server storage method not set
-            require "./Public/error_docs/ServerConfiguration.php"; // throw error page if invalid configuration
+            $_GET["errorCode"] = "ServerConfiguration"; // set error code
+            require "./Public/error.php"; // throw error page if invalid configuration
             die();
         }
     }
@@ -183,12 +187,13 @@ function insertRecord($encrypted_contents, $encryption_token, $password)
 {
     $configuration = json_decode(file_get_contents("./.config", true), true);
     $json = json_decode(file_get_contents("./Modules/Database.env", true), true);
-    if(empty($_SERVER['HTTP_CF_CONNECTING_IP']) || empty($_SERVER['REMOTE_ADDR'])) header("Location: ./500"); // Kill request if server vars are empty
+    if (empty($_SERVER['HTTP_CF_CONNECTING_IP']) || empty($_SERVER['REMOTE_ADDR'])) header("Location: ./500"); // Kill request if server vars are empty
     if ($_SERVER['HTTP_CF_CONNECTING_IP'] == "" || !isset($_SERVER['HTTP_CF_CONNECTING_IP'])) $_SERVER['HTTP_CF_CONNECTING_IP'] = $_SERVER["REMOTE_ADDR"];
     if (strtolower($configuration["STORAGE_METHOD"]) == "mysql") {
         $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
         if ($mysqli->connect_errno) {
-            require "./Public/error_docs/DatabaseCredentials.php";
+            $_GET["errorCode"] = "DatabaseCredentials"; // set error code
+            require "./Public/error.php"; // throw error page if invalid configuration
             die();
         }
         $source_ip = filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP) ?? filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
@@ -208,7 +213,8 @@ function insertRecord($encrypted_contents, $encryption_token, $password)
         $record_date = date("Y-m-d H:i:s");
         file_put_contents("$baseStorageFolder/encryptions/$uniqueIdentifier/data.json", '{"filestore_id": "' . $uniqueIdentifier . '", "encrypted_contents": "' . $encrypted_contents . '", "password": "' . $password . '", "encryption_token": "' . $encryption_token . '", "source_ip": "' . $source_ip . '", "record_date": "' . $record_date . '"}'); // Set data file encryption data
     } else {
-        require "./Public/error_docs/ServerConfiguration.php"; // throw error page if invalid configuration
+        $_GET["errorCode"] = "ServerConfiguration"; // set error code
+        require "./Public/error.php"; // throw error page if invalid configuration
         die();
     }
 }
@@ -219,7 +225,8 @@ function destroyRecord($token)
     if (strtolower($configuration["STORAGE_METHOD"]) == "mysql") {
         $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
         if ($mysqli->connect_errno) {
-            require "./Public/error_docs/DatabaseCredentials.php";
+            $_GET["errorCode"] = "DatabaseCredentials"; // set error code
+            require "./Public/error.php"; // throw error page if invalid configuration
             die();
         }
         $token = filter_var($token, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -250,7 +257,8 @@ function destroyRecord($token)
             }
         }
     } else { // Server storage method not set
-        require "./Public/error_docs/ServerConfiguration.php"; // throw error page if invalid configuration
+        $_GET["errorCode"] = "ServerConfiguration"; // set error code
+        require "./Public/error.php"; // throw error page if invalid configuration
         die();
     }
 }
@@ -261,7 +269,8 @@ function getRecord($dataToFetch, $encryption_token)
     if (strtolower($configuration["STORAGE_METHOD"]) == "mysql") {
         $mysqli = new mysqli($json["HOSTNAME"], $json["USERNAME"], $json["PASSWORD"], $json["DATABASE"]);
         if ($mysqli->connect_errno) {
-            require "./Public/error_docs/DatabaseCredentials.php";
+            $_GET["errorCode"] = "DatabaseCredentials"; // set error code
+            require "./Public/error.php"; // throw error page if invalid configuration
             die();
         }
         $encryption_token = filter_var($encryption_token, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -286,7 +295,8 @@ function getRecord($dataToFetch, $encryption_token)
             }
         }
     } else { // Server storage method not set
-        require "./Public/error_docs/ServerConfiguration.php"; // throw error page if invalid configuration
+        $_GET["errorCode"] = "ServerConfiguration"; // set error code
+        require "./Public/error.php"; // throw error page if invalid configuration
         die();
     }
 }

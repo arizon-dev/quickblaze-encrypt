@@ -1,190 +1,26 @@
-html,
-body {
-	max-height: 100%;
-	align-items: center;
-	padding-bottom: 40px;
-}
+/*
+    -==- Quickblaze Encrypt -==-
+    https://github.com/arizon-dev/quickblaze-encrypt
+    @ 2023 Arizon Development by axtonprice
+*/
 
-#form_submission {
-	display: none;
-}
+/* Font Utils */
+@import url("components/fonts.component.css");
 
-.size-max {
-	width: 100%;
-	height: 100px;
-}
+/* Spacing Utils */
+@import url("components/spacing.component.css");
 
-.size-single {
-	width: 100%;
-	height: 43px;
-}
+/* Snackbar Utils */
+@import url("components/snackbar.component.css");
 
-label {
-	float: left;
-	padding-bottom: 10px;
-}
+/* Misc Utils */
+@import url("components/misc.component.css");
 
-.form-control {
-	margin-bottom: 10px;
-}
+/* Animations Utils */
+@import url("components/animations.component.css");
 
-#form_input>.form-input-item:last-child {
-	margin-bottom: none;
-}
+/* Main Content */
+@import url("components/main.component.css");
 
-.pb-10 {
-	padding-bottom: 10px;
-}
-
-.pb-20 {
-	padding-bottom: 20px;
-}
-
-.mt-2{
-	margin-top: 2px;
-}
-
-.mt-3{
-	margin-top: 3px;
-}
-
-.mt-4{
-	margin-top: 4px;
-}
-
-.mt-5{
-	margin-top: 5px;
-}
-
-.mb-2{
-	margin-bottom: 2px;
-}
-
-.mb-3{
-	margin-bottom: 3px;
-}
-
-.mb-4{
-	margin-bottom: 4px;
-}
-
-.mb-5{
-	margin-bottom: 5px;
-}
-
-.submit-button {
-	width: 35%;
-	margin-top: 20px;
-}
-
-.main-form {
-	width: 100%;
-	max-width: 600px;
-	padding: 15px;
-	margin-top: 10vh;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.main-form .checkbox {
-	font-weight: 400;
-}
-
-.main-form .form-icon {
-	padding-bottom: 15px;
-	--fa-animation-duration: 3.5s
-}
-
-.main-form .form-floating:focus-within {
-	z-index: 2;
-}
-
-.no-decoration {
-	text-decoration: none;
-}
-
-/* The snackbar - position it at the bottom and in the middle of the screen */
-.snackbar-error {
-	background-color: rgba(250, 76, 76, 0.479);
-	outline: rgb(206, 77, 77) 1px solid;
-}
-
-.snackbar-success {
-	background-color: rgba(76, 250, 76, 0.479);
-	outline: rgb(77, 206, 77) 1px solid;
-}
-
-.snackbar-warn {
-	background-color: rgba(250, 250, 76, 0.479);
-	outline: rgb(206, 206, 77) 1px solid;
-}
-
-.snackbar-container {
-	margin-left: auto;
-	margin-right: auto;
-	padding: 10px 15px 10px 15px!important;
-	text-align: center;
-	max-width: fit-content;
-}
-
-.snackbar-messages {
-	display: none;
-}
-
-#snackbar_link.show,
-#snackbar_password.show,
-#snackbar_empty_fields.show,
-#snackbar_error.show {
-	visibility: visible;
-	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-	animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-
-/* Animations to fade the snackbar in and out */
-@-webkit-keyframes fadein {
-	from {
-		bottom: 0;
-		opacity: 0;
-	}
-
-	to {
-		bottom: 30px;
-		opacity: 1;
-	}
-}
-
-@keyframes fadein {
-	from {
-		bottom: 0;
-		opacity: 0;
-	}
-
-	to {
-		bottom: 30px;
-		opacity: 1;
-	}
-}
-
-@-webkit-keyframes fadeout {
-	from {
-		bottom: 30px;
-		opacity: 1;
-	}
-
-	to {
-		bottom: 0;
-		opacity: 0;
-	}
-}
-
-@keyframes fadeout {
-	from {
-		bottom: 30px;
-		opacity: 1;
-	}
-
-	to {
-		bottom: 0;
-		opacity: 0;
-	}
-}
+/* Theme Utils */
+@import url("components/darkmode.component.css");

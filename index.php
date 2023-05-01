@@ -1,56 +1,27 @@
 <?php
-/* Initialise the Application */
-if(empty($_SERVER['SCRIPT_NAME'])) header("Location: 500"); // No request server variable is available
-if(empty($_SERVER['REQUEST_URI'])) $_SERVER['REQUEST_URI'] = $_SERVER['SCRIPT_NAME'];
-$url = $_SERVER['REQUEST_URI'];
-$url = substr($url, strrpos($url, '/') + 1);
-if (strpos($url, '?') !== false) $url = substr($url, 0, strpos($url, "?"));
-/* Initialise Displays */
-if ($url == "dataProcessing") {
-    /* Form Submission Handler */
-    require "./Modules/functions.php";
-    require "./Public/dataProcessing.php";
-    return;
-}
-if ($url == "view") {
-    /* View Message Page */
-    require "./Modules/functions.php";
-    require "./Public/view.php";
-    return;
-}
-if ($url == "") {
-    /* Primary Display Page */
-    require "./Modules/functions.php";
-    initialiseSystem(); // Call system functions to initialise
-    require "./Public/index.php";
-} elseif ($url == "404") {
-    /* Not Found Page */
-    require "./Modules/functions.php";
-    return require "./Public/error_docs/404.php";
-} elseif ($url == "404") {
-    /* Not Found Page */
-    require "./Modules/functions.php";
-    return require "./Public/error_docs/404.php";
-} elseif ($url == "DatabaseConfig") {
-    /* Not Found Page */
-    require "./Modules/functions.php";
-    return require "./Public/error_docs/DatabaseConfig.php";
-} elseif ($url == "DatabaseCredentials") {
-    /* Not Found Page */
-    require "./Modules/functions.php";
-    return require "./Public/error_docs/DatabaseCredentials.php";
-} elseif ($url == "ServerConfiguration") {
-    /* Not Found Page */
-    require "./Modules/functions.php";
-    return require "./Public/error_docs/ServerConfiguration.php";
-} else {
-    if ($url == "500") {
-        /* Server Error Page */
-        require "./Modules/functions.php";
-        return require "./Public/error_docs/500.php";
-    } else {
-        /* Not Found Page */
-        require "./Modules/functions.php";
-        return require "./Public/error_docs/404.php";
-    }
+/*
+    -==- Quickblaze Encrypt -==-
+    https://github.com/arizon-dev/quickblaze-encrypt
+    @ 2023 Arizon Development by axtonprice
+*/
+
+/* Application Initilisation */
+if (empty($_SERVER['REQUEST_URI'])) header("Location: 500");
+$request = $_SERVER['REQUEST_URI'];
+$request = substr($request, strrpos($request, '/') + 1);
+if (empty($request)) $request = "index"; // Replace with index if empty
+if (strpos($request, '?') !== false) $request = substr($request, 0, strpos($request, "?")); // Remove query string
+$errorPages = array("DatabaseConfig", "DatabaseCredentials", "ServerConfiguration", "404", "500", "403");
+
+/* Automatic File Rendering */
+require "./Modules/functions.php"; // Require functions regardless of request file
+if (in_array($request, $errorPages)) { // Check if page is an error page
+    $_GET["code"] = $request; // Set error code 
+    return require "./Public/error.php"; // Render page
+} else if (file_exists("./Public/" . $request . ".php")) { // Check if page exists
+    if (empty($request) || $request == "index") initialiseSystem(); // Initialise system
+    return require "./Public/" . $request . ".php"; // Render page
+} else { // Page not found
+    $_GET["code"] = "404"; // Set error code 
+    return require "./Public/error.php"; // Render page
 }

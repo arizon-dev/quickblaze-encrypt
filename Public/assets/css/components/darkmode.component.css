@@ -1,0 +1,65 @@
+/*!
+ * Dark Mode Switch v1.0.1 (https://github.com/coliff/dark-mode-switch)
+ * Copyright 2021 C.Oliff
+ * Licensed under MIT (https://github.com/coliff/dark-mode-switch/blob/main/LICENSE)
+ */
+
+.darkmode-widget-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.darkmode-widget-button {
+    font-size: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    background-color: black;
+    border-style: none;
+}
+
+[data-theme="dark"] {
+    background-color: #111 !important;
+    color: #eee;
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] textarea {
+    background-color: #1111118e;
+    color: white;
+}
+
+[data-theme="dark"] input:active,
+[data-theme="dark"] input:not(:hover),
+[data-theme="dark"] input:hover,
+[data-theme="dark"] textarea:active,
+[data-theme="dark"] textarea:not(:hover),
+[data-theme="dark"] textarea:hover {
+    background-color: #1111118e;
+    color: white;
+}
+
+[data-theme="dark"] .darkmode-widget-button {
+    background-color: #5a5a5a;
+    color: black;
+}
+
+[data-theme="dark"] .bg-black {
+    background-color: #fff !important;
+}
+
+[data-theme="dark"] .bg-dark {
+    background-color: #eee !important;
+}
+
+[data-theme="dark"] .bg-light {
+    background-color: #222 !important;
+}
+
+[data-theme="dark"] .bg-white {
+    background-color: #000 !important;
+}

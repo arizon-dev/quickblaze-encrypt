@@ -1,17 +1,17 @@
 ---
 engines:
-  rubocop:
-    exclude_paths:
-      - config/engines.yml
+  rubocop: []
   duplication:
-    exclude_paths:
-      - config/engines.yml
-  metric:
-    exclude_paths:
-      - config/engines.yml
+    minTokenMatch: 20
+    skipLexicalErrors: false
+    ignoreLiterals: false
+    ignoreIdentifiers: true
+    ignoreAnnotations: false
+    ignoreUsings: false
+  metric: []
 languages:
   css:
     extensions:
       - '.scss'
 exclude_paths:
-  - "Public/assets/css/**"
+  - "Public/assets/**"
