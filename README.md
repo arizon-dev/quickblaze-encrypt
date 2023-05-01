@@ -2,7 +2,7 @@
   <img alt="Quickblaze Logo" src=".github/images/logo.png"></img>
 </div>
 <h1 align="center">
-  Quickblaze Encrypt 🔥
+  Quickblaze Encrypt
 </h1>
 
 <p align="center">
