@@ -12,4 +12,3 @@
 ## Reports & Submissions
 
 Please report all security vulnerabilities, bug reports, and suggestions to the GitHub [issues](https://github.com/arizon-dev/quickblaze-encrypt/issues) page, [discussion](https://github.com/arizon-dev/quickblaze-encrypt/discussions) page, or the community [Discord](https://discord.gg/dP3MuBATGc) server.
-You can also directly contact the project's lead developer via Discord DM's, in order to manually submit reports.

@@ -6,3 +6,6 @@
 local-storage/
 Modules/Database.env
 .config
+
+# Security
+.codacy-scan
