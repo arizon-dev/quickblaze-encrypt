@@ -63,9 +63,7 @@ label {
 }
 
 .buttons-inline{
-    position: absolute;
     display: inline-flex;
     width: 100%;
     justify-content: space-between;
-    margin: auto auto auto 10px;
 }
