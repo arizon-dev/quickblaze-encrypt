@@ -51,8 +51,9 @@ $pageDetails = new errorGenerator($errorCode);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
     <link rel="icon" type="image/x-icon" href="<?= getInstallationPath(); ?>/Public/assets/img/favicon-100x100.png">
-    <meta name="description" content="<?= translate("An extremely simple, one-time view encrypted message system. Send anybody passwords, or secret messages on a one-time view basis.") ?>">
+    <meta name="description" content="<?= translate("An extremely simple, one-time view encrypted message system. Send anybody passwords, or secret messages on a one-time view basis."); ?>">
     <title>Quickblaze Encrypt</title>
 
     <!-- Site CSS -->
@@ -60,7 +61,6 @@ $pageDetails = new errorGenerator($errorCode);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
 
-    <!-- Site Fonts -->
     <!-- Site Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,7 +77,7 @@ $pageDetails = new errorGenerator($errorCode);
                 <h2><?= translate($pageDetails->generateDetails($errorCode)['title']); ?></h2>
             </div>
             <p class="error-details-container"><?= translate($pageDetails->generateDetails($errorCode)['subtext']); ?></p>
-            <a class="btn btn-primary submit-button" href="./"><?= translate("Return Home") ?></a>
+            <a class="btn btn-primary submit-button" href="./"><?= translate("Return Home"); ?></a>
             <p class="mt-5 mb-3 text-muted">
                 <a href="https://github.com/arizon-dev/quickblaze-encrypt" class="text-muted no-decoration">GitHub</a> •
                 <a href="https://discord.gg/dP3MuBATGc" class="text-muted no-decoration">Discord</a> •
@@ -88,7 +88,7 @@ $pageDetails = new errorGenerator($errorCode);
 
     <!-- Darkmode Widget -->
     <div class="darkmode-widget">
-        <button class="darkmode-widget-button" id="darkSwitch">🌙</button>
+        <button class="darkmode-widget-button" id="darkSwitch"></button>
     </div>
 
     <!-- Site Javascript -->

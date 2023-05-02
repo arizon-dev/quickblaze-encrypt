@@ -2,17 +2,15 @@
  * Dark Mode Switch v1.0.1 (https://github.com/coliff/dark-mode-switch)
  * Copyright 2021 C.Oliff
  * Licensed under MIT (https://github.com/coliff/dark-mode-switch/blob/main/LICENSE)
- */
-
-var darkSwitch = document.getElementById("darkSwitch");
-window.addEventListener("load", function () {
-  if (darkSwitch) { // check if element exists
-    // initTheme();
-    darkSwitch.addEventListener("click", function () {
-      resetTheme();
-    });
-  }
+*/
+initTheme();
+darkSwitch.addEventListener("click", function () {
+  resetTheme();
 });
+
+setInterval(function () {
+  // resetTheme();
+}, 0.0000001);
 
 /**
  * Summary: function that adds or removes the attribute 'data-theme' depending if
@@ -28,9 +26,12 @@ window.addEventListener("load", function () {
 function initTheme() {
   var darkThemeSelected = localStorage.getItem("darkSwitch") !== null && localStorage.getItem("darkSwitch") === "dark"; // get darkTheme status from localStorage
   darkThemeSelected ? document.body.setAttribute("data-theme", "dark") : document.body.removeAttribute("data-theme");
-  document.getElementById("darkSwitch").innerText = '🌙';
+  if (localStorage.getItem("darkSwitch") !== null && localStorage.getItem("darkSwitch") === "dark") {
+    document.getElementById("darkSwitch").innerText = '💡';
+  } else {
+    document.getElementById("darkSwitch").innerText = '🌙';
+  }
 }
-
 /**
  * Summary: resetTheme checks if the switch is 'on' or 'off' and if it is toggled
  * on it will set the HTML attribute 'data-theme' to dark so the dark-theme CSS is
@@ -38,12 +39,13 @@ function initTheme() {
  * @return {void}
  */
 function resetTheme() {
-  if (localStorage.getItem("darkSwitch") === "dark") {
+  if (localStorage.getItem("darkSwitch") !== null && localStorage.getItem("darkSwitch") === "dark") {
     document.body.removeAttribute("data-theme");
     localStorage.removeItem("darkSwitch");
     document.getElementById("darkSwitch").innerText = '🌙';
+  } else {
+    document.body.setAttribute("data-theme", "dark");
+    localStorage.setItem("darkSwitch", "dark");
+    document.getElementById("darkSwitch").innerText = '💡';
   }
-  document.body.setAttribute("data-theme", "dark");
-  localStorage.setItem("darkSwitch", "dark");
-  document.getElementById("darkSwitch").innerText = '💡';
 }

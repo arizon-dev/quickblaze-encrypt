@@ -4,8 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
     <link rel="icon" type="image/x-icon" href="<?= getInstallationPath(); ?>/Public/assets/img/favicon-100x100.png">
-    <meta name="description" content="<?= translate("An extremely simple, one-time view encrypted message system. Send anybody passwords, or secret messages on a one-time view basis.") ?>">
+    <meta name="description" content="<?= translate("An extremely simple, one-time view encrypted message system. Send anybody passwords, or secret messages on a one-time view basis."); ?>">
     <title>Quickblaze Encrypt</title>
 
     <!-- Site CSS -->
@@ -30,7 +31,7 @@
                     </a>
                     <h2>Quickblaze Encrypt</h2>
                 </div>
-                <h5 class="text-muted"><?= translate("One-time view encrypted message sharing system") ?></h5>
+                <h5 class="text-muted"><?= translate(htmlspecialchars("One-time view encrypted message sharing system")); ?></h5>
 
                 <!-- Snackbar -->
                 <div class="alert snackbar-container" id="snackbar-container">
@@ -39,34 +40,37 @@
 
                 <!-- Main Form Content -->
                 <div id="form_input" class="form-area">
-                    <label for="input_text_box"><?= translate("Secret Message") ?></label>
-                    <textarea type="text" class="form-control form-input-item size-max" id="input_text_box" placeholder="<?= translate("Enter your secret message!") ?>" required></textarea>
-                    <label for="input_password"><?= translate("Decryption Password") ?></label>
-                    <input class="form-control form-input-item size-single" id="input_password" placeholder="<?= translate("Enter decryption password") ?>" required></input>
-                    <button type="button" class="btn btn-primary submit-button" onclick="formValidateDisplay();">
-                        <?= translate("Encrypt Message"); ?>
+                    <div class="input-container">
+                        <label for="input_text_box"><?= translate(htmlspecialchars("Secret Message")); ?></label>
+                        <textarea type="text" class="form-control form-input-item size-max" id="input_text_box" placeholder="<?= translate(htmlspecialchars("Enter your secret message!")); ?>" required></textarea>
+                        <label for="input_password"><?= translate(htmlspecialchars("Decryption Password")); ?></label>
+                        <input class="form-control form-input-item size-single" id="input_password" placeholder="<?= translate(htmlspecialchars("Enter decryption password")); ?>" required></input>
+                    </div>
+                    <button type="button" class="btn btn-primary submit-button button-50" onclick="formValidateDisplay();">
+                        <?= translate(htmlspecialchars("Encrypt Message")); ?>
                     </button>
                 </div>
 
                 <div id="form_submission" class="form-area">
-                    <label for="submission_text_box"><?= translate("Share Link") ?></label>
-                    <textarea type="text" class="form-control form-input-item size-max" id="submission_text_box" disabled></textarea>
-                    <label for="submission_password"><?= translate("Decryption Password") ?></label>
-                    <input type="text" class="form-control form-input-item size-single" id="submission_password" disabled></input>
-                    <br>
+                    <div class="input-container">
+                        <label for="submission_text_box"><?= translate(htmlspecialchars("Share Link")); ?></label>
+                        <textarea type="text" class="form-control form-input-item size-max" id="submission_text_box" disabled></textarea>
+                        <label for="submission_password"><?= translate(htmlspecialchars("Decryption Password")); ?></label>
+                        <input type="text" class="form-control form-input-item size-single" id="submission_password" disabled></input>
+                    </div>
                     <p class="text-muted">
-                        <?= translate("Share this link and decryption password anywhere on the internet. The message will be automatically destroyed once viewed.") ?>
+                        <?= translate(htmlspecialchars("Share this link and decryption password anywhere on the internet. The message will be automatically destroyed once viewed.")); ?>
                     </p>
                     <div class="buttons-inline">
-                        <button type="button" class="btn btn-primary submit-button" onclick="copyToClipboard('submission_text_box', 'snackbar_link')">
-                            <?= translate("Copy Link") ?>
+                        <button type="button" class="btn btn-primary submit-button button-50" onclick="copyToClipboard('submission_text_box', 'snackbar_link')">
+                            <?= translate(htmlspecialchars("Copy Link")); ?>
                         </button>
-                        <button type="button" class="btn btn-primary submit-button" onclick="copyToClipboard('submission_password', 'snackbar_password')">
-                            <?= translate("Copy Password") ?>
+                        <button type="button" class="btn btn-primary submit-button button-50" onclick="copyToClipboard('submission_password', 'snackbar_password')">
+                            <?= translate(htmlspecialchars("Copy Password")); ?>
                         </button>
                     </div>
-                    <a class="btn btn-secondary submit-button" href="./">
-                        <?= translate("Create New") ?>
+                    <a class="btn btn-secondary submit-button button-100" href="./">
+                        <?= translate(htmlspecialchars("Create New Message")); ?>
                     </a>
                 </div>
 
@@ -86,24 +90,24 @@
     <div class="snackbar-messages">
         <div id="snackbar_link">
             <span class="snackbar-text" id="snackbar-text">
-                ✅ <?= translate("Link has been copied to clipboard!") ?>
+                ✅ <?= translate(htmlspecialchars("Link has been copied to clipboard!")); ?>
             </span>
         </div>
         <div id="snackbar_empty_fields">
             <span class="snackbar-text" id="snackbar-text">
-                ❌ <?= translate("Error! One or more fields are empty!") ?>
+                ❌ <?= translate(htmlspecialchars("Error! One or more fields are empty!")); ?>
             </span>
         </div>
         <div id="snackbar_error">
             <span class="snackbar-text" id="snackbar-text">
-                ❌ <?= translate("Error! An error occurred processing your message!") ?>
+                ❌ <?= translate(htmlspecialchars("Error! An error occurred processing your message!")); ?>
             </span>
         </div>
     </div>
 
     <!-- Darkmode Widget -->
     <div class="darkmode-widget">
-        <button class="darkmode-widget-button" id="darkSwitch">🌙</button>
+        <button class="darkmode-widget-button" id="darkSwitch"></button>
     </div>
 
     <!-- Site Javascript -->

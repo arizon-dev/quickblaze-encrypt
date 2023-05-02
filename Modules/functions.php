@@ -19,7 +19,6 @@ function getInstallationPath()
 }
 function determineSystemVersion()
 {
-    $config = json_decode(file_get_contents("./.config", true), true);
     if (!file_exists("./.version")) {
         touch("./.version"); // Create version file if not exists
         if (!is_dir("./local-storage/")) mkdir("./local-storage/");
@@ -315,5 +314,5 @@ function translate($q)
     }
     $res = file_get_contents("https://translate.googleapis.com/translate_a/single?client=gtx&ie=UTF-8&oe=UTF-8&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&sl=" . $translateFrom . "&tl=" . $translateTo . "&hl=hl&q=" . urlencode($q), $_SERVER['DOCUMENT_ROOT'] . "/transes.html");
     $res = json_decode($res);
-    return htmlspecialchars($res[0][0][0]); // Escape response
+    return $res[0][0][0]; // Escape response
 }
