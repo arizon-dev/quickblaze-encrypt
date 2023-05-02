@@ -32,7 +32,7 @@
 - PHP [MBSTRING](http://php.net/manual/en/book.mbstring.php) module for full UTF-8 support.
 - PHP [JSON](http://php.net/manual/en/book.json.php) module for JSON manipulation.
 
-***Optional:** dependant on storage method configuration in `.config`. [See below.](https://github.com/arizon-dev/quickblaze-encrypt/#system-configuration)*
+***Optional:** dependant on storage method configuration in `.config`. [See below.](#system-configuration)*
 
 ## Installation
 
