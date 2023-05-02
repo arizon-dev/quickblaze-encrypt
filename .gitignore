@@ -4,7 +4,7 @@
 
 # Quickblaze Files
 local-storage/
-Modules/Database.env
+modules/Database.env
 .config
 
 # Security

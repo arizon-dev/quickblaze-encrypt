@@ -43,7 +43,7 @@
 **Don't** delete the `.version`, `.config`, or `.cache` files once the installation has completed! They contain necessary version and configuration data, and removing them will cause issues!
 
 If using MYSQL as storage method:
-* Update the database information in `Modules/Database_example.env`.
+* Update the database information in `modules/Database_example.env`.
 * Rename the database configuration file to `Database.env`.
 * View example database configuration below.
 

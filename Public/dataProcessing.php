@@ -1,5 +1,5 @@
 <?php
-// error_reporting(0);
+error_reporting(0); // Disable errors
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 

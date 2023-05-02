@@ -33,6 +33,11 @@ body {
     --fa-animation-duration: 2.5s
 }
 
+.form-title{
+    padding-bottom: 10px;
+    font-weight: 600!important;
+}
+
 .form-control {
     margin-bottom: 10px;
 }
@@ -42,7 +47,7 @@ body {
 }
 
 .input-container {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 .input-container>label {

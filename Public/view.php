@@ -1,3 +1,4 @@
+<?php if ($_SERVER["SCRIPT_NAME"] == "/public/view.php") header("Location: ../view?" . $_SERVER["QUERY_STRING"]); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,12 +6,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="dark">
-    <link rel="icon" type="image/x-icon" href="<?= getInstallationPath(); ?>/Public/assets/img/favicon-100x100.png">
+    <link rel="icon" type="image/x-icon" href="<?= getInstallationPath(); ?>/public/assets/img/favicon-100x100.png">
     <meta name="description" content="<?= translate(htmlspecialchars("An extremely simple, one-time view encrypted message system. Send anybody passwords, or secret messages on a one-time view basis.")); ?>">
     <title>Quickblaze Encrypt</title>
 
     <!-- Site CSS -->
-    <link href="<?= getInstallationPath(); ?>/Public/assets/css/style.css" rel="stylesheet">
+    <link href="<?= getInstallationPath(); ?>/public/assets/css/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
 
@@ -19,13 +20,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
     <div class="global-container">
         <div class="main-form">
             <form onsubmit="return false;">
                 <a href="<?= getInstallationPath(); ?>">
-                    <img class="form-icon fa-fade" id="form-icon" draggable="false" alt="Quickblaze Encrypt" aria-label="Quickblaze Encrypt" title="Quickblaze Encrypt" src="<?= getInstallationPath(); ?>/Public/assets/img/favicon-100x100.png">
+                    <img class="form-icon fa-fade" id="form-icon" draggable="false" alt="Quickblaze Encrypt" aria-label="Quickblaze Encrypt" title="Quickblaze Encrypt" src="<?= getInstallationPath(); ?>/public/assets/img/favicon-100x100.png">
                 </a>
                 <h2>Quickblaze Encrypt</h2>
                 <h5 class="text-muted"><?= translate(htmlspecialchars("One-time view encrypted message sharing system")); ?></h5>
@@ -37,11 +39,9 @@
 
                 <!-- Main Form Content -->
                 <div id="form_confirmation">
-                    <h6>
-                        <?= translate(htmlspecialchars("Decrypt & View Message?")); ?>
-                    </h6>
+                    <code class="pb-5">Message created <?= getMessageCreationDate(); ?></code>
                     <div class="input-container">
-                        <label for="input_password_attempt">Decryption Password</label>
+                        <label for="input_password_attempt"><?= translate(htmlspecialchars("Decrypt & View Message?")); ?></label>
                         <input class="form-control form-input-item size-single" type="password" id="input_password_attempt" placeholder="<?= translate(htmlspecialchars("Enter decryption password")); ?>" required></input>
                     </div>
                     <button class="btn btn-primary submit-button button-50" onclick="formValidateDisplay();">
@@ -116,10 +116,10 @@
     </div>
 
     <!-- Site Javascript -->
-    <script src="<?= getInstallationPath(); ?>/Public/assets/js/globalFunctions.js"></script>
-    <script src="<?= getInstallationPath(); ?>/Public/assets/js/buttonSnackbar.js"></script>
-    <script src="<?= getInstallationPath(); ?>/Public/assets/js/formContentUpdate.js"></script>
-    <script src="<?= getInstallationPath(); ?>/Public/assets/js/darkModeWidget.js"></script>
+    <script src="<?= getInstallationPath(); ?>/public/assets/js/globalFunctions.js"></script>
+    <script src="<?= getInstallationPath(); ?>/public/assets/js/buttonSnackbar.js"></script>
+    <script src="<?= getInstallationPath(); ?>/public/assets/js/formContentUpdate.js"></script>
+    <script src="<?= getInstallationPath(); ?>/public/assets/js/darkModeWidget.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://momentjs.com/downloads/moment.js"></script>

@@ -14,4 +14,4 @@ languages:
     extensions:
       - '.scss'
 exclude_paths:
-  - "Public/assets/**"
+  - "public/assets/**"

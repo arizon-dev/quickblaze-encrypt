@@ -4,13 +4,18 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^.* index.php [L,QSA]
 
-# Error handling
-ErrorDocument 404 /404
-ErrorDocument 403 /403
-ErrorDocument 500 /500
-
 # File security
-<FilesMatch "\.(json|sarif|gitignore|version|htaccess|env|security-scan|config|cache)$">
+<FilesMatch "\.(json|sarif|gitignore|gitattributes|version|htaccess|env|security-scan|config|cache|gitattributes|codacy.yml)$">
 Order allow,deny
 Deny from all
 </FilesMatch>
+
+<FilesMatch "^(data.json|LICENSE|FUNDING.yml|README.md|SECURITY.md)">
+Order allow,deny
+Deny from all
+</FilesMatch>
+
+# Error handling
+ErrorDocument 404 /public/error.php?errorCode=404
+ErrorDocument 403 /public/error.php?errorCode=403
+ErrorDocument 500 /public/error.php?errorCode=500
