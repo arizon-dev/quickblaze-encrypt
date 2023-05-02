@@ -23,16 +23,16 @@
 
 ## Requirements
 
-- PHP v7 or higher.
+- PHP v8.1.10.
 - Accessible webserver with PHP support.
 - MySQL server for database host. *(Optional)\**
 - PHP [MYSQL](http://php.net/manual/en/book.mysql.php) module for database access. *(Optional)\**
 - PHP [PDO](http://php.net/manual/en/book.pdo.php) module for database access. *(Optional)\**
-- PHP [OPENSSL](http://php.net/manual/en/book.openssl.php) module for encryption. *(Optional)\**
+- PHP [OPENSSL](http://php.net/manual/en/book.openssl.php) module for encryption.
 - PHP [MBSTRING](http://php.net/manual/en/book.mbstring.php) module for full UTF-8 support.
 - PHP [JSON](http://php.net/manual/en/book.json.php) module for JSON manipulation.
 
-*\* **Optional:** dependant on storage method configuration in `.config`. [See below.](https://github.com/arizon-dev/quickblaze-encrypt/#system-configurations)*
+***Optional:** dependant on storage method configuration in `.config`. [See below.](https://github.com/arizon-dev/quickblaze-encrypt/#system-configuration)*
 
 ## Installation
 
@@ -40,11 +40,11 @@
 2. Upload and extract the contents to your web server. You can also pull the repo with GitHub Desktop.
 3. Visit your domain installation directory or subdomain <https://example.com/quickblaze-encrypt/>
 
-**Don't** delete the `.version`, `.config`, or `.cache` files once the installation has completed! They contain necessary version and configuration data, and removing them will cause issues!
+**Don't** delete the `.version`, `.config`, or cache files once the installation has completed! They contain necessary version and configuration data, and removing them will cause issues!
 
-If using MYSQL as storage method:
+If using MySQL as storage method:
 
-- Update the database information in `modules/Database_example.env`.
+- Update the database connection information in `modules/Database_example.env`.
 - Rename the database configuration file to `Database.env`.
 - View example database configuration below.
 
@@ -67,7 +67,7 @@ Example configuration of `Database.env`.
 { 
   "STORAGE_METHOD": "mysql", // options: 'mysql', 'filetree'
   "LANGUAGE": "auto", // options: 'auto', 'en', 'ru', 'is', etc.
-  "INSTALLATION_PATH": "https://quickblaze.com" // No trailing slash
+  "INSTALLATION_PATH": "https://example.com" // No trailing slash
 }
 ```
 
@@ -200,22 +200,15 @@ Available Endpoints:
 </details>
 
 ## Author & Maintainer
-
-<div align="left">
-
-  ### 🙍 axtonprice
-  [![@axtonprice](https://avatars.githubusercontent.com/u/37771600?s=48&v=4)](https://github.com/axtonprice)
-  [![Twitter](./.github/images/assets/twitter-button.png)](https://twitter.com/axtonprice)
-  [![Sponsor Me](./.github/images/assets/sponsor-button.png)](https://github.com/sponsors/axtonprice)
-
-</div>
+### 🙍 axtonprice
+[![@axtonprice](https://avatars.githubusercontent.com/u/37771600?s=48&v=4)](https://github.com/axtonprice)
+[![Twitter](./.github/images/assets/twitter-button.png)](https://twitter.com/axtonprice)
+[![Sponsor Me](./.github/images/assets/sponsor-button.png)](https://github.com/sponsors/axtonprice)
 
 ## Contributors
-
-  [![@RChutchev](https://avatars.githubusercontent.com/u/11131666?s=48&v=4)](https://github.com/RChutchev)
-  [![@brendanprice2003](https://avatars.githubusercontent.com/u/56489848?s=48&v=4)](https://github.com/brendanprice2003)
-  [![@masondq](https://avatars.githubusercontent.com/u/86250349?s=48&v=4)](https://github.com/masondq)
-
+[![@RChutchev](https://avatars.githubusercontent.com/u/11131666?s=48&v=4)](https://github.com/RChutchev)
+[![@brendanprice2003](https://avatars.githubusercontent.com/u/56489848?s=48&v=4)](https://github.com/brendanprice2003)
+[![@masondq](https://avatars.githubusercontent.com/u/86250349?s=48&v=4)](https://github.com/masondq)
 
 ## ❤️ Show your support
 
