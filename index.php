@@ -1,5 +1,5 @@
 <?php
-/*!
+/*
  * -==- Quickblaze Encrypt -==-
  * Licensed under the GNU General public License v3.0 https://github.com/arizon-dev/quickblaze-encrypt/blob/main/LICENSE
  * Copyright 2023 Arizon Developement 
@@ -26,3 +26,4 @@ if (in_array($request, $errorPages)) { // Check if page is an error page
     $_GET["errorCode"] = "404"; // Set error code 
     return require $_SERVER['DOCUMENT_ROOT'] . "/public/error.php"; // Render page
 }
+?>
