@@ -1,5 +1,5 @@
 <?php
-error_reporting(0); // disable error reporting
+// error_reporting(0); // disable error reporting
 header("Access-Control-Allow-Origin: *"); // "*" could also be a site such as http://www.example.com
 
 
@@ -26,7 +26,7 @@ function determineSystemVersion()
         $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/arizon-dev/quickblaze-encrypt/main/.version?cacheUpdate=" . rand(0, 100), true), true);
         $date = date("Y-m-d H:i:s"); // Current date for cache
         file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/.version", json_encode(array("BRANCH" => $latestVersion["BRANCH"], "VERSION" => $latestVersion["VERSION"])));
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local-storage/.version", json_encode(array("cacheDate" => $date, "BRANCH" => $latestVersion["BRANCH"], "VERSION" => $latestVersion["VERSION"])));
+        file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local-storage/.version-cache", json_encode(array("cacheDate" => $date, "BRANCH" => $latestVersion["BRANCH"], "VERSION" => $latestVersion["VERSION"])));
     }
     $thisVersion = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/.version", true), true);
     $latestVersion = json_decode(file_get_contents("https://raw.githubusercontent.com/arizon-dev/quickblaze-encrypt/" . htmlspecialchars($thisVersion["BRANCH"]) . "/.version?cacheUpdate=" . rand(0, 100), true), true);
@@ -40,14 +40,13 @@ function generateKey($length)
     $hex = bin2hex($bytes);
     return $hex;
 }
-function getMessageCreationDate()
+function getMessageCreationDate($key)
 {
     $config = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/.config", true), true);
     $timezone = (empty($config["TIMEZONE"]) || !$config["TIMEZONE"]) ? date('e') : $config["TIMEZONE"];
     date_default_timezone_set($timezone); // Set default timezone
-    if (empty($_GET["key"])) return "--";
-    $encryption_key = $_GET["key"];
-    return date('F jS, Y \a\t h:ma', strtotime(getRecord("record_date", $encryption_key)));
+    if (empty($key)) return "--";
+    return date('F jS, Y \a\t H:ia', strtotime(getRecord("record_date", $key)));
 }
 
 

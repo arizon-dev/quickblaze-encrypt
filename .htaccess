@@ -5,7 +5,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^.* index.php [L,QSA]
 
 # File security
-<FilesMatch "\.(json|sarif|gitignore|gitattributes|version|htaccess|env|security-scan|config|cache|gitattributes|codacy.yml)$">
+<FilesMatch "\.(json|sarif|gitignore|gitattributes|version|htaccess|env|security-scan|config|cache|gitattributes|codacy.yml|debug.log)$">
 Order allow,deny
 Deny from all
 </FilesMatch>

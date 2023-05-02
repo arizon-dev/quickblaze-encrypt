@@ -94,6 +94,11 @@
                 ✅ <?= translate(htmlspecialchars("Link has been copied to clipboard!")); ?>
             </span>
         </div>
+        <div id="snackbar_password">
+            <span class="snackbar-text" id="snackbar-text">
+                ✅ <?= translate(htmlspecialchars("Password has been copied to clipboard!")); ?>
+            </span>
+        </div>
         <div id="snackbar_empty_fields">
             <span class="snackbar-text" id="snackbar-text">
                 ❌ <?= translate(htmlspecialchars("Error! One or more fields are empty!")); ?>

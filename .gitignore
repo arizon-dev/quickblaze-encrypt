@@ -9,3 +9,6 @@ modules/Database.env
 
 # Security
 .codacy-scan
+
+# Temp
+api/

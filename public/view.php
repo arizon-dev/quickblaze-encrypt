@@ -26,10 +26,12 @@
     <div class="global-container">
         <div class="main-form">
             <form onsubmit="return false;">
-                <a href="<?= getInstallationPath(); ?>">
-                    <img class="form-icon fa-fade" id="form-icon" draggable="false" alt="Quickblaze Encrypt" aria-label="Quickblaze Encrypt" title="Quickblaze Encrypt" src="<?= getInstallationPath(); ?>/public/assets/img/favicon-100x100.png">
-                </a>
-                <h2>Quickblaze Encrypt</h2>
+                <div class="page-title-container">
+                    <a href="<?= getInstallationPath(); ?>">
+                        <img class="form-icon fa-fade" id="form-icon" draggable="false" alt="Quickblaze Encrypt" aria-label="Quickblaze Encrypt" title="Quickblaze Encrypt" src="<?= getInstallationPath(); ?>/public/assets/img/favicon-100x100.png">
+                    </a>
+                    <h2>Quickblaze Encrypt</h2>
+                </div>
                 <h5 class="text-muted"><?= translate(htmlspecialchars("One-time view encrypted message sharing system")); ?></h5>
 
                 <!-- Snackbar -->
@@ -39,7 +41,6 @@
 
                 <!-- Main Form Content -->
                 <div id="form_confirmation">
-                    <code class="pb-5">Message created <?= getMessageCreationDate(); ?></code>
                     <div class="input-container">
                         <label for="input_password_attempt"><?= translate(htmlspecialchars("Decrypt & View Message?")); ?></label>
                         <input class="form-control form-input-item size-single" type="password" id="input_password_attempt" placeholder="<?= translate(htmlspecialchars("Enter decryption password")); ?>" required></input>
@@ -83,6 +84,11 @@
 
     <!-- Snackbar Notifications -->
     <div class="snackbar-messages">
+        <div id="snackbar_info">
+            <span class="snackbar-text" id="snackbar-text">
+                💁‍♂️ <?= translate(htmlspecialchars("Message created on " . getMessageCreationDate($_GET["key"])) . "."); ?>
+            </span>
+        </div>
         <div id="snackbar_password">
             <span class="snackbar-text" id="snackbar-text">
                 ✅ <?= translate(htmlspecialchars("Password has been copied to clipboard!")); ?>

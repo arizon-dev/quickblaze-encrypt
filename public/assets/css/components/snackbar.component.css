@@ -8,14 +8,19 @@
 	outline: rgb(77, 206, 77) 1px solid;
 }
 
+.snackbar-info {
+	background-color: rgba(76, 250, 250, 0.479);
+	outline: rgb(77, 206, 206) 1px solid;
+}
+
 .snackbar-warn {
 	background-color: rgba(250, 250, 76, 0.479);
 	outline: rgb(206, 206, 77) 1px solid;
 }
 
 .snackbar-container {
-	margin-left: auto;
-	margin-right: auto;
+	/* margin: 1rem auto 2rem auto !important; */
+	margin: auto;
 	padding: 10px 15px 10px 15px !important;
 	text-align: center;
 	max-width: fit-content;
@@ -28,7 +33,10 @@
 #snackbar_link.show,
 #snackbar_password.show,
 #snackbar_empty_fields.show,
-#snackbar_error.show {
+#snackbar_error.show,
+#snackbar_message_nonexist.show,
+#snackbar_incorrect_password.show {
+	display: block;
 	visibility: visible;
 	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
 	animation: fadein 0.5s, fadeout 0.5s 2.5s;

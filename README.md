@@ -25,10 +25,10 @@
 
 - PHP v7 or higher.
 - Accessible webserver with PHP support.
-- MySQL server for database host. *(Optional\*)*
-- PHP [MYSQL](http://php.net/manual/en/book.mysql.php) module for database access. *(Optional\*)*
-- PHP [PDO](http://php.net/manual/en/book.pdo.php) module for database access. *(Optional\*)*
-- PHP [OPENSSL](http://php.net/manual/en/book.openssl.php) module for encryption. *(Optional\*)*
+- MySQL server for database host. *(Optional)\**
+- PHP [MYSQL](http://php.net/manual/en/book.mysql.php) module for database access. *(Optional)\**
+- PHP [PDO](http://php.net/manual/en/book.pdo.php) module for database access. *(Optional)\**
+- PHP [OPENSSL](http://php.net/manual/en/book.openssl.php) module for encryption. *(Optional)\**
 - PHP [MBSTRING](http://php.net/manual/en/book.mbstring.php) module for full UTF-8 support.
 - PHP [JSON](http://php.net/manual/en/book.json.php) module for JSON manipulation.
 

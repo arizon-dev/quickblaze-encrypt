@@ -17,9 +17,6 @@ function showSnackBar(snackbarId, messageType, permanent = false) {
     snackbarArea.innerHTML = snackbarContent; // set snackbar content
     if (permanent) {
         log(`Displaying snackbar '${snackbarId}' permanently.`);
-        setTimeout(function () {
-            window.location = "./"; // Redirect to home page
-        }, 4000);
     } else {
         var showTime = 6000; // set snackbard show time
         log(`Displaying snackbar '${snackbarId}' for ${showTime}ms`);
