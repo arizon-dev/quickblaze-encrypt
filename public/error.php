@@ -60,7 +60,7 @@ $pageDetails = new errorGenerator($errorCode);
     <!-- Site CSS -->
     <link href="<?= getInstallationPath(); ?>/public/assets/css/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 
     <!-- Site Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

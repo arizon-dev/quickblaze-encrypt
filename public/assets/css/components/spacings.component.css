@@ -1,3 +1,45 @@
+/* Padding Left */
+.pl-1 {
+    padding-left: 1px;
+}
+
+.pl-2 {
+    padding-left: 2px;
+}
+
+.pl-3 {
+    padding-left: 3px;
+}
+
+.pl-4 {
+    padding-left: 4px;
+}
+
+.pl-5 {
+    padding-left: 5px;
+}
+
+/* Padding Right */
+.pr-1 {
+    padding-right: 1px;
+}
+
+.pr-2 {
+    padding-right: 2px;
+}
+
+.pr-3 {
+    padding-right: 3px;
+}
+
+.pr-4 {
+    padding-right: 4px;
+}
+
+.pr-5 {
+    padding-right: 5px;
+}
+
 /* Padding Top */
 .pt-1 {
     padding-top: 1px;
@@ -128,4 +170,46 @@
 
 .mb-5 {
     margin-bottom: 5px;
+}
+
+/* Margin Left */
+.ml-1 {
+    margin-left: 1px;
+}
+
+.ml-2 {
+    margin-left: 2px;
+}
+
+.ml-3 {
+    margin-left: 3px;
+}
+
+.ml-4 {
+    margin-left: 4px;
+}
+
+.ml-5 {
+    margin-left: 5px;
+}
+
+/* Margin Right */
+.mr-1 {
+    margin-right: 1px;
+}
+
+.mr-2 {
+    margin-right: 2px;
+}
+
+.mr-3 {
+    margin-right: 3px;
+}
+
+.mr-4 {
+    margin-right: 4px;
+}
+
+.mr-5 {
+    margin-right: 5px;
 }
