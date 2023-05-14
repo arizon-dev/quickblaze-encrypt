@@ -218,7 +218,7 @@ Want to sponsor us? [Become an Arizon sponsor here!](https://github.com/sponsors
 ## 📝 License
 
 Copyright © 2023 [axtonprice](https://github.com/axtonprice) & [Arizon Software](https://github.com/arizon-dev).<br />
-This project is [GNU GPL v3.0](https://github.com/arizon-dev/quickblaze-encrypt/LICENSE.txt) licensed.
+This project is [GNU GPL v3.0](https://github.com/arizon-dev/quickblaze-encrypt/blob/main/LICENSE) licensed.
 
 ## 🎮 Discord
 <a href="https://discord.gg/dP3MuBATGc"><img src="https://discord.com/api/guilds/826239258590969897/widget.png?style=banner3" width="270"/></a>
