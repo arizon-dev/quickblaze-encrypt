@@ -49,6 +49,7 @@ If using MySQL as storage method:
 - View example database configuration below.
 
 ## System Configuration
+> **NOTE:** Remove comments from configuration for valid JSON.
 
 Example configuration of `Database.env`.
 
@@ -61,7 +62,7 @@ Example configuration of `Database.env`.
 }
 ```
 
- default configuration of `.config`.
+Default configuration of `.config`.
 
 ```js
 { 
