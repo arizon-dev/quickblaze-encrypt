@@ -4,24 +4,44 @@
  * Licensed under MIT (https://github.com/coliff/dark-mode-switch/blob/main/LICENSE)
  */
 
-.darkmode-widget-container {
-    position: relative;
-    cursor: pointer;
+.darkmode-widget {
+    bottom: 0;
+    right: 0;
+    position: fixed;
 }
 
-.darkmode-widget-button {
-    /* width: 50px!important;
-    height: 50px!important; */
-    font-size: 20px;
+.darkmode-widget .darkmode-btn-wrapper {
+    width: 60px;
+    height: 60px;
     margin-right: 20px;
     margin-bottom: 20px;
     padding: 10px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    border-radius: 10px / 5px;
+    border-radius: 50%;
     background-color: #3b3b3b;
     border-style: none;
+}
+
+.darkmode-widget .darkmode-btn {
+    border: none;
+    background: none;
+    font-size: 25px;
+    justify-content: center;
+    margin: auto;
+    vertical-align: middle;
+    text-align: center;
+}
+
+/* Media Queries */
+@media screen and (max-width: 750px) {
+    .darkmode-btn-wrapper {
+        opacity: 0.5;
+        transition: 0.1s ease-in-out;
+    }
+
+    .darkmode-btn-wrapper:hover {
+        opacity: 1;
+        transition: 0.1s ease-in-out;
+    }
 }
 
 [data-theme="dark"] {

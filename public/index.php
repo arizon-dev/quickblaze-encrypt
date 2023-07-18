@@ -12,8 +12,8 @@
 
     <!-- Site CSS -->
     <link href="<?= getInstallationPath(); ?>/public/assets/css/style.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link href="<?= getInstallationPath(); ?>/public/assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Site Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -91,29 +91,32 @@
     <div class="snackbar-messages">
         <div id="snackbar_link">
             <span class="snackbar-text" id="snackbar-text">
-                <i class="fas fa-check mr-5"></i> <?= translate(htmlspecialchars("Link has been copied to clipboard!")); ?>
+                <i class="fa-solid fa-check mr-5"></i> <?= translate(htmlspecialchars("Link has been copied to clipboard!")); ?>
             </span>
         </div>
         <div id="snackbar_password">
             <span class="snackbar-text" id="snackbar-text">
-                <i class="fas fa-check mr-5"></i> <?= translate(htmlspecialchars("Password has been copied to clipboard!")); ?>
+                <i class="fa-solid fa-check mr-5"></i> <?= translate(htmlspecialchars("Password has been copied to clipboard!")); ?>
             </span>
         </div>
         <div id="snackbar_empty_fields">
             <span class="snackbar-text" id="snackbar-text">
-                <i class="fas fa-times mr-5"></i> <?= translate(htmlspecialchars("Error! One or more fields are empty!")); ?>
+                <i class="fa-solid fa-xmark mr-5"></i> <?= translate(htmlspecialchars("Error! One or more fields are empty!")); ?>
             </span>
         </div>
         <div id="snackbar_error">
             <span class="snackbar-text" id="snackbar-text">
-                <i class="fas fa-times mr-5"></i> <?= translate(htmlspecialchars("Error! An error occurred processing your message!")); ?>
+                <i class="fa-solid fa-xmark mr-5"></i> <?= translate(htmlspecialchars("Error! An error occurred processing your message!")); ?>
             </span>
         </div>
     </div>
 
     <!-- Darkmode Widget -->
     <div class="darkmode-widget">
-        <button class="darkmode-widget-button" id="darkSwitch"></button>
+        <div class="darkmode-btn-wrapper">
+            <button class="darkmode-btn" id="darkSwitch"></button>
+        </div>
+
     </div>
 
     <!-- Site Javascript -->
@@ -121,9 +124,9 @@
     <script src="<?= getInstallationPath(); ?>/public/assets/js/buttonSnackbar.js"></script>
     <script src="<?= getInstallationPath(); ?>/public/assets/js/formContentUpdate.js"></script>
     <script src="<?= getInstallationPath(); ?>/public/assets/js/darkModeWidget.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script src="<?= getInstallationPath(); ?>/public/assets/js/bootstrap/bootstrap.min.js"></script>
+    <script src="<?= getInstallationPath(); ?>/public/assets/js/jquery-2.1.1.min.js"></script>
+    <script src="<?= getInstallationPath(); ?>/public/assets/js/momentjs.min.js"></script>
 
 </body>
 

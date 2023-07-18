@@ -12,7 +12,7 @@ if ($_GET["action"] == "decrypt" && isset($_GET["key"]) && isset($_GET["password
         echo '{"response": "' . htmlspecialchars(decryptData("encrypted_contents", stripslashes($_GET["key"]))) . '"}';
         destroyRecord(stripslashes($_GET["key"])); // Destroy record after message decryption
     } else {
-        echo '{"response": "badpass"}'; // Password is incorrect
+        echo '{"response": 403}'; // Password is incorrect
     }
 } else if ($_GET["action"] == "validatePassword" && isset($_GET["key"]) && isset($_GET["password"])) {
     if (decryptData("password", stripslashes($_GET["key"])) == $_GET["password"]) {

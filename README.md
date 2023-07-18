@@ -102,7 +102,7 @@ https://quickblaze.arizon.dev/api/interactions/{endpoint}
 Available Endpoints:
 
 <details>
- <summary><code>GET</code> <code><b>/{createEncryption}</b></code></summary>
+ <summary><code>GET/POST</code> <code><b>/{createEncryption}</b></code></summary>
 
 ##### Parameters
 
@@ -126,7 +126,7 @@ Available Endpoints:
 > ```
 </details>
 <details>
- <summary><code>GET</code> <code><b>/{decryptMessage}</b></code></summary>
+ <summary><code>GET/POST</code> <code><b>/{decryptMessage}</b></code></summary>
 
 ##### Parameters
 
@@ -151,7 +151,7 @@ Available Endpoints:
 
 </details>
 <details>
- <summary><code>GET</code> <code><b>/{checkEncryption}</b></code></summary>
+ <summary><code>GET/POST</code> <code><b>/{checkEncryption}</b></code></summary>
 
 ##### Parameters
 
@@ -175,7 +175,7 @@ Available Endpoints:
 
 </details>
 <details>
- <summary><code>GET</code> <code><b>/{getCreationDate}</b></code></summary>
+ <summary><code>GET/POST</code> <code><b>/{getCreationDate}</b></code></summary>
 
 ##### Parameters
 

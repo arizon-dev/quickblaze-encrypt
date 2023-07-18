@@ -61,7 +61,7 @@ function decryptFormSubmit() {
                     }, 200);
                     // Redirect to home page
                     setTimeout(() => {
-                        // window.location.replace('./'); // Redirect to home page
+                        window.location.replace('./'); // Redirect to home page
                     }, 2000);
                 } else {
                     $('#form_confirmation').fadeOut('fast'); // fade out previous content 
