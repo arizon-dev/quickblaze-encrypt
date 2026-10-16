@@ -306,7 +306,7 @@ function translate($q)
     } else {
         $tl = "en";
     }
-    $res = file_get_contents("https://translate.googleapis.com/translate_a/single?client=gtx&ie=UTF-8&oe=UTF-8&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&sl=" . $lang . "&tl=" . $tl . "&hl=hl&q=" . urlencode($q), $_SERVER['DOCUMENT_ROOT'] . "/transes.html");
+    $res = file_get_contents("https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=" . $lang . "&tl=" . $tl . "&q=" . urlencode($q), $_SERVER['DOCUMENT_ROOT'] . "/transes.html");
     $res = json_decode($res);
-    return $res[0][0][0];
+    return $res[0];
 }
