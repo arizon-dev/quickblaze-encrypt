@@ -1,6 +1,5 @@
-# Quickblaze Files
+# OneView Files
 .vscode/
-.stashed/
 .gitattributes
 .dccache
 
@@ -8,7 +7,3 @@
 local
 local/database.json
 config.json
-
-# OneView Composer
-vendor/
-composer.lock
