@@ -1,0 +1,18 @@
+Options -Indexes
+RewriteEngine On
+
+RewriteRule ^local(?:/|$) - [F,L,NC]
+<FilesMatch "^(\.codacy\.yml|codacy\.yml|\.gitattributes|\.gitignore|\.security-scan|actions\.yml|config\.json|README\.md|SECURITY\.md|version.json)$">
+Require all denied
+</FilesMatch>
+
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !^/$
+RewriteRule ^ / [R=302,L]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+RewriteRule ^ index.php [L,QSA]
+
+ErrorDocument 404 /404
+ErrorDocument 403 /403
+ErrorDocument 500 /500
