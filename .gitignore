@@ -1,5 +1,4 @@
 .vscode/
-.stashed/
 .gitattributes
-.dccache
 .security-scan
+/root/local/encryptions
