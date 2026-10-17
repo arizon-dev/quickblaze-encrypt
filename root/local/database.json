@@ -1,0 +1,7 @@
+{
+  "HOSTNAME": "database.example.com",
+  "PORT": "3306",
+  "USERNAME": "oneviewuser",
+  "PASSWORD": "password123",
+  "DATABASE": "oneview"
+}

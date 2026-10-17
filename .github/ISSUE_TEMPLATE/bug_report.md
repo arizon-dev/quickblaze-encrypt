@@ -7,7 +7,7 @@ assignees: axtonprice
 ---
 
 **Describe the bug**
-A clear and concise description of what the bug is.
+A clear and concise description of what the bug is. Do not submit bug report if you are not using the latest OneView version!
 
 **To Reproduce**
 Steps to reproduce the behavior:

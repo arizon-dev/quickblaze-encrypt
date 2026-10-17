@@ -1,9 +1,5 @@
-# OneView Files
 .vscode/
+.stashed/
 .gitattributes
 .dccache
-
-# OneView Security
-local
-local/database.json
-config.json
+.security-scan
