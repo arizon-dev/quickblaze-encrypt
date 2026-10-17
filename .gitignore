@@ -4,15 +4,11 @@
 .gitattributes
 .dccache
 
-# QuickBlaze Security
-local-storage
-Modules/Database.env
-.config
+# OneView Security
+local
+local/database.json
+config.json
 
-# QuickBlaze Composer
+# OneView Composer
 vendor/
 composer.lock
-
-# Docker (Unreleased)
-Dockerfile
-.dockerignore

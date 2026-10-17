@@ -12,6 +12,6 @@ engines:
 languages:
   css:
     extensions:
-      - '.scss'
+      - ".scss"
 exclude_paths:
-  - "Public/assets/css/**"
+  - "public/assets/css/**"
