@@ -12,6 +12,9 @@
   <a href="https://github.com/arizon-dev/oneview/blob/main/LICENSE">
     <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-yellow.svg">
   </a>
+  <a href="https://app.codacy.com/gh/arizon-dev/oneview/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade">
+    <img alt="Codacy" src="https://app.codacy.com/project/badge/Grade/3d4571a7a1a34c548bce562c16ba1221">
+  </a>
 </p>
 
 > A small, self-hosted service for sharing encrypted messages through links that can only be viewed once. Available in all languages, provided by Google Translate.
